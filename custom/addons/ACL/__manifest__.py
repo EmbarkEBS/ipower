@@ -1,6 +1,6 @@
 {
     'name': 'ACL Role Management',
-    'version': '1.0',
+    'version': '19.0.1',
     'depends': ['base', 'sale', 'stock', 'account'],
     'data': [
         'security/security.xml',
