@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_activity_all,activity_all,mail.model_mail_activity,,1,1,1,1
-access_employee_management,employee.management,model_ACL,group_management,1,1,1,1
-access_employee_sales,employee.sales,model_ACL,group_sales_officer,1,1,1,0
-access_employee_logistics,employee.logistics,model_ACL,group_logistics,1,1,1,0
-access_employee_accountant,employee.accountant,model_ACL,group_accountant,1,1,1,0
+access_acl_admin,acl.admin,model_acl,group_management,1,1,1,1
+access_acl_sales,acl.sales,model_acl,group_sales_officer,1,1,1,0
+access_acl_logistics,acl.logistics,model_acl,group_logistics,1,1,1,0
+access_acl_accountant,acl.accountant,model_acl,group_accountant,1,1,1,0
