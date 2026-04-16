@@ -1,27 +1,91 @@
 <odoo>
     <data>
 
-         <record id="group_management" model="res.groups">
-    <field name="name">Admin</field>
-</record>
+        <!-- =========================
+             MODULE CATEGORY
+        ========================== -->
+        <record id="module_category_acl" model="ir.module.category">
+            <field name="name">ACL Management</field>
+            <field name="sequence">30</field>
+        </record>
 
-    <record id="group_sales_officer" model="res.groups">
-        <field name="name">Sales Officer</field>
-    </record>
 
-    <record id="group_logistics" model="res.groups">
-        <field name="name">Logistics</field>
-    </record>
+        <!-- =========================
+             GROUPS
+        ========================== -->
+        <record id="group_management" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
 
-    <record id="group_accountant" model="res.groups">
-        <field name="name">Accountant</field>
-    </record>
-  
-    <!-- Override CRM menu visibility-->
-    <menuitem 
-            id="crm.crm_menu_root"  name="CRM"
-            groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"
-        />
+        <record id="group_sales_officer" model="res.groups">
+            <field name="name">Sales Officer</field>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+        <record id="group_logistics" model="res.groups">
+            <field name="name">Logistics</field>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+        <record id="group_accountant" model="res.groups">
+            <field name="name">Accountant</field>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+
+        <!-- =========================
+             OPTIONAL: INHERIT CORE GROUPS
+             (So your roles behave like real roles)
+        ========================== -->
+
+        <record id="group_management_inherit" model="res.groups">
+            <field name="name">Admin (Full Access)</field>
+            <field name="implied_ids" eval="[
+                (4, ref('base.group_system')),
+                (4, ref('sales_team.group_sale_manager')),
+                (4, ref('account.group_account_manager')),
+                (4, ref('stock.group_stock_manager'))
+            ]"/>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+        <record id="group_sales_officer_inherit" model="res.groups">
+            <field name="name">Sales Officer (Access)</field>
+            <field name="implied_ids" eval="[
+                (4, ref('sales_team.group_sale_salesman'))
+            ]"/>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+        <record id="group_logistics_inherit" model="res.groups">
+            <field name="name">Logistics (Access)</field>
+            <field name="implied_ids" eval="[
+                (4, ref('stock.group_stock_user'))
+            ]"/>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+        <record id="group_accountant_inherit" model="res.groups">
+            <field name="name">Accountant (Access)</field>
+            <field name="implied_ids" eval="[
+                (4, ref('account.group_account_user'))
+            ]"/>
+            <field name="category_id" ref="module_category_acl"/>
+        </record>
+
+
+        <!-- =========================
+             MENU VISIBILITY FIX (OPTIONAL)
+        ========================== -->
+
+        <!-- Example: Allow your Admin group to see CRM menu -->
+        <record id="crm.crm_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[
+                (4, ref('acl_role_management.group_management')),
+                (4, ref('sales_team.group_sale_manager'))
+            ]"/>
+        </record>
 
     </data>
 </odoo>
