@@ -3,7 +3,6 @@
 
          <record id="group_management" model="res.groups">
     <field name="name">Admin</field>
-    <field name="implied_ids" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]"/>
 </record>
 
     <record id="group_sales_officer" model="res.groups">
