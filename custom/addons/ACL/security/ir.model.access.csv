@@ -4,6 +4,6 @@ access_acl_admin,acl.admin,model_acl,group_management,1,1,1,1
 access_acl_sales,acl.sales,model_acl,group_sales_officer,1,1,1,0
 access_acl_logistics,acl.logistics,model_acl,group_logistics,1,1,1,0
 access_acl_accountant,acl.accountant,model_acl,group_accountant,1,1,1,0
-access_crm_admin,acl.crm.admin,crm.lead,group_management,1,1,1,1
-access_crm_sales,acl.crm.sales,crm.lead,group_sales_officer,1,1,1,0
-access_crm_logistics,acl.crm.logistics,crm.lead,group_logistics,1,1,1,0
+access_crm_admin,acl.crm.admin,model_crm_lead,group_management,1,1,1,1
+access_crm_sales,acl.crm.sales,model_crm_lead,group_sales_officer,1,1,1,0
+access_crm_logistics,acl.crm.logistics,model_crm_lead,group_logistics,1,1,1,0
