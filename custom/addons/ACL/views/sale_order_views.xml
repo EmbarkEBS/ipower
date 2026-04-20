@@ -6,16 +6,23 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
+            <!-- ✅ MUST: add fields in view -->
+            <xpath expr="//sheet" position="inside">
+                <field name="purchase_created" invisible="1"/>
+                <field name="purchase_order_id" invisible="1"/>
+            </xpath>
+
+            <!-- ✅ Buttons -->
             <xpath expr="//header" position="inside">
 
-                <!-- ✅ Create PO -->
+                <!-- Create -->
                 <button name="action_create_purchase_order"
                         type="object"
                         string="Create Purchase Order"
                         class="btn-primary"
                         invisible="purchase_created"/>
 
-                <!-- ✅ View PO -->
+                <!-- View -->
                 <button name="action_view_purchase_order"
                         type="object"
                         string="View Purchase Order"
