@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <odoo>
     <!-- Sales Custom User -->
     <record id="group_sale_team" model="res.groups">
@@ -10,4 +11,18 @@
         <field name="name">Sales Logistics</field>
         <field name="category_ids" ref="base.module_category_sales_management"/>
     </record>
+=======
+<odoo>
+    <!-- Sales Custom User -->
+    <record id="group_sale_team" model="res.groups">
+        <field name="name">Sales Team</field>
+        <field name="category_ids" ref="base.module_category_sales_management"/>
+    </record>
+
+    <!-- Sales Custom Manager -->
+    <record id="group_sale_logistics" model="res.groups">
+        <field name="name">Sales Logistics</field>
+        <field name="category_ids" ref="base.module_category_sales_management"/>
+    </record>
+>>>>>>> 3936c5e7f990485dd18d153535bd814082995d25
 </odoo>
