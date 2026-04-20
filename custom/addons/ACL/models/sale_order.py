@@ -5,100 +5,71 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    # ✅ Track PO
-    purchase_created = fields.Boolean(string="Purchase Created", default=False)
-    purchase_order_id = fields.Many2one('purchase.order', string="Purchase Order")
+    quotation_file = fields.Binary(string="Upload File")
+    quotation_filename = fields.Char(string="File Name")
 
     def action_create_purchase_order(self):
-        self.ensure_one()
+        for order in self:
 
-        # 🔒 HARD BACKEND BLOCK (most important)
-        existing_po = self.env['purchase.order'].search([
-            ('origin', '=', self.name)
-        ], limit=1)
+            po_lines = []
 
-        if existing_po:
-            raise UserError("Purchase Order already exists for this Sales Order.")
+            # ✅ Get default vendor (create one manually if not exists)
+            default_vendor = self.env['res.partner'].search(
+                [('name', '=', 'Unknown Vendor')], limit=1
+            )
 
-        po_lines = []
+            if not default_vendor:
+                raise UserError("Please create a vendor named 'Unknown Vendor'")
 
-        # ✅ Default vendor
-        vendor = self.env['res.partner'].search(
-            [('name', '=', 'Unknown Vendor')], limit=1
-        )
+            vendor = default_vendor  # fallback
 
-        if not vendor:
-            raise UserError("Please create a vendor named 'Unknown Vendor'")
+            for line in order.order_line:
+                product = line.product_id
 
-        for line in self.order_line:
-            product = line.product_id
+                if product.type not in ['product', 'consu']:
+                    continue
 
-            # Only stockable / consumable
-            if product.type not in ['product', 'consu']:
-                continue
+                required_qty = line.product_uom_qty
 
-            required_qty = line.product_uom_qty
-            if required_qty <= 0:
-                continue
+                if required_qty <= 0:
+                    continue
 
-            # Stock check
-            if self.warehouse_id:
                 qty_available = product.with_context(
-                    warehouse=self.warehouse_id.id
+                    warehouse=order.warehouse_id.id
                 ).free_qty
-            else:
-                qty_available = product.free_qty
 
-            # Only shortage
-            if qty_available < required_qty:
+                # ✅ only check shortage
+                if qty_available < required_qty:
 
-                supplier = product.seller_ids[:1]
+                    supplier = product.seller_ids[:1]
 
-                if supplier:
-                    vendor = supplier.partner_id
+                    # ✅ if vendor exists → use it
+                    if supplier:
+                        vendor = supplier.partner_id
 
-                po_lines.append((0, 0, {
-                    'product_id': product.id,
-                    'name': product.name,
-                    'product_qty': required_qty - qty_available,
-                    'price_unit': supplier.price if supplier else product.standard_price,
-                    'date_planned': fields.Datetime.now(),
-                }))
+                    # ✅ ALWAYS add line (even if no vendor)
+                    po_lines.append((0, 0, {
+                        'product_id': product.id,
+                        'name': product.name,
+                        'product_qty': required_qty - qty_available,
+                        'price_unit': supplier.price if supplier else product.standard_price,
+                        'date_planned': fields.Datetime.now(),
+                    }))
 
-        if not po_lines:
-            raise UserError("All products are in stock.")
+            # ❌ if still empty → real stock available
+            if not po_lines:
+                raise UserError("All products are in stock.")
 
-        # ✅ Create PO
-        po = self.env['purchase.order'].create({
-            'partner_id': vendor.id,
-            'origin': self.name,
-            'order_line': po_lines,
-        })
+            po = self.env['purchase.order'].create({
+                'partner_id': vendor.id,
+                'origin': order.name,
+                'order_line': po_lines,
+            })
 
-        # ✅ Update flags (UI control)
-        self.purchase_created = True
-        self.purchase_order_id = po.id
-
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Purchase Order',
-            'res_model': 'purchase.order',
-            'view_mode': 'form',
-            'res_id': po.id,
-            'target': 'current',
-        }
-
-    def action_view_purchase_order(self):
-        self.ensure_one()
-
-        if not self.purchase_order_id:
-            raise UserError("No Purchase Order found.")
-
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Purchase Order',
-            'res_model': 'purchase.order',
-            'view_mode': 'form',
-            'res_id': self.purchase_order_id.id,
-            'target': 'current',
-        }
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Purchase Order',
+                'res_model': 'purchase.order',
+                'view_mode': 'form',
+                'res_id': po.id,
+            }

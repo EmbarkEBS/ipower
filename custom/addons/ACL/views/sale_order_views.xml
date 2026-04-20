@@ -1,37 +1,17 @@
 <odoo>
-
     <record id="view_sale_order_form_inherit_purchase_button" model="ir.ui.view">
         <field name="name">sale.order.form.purchase.button</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- ✅ VERY IMPORTANT: include fields -->
-            <xpath expr="//sheet" position="inside">
-                <field name="purchase_created" invisible="1"/>
-                <field name="purchase_order_id" invisible="1"/>
-            </xpath>
-
-            <!-- ✅ Buttons -->
             <xpath expr="//header" position="inside">
-
-                <!-- Create PO -->
                 <button name="action_create_purchase_order"
                         type="object"
                         string="Create Purchase Order"
-                        class="btn-primary"
-                        invisible="purchase_created"/>
-
-                <!-- View PO -->
-                <button name="action_view_purchase_order"
-                        type="object"
-                        string="View Purchase Order"
-                        class="btn-secondary"
-                        invisible="not purchase_created"/>
-
+                        class="btn-primary"/>
             </xpath>
 
         </field>
     </record>
-
 </odoo>
