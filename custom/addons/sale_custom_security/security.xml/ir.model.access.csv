@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sale_order_sale_team,sale.order user,sale.model_sale_order,group_sale_team,1,0,0,0
-=======
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sale_order_sale_team,sale.order user,sale.model_sale_order,group_sale_team,1,0,0,0
->>>>>>> 3936c5e7f990485dd18d153535bd814082995d25
-access_sale_order_sale_logistics,sale.order manager,sale.model_sale_order,group_sale_logistics,1,1,1,1
