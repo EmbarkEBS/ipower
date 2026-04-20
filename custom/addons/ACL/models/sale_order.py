@@ -5,16 +5,20 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    # ✅ Fields to track PO
+    # ✅ Track PO
     purchase_created = fields.Boolean(string="Purchase Created", default=False)
     purchase_order_id = fields.Many2one('purchase.order', string="Purchase Order")
 
     def action_create_purchase_order(self):
-        self.ensure_one()  # ✅ single record only
+        self.ensure_one()
 
-        # ❌ Prevent duplicate
-        if self.purchase_created:
-            raise UserError("Purchase Order already created for this Sales Order.")
+        # 🔒 HARD BACKEND BLOCK (most important)
+        existing_po = self.env['purchase.order'].search([
+            ('origin', '=', self.name)
+        ], limit=1)
+
+        if existing_po:
+            raise UserError("Purchase Order already exists for this Sales Order.")
 
         po_lines = []
 
@@ -71,11 +75,9 @@ class SaleOrder(models.Model):
             'order_line': po_lines,
         })
 
-        # ✅ IMPORTANT → use write()
-        self.write({
-            'purchase_created': True,
-            'purchase_order_id': po.id,
-        })
+        # ✅ Update flags (UI control)
+        self.purchase_created = True
+        self.purchase_order_id = po.id
 
         return {
             'type': 'ir.actions.act_window',
@@ -83,6 +85,7 @@ class SaleOrder(models.Model):
             'res_model': 'purchase.order',
             'view_mode': 'form',
             'res_id': po.id,
+            'target': 'current',
         }
 
     def action_view_purchase_order(self):
@@ -97,4 +100,5 @@ class SaleOrder(models.Model):
             'res_model': 'purchase.order',
             'view_mode': 'form',
             'res_id': self.purchase_order_id.id,
+            'target': 'current',
         }
