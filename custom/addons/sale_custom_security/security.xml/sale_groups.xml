@@ -1,0 +1,13 @@
+<odoo>
+    <!-- Sales Custom User -->
+    <record id="group_sale_team" model="res.groups">
+        <field name="name">Sales Team</field>
+        <field name="category_ids" ref="base.module_category_sales_management"/>
+    </record>
+
+    <!-- Sales Custom Manager -->
+    <record id="group_sale_logistics" model="res.groups">
+        <field name="name">Sales Logistics</field>
+        <field name="category_ids" ref="base.module_category_sales_management"/>
+    </record>
+</odoo>
