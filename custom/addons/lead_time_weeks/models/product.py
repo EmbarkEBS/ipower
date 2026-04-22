@@ -1,20 +1,16 @@
-from odoo import models, fields, api
+from odoo import models, fields
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    lead_time_weeks = fields.Integer(
-        string="Customer Lead Time (Weeks)"
-    )
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if vals.get('lead_time_weeks'):
-                vals['sale_delay'] = vals['lead_time_weeks'] * 7
-        return super().create(vals_list)
+    lead_time_weeks = fields.Integer(string="Customer Lead Time (Weeks)")
 
     def write(self, vals):
         if 'lead_time_weeks' in vals:
             vals['sale_delay'] = vals['lead_time_weeks'] * 7
         return super().write(vals)
+
+    def create(self, vals):
+        if vals.get('lead_time_weeks'):
+            vals['sale_delay'] = vals['lead_time_weeks'] * 7
+        return super().create(vals)

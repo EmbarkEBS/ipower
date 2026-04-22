@@ -1,22 +1,16 @@
 <odoo>
-    <record id="lead_time_weeks_view_int" model="ir.ui.view">
-        <field name="name">product.template.lead.time.weeks.int</field>
+    <record id="lead_time_weeks_view_clean" model="ir.ui.view">
+        <field name="name">product.template.lead.time.weeks.clean.final</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
 
-            <!-- Remove default lead time UI safely -->
-            <xpath expr="//field[@name='sale_delay']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <!-- Add integer weeks field -->
+            <!-- SAFE INSERT ONLY -->
             <xpath expr="//group[.//field[@name='weight']]" position="inside">
-                <div class="o_row">
-                    <label for="lead_time_weeks"/>
+                <group>
                     <field name="lead_time_weeks"/>
-                    <span class="ms-2">weeks</span>
-                </div>
+                    <label string="weeks"/>
+                </group>
             </xpath>
 
         </field>
