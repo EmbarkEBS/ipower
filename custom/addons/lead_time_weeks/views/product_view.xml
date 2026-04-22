@@ -5,12 +5,7 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
 
-            <!-- STEP 1: HIDE ORIGINAL FIELD COMPLETELY -->
-            <xpath expr="//field[@name='sale_delay']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <!-- STEP 2: ADD YOUR FIELD IN SAME AREA -->
+            <!-- SAFE INSERT ONLY -->
             <xpath expr="//group[.//field[@name='weight']]" position="inside">
                 <div class="o_row">
                     <label for="lead_time_weeks"/>
