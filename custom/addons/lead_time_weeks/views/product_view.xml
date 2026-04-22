@@ -1,15 +1,15 @@
 <odoo>
-    <record id="lead_time_weeks_view_clean" model="ir.ui.view">
-        <field name="name">product.template.lead.time.weeks.clean.final</field>
+    <record id="lead_time_weeks_view_clean_final" model="ir.ui.view">
+        <field name="name">product.template.lead.time.weeks.safe.final</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
 
-            <!-- SAFE INSERT ONLY -->
+            <!-- SAFE INSERT (NO LABEL TAGS) -->
             <xpath expr="//group[.//field[@name='weight']]" position="inside">
                 <group>
                     <field name="lead_time_weeks"/>
-                    <label string="weeks"/>
+                    <span class="text-muted ms-2">weeks</span>
                 </group>
             </xpath>
 
