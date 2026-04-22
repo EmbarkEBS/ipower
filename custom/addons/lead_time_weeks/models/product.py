@@ -3,19 +3,18 @@ from odoo import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    lead_time_weeks = fields.Float(
-        string="Customer Lead Time (Weeks)",
-        compute="_compute_weeks",
-        inverse="_inverse_weeks",
-        store=True
+    lead_time_weeks = fields.Integer(
+        string="Customer Lead Time (Weeks)"
     )
 
-    def _compute_weeks(self):
-        for rec in self:
-            sale_delay = getattr(rec, 'sale_delay', 0.0)
-            rec.lead_time_weeks = sale_delay / 7.0 if sale_delay else 0.0
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('lead_time_weeks'):
+                vals['sale_delay'] = vals['lead_time_weeks'] * 7
+        return super().create(vals_list)
 
-    def _inverse_weeks(self):
-        for rec in self:
-            if hasattr(rec, 'sale_delay'):
-                rec.sale_delay = rec.lead_time_weeks * 7.0
+    def write(self, vals):
+        if 'lead_time_weeks' in vals:
+            vals['sale_delay'] = vals['lead_time_weeks'] * 7
+        return super().write(vals)
