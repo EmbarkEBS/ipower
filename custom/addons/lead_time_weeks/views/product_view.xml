@@ -5,14 +5,12 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
 
-            <!-- Hide default days field -->
-            <xpath expr="//field[@name='sale_delay']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-
-            <!-- Add weeks field -->
-            <xpath expr="//field[@name='sale_delay']" position="after">
-                <field name="lead_time_weeks"/>
+            <!-- FULL replacement removes label + unit (days) -->
+            <xpath expr="//field[@name='sale_delay']" position="replace">
+                <div class="o_row">
+                    <field name="lead_time_weeks"/>
+                    <span class="ms-2">weeks</span>
+                </div>
             </xpath>
 
         </field>
