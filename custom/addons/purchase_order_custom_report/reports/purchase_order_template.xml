@@ -120,10 +120,7 @@
 
     <!-- LINES -->
     <t t-set="i" t-value="0"/>
-    <t t-foreach="o.order_line" t-as="line">
-        <t t-set="i" t-value="i+1"/>
-
-        <t t-foreach="o.order_line" t-as="line">
+          <t t-foreach="o.order_line" t-as="line">
     <t t-set="i" t-value="i+1"/>
 
     <table style="width:100%; margin-top:4px;"
