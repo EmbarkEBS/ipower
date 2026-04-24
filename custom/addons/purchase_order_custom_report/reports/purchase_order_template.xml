@@ -66,12 +66,7 @@
                    
 
                     <table style="width:100%;">
-                        <tr>
-                            <td style="width:45%;"><strong>PO No</strong></td>
-                            <td>
-                                <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
-                            </td>
-                        </tr>
+                      
 
                         <tr>
                             <td><strong>Order Date</strong></td>
@@ -100,7 +95,12 @@
 
         </tr>
     </table>
-
+  <div>
+                            <p style="color:#f26836"> <strong><span>Purchase Order </span>
+                            
+                                <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
+                          </strong>  </p>
+                        </div>
     <!-- LINE HEADER -->
     <table style="width:100%; margin-top:20px; border-bottom:1px solid black;">
         <tr>
