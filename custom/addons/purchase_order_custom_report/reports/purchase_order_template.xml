@@ -112,7 +112,7 @@
             <th style="width:5%;">S.No</th>
             <th style="width:45%;">Description</th>
             <th style="width:10%; text-align:center;">Qty</th>
-            <th style="width:10%; text-align:center;">Lead Time(Days)</th>
+            <th style="width:10%; text-align:center;">Lead Time(Weeks)</th>
             <th style="width:15%; text-align:right;">Unit</th>
             <th style="width:15%; text-align:right;">Amount</th>
         </tr>
