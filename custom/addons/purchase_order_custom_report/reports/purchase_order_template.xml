@@ -107,7 +107,7 @@
                           </strong>  </p>
                         </div>
     <!-- LINE HEADER -->
-    <table style="width:100%; margin-top:20px; border-bottom:1px solid black;">
+    <table style="width:100%; margin-top:20px; background-color:#fff5e6;">
         <tr>
             <th style="width:5%;">S.No</th>
             <th style="width:45%;">Description</th>
@@ -120,10 +120,10 @@
 
     <!-- LINES -->
     <t t-set="i" t-value="0"/>
-          <t t-foreach="o.order_line" t-as="line">
-    <t t-set="i" t-value="i+1"/>
+    <t t-foreach="o.order_line" t-as="line">
+        <t t-set="i" t-value="i+1"/>
 
-   <table t-att-style="'width:100%; margin-top:4px; background-color:' + ('#fff5e6' if i % 2 == 0 else '#ffffff') + ';'">
+        <table style="width:100%; margin-top:4px;">
             <tr>
                 <td style="width:5%;" t-esc="i"/>
 
