@@ -1,70 +1,100 @@
 <odoo>
-<template id="purchase_order_template">
 
-<t t-call="web.html_container">
-<t t-foreach="docs" t-as="o">
-<t t-call="web.external_layout">
+    <!-- ========================= -->
+    <!-- CUSTOM EXTERNAL LAYOUT -->
+    <!-- ========================= -->
+    <template id="custom_external_layout" inherit_id="web.external_layout">
 
-<div class="page">
+        <!-- REMOVE DEFAULT HEADER -->
+        <xpath expr="//div[contains(@class,'header')]" position="replace">
+            <div class="header"/>
+        </xpath>
 
-    <div style="text-align:right;">
-        <h3>Purchase Order</h3>
-        <p><strong>PO No:</strong> <span t-esc="o.name"/></p>
-        <p><strong>Date:</strong> <span t-esc="o.date_order"/></p>
-    </div>
+        <!-- REMOVE DEFAULT FOOTER -->
+        <xpath expr="//div[contains(@class,'footer')]" position="replace">
+            <div class="footer"/>
+        </xpath>
 
-    <div>
-        <strong>Vendor:</strong>
-        <p t-esc="o.partner_id.name"/>
-        <p t-esc="o.partner_id.contact_address"/>
-    </div>
+    </template>
 
-    <br/>
 
-    <table style="width:100%; border-collapse: collapse;" border="1">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Unit Price</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
+    <!-- ========================= -->
+    <!-- PURCHASE ORDER TEMPLATE -->
+    <!-- ========================= -->
+    <template id="purchase_order_template">
 
-        <tbody>
-            <tr t-foreach="o.order_line" t-as="line">
-                <td t-esc="line.name"/>
-                <td t-esc="line.product_qty"/>
-                <td t-esc="line.price_unit"/>
-                <td t-esc="line.price_subtotal"/>
-            </tr>
-        </tbody>
-    </table>
+        <t t-call="web.external_layout">
+        <t t-foreach="docs" t-as="o">
 
-    <br/>
+        <main>
+        <div class="page" style="padding:10px 20px 80px 20px; font-size:12px; position:relative; min-height:1000px;">
 
-    <div style="text-align:right;">
-        <p><strong>Untaxed:</strong> <span t-esc="o.amount_untaxed"/></p>
-        <p><strong>Tax:</strong> <span t-esc="o.amount_tax"/></p>
-        <p><strong>Total:</strong> <span t-esc="o.amount_total"/></p>
-    </div>
+            <!-- HEADER -->
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:60%;">
+                        <strong>
+                            <span t-esc="o.company_id.name"/>
+                        </strong><br/>
 
-    <br/>
+                        <!-- FIXED ADDRESS -->
+                        <span t-esc="o.company_id.partner_id.street or ''"/><br/>
+                        <span t-esc="o.company_id.partner_id.city or ''"/>
+                        <span t-esc="', ' + o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
+                    </td>
 
-    <div>
-        <p><strong>Payment Terms:</strong>
-            <span t-esc="o.payment_term_id.name"/>
-        </p>
+                    <td style="width:40%; text-align:right;">
+                        <img t-if="o.company_id.logo"
+                             t-att-src="image_data_uri(o.company_id.logo)"
+                             style="height:60px;"/>
+                    </td>
+                </tr>
+            </table>
 
-        <p><strong>Notes:</strong></p>
-        <p t-esc="o.notes"/>
-    </div>
+            <!-- YOUR CONTENT (shortened here, keep your lines section same) -->
 
-</div>
+            <table style="width:100%; margin-top:20px;">
+                <tr>
 
-</t>
-</t>
-</t>
+                    <!-- LEFT -->
+                    <td style="width:60%;">
+                        <strong>Amount in Words:</strong><br/>
+                        <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only
+                    </td>
 
-</template>
+                    <!-- RIGHT -->
+                    <td style="width:40%; text-align:right;">
+                        <div>Subtotal : <span t-esc="'%.2f' % o.amount_untaxed"/></div>
+                        <div>Tax : <span t-esc="'%.2f' % o.amount_tax"/></div>
+                        <div style="font-weight:bold;">
+                            Total :
+                            <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_total)"/>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+
+            <!-- FOOTER (FIXED BOTTOM) -->
+            <div style="position:absolute; bottom:0; left:20px; right:20px; text-align:center; border-top:1px solid #aaa; font-size:10px; padding-top:5px;">
+
+                <strong t-esc="o.company_id.name"/><br/>
+
+                <span t-esc="o.company_id.partner_id.street or ''"/><br/>
+                <span t-esc="o.company_id.partner_id.city or ''"/>
+                <span t-esc="', ' + o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
+
+                <br/>
+                Page <span class="page"/> of <span class="topage"/>
+
+            </div>
+
+        </div>
+        </main>
+
+        </t>
+        </t>
+
+    </template>
+
 </odoo>
