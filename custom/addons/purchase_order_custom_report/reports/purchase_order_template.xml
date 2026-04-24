@@ -96,7 +96,7 @@
         </tr>
     </table>
   <div>
-                            <p style="color:#f26836"> <strong><span>Purchase Order </span>
+                            <p style="color:#f26836 ;font-size:20px;"> <strong><span>Purchase Order </span>
                             
                                 <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
                           </strong>  </p>
@@ -211,7 +211,7 @@
     right: 20px;
     text-align: center;
     border-top: 1px solid #aaa;
-    padding-top: 5px;
+    padding-top: 25px;
     font-size: 10px;">
         
         <strong t-esc="o.company_id.name"/> |
