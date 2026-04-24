@@ -81,7 +81,12 @@
                                 <td><span t-esc="o.incoterm_id.code"/></td>
                             </tr>
                         </t>
-
+ <t t-if="o.origin" class="col-3">
+  <tr>
+                    <td> <strong>Sales Order:</strong> </td>
+                    <td> <p t-field="o.origin" class="m-0"/> </td>
+                    </tr>
+                </t>
                         <t t-if="o.payment_term_id">
                             <tr>
                                 <td><strong>Payment Terms</strong></td>
@@ -203,7 +208,7 @@
 
     </tr>
 </table>
-
+ <p t-field="o.note" class="mt-4"/>
     <!-- FOOTER -->
     <div style="position: fixed;
     bottom: 0;
