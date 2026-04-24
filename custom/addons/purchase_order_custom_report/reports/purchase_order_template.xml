@@ -5,6 +5,10 @@
 <t t-call="web.html_container">
 <t t-foreach="docs" t-as="o">
 
+<!-- ✅ SAFE CURRENCY SYMBOL -->
+<t t-set="cur_symbol"
+   t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
+
 <main>
 <div class="page" style="padding:10px 20px 60px 20px; font-size:12px; line-height:1.4; position:relative; min-height:1000px;">
 
@@ -16,8 +20,8 @@
                     <span t-esc="o.company_id.name"/>
                 </strong><br/>
 
-                <span t-esc="o.company_id.partner_id.street or ''"/>,<br/>
-                <span t-esc="o.company_id.partner_id.city or ''"/>,<br/>
+                <span t-esc="o.company_id.partner_id.street or ''"/><br/>
+                <span t-esc="o.company_id.partner_id.city or ''"/><br/>
                 <span t-esc="o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
             </td>
 
@@ -33,70 +37,65 @@
     <table style="width:100%; margin-top:20px;">
         <tr>
 
+            <!-- SHIPPING -->
             <td style="width:50%;">
-               <strong>Shipping</strong><br/>
+                <strong>Shipping</strong><br/>
 
-    <t t-set="addr" t-value="(o.dest_address_id or o.partner_id)"/>
+                <t t-set="addr" t-value="(o.dest_address_id or o.partner_id)"/>
 
-    <!-- NAME -->
-    <span t-esc="addr.name"/><br/>
+                <span t-esc="addr.name"/><br/>
 
-    <!-- PLOT / STREET -->
-    <t t-if="addr.street">
-        <span t-esc="addr.street"/><br/>
-    </t>
+                <t t-if="addr.street">
+                    <span t-esc="addr.street"/><br/>
+                </t>
 
-    <!-- CITY -->
-    <t t-if="addr.city">
-        <span t-esc="addr.city"/><br/>
-    </t>
+                <t t-if="addr.city">
+                    <span t-esc="addr.city"/><br/>
+                </t>
 
-    <!-- COUNTRY -->
-    <t t-if="addr.country_id">
-        <span t-esc="addr.country_id.name"/>
-    </t>
-
+                <t t-if="addr.country_id">
+                    <span t-esc="addr.country_id.name"/>
+                </t>
             </td>
 
+            <!-- PO DETAILS -->
             <td style="width:50%; position:relative;">
+                <div style="float:right; width:260px; text-align:left;">
 
-    <div style="float:right; width:260px; text-align:left;">
+                    <strong>Purchase Order</strong><br/><br/>
 
-        <strong>Purchase Order</strong><br/><br/>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:45%;"><strong>PO No</strong></td>
+                            <td>
+                                <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
+                            </td>
+                        </tr>
 
-        <table style="width:100%;">
-            <tr>
-                <td style="width:45%;"><strong>PO No</strong></td>
-                <td>
-                    <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
-                </td>
-            </tr>
+                        <tr>
+                            <td><strong>Order Date</strong></td>
+                            <td>
+                                <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
+                            </td>
+                        </tr>
 
-            <tr>
-                <td><strong>Order Date</strong></td>
-                <td>
-                    <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
-                </td>
-            </tr>
+                        <t t-if="o.incoterm_id">
+                            <tr>
+                                <td><strong>Incoterm</strong></td>
+                                <td><span t-esc="o.incoterm_id.code"/></td>
+                            </tr>
+                        </t>
 
-            <t t-if="o.incoterm_id">
-                <tr>
-                    <td><strong>Incoterm</strong></td>
-                    <td><span t-esc="o.incoterm_id.code"/></td>
-                </tr>
-            </t>
+                        <t t-if="o.payment_term_id">
+                            <tr>
+                                <td><strong>Payment Terms</strong></td>
+                                <td><span t-esc="o.payment_term_id.name"/></td>
+                            </tr>
+                        </t>
+                    </table>
 
-            <t t-if="o.payment_term_id">
-                <tr>
-                    <td><strong>Payment Terms</strong></td>
-                    <td><span t-esc="o.payment_term_id.name"/></td>
-                </tr>
-            </t>
-        </table>
-
-    </div>
-
-</td>
+                </div>
+            </td>
 
         </tr>
     </table>
@@ -121,21 +120,29 @@
         <table style="width:100%; margin-top:4px;">
             <tr>
                 <td style="width:5%;" t-esc="i"/>
-                <td style="width:45%;"><span t-esc="line.name"/></td>
+
+                <td style="width:45%;">
+                    <span t-esc="line.name"/>
+                </td>
+
                 <td style="width:10%; text-align:center;">
                     <span t-field="line.product_qty" t-options='{"widget":"integer"}'/>
                 </td>
+
                 <td style="width:10%; text-align:center;">
-                  <t t-set="seller" t-value="line.product_id.seller_ids.filtered(lambda s: s.partner_id == o.partner_id)[:1]"/>
-                                    <t t-if="seller">
-                                        <span t-esc="seller.delay"/>
-                                    </t>
+                    <t t-set="seller" t-value="line.product_id.seller_ids.filtered(lambda s: s.partner_id == o.partner_id)[:1]"/>
+                    <t t-if="seller">
+                        <span t-esc="seller.delay"/>
+                    </t>
                 </td>
+
+                <!-- ✅ SAFE CURRENCY -->
                 <td style="width:15%; text-align:right;">
-                     <span t-field="line.price_unit"/>
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % line.price_unit)"/>
                 </td>
+
                 <td style="width:15%; text-align:right;">
-                     <span t-out="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % line.price_subtotal)"/>
                 </td>
             </tr>
 
@@ -144,11 +151,10 @@
                 <td colspan="5">
                     <small t-esc="line.product_id.description or ''"/>
                     <div>
-                                        <strong>
-                                            
-                                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
-                                        </strong>
-                                    </div>
+                        <strong>
+                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                        </strong>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -164,24 +170,29 @@
             </td>
 
             <td style="width:40%; text-align:right;">
-                <div>Subtotal : <span t-esc="o.currency_id.name + ' ' + ('%.2f' % o.amount_untaxed)"/></div>
-                <div>Tax : <span t-esc="o.currency_id.name + ' ' + ('%.2f' % o.amount_tax)"/></div>
+                <div>Subtotal :
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
+                </div>
+
+                <div>Tax :
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
+                </div>
 
                 <div style="font-weight:bold;">
                     Total :
-                    <span t-esc="o.currency_id.name + ' ' + ('%.2f' % o.amount_total)"/>
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
                 </div>
             </td>
 
         </tr>
     </table>
 
-    <!-- FOOTER (SINGLE LINE) -->
+    <!-- FOOTER -->
     <div style="position:absolute; bottom:0; left:20px; right:20px; text-align:center; border-top:1px solid #aaa; padding-top:5px; font-size:10px;">
         
         <strong t-esc="o.company_id.name"/> |
         <span t-esc="o.company_id.partner_id.street or ''"/> ,
-         <span t-esc="o.company_id.partner_id.city or ''"/> ,
+        <span t-esc="o.company_id.partner_id.city or ''"/> ,
         <span t-esc="o.company_id.partner_id.country_id.name or ''"/>
 
     </div>
