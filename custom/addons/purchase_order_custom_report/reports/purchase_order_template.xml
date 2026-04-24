@@ -63,7 +63,7 @@
             <td style="width:50%; position:relative;">
                 <div style="float:right; width:260px; text-align:left;">
 
-                    <strong>Purchase Order</strong><br/><br/>
+                   
 
                     <table style="width:100%;">
                         <tr>
@@ -163,30 +163,46 @@
 
     <!-- TOTAL -->
     <table style="width:100%; margin-top:20px;">
-        <tr>
+    <tr>
 
-            <td style="width:60%;">
-                <strong>Amount in Words:</strong><br/>
-                <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only
-            </td>
+        <!-- LEFT: AMOUNT IN WORDS -->
+        <td style="width:60%;">
+            <strong>Amount in Words:</strong><br/>
+            <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only
+        </td>
 
-            <td style="width:40%; text-align:right;">
-                <div>Subtotal :
+        <!-- RIGHT: TOTAL BOX -->
+        <td style="width:40%; text-align:right;">
+
+            <div style="width:220px; margin-left:auto;">
+
+                <!-- TOP BORDER (SUBTOTAL START) -->
+                <div style="border-top:1px solid #000; padding-top:5px;">
+                    Subtotal :
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
                 </div>
 
-                <div>Tax :
+                <!-- TAX -->
+                <div style="padding:3px 0;">
+                    Tax :
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
                 </div>
 
+                <!-- BOTTOM BORDER (AFTER TAX) -->
+                <div style="border-bottom:1px solid #000; margin-bottom:5px;"></div>
+
+                <!-- TOTAL -->
                 <div style="font-weight:bold;">
                     Total :
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
                 </div>
-            </td>
 
-        </tr>
-    </table>
+            </div>
+
+        </td>
+
+    </tr>
+</table>
 
     <!-- FOOTER -->
     <div style="position: fixed;
