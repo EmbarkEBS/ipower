@@ -40,9 +40,9 @@ class SaleOrder(models.Model):
 
                 supplier = product.seller_ids[:1]
 
-                # اگر vendor داشت استفاده کن
+         
                 if supplier:
-                    vendor = supplier.name   # ✅ FIX (not partner_id)
+                  vendor = supplier.partner_id  # ✅ FIX (not partner_id)
 
                 po_lines.append((0, 0, {
                     'product_id': product.id,
