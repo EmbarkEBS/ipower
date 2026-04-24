@@ -16,8 +16,8 @@
                     <span t-esc="o.company_id.name"/>
                 </strong><br/>
 
-                <span t-esc="o.company_id.partner_id.street or ''"/>
-                <span t-esc="o.company_id.partner_id.city or ''"/>
+                <span t-esc="o.company_id.partner_id.street or ''"/>,<br/>
+                <span t-esc="o.company_id.partner_id.city or ''"/><br/>
                 <span t-esc="', ' + o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
             </td>
 
@@ -108,10 +108,10 @@
                                     </t>
                 </td>
                 <td style="width:15%; text-align:right;">
-                    <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % line.price_unit)"/>
+                     <span t-field="line.price_unit"/>
                 </td>
                 <td style="width:15%; text-align:right;">
-                    <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % line.price_subtotal)"/>
+                     <span t-out="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
                 </td>
             </tr>
 
@@ -140,12 +140,12 @@
             </td>
 
             <td style="width:40%; text-align:right;">
-                <div>Subtotal : <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_untaxed)"/></div>
-                <div>Tax : <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_tax)"/></div>
+                <div>Subtotal : <span t-esc="o.currency_id.name + ' ' + ('%.2f' % o.amount_untaxed)"/></div>
+                <div>Tax : <span t-esc="o.currency_id.name + ' ' + ('%.2f' % o.amount_tax)"/></div>
 
                 <div style="font-weight:bold;">
                     Total :
-                    <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_total)"/>
+                    <span t-esc="o.currency_id.name + ' ' + ('%.2f' % o.amount_total)"/>
                 </div>
             </td>
 
