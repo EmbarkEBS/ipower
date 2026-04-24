@@ -123,8 +123,7 @@
           <t t-foreach="o.order_line" t-as="line">
     <t t-set="i" t-value="i+1"/>
 
-    <table style="width:100%; margin-top:4px;"
-           t-att-style="'width:100%; margin-top:4px; background-color:%s;' % ('#fff5e6' if i % 2 == 0 else '#ffffff')">
+   <table t-att-style="'width:100%; margin-top:4px; background-color:' + ('#fff5e6' if i % 2 == 0 else '#ffffff') + ';'">
             <tr>
                 <td style="width:5%;" t-esc="i"/>
 
