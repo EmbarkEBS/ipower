@@ -8,22 +8,18 @@
 <main>
 <div class="page" style="padding:10px 20px 60px 20px; font-size:12px; line-height:1.4; position:relative; min-height:1000px;">
 
-    <!-- ================= HEADER ================= -->
+    <!-- HEADER -->
     <table style="width:100%;">
         <tr>
-            <td style="width:60%; vertical-align:top;">
-                
-                <!-- Company Name -->
-                <strong style="font-size:13px;">
+            <td style="width:60%;">
+                <strong>
                     <span t-esc="o.company_id.name"/>
                 </strong><br/>
 
-                <!-- FULL ADDRESS (WITH PO BOX, NO DUPLICATE NAME) -->
                 <span t-esc="o.company_id.partner_id.street or ''"/><br/>
                 <span t-esc="'PO Box ' + (o.company_id.partner_id.zip or '') if o.company_id.partner_id.zip else ''"/><br/>
                 <span t-esc="o.company_id.partner_id.city or ''"/>
                 <span t-esc="', ' + o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
-
             </td>
 
             <td style="width:40%; text-align:right;">
@@ -34,19 +30,17 @@
         </tr>
     </table>
 
-    <!-- ================= 2 COLUMN (UPDATED) ================= -->
+    <!-- SHIPPING + PO DETAILS -->
     <table style="width:100%; margin-top:20px;">
         <tr>
 
-            <!-- SHIPPING LEFT -->
-            <td style="width:50%; vertical-align:top;">
+            <td style="width:50%;">
                 <strong>Shipping</strong><br/>
                 <span t-esc="(o.dest_address_id or o.partner_id).name"/><br/>
                 <span t-esc="(o.dest_address_id or o.partner_id).contact_address"/>
             </td>
 
-            <!-- PO DETAILS RIGHT -->
-            <td style="width:50%; vertical-align:top;">
+            <td style="width:50%;">
                 <strong>Purchase Order</strong><br/><br/>
 
                 <table style="width:100%;">
@@ -78,31 +72,25 @@
                         </tr>
                     </t>
 
-                    <t t-if="o.origin">
-                        <tr>
-                            <td><strong>Sales Ref</strong></td>
-                            <td><span t-esc="o.origin"/></td>
-                        </tr>
-                    </t>
                 </table>
             </td>
 
         </tr>
     </table>
 
-    <!-- ================= LINE HEADER ================= -->
+    <!-- LINE HEADER -->
     <table style="width:100%; margin-top:20px; border-bottom:1px solid black;">
         <tr>
             <th style="width:5%;">S.No</th>
             <th style="width:45%;">Description</th>
             <th style="width:10%; text-align:center;">Qty</th>
-            <th style="width:10%; text-align:center;">Lead Time (Weeks)</th>
+            <th style="width:10%; text-align:center;">Lead Time(Weeks)</th>
             <th style="width:15%; text-align:right;">Unit</th>
             <th style="width:15%; text-align:right;">Amount</th>
         </tr>
     </table>
 
-    <!-- ================= LINES ================= -->
+    <!-- LINES -->
     <t t-set="i" t-value="0"/>
     <t t-foreach="o.order_line" t-as="line">
         <t t-set="i" t-value="i+1"/>
@@ -110,7 +98,12 @@
         <table style="width:100%; margin-top:4px;">
             <tr>
                 <td style="width:5%;" t-esc="i"/>
-                <td style="width:45%;"><span t-esc="line.name"/></td>
+                <td style="width:45%;"><span t-esc="line.name"/><div>
+                                        <strong>
+                                            
+                                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                                        </strong>
+                                    </div></td>
                 <td style="width:10%; text-align:center;">
                     <span t-field="line.product_qty" t-options='{"widget":"integer"}'/>
                 </td>
@@ -122,11 +115,10 @@
                     </t>
                 </td>
                 <td style="width:15%; text-align:right;">
-                    <span t-esc="'%.2f' % line.price_unit"/>
+                    <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % line.price_unit)"/>
                 </td>
                 <td style="width:15%; text-align:right;">
-                    <!-- FIX EURO SYMBOL -->
-                    <span t-esc="formatLang(line.price_subtotal, currency_obj=o.currency_id)"/>
+                    <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % line.price_subtotal)"/>
                 </td>
             </tr>
 
@@ -139,31 +131,29 @@
         </table>
     </t>
 
-    <!-- ================= TOTAL ================= -->
+    <!-- TOTAL -->
     <table style="width:100%; margin-top:20px;">
         <tr>
 
-            <!-- Amount in Words -->
-            <td style="width:60%; vertical-align:top;">
+            <td style="width:60%;">
                 <strong>Amount in Words:</strong><br/>
                 <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only
             </td>
 
-            <!-- Totals -->
             <td style="width:40%; text-align:right;">
-                <div>Subtotal : <span t-esc="formatLang(o.amount_untaxed, currency_obj=o.currency_id)"/></div>
-                <div>Tax : <span t-esc="formatLang(o.amount_tax, currency_obj=o.currency_id)"/></div>
+                <div>Subtotal : <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_untaxed)"/></div>
+                <div>Tax : <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_tax)"/></div>
 
                 <div style="font-weight:bold;">
                     Total :
-                    <span t-esc="formatLang(o.amount_total, currency_obj=o.currency_id)"/>
+                    <span t-esc="o.currency_id.symbol + ' ' + ('%.2f' % o.amount_total)"/>
                 </div>
             </td>
 
         </tr>
     </table>
 
-    <!-- ================= FOOTER (SINGLE LINE) ================= -->
+    <!-- FOOTER (SINGLE LINE) -->
     <div style="position:absolute; bottom:0; left:20px; right:20px; text-align:center; border-top:1px solid #aaa; padding-top:5px; font-size:10px;">
         
         <strong t-esc="o.company_id.name"/> |
