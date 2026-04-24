@@ -19,10 +19,10 @@
             <td style="width:60%;">
                 <strong>
                     <span t-esc="o.company_id.name"/>
-                </strong><br/>
+                </strong>,<br/>
 
-                <span t-esc="o.company_id.partner_id.street or ''"/><br/>
-                <span t-esc="o.company_id.partner_id.city or ''"/><br/>
+                <span t-esc="o.company_id.partner_id.street or ''"/>,<br/>
+                <span t-esc="o.company_id.partner_id.city or ''"/>,<br/>
                 <span t-esc="o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
             </td>
 
@@ -40,18 +40,18 @@
 
             <!-- SHIPPING -->
             <td style="width:50%;">
-                <strong>Shipping</strong><br/>
+                <strong>To</strong><br/>
 
                 <t t-set="addr" t-value="(o.dest_address_id or o.partner_id)"/>
 
-                <span t-esc="addr.name"/><br/>
+                <span t-esc="addr.name"/>,<br/>
 
                 <t t-if="addr.street">
-                    <span t-esc="addr.street"/><br/>
+                    <span t-esc="addr.street"/>,<br/>
                 </t>
 
                 <t t-if="addr.city">
-                    <span t-esc="addr.city"/><br/>
+                    <span t-esc="addr.city"/>,<br/>
                 </t>
 
                 <t t-if="addr.country_id">
