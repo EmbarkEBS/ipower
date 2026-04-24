@@ -17,8 +17,8 @@
                 </strong><br/>
 
                 <span t-esc="o.company_id.partner_id.street or ''"/>,<br/>
-                <span t-esc="o.company_id.partner_id.city or ''"/><br/>
-                <span t-esc="', ' + o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
+                <span t-esc="o.company_id.partner_id.city or ''"/>,<br/>
+                <span t-esc="o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
             </td>
 
             <td style="width:40%; text-align:right;">
@@ -34,45 +34,69 @@
         <tr>
 
             <td style="width:50%;">
-                <strong>Shipping</strong><br/>
-                <span t-esc="(o.dest_address_id or o.partner_id).name"/><br/>
-                <span t-esc="(o.dest_address_id or o.partner_id).contact_address"/>
+               <strong>Shipping</strong><br/>
+
+    <t t-set="addr" t-value="(o.dest_address_id or o.partner_id)"/>
+
+    <!-- NAME -->
+    <span t-esc="addr.name"/><br/>
+
+    <!-- PLOT / STREET -->
+    <t t-if="addr.street">
+        <span t-esc="addr.street"/><br/>
+    </t>
+
+    <!-- CITY -->
+    <t t-if="addr.city">
+        <span t-esc="addr.city"/><br/>
+    </t>
+
+    <!-- COUNTRY -->
+    <t t-if="addr.country_id">
+        <span t-esc="addr.country_id.name"/>
+    </t>
+
             </td>
 
-            <td style="width:50%;">
-                <strong>Purchase Order</strong><br/><br/>
+            <td style="width:50%; position:relative;">
 
-                <table style="width:100%;">
-                    <tr>
-                        <td style="width:45%;"><strong>PO No</strong></td>
-                        <td>
-                            <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
-                        </td>
-                    </tr>
+    <div style="float:right; width:260px; text-align:left;">
 
-                    <tr>
-                        <td><strong>Order Date</strong></td>
-                        <td>
-                            <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
-                        </td>
-                    </tr>
+        <strong>Purchase Order</strong><br/><br/>
 
-                    <t t-if="o.incoterm_id">
-                        <tr>
-                            <td><strong>Incoterm</strong></td>
-                            <td><span t-esc="o.incoterm_id.code"/></td>
-                        </tr>
-                    </t>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:45%;"><strong>PO No</strong></td>
+                <td>
+                    <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
+                </td>
+            </tr>
 
-                    <t t-if="o.payment_term_id">
-                        <tr>
-                            <td><strong>Payment Terms</strong></td>
-                            <td><span t-esc="o.payment_term_id.name"/></td>
-                        </tr>
-                    </t>
+            <tr>
+                <td><strong>Order Date</strong></td>
+                <td>
+                    <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
+                </td>
+            </tr>
 
-                </table>
-            </td>
+            <t t-if="o.incoterm_id">
+                <tr>
+                    <td><strong>Incoterm</strong></td>
+                    <td><span t-esc="o.incoterm_id.code"/></td>
+                </tr>
+            </t>
+
+            <t t-if="o.payment_term_id">
+                <tr>
+                    <td><strong>Payment Terms</strong></td>
+                    <td><span t-esc="o.payment_term_id.name"/></td>
+                </tr>
+            </t>
+        </table>
+
+    </div>
+
+</td>
 
         </tr>
     </table>
