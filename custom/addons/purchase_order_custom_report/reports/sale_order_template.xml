@@ -1,0 +1,231 @@
+<odoo>
+
+<template id="sale_order_template">
+
+<t t-call="web.html_container">
+<meta charset="UTF-8"/>
+<t t-foreach="docs" t-as="o">
+
+<main>
+<div class="page" style="padding:10px 20px 60px 20px; font-size:12px; line-height:1.4; min-height:1000px;">
+
+    <!-- HEADER -->
+    <table style="width:100%;">
+        <tr>
+            <td style="width:60%;">
+                <strong>
+                    <span t-esc="o.company_id.name"/>
+                </strong><br/>
+
+                <span t-esc="o.company_id.partner_id.street or ''"/><br/>
+                <span t-esc="o.company_id.partner_id.city or ''"/><br/>
+                <span t-esc="o.company_id.partner_id.country_id.name or ''"/>
+            </td>
+
+            <td style="width:40%; text-align:right;">
+                <img t-if="o.company_id.logo"
+                     t-att-src="image_data_uri(o.company_id.logo)"
+                     style="height:60px;"/>
+            </td>
+        </tr>
+    </table>
+
+    <!-- CUSTOMER + DETAILS -->
+    <table style="width:100%; margin-top:20px;">
+        <tr>
+
+            <!-- CUSTOMER -->
+            <td style="width:50%;">
+                <strong>Customer</strong><br/>
+
+                <span t-esc="o.partner_id.name"/><br/>
+
+                <t t-if="o.partner_id.street">
+                    <span t-esc="o.partner_id.street"/><br/>
+                </t>
+
+                <t t-if="o.partner_id.city">
+                    <span t-esc="o.partner_id.city"/><br/>
+                </t>
+
+                <t t-if="o.partner_id.country_id">
+                    <span t-esc="o.partner_id.country_id.name"/>
+                </t>
+            </td>
+
+            <!-- ORDER DETAILS -->
+            <td style="width:50%;">
+                <div style="float:right; width:260px;">
+                    <table style="width:100%;">
+
+                        <tr>
+                            <td><strong>Order Date</strong></td>
+                            <td>
+                                <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Order No</strong></td>
+                            <td><span t-esc="o.name"/></td>
+                        </tr>
+
+                        <t t-if="o.payment_term_id">
+                            <tr>
+                                <td><strong>Payment Terms</strong></td>
+                                <td><span t-esc="o.payment_term_id.name"/></td>
+                            </tr>
+                        </t>
+
+                        <t t-if="o.user_id">
+                            <tr>
+                                <td><strong>Salesperson</strong></td>
+                                <td><span t-esc="o.user_id.name"/></td>
+                            </tr>
+                        </t>
+
+                    </table>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+
+    <!-- TITLE -->
+   <div>
+                            <p style="color:#f26836 ;font-size:20px;"> <strong><span>Sales Order </span>
+                            
+                                <span t-esc="'IP/SO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
+                          </strong>  </p>
+                        </div>
+
+    <!-- LINE HEADER -->
+    <table style="width:100%; margin-top:20px; background-color:#f5f5f5;">
+        <tr>
+            <th style="width:5%;">S.No</th>
+            <th style="width:45%;">Description</th>
+            <th name="th_lead_time" class="text-start">Lead Time(Days)</th>
+            <th style="width:10%; text-align:center;">Qty</th>
+            <th style="width:20%; text-align:right;">Unit Price</th>
+            <th style="width:20%; text-align:right;">Amount</th>
+        </tr>
+    </table>
+
+    <!-- LINES -->
+    <t t-set="i" t-value="0"/>
+    <t t-foreach="o.order_line" t-as="line">
+        <t t-set="i" t-value="i+1"/>
+
+        <table style="width:100%; margin-top:4px;">
+            <tr>
+                <td style="width:5%;" t-esc="i"/>
+
+                <td style="width:45%;">
+                    <span t-esc="line.name"/>
+                     <span t-field="line.product_id.description"/>
+                                    <div>
+                                        <strong>
+                                        <span t-field="line.x_studio_related_field_8b0_1jmkth7qs"/></strong>
+                                    </div>
+                                    <div>
+                                        
+                                        <span>Warranty: </span>
+                                        <span t-field="line.x_studio_related_field_36u_1jmlgnj3j"/>
+                                    </div>
+                                    
+                                </td>
+                                <td name="td_lead_time">
+                                    <span t-field="line.customer_lead"/>
+                                </td>
+              
+
+                <td style="width:10%; text-align:center;">
+                  <span t-esc="int(round(line.product_uom_qty))"/>
+                      
+                </td>
+
+                <!-- ✅ Dynamic currency -->
+                <td style="width:20%; text-align:right;">
+                    <span t-field="line.price_unit"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+
+                <td style="width:20%; text-align:right;">
+                    <span t-field="line.price_subtotal"
+                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+                   <br/>
+                                    <span t-field="line.product_id.description"/>
+            </tr>
+        </table>
+    </t>
+
+    <!-- TOTAL -->
+    <table style="width:100%; margin-top:20px;">
+        <tr>
+
+            <!-- AMOUNT IN WORDS -->
+            <td style="width:60%;">
+                <strong>Amount in Words:</strong><br/>
+                <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only
+            </td>
+
+            <!-- TOTAL BOX -->
+            <td style="width:40%; text-align:right;">
+                <div style="width:220px; margin-left:auto;">
+
+                    <div style="border-top:1px solid #000; padding-top:5px;">
+                        Subtotal :
+                        <span t-field="o.amount_untaxed"
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </div>
+
+                    <div style="padding:3px 0;">
+                        Tax :
+                        <span t-field="o.amount_tax"
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </div>
+
+                    <div style="border-bottom:1px solid #000; margin-bottom:5px;"></div>
+
+                    <div style="font-weight:bold;">
+                        Total :
+                        <span t-field="o.amount_total"
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </div>
+
+                </div>
+            </td>
+
+        </tr>
+    </table>
+
+    <!-- NOTES -->
+    <p t-field="o.note" class="mt-4"/>
+
+    <!-- FOOTER -->
+    <div style="position: fixed;
+        bottom: 0;
+        left: 20px;
+        right: 20px;
+        text-align: center;
+        border-top: 1px solid #aaa;
+        padding-top: 10px;
+        font-size: 10px;">
+
+        <strong t-esc="o.company_id.name"/> |
+        <span t-esc="o.company_id.partner_id.street or ''"/> ,
+        <span t-esc="o.company_id.partner_id.city or ''"/> ,
+        <span t-esc="o.company_id.partner_id.country_id.name or ''"/>
+
+    </div>
+
+</div>
+</main>
+
+</t>
+</t>
+
+</template>
+
+</odoo>
