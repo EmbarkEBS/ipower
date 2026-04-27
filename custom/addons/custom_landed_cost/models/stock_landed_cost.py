@@ -9,22 +9,22 @@ class StockLandedCost(models.Model):
 
         filtered_lines = []
 
-        for line in valuation_lines:
+        for val in valuation_lines:
 
-            product = line.product_id
+            cost_line = val.get('cost_line_id')  # FIXED
 
-            if product:
+            if cost_line:
 
                 exemption = getattr(
-                    product,
+                    cost_line,
                     "x_studio_related_field_8pf_1jn6mtke2",
                     False
                 )
 
-                # ❌ exclude 0% products BEFORE compute happens
+                # ❌ If 0% → remove from allocation base
                 if exemption == "0%":
                     continue
 
-            filtered_lines.append(line)
+            filtered_lines.append(val)
 
         return filtered_lines
