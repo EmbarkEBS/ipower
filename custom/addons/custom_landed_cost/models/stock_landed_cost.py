@@ -16,7 +16,7 @@ class StockLandedCost(models.Model):
 
             exemption = getattr(
                 product,
-                "x_studio_related_field_8pf_1jn6mtke2",
+                "x_studio_exemption",
                 False
             )
 
