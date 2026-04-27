@@ -1,30 +1,28 @@
-from odoo import models
-
 class StockLandedCost(models.Model):
     _inherit = "stock.landed.cost"
 
-    def _get_valuation_lines(self):
-        valuation_lines = super()._get_valuation_lines()
+    def _prepare_valuation_lines(self, forced_quantity=None):
 
-        filtered = []
+        valuation_lines = super()._prepare_valuation_lines(forced_quantity)
 
-        for line in valuation_lines:
-            product = line.product_id
+        filtered_lines = []
 
-            if not product:
-                continue
+        for val in valuation_lines:
 
-            exemption = getattr(
-                product,
-                "x_studio_exemption",
-                False
-            )
+            cost_line = val.cost_line_id  # IMPORTANT
 
-            # ❌ Exclude 0% products completely from allocation base
-            if exemption == "0%":
-                continue
+            if cost_line:
 
-            # ✔ Only 5% products remain
-            filtered.append(line)
+                exemption = getattr(
+                    cost_line,
+                    "x_studio_related_field_8pf_1jn6mtke2",
+                    False
+                )
 
-        return filtered
+                # ❌ If 0% → remove from allocation base
+                if exemption == "0%":
+                    continue
+
+            filtered_lines.append(val)
+
+        return filtered_lines
