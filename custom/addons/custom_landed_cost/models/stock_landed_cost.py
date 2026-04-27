@@ -3,19 +3,18 @@ from odoo import models
 class StockLandedCost(models.Model):
     _inherit = "stock.landed.cost"
 
-    def button_validate(self):
+    def compute_landed_cost(self):
         for cost in self:
+            for line in cost.cost_lines:
 
-            for val in cost.valuation_adjustment_lines:
+                product = line.product_id
 
-                product = val.product_id 
-
-                if product:
+                if product and hasattr(product, "x_studio_exemption"):
 
                     exemption = product.x_studio_exemption
 
-                    # 0% → remove landed cost impact
+                    # 0% → remove from computation
                     if exemption == "0%":
-                        val.additional_landed_cost = 0
+                        line.price_unit = 0.0
 
-        return super().button_validate()
+        return super().compute_landed_cost()
