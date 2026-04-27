@@ -8,11 +8,11 @@ class StockLandedCost(models.Model):
 
             for val in cost.valuation_adjustment_lines:
 
-                product = val.product_id  # this is product.product
+                product = val.product_id 
 
                 if product:
 
-                    exemption = product.x_studio_related_field_8pf_1jn6mtke2
+                    exemption = product.x_studio_exemption
 
                     # 0% → remove landed cost impact
                     if exemption == "0%":
