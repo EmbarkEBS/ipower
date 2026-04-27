@@ -1,3 +1,5 @@
+from odoo import models
+
 class StockLandedCost(models.Model):
     _inherit = "stock.landed.cost"
 
@@ -7,22 +9,22 @@ class StockLandedCost(models.Model):
 
         filtered_lines = []
 
-        for val in valuation_lines:
+        for line in valuation_lines:
 
-            cost_line = val.cost_line_id  # IMPORTANT
+            product = line.product_id
 
-            if cost_line:
+            if product:
 
                 exemption = getattr(
-                    cost_line,
+                    product,
                     "x_studio_related_field_8pf_1jn6mtke2",
                     False
                 )
 
-                # ❌ If 0% → remove from allocation base
+                # ❌ exclude 0% products BEFORE compute happens
                 if exemption == "0%":
                     continue
 
-            filtered_lines.append(val)
+            filtered_lines.append(line)
 
         return filtered_lines
