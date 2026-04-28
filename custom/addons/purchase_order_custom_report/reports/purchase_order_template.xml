@@ -112,9 +112,8 @@
             <th style="width:5%;">S.No</th>
             <th style="width:45%;">Description</th>
             <th style="width:10%; text-align:center;">Qty</th>
-            <th style="width:10%; text-align:center;">Lead Time(Weeks)</th>
-            <th style="width:15%; text-align:right;">Unit</th>
-            <th style="width:15%; text-align:right;">Amount</th>
+           <th style="width:15%; text-align:right;">Unit Price</th>
+            <th style="width:15%; text-align:right;">Total Price</th>
         </tr>
     </table>
 
@@ -135,12 +134,12 @@
                    <span t-esc="int(round(line.product_qty))"/>
                 </td>
 
-                <td style="width:10%; text-align:center;">
+              <!-- <td style="width:10%; text-align:center;">
                     <t t-set="seller" t-value="line.product_id.seller_ids.filtered(lambda s: s.partner_id == o.partner_id)[:1]"/>
                     <t t-if="seller">
                         <span t-esc="seller.delay"/>
                     </t>
-                </td>
+                </td>--> 
 
                 <!-- ✅ SAFE CURRENCY -->
               <td style="width:15%; text-align:right;">
