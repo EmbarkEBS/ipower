@@ -1,6 +1,6 @@
 {
     'name': 'Custom  Report',
-    'version': '19.0',
+    'version': '1.0',
     'depends': ['purchase'],
     'data': [
         'reports/purchase_order_report.xml',
