@@ -164,7 +164,63 @@
             </tr>
         </table>
     </t>
+<!-- SHIPPING DETAILS (ONLY FOR FREIGHT FORWARDER) -->
+<t t-if="o.partner_id.category_id.filtered(lambda c: c.name == 'Freight Forwarder')">
 
+    <div style="margin-top:20px;">
+        <strong style="font-size:14px;">Shipping Details</strong>
+
+        <table style="width:100%; margin-top:8px; border:1px solid #000; border-collapse:collapse;">
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px; width:40%;">
+                    <strong>Weight (kg)</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_weightkg_1 or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Dimensions</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_dimensions_1 or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Pickup Address</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_pickup_address or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Delivery Location</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_delivery_location or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Instructions</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_special_instructions or ''"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</t>
     <!-- TOTAL -->
     <table style="width:100%; margin-top:20px;">
     <tr>
