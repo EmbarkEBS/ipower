@@ -165,7 +165,7 @@
         </table>
     </t>
 <!-- SHIPPING DETAILS (ONLY FOR FREIGHT FORWARDER) -->
-<t t-if="o.partner_id.category_id.filtered(lambda c: c.name == 'Freight Forwarder')">
+<t t-if="o.partner_id.category_id.filtered(lambda c: c.name == 'Freight Forwarders')">
 
     <div style="margin-top:20px;">
         <strong style="font-size:14px;">Shipping Details</strong>
