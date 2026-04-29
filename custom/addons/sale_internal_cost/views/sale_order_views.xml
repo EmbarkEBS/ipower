@@ -5,14 +5,16 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- SAFER LOCATION -->
-            <xpath expr="//sheet" position="inside">
-                <group string="Internal Costs" col="4">
-                    <field name="freight"/>
-                    <field name="duty"/>
-                    <field name="misc"/>
-                    <field name="total_extra" readonly="1"/>
-                </group>
+            <!-- Add new tab -->
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Internal Charges">
+                    <group>
+                        <field name="freight"/>
+                        <field name="duty"/>
+                        <field name="misc"/>
+                        <field name="total_extra" readonly="1"/>
+                    </group>
+                </page>
             </xpath>
 
         </field>
