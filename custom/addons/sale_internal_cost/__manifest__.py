@@ -6,7 +6,7 @@
     'author': 'vidhya',
     'category': 'Sales',
     'summary': 'Add Freight, Duty, Misc to Sale Order and include in price',
-    'data': [],
+    'data': ['views/sale_order_views.xml'],
     'installable': True,
     'application': False,
 }
