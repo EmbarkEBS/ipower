@@ -5,8 +5,9 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//sheet/notebook" position="before">
-                <group string="Internal Costs">
+            <!-- SAFER LOCATION -->
+            <xpath expr="//sheet" position="inside">
+                <group string="Internal Costs" col="4">
                     <field name="freight"/>
                     <field name="duty"/>
                     <field name="misc"/>
