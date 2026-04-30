@@ -1,6 +1,9 @@
 from odoo import models, fields, api
 
 
+# =========================
+# SALE ORDER
+# =========================
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -46,17 +49,39 @@ class SaleOrder(models.Model):
 
             for line in lines:
 
-                # Only update if user hasn't manually changed price
-                if not line._origin or line.price_unit == line._origin.price_unit:
-                    base_price = line.product_id.lst_price
-                    line.price_unit = base_price + extra_per_unit
+                # Ensure base price exists
+                if not line.base_price:
+                    line.base_price = line.price_unit
+
+                # Always calculate from base price
+                line.price_unit = line.base_price + extra_per_unit
 
 
+# =========================
+# SALE ORDER LINE
+# =========================
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    @api.onchange('product_id', 'product_uom_qty')
-    def _onchange_product_apply_extra(self):
+    base_price = fields.Float(
+        string="Base Price",
+        readonly=True
+    )
+
+    @api.onchange('product_id')
+    def _onchange_product_set_base(self):
+        for line in self:
+            if line.product_id:
+                line.base_price = line.price_unit or line.product_id.lst_price
+
+    @api.onchange('price_unit')
+    def _onchange_price_update_base(self):
+        for line in self:
+            if line.price_unit:
+                line.base_price = line.price_unit
+
+    @api.onchange('product_uom_qty')
+    def _onchange_qty_reapply_extra(self):
         for line in self:
             order = line.order_id
 
@@ -72,7 +97,8 @@ class SaleOrderLine(models.Model):
 
             extra_per_unit = total_extra / total_qty
 
-            # Only apply if user hasn't manually changed
-            if not line._origin or line.price_unit == line._origin.price_unit:
-                base_price = line.product_id.lst_price
-                line.price_unit = base_price + extra_per_unit
+            for l in lines:
+                if not l.base_price:
+                    l.base_price = l.price_unit
+
+                l.price_unit = l.base_price + extra_per_unit
