@@ -34,11 +34,13 @@ class SaleOrder(models.Model):
             extra_per_unit = (order.total_extra or 0.0) / total_qty
 
             for line in lines:
-                # ✅ ALWAYS use base_price only
-                base = line.base_price or line.product_id.lst_price
+                # ✅ ALWAYS ensure base_price exists
+                if not line.base_price:
+                    line.base_price = line.price_unit or line.product_id.lst_price
 
+                # ✅ Apply extra cleanly
                 line.extra_per_unit = extra_per_unit
-                line.price_unit = base + extra_per_unit
+                line.price_unit = line.base_price + extra_per_unit
 
     @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
     def _onchange_extra(self):
@@ -55,7 +57,6 @@ class SaleOrderLine(models.Model):
     def _onchange_product_set_base(self):
         for line in self:
             if line.product_id:
-                # set base price once
                 line.base_price = line.product_id.lst_price
 
                 if line.order_id:
@@ -73,8 +74,6 @@ class SaleOrderLine(models.Model):
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = (order.total_extra or 0.0) / total_qty
 
-            # ✅ CRITICAL FIX:
-            # base = edited price - current extra
-            new_base = line.price_unit - extra_per_unit
-
-            line.base_price = new_base
+            # ✅ KEY FIX:
+            # Always update base_price BEFORE any recompute happens
+            line.base_price = line.price_unit - extra_per_unit
