@@ -1,9 +1,6 @@
 from odoo import models, fields, api
 
 
-# =========================
-# SALE ORDER
-# =========================
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -37,19 +34,17 @@ class SaleOrder(models.Model):
             extra_per_unit = (order.total_extra or 0.0) / total_qty
 
             for line in lines:
-                base = line.base_price or line.price_unit
+                # ✅ ALWAYS use base_price only
+                base = line.base_price or line.product_id.lst_price
+
                 line.extra_per_unit = extra_per_unit
                 line.price_unit = base + extra_per_unit
-
 
     @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
     def _onchange_extra(self):
         self._recompute_prices()
 
 
-# =========================
-# SALE ORDER LINE
-# =========================
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
@@ -60,26 +55,26 @@ class SaleOrderLine(models.Model):
     def _onchange_product_set_base(self):
         for line in self:
             if line.product_id:
-                # set base price when product selected
+                # set base price once
                 line.base_price = line.product_id.lst_price
+
                 if line.order_id:
                     line.order_id._recompute_prices()
 
     @api.onchange('price_unit')
     def _onchange_price_unit_update_base(self):
-        """
-        When user edits price → update base price
-        """
         for line in self:
             if not line.order_id:
                 continue
 
-            # compute current extra
             order = line.order_id
             lines = order.order_line.filtered(lambda l: l.product_id)
 
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = (order.total_extra or 0.0) / total_qty
 
-            # new base price = edited price - extra
-            line.base_price = line.price_unit - extra_per_unit
+            # ✅ CRITICAL FIX:
+            # base = edited price - current extra
+            new_base = line.price_unit - extra_per_unit
+
+            line.base_price = new_base
