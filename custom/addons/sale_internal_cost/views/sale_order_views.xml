@@ -5,7 +5,6 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- Global Charges Tab -->
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges" name="internal_charges">
                     <group>
@@ -21,10 +20,15 @@
                 </page>
             </xpath>
 
-            <!-- Ensure Unit Price is NOT readonly -->
-            <!-- Note: Using //field[@name='price_unit'] to be safe across versions -->
+            <!-- Add the editable Base Price -->
+            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
+                <field name="x_base_price" string="Base Price"/>
+            </xpath>
+
+            <!-- Make the resulting Unit Price readonly so it doesn't loop -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
-                <attribute name="readonly">0</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
             </xpath>
 
         </field>
