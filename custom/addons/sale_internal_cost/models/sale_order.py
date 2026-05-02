@@ -46,16 +46,26 @@ class SaleOrder(models.Model):
     def _onchange_recompute_extra(self):
         self._distribute_extra()
 
-    @api.depends('order_line.price_total', 'order_line.extra_total')
+    @api.depends('order_line.price_subtotal', 'order_line.price_tax', 'order_line.extra_total')
     def _compute_amount_all(self):
-        """
-        Add extra cost into order total
-        """
-        super()._compute_amount_all()
-
         for order in self:
-            extra = sum(order.order_line.mapped('extra_total'))
-            order.amount_total += extra
+            amount_untaxed = 0.0
+            amount_tax = 0.0
+            extra = 0.0
+
+        for line in order.order_line:
+            amount_untaxed += line.price_subtotal
+            amount_tax += line.price_tax
+            extra += line.extra_total
+
+        # ✅ Add extra to untaxed
+        amount_untaxed += extra
+
+        order.update({
+            'amount_untaxed': amount_untaxed,
+            'amount_tax': amount_tax,
+            'amount_total': amount_untaxed + amount_tax,
+        })
 
 
 # =========================
