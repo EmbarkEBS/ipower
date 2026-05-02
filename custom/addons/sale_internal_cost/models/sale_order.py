@@ -17,12 +17,16 @@ class SaleOrder(models.Model):
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
         for order in self:
-            order.total_extra = (order.freight or 0.0) + (order.duty or 0.0) + (order.misc or 0.0)
+            order.total_extra = (
+                (order.freight or 0.0)
+                + (order.duty or 0.0)
+                + (order.misc or 0.0)
+            )
 
     @api.onchange('freight', 'duty', 'misc', 'order_line')
     def _onchange_apply_extra_cost(self):
         for order in self:
-            lines = order.order_line
+            lines = order.order_line.filtered(lambda l: l.product_id)
             if not lines:
                 continue
 
@@ -32,9 +36,16 @@ class SaleOrder(models.Model):
             extra_per_unit = total_extra / total_qty
 
             for line in lines:
-                if line.product_id:
-                    base_price = line.product_id.lst_price
-                    line.price_unit = base_price + extra_per_unit
+
+                # STEP 1: remove old extra (if any)
+                if hasattr(line, '_old_extra'):
+                    line.price_unit -= line._old_extra
+
+                # STEP 2: apply new extra
+                line.price_unit += extra_per_unit
+
+                # STEP 3: store applied extra
+                line._old_extra = extra_per_unit
 
 
 class SaleOrderLine(models.Model):
@@ -46,7 +57,7 @@ class SaleOrderLine(models.Model):
             return
 
         order = self.order_id
-        lines = order.order_line
+        lines = order.order_line.filtered(lambda l: l.product_id)
 
         if not lines:
             return
@@ -57,6 +68,12 @@ class SaleOrderLine(models.Model):
         extra_per_unit = total_extra / total_qty
 
         for line in lines:
-            if line.product_id:
-                base_price = line.product_id.lst_price
-                line.price_unit = base_price + extra_per_unit
+
+            # remove old extra
+            if hasattr(line, '_old_extra'):
+                line.price_unit -= line._old_extra
+
+            # add new extra
+            line.price_unit += extra_per_unit
+
+            line._old_extra = extra_per_unit
