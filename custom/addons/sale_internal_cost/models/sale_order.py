@@ -14,25 +14,20 @@ class SaleOrder(models.Model):
         store=True
     )
 
-    # 🔒 control flag (important)
-    skip_recompute = fields.Boolean(default=False)
-
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
         for order in self:
             order.total_extra = (
-                (order.freight or 0.0)
-                + (order.duty or 0.0)
-                + (order.misc or 0.0)
+                (order.freight or 0.0) +
+                (order.duty or 0.0) +
+                (order.misc or 0.0)
             )
 
-    def _recompute_prices(self):
+    @api.onchange('freight', 'duty', 'misc', 'order_line')
+    def _onchange_apply_extra_cost(self):
         for order in self:
-
-            if order.skip_recompute:
-                return
-
             lines = order.order_line.filtered(lambda l: l.product_id)
+
             if not lines:
                 continue
 
@@ -41,54 +36,43 @@ class SaleOrder(models.Model):
 
             extra_per_unit = total_extra / total_qty
 
-            # block recursion
-            order.skip_recompute = True
-
             for line in lines:
-                if not line.original_price:
-                    line.original_price = line.price_unit
-
-                # reset
-                line.price_unit = line.original_price
-
-            for line in lines:
-                line.price_unit += extra_per_unit
-
-            order.skip_recompute = False
-
-    @api.onchange('freight', 'duty', 'misc')
-    def _onchange_internal_cost(self):
-        self._recompute_prices()
+                # ✅ Skip manually edited lines
+                if not line.is_manual_price:
+                    base_price = line.product_id.lst_price
+                    line.price_unit = base_price + extra_per_unit
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    original_price = fields.Float(string="Original Price")
-
-    @api.onchange('product_id')
-    def _onchange_product(self):
-        for line in self:
-            if line.product_id:
-                line.original_price = line.price_unit or line.product_id.lst_price
+    is_manual_price = fields.Boolean(string="Manual Price")
 
     @api.onchange('price_unit')
-    def _onchange_price(self):
+    def _onchange_price_unit_manual(self):
+        for line in self:
+            if line.price_unit:
+                line.is_manual_price = True
+
+    @api.onchange('product_id', 'product_uom_qty')
+    def _onchange_product_apply_extra(self):
         for line in self:
             order = line.order_id
-
             if not order:
                 continue
 
-            # ONLY update base if user changed manually
-            if line._origin and line.price_unit != line._origin.price_unit:
-                if not order.skip_recompute:
-                    line.original_price = line.price_unit
+            lines = order.order_line.filtered(lambda l: l.product_id)
 
-            order._recompute_prices()
+            if not lines:
+                continue
 
-    @api.onchange('product_uom_qty')
-    def _onchange_qty(self):
-        for line in self:
-            if line.order_id:
-                line.order_id._recompute_prices()
+            total_extra = order.total_extra or 0.0
+            total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
+
+            extra_per_unit = total_extra / total_qty
+
+            for l in lines:
+                # ✅ Do not override manual price
+                if not l.is_manual_price:
+                    base_price = l.product_id.lst_price
+                    l.price_unit = base_price + extra_per_unit
