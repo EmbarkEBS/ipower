@@ -37,19 +37,23 @@ class SaleOrder(models.Model):
 
             for line in lines:
 
-                # STEP 1: remove old extra (if any)
-                if hasattr(line, '_old_extra'):
-                    line.price_unit -= line._old_extra
+                # Remove previous extra
+                line.price_unit -= line.extra_applied
 
-                # STEP 2: apply new extra
+                # Add new extra
                 line.price_unit += extra_per_unit
 
-                # STEP 3: store applied extra
-                line._old_extra = extra_per_unit
+                # Store current extra
+                line.extra_applied = extra_per_unit
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
+
+    extra_applied = fields.Float(
+        string="Extra Applied",
+        default=0.0
+    )
 
     @api.onchange('product_id', 'product_uom_qty')
     def _onchange_product_apply_extra(self):
@@ -69,11 +73,6 @@ class SaleOrderLine(models.Model):
 
         for line in lines:
 
-            # remove old extra
-            if hasattr(line, '_old_extra'):
-                line.price_unit -= line._old_extra
-
-            # add new extra
+            line.price_unit -= line.extra_applied
             line.price_unit += extra_per_unit
-
-            line._old_extra = extra_per_unit
+            line.extra_applied = extra_per_unit
