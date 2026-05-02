@@ -1,6 +1,9 @@
 from odoo import models, fields, api
 
 
+# =========================
+# SALE ORDER
+# =========================
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -41,23 +44,27 @@ class SaleOrder(models.Model):
             total_extra = order.total_extra or 0.0
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
 
-            extra_per_unit = total_extra / total_qty
+            # Correct distribution
+            extra_per_unit = round(total_extra / total_qty, 2)
 
+            # STEP 1: Reset to base price
             for line in lines:
-
-                # ensure base price is stored only once
                 if not line.base_price:
                     line.base_price = line.price_unit
+                line.price_unit = line.base_price
 
-                # ALWAYS compute from base price
-                line.price_unit = line.base_price + extra_per_unit
-
+            # STEP 2: Apply extra ONLY ONCE
+            for line in lines:
+                line.price_unit += extra_per_unit
 
     @api.onchange('freight', 'duty', 'misc', 'order_line', 'apply_internal_cost')
     def _onchange_internal_cost(self):
         self._recompute_prices()
 
 
+# =========================
+# SALE ORDER LINE
+# =========================
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
@@ -67,18 +74,18 @@ class SaleOrderLine(models.Model):
     def _onchange_product(self):
         for line in self:
             if line.product_id:
+                # store initial price
                 line.base_price = line.price_unit or line.product_id.lst_price
 
     @api.onchange('price_unit')
     def _onchange_price(self):
         for line in self:
             if line.price_unit:
-                # user manually changed → update base
+                # user manually edits → update base
                 line.base_price = line.price_unit
 
     @api.onchange('product_uom_qty')
     def _onchange_qty(self):
         for line in self:
-            order = line.order_id
-            if order:
-                order._recompute_prices()
+            if line.order_id:
+                line.order_id._recompute_prices()
