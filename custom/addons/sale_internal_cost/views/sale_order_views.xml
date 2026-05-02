@@ -9,20 +9,20 @@
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges" name="internal_charges">
                     <group>
-                        <field name="freight"/>
-                        <field name="duty"/>
-                        <field name="misc"/>
-                        <field name="total_extra" readonly="1"/>
+                        <group>
+                            <field name="freight"/>
+                            <field name="duty"/>
+                            <field name="misc"/>
+                        </group>
+                        <group>
+                            <field name="total_extra" readonly="1"/>
+                        </group>
                     </group>
                 </page>
             </xpath>
 
-            <!-- Show the Internal Charge next to the Price -->
-            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="after">
-                <field name="internal_charge" string="Int. Charge" optional="show"/>
-            </xpath>
-
-            <!-- ENSURE Price Unit is NOT readonly -->
+            <!-- Ensure Unit Price is NOT readonly -->
+            <!-- Note: Using //field[@name='price_unit'] to be safe across versions -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
                 <attribute name="readonly">0</attribute>
             </xpath>
