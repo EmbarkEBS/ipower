@@ -25,10 +25,6 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_apply_extra_cost(self):
-        """
-        Apply extra cost ONLY when extra fields change.
-        Do NOT override manually edited lines.
-        """
         for order in self:
             lines = order.order_line.filtered(lambda l: l.product_id)
 
@@ -37,63 +33,59 @@ class SaleOrder(models.Model):
 
             total_extra = order.total_extra or 0.0
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
-
             extra_per_unit = total_extra / total_qty
 
             for line in lines:
-                if not line.is_manual_price:
-                    base_price = line.product_id.lst_price
-                    line.price_unit = base_price + extra_per_unit
+                # ✅ Use stored base_price (important)
+                base_price = line.base_price or line.product_id.lst_price
+                line.price_unit = base_price + extra_per_unit
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    base_price = fields.Float(string="Base Price")
     is_manual_price = fields.Boolean(string="Manual Price", default=False)
 
-    @api.onchange('price_unit')
-    def _onchange_price_unit_manual(self):
-        """
-        Mark line as manual ONLY if user changes price
-        (avoid marking during system updates)
-        """
+    @api.onchange('product_id')
+    def _onchange_product_set_base(self):
         for line in self:
             if line.product_id:
-                # Mark manual ONLY if price differs from computed price
+                # ✅ Set default base price
+                line.base_price = line.product_id.lst_price
+                line.is_manual_price = False
+
                 order = line.order_id
                 if not order:
                     continue
 
                 lines = order.order_line.filtered(lambda l: l.product_id)
+
                 total_extra = order.total_extra or 0.0
                 total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
                 extra_per_unit = total_extra / total_qty
 
-                expected_price = line.product_id.lst_price + extra_per_unit
+                line.price_unit = line.base_price + extra_per_unit
 
-                # Only mark manual if user really changed it
-                if abs(line.price_unit - expected_price) > 0.0001:
-                    line.is_manual_price = True
-
-    @api.onchange('product_id')
-    def _onchange_product_apply_extra(self):
-        """
-        Apply price ONLY when product is selected.
-        Do NOT reapply on quantity change.
-        """
+    @api.onchange('price_unit')
+    def _onchange_price_unit_manual(self):
         for line in self:
+            if not line.product_id:
+                continue
+
             order = line.order_id
-            if not order or not line.product_id:
+            if not order:
                 continue
 
             lines = order.order_line.filtered(lambda l: l.product_id)
 
             total_extra = order.total_extra or 0.0
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
-
             extra_per_unit = total_extra / total_qty
 
-            # Apply only if NOT manual
-            if not line.is_manual_price:
-                base_price = line.product_id.lst_price
-                line.price_unit = base_price + extra_per_unit
+            expected_price = (line.base_price or 0.0) + extra_per_unit
+
+            # ✅ If user changes price → update base_price
+            if abs(line.price_unit - expected_price) > 0.0001:
+                line.base_price = line.price_unit - extra_per_unit
+                line.is_manual_price = True
