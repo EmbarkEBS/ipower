@@ -1,6 +1,9 @@
 from odoo import models, fields, api
 
 
+# =========================
+# SALE ORDER
+# =========================
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -23,8 +26,7 @@ class SaleOrder(models.Model):
                 + (order.misc or 0.0)
             )
 
-    @api.onchange('freight', 'duty', 'misc', 'order_line')
-    def _onchange_apply_extra_cost(self):
+    def _recompute_prices(self):
         for order in self:
             lines = order.order_line.filtered(lambda l: l.product_id)
             if not lines:
@@ -37,42 +39,42 @@ class SaleOrder(models.Model):
 
             for line in lines:
 
-                # Remove previous extra
-                line.price_unit -= line.extra_applied
+                # STEP 1: store original price once
+                if not line.original_price:
+                    line.original_price = line.price_unit
 
-                # Add new extra
-                line.price_unit += extra_per_unit
-
-                # Store current extra
-                line.extra_applied = extra_per_unit
+                # STEP 2: always calculate from original
+                line.price_unit = line.original_price + extra_per_unit
 
 
+    @api.onchange('freight', 'duty', 'misc', 'order_line')
+    def _onchange_internal_cost(self):
+        self._recompute_prices()
+
+
+# =========================
+# SALE ORDER LINE
+# =========================
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    extra_applied = fields.Float(
-        string="Extra Applied",
-        default=0.0
-    )
+    original_price = fields.Float(string="Original Price")
 
-    @api.onchange('product_id', 'product_uom_qty')
-    def _onchange_product_apply_extra(self):
-        if not self.order_id:
-            return
+    @api.onchange('product_id')
+    def _onchange_product(self):
+        for line in self:
+            if line.product_id:
+                line.original_price = line.price_unit or line.product_id.lst_price
 
-        order = self.order_id
-        lines = order.order_line.filtered(lambda l: l.product_id)
+    @api.onchange('price_unit')
+    def _onchange_price(self):
+        for line in self:
+            # user edits → update original price
+            if line._origin and line.price_unit != line._origin.price_unit:
+                line.original_price = line.price_unit
 
-        if not lines:
-            return
-
-        total_extra = order.total_extra or 0.0
-        total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
-
-        extra_per_unit = total_extra / total_qty
-
-        for line in lines:
-
-            line.price_unit -= line.extra_applied
-            line.price_unit += extra_per_unit
-            line.extra_applied = extra_per_unit
+    @api.onchange('product_uom_qty')
+    def _onchange_qty(self):
+        for line in self:
+            if line.order_id:
+                line.order_id._recompute_prices()
