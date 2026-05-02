@@ -1,9 +1,6 @@
 from odoo import models, fields, api
 
 
-# =========================
-# SALE ORDER
-# =========================
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -17,6 +14,9 @@ class SaleOrder(models.Model):
         store=True
     )
 
+    # 🔒 control flag (important)
+    skip_recompute = fields.Boolean(default=False)
+
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
         for order in self:
@@ -28,6 +28,10 @@ class SaleOrder(models.Model):
 
     def _recompute_prices(self):
         for order in self:
+
+            if order.skip_recompute:
+                return
+
             lines = order.order_line.filtered(lambda l: l.product_id)
             if not lines:
                 continue
@@ -37,24 +41,26 @@ class SaleOrder(models.Model):
 
             extra_per_unit = total_extra / total_qty
 
-            # STEP 1: Reset to original price (prevents stacking)
+            # block recursion
+            order.skip_recompute = True
+
             for line in lines:
                 if not line.original_price:
                     line.original_price = line.price_unit
+
+                # reset
                 line.price_unit = line.original_price
 
-            # STEP 2: Apply extra once
             for line in lines:
                 line.price_unit += extra_per_unit
 
-    @api.onchange('freight', 'duty', 'misc', 'order_line')
+            order.skip_recompute = False
+
+    @api.onchange('freight', 'duty', 'misc')
     def _onchange_internal_cost(self):
         self._recompute_prices()
 
 
-# =========================
-# SALE ORDER LINE
-# =========================
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
@@ -64,16 +70,22 @@ class SaleOrderLine(models.Model):
     def _onchange_product(self):
         for line in self:
             if line.product_id:
-                # store initial base price
                 line.original_price = line.price_unit or line.product_id.lst_price
 
     @api.onchange('price_unit')
     def _onchange_price(self):
         for line in self:
-            # ONLY update if user manually edits AND no extra applied
+            order = line.order_id
+
+            if not order:
+                continue
+
+            # ONLY update base if user changed manually
             if line._origin and line.price_unit != line._origin.price_unit:
-                if line.order_id and line.order_id.total_extra == 0:
+                if not order.skip_recompute:
                     line.original_price = line.price_unit
+
+            order._recompute_prices()
 
     @api.onchange('product_uom_qty')
     def _onchange_qty(self):
