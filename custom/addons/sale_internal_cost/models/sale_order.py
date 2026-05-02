@@ -19,7 +19,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Redistribute charges when global extra cost fields change."""
+        """Triggers recalculation when global charges change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
@@ -32,36 +32,38 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # If you edited the price, we use that as the base. 
-                # Otherwise, we use the product's default list price.
-                base = line.manual_price if line.manual_price > 0 else line.product_id.lst_price
+                # Use stored manual price; if never edited, use product price
+                base = line.manual_base_price if line.manual_base_price > 0 else line.product_id.lst_price
                 
-                # 'from_recompute' prevents our own onchange from 'stealing' this update
-                line.with_context(from_recompute=True).price_unit = base + extra_per_unit
+                # Context flag 'internal_compute' stops the loop in SaleOrderLine
+                line.with_context(internal_compute=True).price_unit = base + extra_per_unit
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # Remembers your manual entry before charges were added
-    manual_price = fields.Float(string="Base Price (Manual)", digits='Product Price')
+    # Store the actual 'base' price without internal charges
+    manual_base_price = fields.Float(string="Base Price", digits='Product Price')
 
     @api.onchange('price_unit')
-    def _onchange_price_unit_manual(self):
-        """When you type a price, we calculate what the base 'non-charge' price is."""
-        if self._context.get('from_recompute') or not self.order_id:
+    def _onchange_price_unit_catch_manual(self):
+        """When you type in the price, calculate and save the 'true' base price."""
+        if self._context.get('internal_compute') or not self.order_id:
             return
 
-        total_qty = sum(self.order_id.order_line.mapped('product_uom_qty')) or 1.0
-        extra_per_unit = (self.order_id.total_extra or 0.0) / total_qty
-        
-        # Save your manual price MINUS the current internal charge share
-        self.manual_price = self.price_unit - extra_per_unit
+        for line in self:
+            total_qty = sum(line.order_id.order_line.mapped('product_uom_qty')) or 1.0
+            extra_per_unit = (line.order_id.total_extra or 0.0) / total_qty
+            
+            # If user types $110 and extra is $10, we save $100 as the base
+            line.manual_base_price = line.price_unit - extra_per_unit
 
     @api.onchange('product_id', 'product_uom_qty')
-    def _onchange_product_or_qty_apply_extra(self):
-        """Ensures price is correct when changing items or quantities."""
+    def _onchange_recompute_all(self):
+        """Ensure charges are redistributed when adding items or changing quantities."""
         if self.order_id:
-            # If the user changed the actual PRODUCT, reset the manual memory
+            # If changing the product entirely, clear the manual memory
             if self._origin.product_id != self.product_id:
-                self.manual_price = 0.0
+                self.manual_base_price = 0.0
+            
+            # Recalculate everything to redistribute charges
             self.order_id._recalculate_line_prices()
