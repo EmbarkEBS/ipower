@@ -21,13 +21,12 @@
                 </page>
             </xpath>
 
-            <!-- Add Base Price to lines and make Unit Price Readonly -->
-            <!-- Using a broader XPath to avoid the 'cannot be located' error -->
-            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="before">
+            <!-- Target the tree view inside order_line specifically -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="before">
                 <field name="manual_base_price" string="Base Price"/>
             </xpath>
 
-            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="attributes">
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
