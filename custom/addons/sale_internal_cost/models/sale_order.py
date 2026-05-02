@@ -17,12 +17,6 @@ class SaleOrder(models.Model):
         store=True
     )
 
-    extra_amount = fields.Monetary(
-        string="Extra Amount",
-        compute="_compute_extra_amount",
-        store=True
-    )
-
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
         for order in self:
@@ -32,7 +26,7 @@ class SaleOrder(models.Model):
                 + (order.misc or 0.0)
             )
 
-    def _distribute_extra(self):
+    def _recompute_prices(self):
         for order in self:
             lines = order.order_line.filtered(lambda l: l.product_id)
 
@@ -43,25 +37,14 @@ class SaleOrder(models.Model):
             extra_per_unit = (order.total_extra or 0.0) / total_qty
 
             for line in lines:
+                base = line.base_price or line.price_unit
                 line.extra_per_unit = extra_per_unit
+                line.price_unit = base + extra_per_unit
+
 
     @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
-    def _onchange_recompute_extra(self):
-        self._distribute_extra()
-
-    @api.depends('order_line.extra_total')
-    def _compute_extra_amount(self):
-        for order in self:
-            order.extra_amount = sum(order.order_line.mapped('extra_total'))
-
-    # ✅ SAFELY extend total without breaking Odoo
-    def _amount_all(self):
-        res = super()._amount_all()
-
-        for order in self:
-            order.amount_total += order.extra_amount
-
-        return res
+    def _onchange_extra(self):
+        self._recompute_prices()
 
 
 # =========================
@@ -70,15 +53,33 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    base_price = fields.Float(string="Base Price")
     extra_per_unit = fields.Float(string="Extra / Unit")
 
-    extra_total = fields.Monetary(
-        string="Extra Total",
-        compute="_compute_extra_total",
-        store=True
-    )
-
-    @api.depends('extra_per_unit', 'product_uom_qty')
-    def _compute_extra_total(self):
+    @api.onchange('product_id')
+    def _onchange_product_set_base(self):
         for line in self:
-            line.extra_total = line.extra_per_unit * line.product_uom_qty
+            if line.product_id:
+                # set base price when product selected
+                line.base_price = line.product_id.lst_price
+                if line.order_id:
+                    line.order_id._recompute_prices()
+
+    @api.onchange('price_unit')
+    def _onchange_price_unit_update_base(self):
+        """
+        When user edits price → update base price
+        """
+        for line in self:
+            if not line.order_id:
+                continue
+
+            # compute current extra
+            order = line.order_id
+            lines = order.order_line.filtered(lambda l: l.product_id)
+
+            total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
+            extra_per_unit = (order.total_extra or 0.0) / total_qty
+
+            # new base price = edited price - extra
+            line.base_price = line.price_unit - extra_per_unit
