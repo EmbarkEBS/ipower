@@ -37,15 +37,15 @@ class SaleOrder(models.Model):
 
             extra_per_unit = total_extra / total_qty
 
+            # STEP 1: Reset to original price (prevents stacking)
             for line in lines:
-
-                # STEP 1: store original price once
                 if not line.original_price:
                     line.original_price = line.price_unit
+                line.price_unit = line.original_price
 
-                # STEP 2: always calculate from original
-                line.price_unit = line.original_price + extra_per_unit
-
+            # STEP 2: Apply extra once
+            for line in lines:
+                line.price_unit += extra_per_unit
 
     @api.onchange('freight', 'duty', 'misc', 'order_line')
     def _onchange_internal_cost(self):
@@ -64,14 +64,16 @@ class SaleOrderLine(models.Model):
     def _onchange_product(self):
         for line in self:
             if line.product_id:
+                # store initial base price
                 line.original_price = line.price_unit or line.product_id.lst_price
 
     @api.onchange('price_unit')
     def _onchange_price(self):
         for line in self:
-            # user edits → update original price
+            # ONLY update if user manually edits AND no extra applied
             if line._origin and line.price_unit != line._origin.price_unit:
-                line.original_price = line.price_unit
+                if line.order_id and line.order_id.total_extra == 0:
+                    line.original_price = line.price_unit
 
     @api.onchange('product_uom_qty')
     def _onchange_qty(self):
