@@ -6,11 +6,7 @@ class SaleOrder(models.Model):
     freight = fields.Monetary(string="Freight")
     duty = fields.Monetary(string="Duty")
     misc = fields.Monetary(string="Miscellaneous")
-    total_extra = fields.Monetary(
-        string="Total Extra Cost", 
-        compute="_compute_total_extra", 
-        store=True
-    )
+    total_extra = fields.Monetary(string="Total Extra Cost", compute="_compute_total_extra", store=True)
 
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
@@ -19,7 +15,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Triggers recalculation when global charges change."""
+        """Triggers when global costs change"""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
@@ -32,38 +28,28 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # Use stored manual price; if never edited, use product price
-                base = line.manual_base_price if line.manual_base_price > 0 else line.product_id.lst_price
+                # 1. Use the manual price if the user typed one
+                # 2. Otherwise use the product list price
+                base = line.x_manual_price if line.x_manual_price > 0 else line.product_id.lst_price
                 
-                # Context flag 'internal_compute' stops the loop in SaleOrderLine
-                line.with_context(internal_compute=True).price_unit = base + extra_per_unit
+                # Update the unit price with the extra cost
+                line.price_unit = base + extra_per_unit
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # Store the actual 'base' price without internal charges
-    manual_base_price = fields.Float(string="Base Price", digits='Product Price')
+    # This field is the "Master" for your manual edits
+    x_manual_price = fields.Float(string="Manual Base Price", digits='Product Price')
 
-    @api.onchange('price_unit')
-    def _onchange_price_unit_catch_manual(self):
-        """When you type in the price, calculate and save the 'true' base price."""
-        if self._context.get('internal_compute') or not self.order_id:
-            return
+    @api.onchange('product_id')
+    def _onchange_product_id_reset_manual(self):
+        """Reset manual price when product changes"""
+        self.x_manual_price = self.product_id.lst_price
 
-        for line in self:
-            total_qty = sum(line.order_id.order_line.mapped('product_uom_qty')) or 1.0
-            extra_per_unit = (line.order_id.total_extra or 0.0) / total_qty
-            
-            # If user types $110 and extra is $10, we save $100 as the base
-            line.manual_base_price = line.price_unit - extra_per_unit
-
-    @api.onchange('product_id', 'product_uom_qty')
-    def _onchange_recompute_all(self):
-        """Ensure charges are redistributed when adding items or changing quantities."""
+    @api.onchange('x_manual_price', 'product_uom_qty')
+    def _onchange_manual_price_trigger(self):
+        """When you edit the MANUAL price field, update the real Unit Price"""
         if self.order_id:
-            # If changing the product entirely, clear the manual memory
-            if self._origin.product_id != self.product_id:
-                self.manual_base_price = 0.0
-            
-            # Recalculate everything to redistribute charges
             self.order_id._recalculate_line_prices()
+
+    # NOTE: We stop using @api.onchange('price_unit') because it loops with Odoo's core
