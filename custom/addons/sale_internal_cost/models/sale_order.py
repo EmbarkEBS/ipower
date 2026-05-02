@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Triggers when global costs change"""
+        """Update all lines when global charges change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
@@ -28,28 +28,25 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # 1. Use the manual price if the user typed one
-                # 2. Otherwise use the product list price
-                base = line.x_manual_price if line.x_manual_price > 0 else line.product_id.lst_price
-                
-                # Update the unit price with the extra cost
+                # If user entered a price in our new field, use it. 
+                # Otherwise, use the product's default price.
+                base = line.manual_base_price if line.manual_base_price > 0 else line.product_id.lst_price
                 line.price_unit = base + extra_per_unit
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # This field is the "Master" for your manual edits
-    x_manual_price = fields.Float(string="Manual Base Price", digits='Product Price')
+    # NEW FIELD: This is the one you will actually edit in the UI
+    manual_base_price = fields.Float(string="Base Price", digits='Product Price')
 
     @api.onchange('product_id')
-    def _onchange_product_id_reset_manual(self):
-        """Reset manual price when product changes"""
-        self.x_manual_price = self.product_id.lst_price
+    def _onchange_product_id_set_base(self):
+        """When product changes, reset our manual base to the new product price."""
+        if self.product_id:
+            self.manual_base_price = self.product_id.lst_price
 
-    @api.onchange('x_manual_price', 'product_uom_qty')
-    def _onchange_manual_price_trigger(self):
-        """When you edit the MANUAL price field, update the real Unit Price"""
+    @api.onchange('manual_base_price', 'product_uom_qty')
+    def _onchange_recompute_final_price(self):
+        """When you edit the Base Price, trigger the final unit price update."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
-
-    # NOTE: We stop using @api.onchange('price_unit') because it loops with Odoo's core
