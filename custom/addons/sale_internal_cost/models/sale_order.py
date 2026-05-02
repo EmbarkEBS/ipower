@@ -3,16 +3,10 @@ from odoo import models, fields, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    freight = fields.Monetary(string="Freight", currency_field='currency_id')
-    duty = fields.Monetary(string="Duty", currency_field='currency_id')
-    misc = fields.Monetary(string="Miscellaneous", currency_field='currency_id')
-    
-    total_extra = fields.Monetary(
-        string="Total Extra Cost", 
-        compute="_compute_total_extra", 
-        store=True,
-        currency_field='currency_id'
-    )
+    freight = fields.Monetary(string="Freight")
+    duty = fields.Monetary(string="Duty")
+    misc = fields.Monetary(string="Miscellaneous")
+    total_extra = fields.Monetary(string="Total Extra Cost", compute="_compute_total_extra", store=True)
 
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
@@ -21,11 +15,9 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Triggered when the global extra charge fields are modified."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
-        """Helper method to distribute extra costs across all lines."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -35,22 +27,33 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                if line.product_id:
-                    # Logic: Take the standard product price and add the extra share
-                    # This allows the line to reset correctly if freight changes
-                    base_price = line.product_id.lst_price
-                    line.price_unit = base_price + extra_per_unit
+                # Use manual_price if set, otherwise fallback to product price
+                base = line.manual_price if line.manual_price > 0 else line.product_id.lst_price
+                line.price_unit = base + extra_per_unit
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    # New field to store your manual edits
+    manual_price = fields.Float(string="Base Price (Manual)")
+
+    @api.onchange('price_unit')
+    def _onchange_price_unit_manual(self):
+        """
+        If the user manually changes the price, we subtract the 
+        current extra cost share to store the 'true' base price.
+        """
+        # Avoid recursion: only run if the user is physically typing
+        if self._context.get('import_file'): 
+            return
+
+        total_qty = sum(self.order_id.order_line.mapped('product_uom_qty')) or 1.0
+        extra_per_unit = (self.order_id.total_extra or 0.0) / total_qty
+        
+        # Store what the price would be WITHOUT the extra charge
+        self.manual_price = self.price_unit - extra_per_unit
+
     @api.onchange('product_id', 'product_uom_qty')
     def _onchange_product_or_qty_apply_extra(self):
-        """
-        Calculates price when product or quantity changes.
-        We don't use super() here to avoid the AttributeError.
-        """
         if self.order_id:
-            # We wrap this in a call to the parent model to ensure 
-            # all lines are updated if the total quantity changes.
             self.order_id._recalculate_line_prices()
