@@ -52,7 +52,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             line.extra_total = line.extra_per_unit * line.product_uom_qty
 
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'extra_total')
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_ids', 'extra_total')
     def _compute_amount(self):
         """
         Override Odoo amount calculation to include extra cost
