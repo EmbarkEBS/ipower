@@ -17,6 +17,12 @@ class SaleOrder(models.Model):
         store=True
     )
 
+    extra_amount = fields.Monetary(
+        string="Extra Amount",
+        compute="_compute_extra_amount",
+        store=True
+    )
+
     @api.depends('freight', 'duty', 'misc')
     def _compute_total_extra(self):
         for order in self:
@@ -27,9 +33,6 @@ class SaleOrder(models.Model):
             )
 
     def _distribute_extra(self):
-        """
-        Split extra cost based on quantity
-        """
         for order in self:
             lines = order.order_line.filtered(lambda l: l.product_id)
 
@@ -42,30 +45,23 @@ class SaleOrder(models.Model):
             for line in lines:
                 line.extra_per_unit = extra_per_unit
 
-    @api.onchange('freight', 'duty', 'misc', 'order_line', 'order_line.product_uom_qty')
+    @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
     def _onchange_recompute_extra(self):
         self._distribute_extra()
 
-    @api.depends('order_line.price_subtotal', 'order_line.price_tax', 'order_line.extra_total')
-    def _compute_amount_all(self):
+    @api.depends('order_line.extra_total')
+    def _compute_extra_amount(self):
         for order in self:
-            amount_untaxed = 0.0
-            amount_tax = 0.0
-            extra = 0.0
+            order.extra_amount = sum(order.order_line.mapped('extra_total'))
 
-        for line in order.order_line:
-            amount_untaxed += line.price_subtotal
-            amount_tax += line.price_tax
-            extra += line.extra_total
+    # ✅ SAFELY extend total without breaking Odoo
+    def _amount_all(self):
+        res = super()._amount_all()
 
-        # ✅ Add extra to untaxed
-        amount_untaxed += extra
+        for order in self:
+            order.amount_total += order.extra_amount
 
-        order.update({
-            'amount_untaxed': amount_untaxed,
-            'amount_tax': amount_tax,
-            'amount_total': amount_untaxed + amount_tax,
-        })
+        return res
 
 
 # =========================
