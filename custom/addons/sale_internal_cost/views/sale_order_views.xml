@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- Add new tab -->
+            <!-- 1. Add your new tab for global charges -->
             <xpath expr="//sheet/notebook" position="inside">
                 <page string="Internal Charges">
                     <group>
@@ -15,6 +15,17 @@
                         <field name="total_extra" readonly="1"/>
                     </group>
                 </page>
+            </xpath>
+
+            <!-- 2. Add the editable Base Price field to the order lines -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                <field name="manual_base_price" string="Base Price"/>
+            </xpath>
+
+            <!-- 3. Make the standard Price Unit read-only so it only shows the result (Base + Extra) -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
             </xpath>
 
         </field>
