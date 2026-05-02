@@ -23,69 +23,42 @@ class SaleOrder(models.Model):
                 (order.misc or 0.0)
             )
 
-    @api.onchange('freight', 'duty', 'misc')
-    def _onchange_apply_extra_cost(self):
+    def _compute_extra_distribution(self):
+        """
+        Distribute extra cost based on quantity
+        """
         for order in self:
             lines = order.order_line.filtered(lambda l: l.product_id)
 
-            if not lines:
-                continue
-
-            total_extra = order.total_extra or 0.0
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
-            extra_per_unit = total_extra / total_qty
+            extra_per_unit = (order.total_extra or 0.0) / total_qty
 
             for line in lines:
-                # ✅ Use stored base_price (important)
-                base_price = line.base_price or line.product_id.lst_price
-                line.price_unit = base_price + extra_per_unit
+                line.extra_per_unit = extra_per_unit
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    base_price = fields.Float(string="Base Price")
-    is_manual_price = fields.Boolean(string="Manual Price", default=False)
+    extra_per_unit = fields.Float(string="Extra / Unit", readonly=True)
+    extra_total = fields.Monetary(
+        string="Extra Total",
+        compute="_compute_extra_total",
+        store=True
+    )
 
-    @api.onchange('product_id')
-    def _onchange_product_set_base(self):
+    @api.depends('extra_per_unit', 'product_uom_qty')
+    def _compute_extra_total(self):
         for line in self:
-            if line.product_id:
-                # ✅ Set default base price
-                line.base_price = line.product_id.lst_price
-                line.is_manual_price = False
+            line.extra_total = line.extra_per_unit * line.product_uom_qty
 
-                order = line.order_id
-                if not order:
-                    continue
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'extra_total')
+    def _compute_amount(self):
+        """
+        Override Odoo amount calculation to include extra cost
+        """
+        super()._compute_amount()
 
-                lines = order.order_line.filtered(lambda l: l.product_id)
-
-                total_extra = order.total_extra or 0.0
-                total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
-                extra_per_unit = total_extra / total_qty
-
-                line.price_unit = line.base_price + extra_per_unit
-
-    @api.onchange('price_unit')
-    def _onchange_price_unit_manual(self):
         for line in self:
-            if not line.product_id:
-                continue
-
-            order = line.order_id
-            if not order:
-                continue
-
-            lines = order.order_line.filtered(lambda l: l.product_id)
-
-            total_extra = order.total_extra or 0.0
-            total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
-            extra_per_unit = total_extra / total_qty
-
-            expected_price = (line.base_price or 0.0) + extra_per_unit
-
-            # ✅ If user changes price → update base_price
-            if abs(line.price_unit - expected_price) > 0.0001:
-                line.base_price = line.price_unit - extra_per_unit
-                line.is_manual_price = True
+            line.price_subtotal += line.extra_total
+            line.price_total += line.extra_total
