@@ -5,25 +5,29 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- 1. Add your new tab for global charges -->
-            <xpath expr="//sheet/notebook" position="inside">
-                <page string="Internal Charges">
+            <!-- Tab for Global Charges -->
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page string="Internal Charges" name="internal_charges">
                     <group>
-                        <field name="freight"/>
-                        <field name="duty"/>
-                        <field name="misc"/>
-                        <field name="total_extra" readonly="1"/>
+                        <group>
+                            <field name="freight"/>
+                            <field name="duty"/>
+                            <field name="misc"/>
+                        </group>
+                        <group>
+                            <field name="total_extra" readonly="1"/>
+                        </group>
                     </group>
                 </page>
             </xpath>
 
-            <!-- 2. Add the editable Base Price field to the order lines -->
-            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+            <!-- Add Base Price to lines and make Unit Price Readonly -->
+            <!-- Using a broader XPath to avoid the 'cannot be located' error -->
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="before">
                 <field name="manual_base_price" string="Base Price"/>
             </xpath>
 
-            <!-- 3. Make the standard Price Unit read-only so it only shows the result (Base + Extra) -->
-            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
