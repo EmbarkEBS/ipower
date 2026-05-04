@@ -15,6 +15,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
+        """Triggers when global charges change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
@@ -25,7 +26,7 @@ class SaleOrder(models.Model):
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
-                # Use x_base_price as the calculation foundation
+                # IMPORTANT: Always calculate from the BASE price, not the current price_unit
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
                 line.price_unit = base + extra_per_unit
 
@@ -41,36 +42,6 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_final_price(self):
+        """When you edit the Base Price (e.g. change 20 to 25), recalculate the Unit Price."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
-
-    # FIX: Use 'taxes_id' instead of 'tax_id' for Odoo 17/18/19 compatibility
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id', 'x_base_price')
-    def _compute_amount(self):
-        """
-        Calculates subtotal based on price_unit (includes internal charges),
-        but calculates taxes ONLY on x_base_price.
-        """
-        for line in self:
-            # 1. Standard calculation for Subtotal (Base + Extra charges)
-            base_with_extra = line.price_unit
-            quantity = line.product_uom_qty
-            
-            # 2. Tax calculation using ONLY x_base_price
-            tax_base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-            
-            # Use Odoo's native tax computation on the tax_base only
-            taxes = line.taxes_id.compute_all(
-                tax_base, 
-                line.order_id.currency_id, 
-                quantity, 
-                product=line.product_id, 
-                partner=line.order_id.partner_shipping_id
-            )
-            
-            # 3. Apply the results
-            line.update({
-                'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
-                'price_total': taxes['total_included'] + (base_with_extra - tax_base) * quantity,
-                'price_subtotal': taxes['total_excluded'] + (base_with_extra - tax_base) * quantity,
-            })
