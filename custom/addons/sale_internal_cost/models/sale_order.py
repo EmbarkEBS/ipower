@@ -15,7 +15,6 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Triggers when global charges change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
@@ -26,7 +25,7 @@ class SaleOrder(models.Model):
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
-                # IMPORTANT: Always calculate from the BASE price, not the current price_unit
+                # Use our custom base price
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
                 line.price_unit = base + extra_per_unit
 
@@ -42,6 +41,17 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_final_price(self):
-        """When you edit the Base Price (e.g. change 20 to 25), recalculate the Unit Price."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
+
+    # DO NOT OVERRIDE _compute_amount HERE TO AVOID THE RPC_ERROR
+    # Instead, we adjust the tax calculation via a specific hook
+    def _get_tax_base_price(self):
+        """
+        Odoo hook: This tells the tax engine to use x_base_price 
+        instead of price_unit for tax calculations.
+        """
+        self.ensure_one()
+        if self.x_base_price > 0:
+            return self.x_base_price
+        return super()._get_tax_base_price()
