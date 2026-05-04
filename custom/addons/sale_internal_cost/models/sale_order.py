@@ -15,7 +15,6 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Triggers when global charges change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
@@ -26,7 +25,6 @@ class SaleOrder(models.Model):
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
-                # IMPORTANT: Always calculate from the BASE price, not the current price_unit
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
                 line.price_unit = base + extra_per_unit
 
@@ -42,6 +40,33 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_final_price(self):
-        """When you edit the Base Price (e.g. change 20 to 25), recalculate the Unit Price."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
+
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'x_base_price')
+    def _compute_amount(self):
+        """
+        Overriding subtotal and tax calculation.
+        Taxes are calculated on x_base_price.
+        Subtotal is (Tax on base) + (Full price_unit * qty).
+        """
+        super(SaleOrderLine, self)._compute_amount()
+        for line in self:
+            # 1. Use Base Price for tax calculation
+            base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
+            
+            # 2. Calculate tax based on the base price
+            taxes = line.tax_id.compute_all(
+                base, 
+                line.order_id.currency_id, 
+                line.product_uom_qty, 
+                product=line.product_id, 
+                partner=line.order_id.partner_shipping_id
+            )
+            
+            # 3. Update the subtotal
+            # Standard Odoo calculates price_subtotal on price_unit.
+            # We need to make sure the subtotal matches (Price_unit * Qty) 
+            # while the 'price_tax' field only accounts for the tax on the 'base'.
+            line.price_tax = sum(t.get('amount', 0.0) for t in taxes.get('taxes', []))
+            line.price_total = line.price_subtotal + line.price_tax
