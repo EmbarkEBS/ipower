@@ -43,15 +43,14 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    def _convert_to_tax_base_line_dict(self):
+    def _prepare_base_line_for_taxes_computation(self):
         """
-        Critical Override: Tells Odoo's tax engine to use x_base_price 
-        as the taxable amount, instead of price_unit.
+        Odoo 17/18/19 Hook: Intercepts the tax engine.
+        Forces the tax engine to use x_base_price for its math,
+        ignoring the internal charges added to price_unit.
         """
-        res = super()._convert_to_tax_base_line_dict()
-        # Ensure we only use base price for tax if it exists
-        tax_base = self.x_base_price if self.x_base_price > 0 else self.price_unit
-        res.update({
-            'price_unit': tax_base,
-        })
+        res = super()._prepare_base_line_for_taxes_computation()
+        if self.x_base_price > 0:
+            # We tell the tax engine that the price for TAX math is x_base_price
+            res['price_unit'] = self.x_base_price
         return res
