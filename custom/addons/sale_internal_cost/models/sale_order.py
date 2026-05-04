@@ -25,7 +25,6 @@ class SaleOrder(models.Model):
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
-                # Use our custom base price
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
                 line.price_unit = base + extra_per_unit
 
@@ -44,14 +43,15 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    # DO NOT OVERRIDE _compute_amount HERE TO AVOID THE RPC_ERROR
-    # Instead, we adjust the tax calculation via a specific hook
-    def _get_tax_base_price(self):
+    def _convert_to_tax_base_line_dict(self):
         """
-        Odoo hook: This tells the tax engine to use x_base_price 
-        instead of price_unit for tax calculations.
+        Critical Override: Tells Odoo's tax engine to use x_base_price 
+        as the taxable amount, instead of price_unit.
         """
-        self.ensure_one()
-        if self.x_base_price > 0:
-            return self.x_base_price
-        return super()._get_tax_base_price()
+        res = super()._convert_to_tax_base_line_dict()
+        # Ensure we only use base price for tax if it exists
+        tax_base = self.x_base_price if self.x_base_price > 0 else self.price_unit
+        res.update({
+            'price_unit': tax_base,
+        })
+        return res
