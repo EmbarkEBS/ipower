@@ -18,11 +18,10 @@
                             <field name="total_extra" readonly="1"/>
                         </group>
                     </group>
-                    <p class="text-muted">Calculated as: Product Cost + (Total Extra / Total Quantity). Tax applies only to Product Cost.</p>
                 </page>
             </xpath>
 
-            <!-- Set Price Unit to Readonly since it's calculated from Cost + Extra -->
+            <!-- Make price_unit Readonly and force save -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>

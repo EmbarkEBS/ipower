@@ -27,7 +27,7 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # Use Product Cost Price (standard_price) as the base
+                # Base is now the Product's Cost Price
                 base = line.product_id.standard_price or 0.0
                 line.price_unit = base + extra_per_unit
 
@@ -40,11 +40,8 @@ class SaleOrderLine(models.Model):
             self.order_id._recalculate_line_prices()
 
     def _prepare_base_line_for_taxes_computation(self):
-        """
-        Force the tax engine to use the Cost Price (standard_price) 
-        as the tax base, effectively applying 0% tax to the internal charge.
-        """
         res = super()._prepare_base_line_for_taxes_computation()
         if self.product_id:
+            # Tax is calculated ONLY on cost price (0% tax on extra charge)
             res['price_unit'] = self.product_id.standard_price
         return res
