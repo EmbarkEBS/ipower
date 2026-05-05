@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
     def _onchange_distribute_costs(self):
-        """Calculates charge share and triggers subtotal refresh."""
+        """Calculates charge share and updates all lines."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -24,7 +24,7 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
                 line.x_internal_charge = extra_per_unit
-                # Force the Price + Charges field to update
+                # Force the Price + Charges field and Subtotal to update
                 line.price_unit = line.x_base_price + line.x_internal_charge
 
 class SaleOrderLine(models.Model):
@@ -40,14 +40,14 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'x_internal_charge', 'product_uom_qty')
     def _onchange_update_subtotal(self):
-        """Explicitly recalculates subtotal and total price including charges."""
+        """Forces the 'Amount' column to include charges in the UI."""
         for line in self:
             line.price_unit = line.x_base_price + line.x_internal_charge
-            # Recalculates the 'Amount' column immediately in the UI
-            line._compute_amount()
+            # Recalculates 'Amount' using the new Price + Charges
+            line.price_subtotal = line.price_unit * line.product_uom_qty
 
     def _prepare_base_line_for_taxes_computation(self):
-        """Forces tax math to look only at the Base Price (1720)."""
+        """THE TAX FIX: Forces VAT (86.00) to be calculated on Base (1720) only."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
