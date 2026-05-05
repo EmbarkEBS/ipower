@@ -13,30 +13,31 @@ class SaleOrder(models.Model):
         for order in self:
             total_charge = (order.freight or 0.0) + (order.duty or 0.0) + (order.misc or 0.0)
             
-            # Find our custom 'Internal Charge' line using the boolean flag
+            # Find the custom charge line using the boolean flag
             charge_line = order.order_line.filtered(lambda l: l.x_is_charge_line)
             
             if total_charge > 0:
                 if charge_line:
-                    # Update price on existing line
+                    # Update price on the existing charge line
                     charge_line.price_unit = total_charge
                 else:
-                    # Create new line. NOTE: Using 'tax_id' (plural) as identified
+                    # Create a new line. NOTE: Using 'tax_id' (plural)
                     new_line_vals = {
+                        'display_type': False,
                         'name': 'Internal Charges (Freight, Duty, Misc)',
                         'product_uom_qty': 1.0,
                         'price_unit': total_charge,
-                        'tax_id': [(6, 0, [])], # No taxes applied
+                        'tax_ids': [(6, 0, [])],  # This ensures the charge is NOT taxed
                         'x_is_charge_line': True,
                     }
-                    # We add the line using the command list format
+                    # Command (0, 0, vals) adds the line to the quotation
                     order.order_line = [(0, 0, new_line_vals)]
             elif charge_line:
-                # Remove the charge line if total becomes zero
+                # If all charges are removed, delete the line (Command 2)
                 order.order_line = [(2, charge_line.id, 0)]
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # Boolean to identify the special charge line so we don't affect product lines
+    # Hidden field to identify the special charge line
     x_is_charge_line = fields.Boolean(string="Is Charge Line", default=False)
