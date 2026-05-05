@@ -15,23 +15,23 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
+        """Redistribute when global costs change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
+        """Core logic to distribute costs across lines."""
         for order in self:
-            # Filter to get only product lines (ignore sections/notes)
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
             
-            # Calculate the extra cost to add to EACH unit
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
+                # Update price_unit and MANUALLY trigger the subtotal computation
                 line.price_unit = base + extra_per_unit
-                # FIX FOR BUG 1: Manually trigger the subtotal update
                 line._compute_amount()
 
 class SaleOrderLine(models.Model):
@@ -42,17 +42,28 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id')
     def _onchange_product_id_set_base(self):
         if self.product_id:
+            # Setting initial base price from product list price
             self.x_base_price = self.product_id.lst_price
 
     @api.onchange('x_base_price', 'product_uom_qty')
-    def _onchange_recompute_final_price(self):
-        """When quantity or base price changes, tell the whole order to re-distribute costs."""
+    def _onchange_line_recompute_all(self):
+        """When a line changes, update the whole order distribution."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
+    # --- THE TAX FIX ---
     def _prepare_base_line_for_taxes_computation(self):
-        """Taxes calculated on Base Price only."""
+        """Ensures taxes only see the Base Price."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
         return res
+
+    # --- THE AMOUNT/SUBTOTAL FIX ---
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount(self):
+        """
+        Forces the subtotal to recalculate using the new price_unit.
+        We call the standard Odoo logic to ensure it's accurate.
+        """
+        super(SaleOrderLine, self)._compute_amount()
