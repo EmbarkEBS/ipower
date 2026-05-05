@@ -23,7 +23,7 @@ class SaleOrderLine(models.Model):
             line.total_internal_cost = sum(line.internal_cost_ids.mapped('amount'))
 
     @api.onchange('product_id')
-    def _set_base_price(self):
+    def _onchange_product(self):
         for line in self:
             if line.product_id:
                 line.price_without_cost = line.product_id.lst_price
@@ -31,8 +31,7 @@ class SaleOrderLine(models.Model):
                     line.price_unit = line.price_without_cost + line.total_internal_cost
 
     @api.onchange('internal_cost_ids')
-    def _update_price_with_cost(self):
+    def _onchange_cost(self):
         for line in self:
             if not line.is_manual_price:
                 line.price_unit = line.price_without_cost + line.total_internal_cost
-

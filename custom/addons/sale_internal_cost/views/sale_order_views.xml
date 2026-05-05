@@ -1,13 +1,13 @@
 <odoo>
 
-    <record id="view_order_form_inherit_cost" model="ir.ui.view">
-        <field name="name">sale.order.form.internal.cost</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+    <!-- Inherit SALE ORDER LINE FORM (IMPORTANT) -->
+    <record id="view_sale_order_line_form_inherit_cost" model="ir.ui.view">
+        <field name="name">sale.order.line.form.internal.cost</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_form"/>
         <field name="arch" type="xml">
 
-            <!-- Inject inside order line form -->
-            <xpath expr="//field[@name='order_line']/form" position="inside">
+            <xpath expr="//group" position="after">
 
                 <group string="Internal Pricing">
                     <field name="price_without_cost"/>
@@ -15,8 +15,8 @@
                     <field name="is_manual_price"/>
                 </group>
 
-                <group string="Internal Costs" groups="base.group_user">
-                    <field name="internal_cost_ids" context="{'default_line_id': active_id}">
+                <group string="Internal Costs">
+                    <field name="internal_cost_ids">
                         <tree editable="bottom">
                             <field name="cost_type"/>
                             <field name="amount"/>
