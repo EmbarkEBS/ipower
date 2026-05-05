@@ -1,22 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_order_form_inherit_internal_cost" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.internal.cost</field>
+        <field name="name">sale.order.form.internal.cost</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges" name="internal_charges">
                     <group>
-                        <field name="freight"/>
-                        <field name="duty"/>
-                        <field name="misc"/>
+                        <group>
+                            <field name="freight"/>
+                            <field name="duty"/>
+                            <field name="misc"/>
+                        </group>
+                        <group>
+                            <field name="total_extra" readonly="1"/>
+                        </group>
                     </group>
                 </page>
             </xpath>
-            <xpath expr="//field[@name='order_line']//list/field[@name='name']" position="after">
-                <field name="x_is_charge_line" column_invisible="True"/>
+
+            <!-- Add the editable Base Price -->
+            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
+                <field name="x_base_price" string="Base Price"/>
             </xpath>
+
+            <!-- Make the resulting Unit Price readonly so it doesn't loop -->
+            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+
         </field>
     </record>
 </odoo>
