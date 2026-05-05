@@ -24,7 +24,7 @@
             <!-- =========================
                  LINE FIELDS
             ========================== -->
-            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="before">
+            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
                 <field name="x_base_price" string="Unit Price"/>
                 <field name="x_internal_charge" string="Int. Charge"/>
             </xpath>
