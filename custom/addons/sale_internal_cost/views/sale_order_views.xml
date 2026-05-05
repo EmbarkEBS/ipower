@@ -1,32 +1,33 @@
 <odoo>
-    <record id="view_order_form_inherit_internal_cost" model="ir.ui.view">
+
+    <record id="view_order_form_inherit_cost" model="ir.ui.view">
         <field name="name">sale.order.form.internal.cost</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- Internal Charges Tab -->
-            <xpath expr="//page[@name='order_lines']" position="after">
-                <page string="Internal Cost" name="internal_charges" groups="sales_team.group_sale_manager">
-                    <group>
-                        <group>
-                            <field name="freight"/>
-                            <field name="duty"/>
-                            <field name="misc"/>
-                        </group>
-                        <group>
-                            <field name="total_extra" readonly="1"/>
-                        </group>
-                    </group>
-                </page>
-            </xpath>
+            <xpath expr="//field[@name='order_line']/form" position="inside">
+                <group string="Internal Pricing">
+                    <field name="price_without_cost"/>
+                    <field name="total_internal_cost" readonly="1"/>
+                    <field name="is_manual_price"/>
+                </group>
 
-            <!-- Make price_unit Readonly and force save -->
-            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
-                <attribute name="readonly">1</attribute>
-                <attribute name="force_save">1</attribute>
+                <notebook>
+                    <page string="Internal Costs" groups="base.group_user">
+                        <field name="internal_cost_ids">
+                            <tree editable="bottom">
+                                <field name="cost_type"/>
+                                <field name="amount"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+
             </xpath>
 
         </field>
     </record>
+
 </odoo>
