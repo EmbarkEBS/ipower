@@ -14,4 +14,3 @@ class SaleOrderLineCost(models.Model):
 
     amount = fields.Float(required=True)
     description = fields.Char()
-
