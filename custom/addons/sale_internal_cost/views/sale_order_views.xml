@@ -8,7 +8,7 @@
 
             <!-- Global Charges Tab -->
             <xpath expr="//page[@name='order_lines']" position="after">
-                <page string="Internal Charges">
+                <page string="Internal Charges" name="internal_charges">
                     <group>
                         <field name="freight"/>
                         <field name="duty"/>
