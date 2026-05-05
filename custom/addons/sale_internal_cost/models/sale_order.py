@@ -22,16 +22,11 @@ class SaleOrder(models.Model):
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
-            
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
-            
             for line in lines:
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                # Update the display price
                 line.price_unit = base + extra_per_unit
-                # IMPORTANT: This triggers the subtotal to recalculate using 220 instead of 200
-                line.price_subtotal = line.price_unit * line.product_uom_qty
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -48,9 +43,28 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    # THE TAX FIX: Tells the VAT engine to look only at 'Unit Price' (200)
-    def _prepare_base_line_for_taxes_computation(self):
-        res = super()._prepare_base_line_for_taxes_computation()
-        if self.x_base_price > 0:
-            res['price_unit'] = self.x_base_price
-        return res
+    # --- THE FIX FOR BUG 1 (Amount) & BUG 2 (Tax) ---
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'x_base_price')
+    def _compute_amount(self):
+        """
+        Force Odoo to calculate the Subtotal (Amount) using price_unit (220)
+        but calculate the Tax using x_base_price (200).
+        """
+        for line in self:
+            # 1. Calculate the Subtotal (The 'Amount' column)
+            # This ensures Amount = 220 * Qty
+            line.price_subtotal = line.price_unit * line.product_uom_qty
+            
+            # 2. Calculate the Tax (Only on the Base Price)
+            # We use x_base_price to find the tax amount
+            tax_base = line.x_base_price if line.x_base_price > 0 else line.price_unit
+            taxes = line.tax_id.compute_all(
+                tax_base, 
+                line.order_id.currency_id, 
+                line.product_uom_qty, 
+                product=line.product_id, 
+                partner=line.order_id.partner_shipping_id
+            )
+            
+            line.price_tax = sum(t.get('amount', 0.0) for t in taxes.get('taxes', []))
+            line.price_total = line.price_subtotal + line.price_tax
