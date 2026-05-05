@@ -19,7 +19,6 @@ class SaleOrder(models.Model):
 
     def _recalculate_line_prices(self):
         for order in self:
-            # Filter for real product lines only
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
@@ -28,23 +27,24 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # Use x_base_price as the starting point for math
-                base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
+                # Use Product Cost Price (standard_price) as the base
+                base = line.product_id.standard_price or 0.0
                 line.price_unit = base + extra_per_unit
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # Base price used for internal calculation
-    x_base_price = fields.Float(string="Base Price", digits='Product Price')
-
-    @api.onchange('product_id')
-    def _onchange_product_id_set_base(self):
-        if self.product_id:
-            # Set base price from product's standard list price
-            self.x_base_price = self.product_id.lst_price
-
-    @api.onchange('x_base_price', 'product_uom_qty')
-    def _onchange_recompute_final_price(self):
+    @api.onchange('product_id', 'product_uom_qty')
+    def _onchange_product_recompute_price(self):
         if self.order_id:
             self.order_id._recalculate_line_prices()
+
+    def _prepare_base_line_for_taxes_computation(self):
+        """
+        Force the tax engine to use the Cost Price (standard_price) 
+        as the tax base, effectively applying 0% tax to the internal charge.
+        """
+        res = super()._prepare_base_line_for_taxes_computation()
+        if self.product_id:
+            res['price_unit'] = self.product_id.standard_price
+        return res
