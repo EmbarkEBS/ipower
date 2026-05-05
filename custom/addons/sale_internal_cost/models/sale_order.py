@@ -18,21 +18,25 @@ class SaleOrder(models.Model):
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
-        """Logic to accurately distribute costs and force refresh the UI."""
         for order in self:
+            # Get all physical product lines
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
             
-            # Use sum of all quantities to get an accurate per-unit share
+            # Calculate the total quantity accurately
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
+                # Always start from the Base Price
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                # Update unit price - Odoo will naturally update subtotal if we 
-                # trigger the onchange correctly
+                
+                # Update the price
                 line.price_unit = base + extra_per_unit
+                
+                # FIX BUG 1: Force Odoo to refresh the 'Amount' column for this line
+                line._onchange_price_unit()
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -46,13 +50,12 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_all(self):
-        """Triggers the order-wide redistribution when a single line changes."""
+        """When quantity changes, the 'extra per unit' changes for EVERY line."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    # --- THE TAX FIX (No RPC Error) ---
     def _prepare_base_line_for_taxes_computation(self):
-        """Uses Base Price for tax math while price_unit handles the subtotal."""
+        """Force tax math to ignore the extra charges."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
