@@ -18,7 +18,7 @@ class SaleOrder(models.Model):
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
-        """Updates Unit Price (Base + Extra) for all lines."""
+        """Updates Price + Charges and forces the 'Amount' column to refresh."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -29,8 +29,13 @@ class SaleOrder(models.Model):
             
             for line in lines:
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                # Update price_unit to include charges (This makes 'Amount' correct)
+                
+                # 1. Update the price including charges
                 line.price_unit = base + extra_per_unit
+                
+                # 2. FIX: Manually trigger the subtotal update for the UI
+                # This ensures the 'Amount' column refreshes immediately
+                line.price_subtotal = line.price_unit * line.product_uom_qty
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -47,13 +52,8 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    # --- THE FIX: TAXES ON BASE PRICE ONLY ---
     def _prepare_base_line_for_taxes_computation(self):
-        """
-        Interacts with the tax engine. 
-        Tells Odoo to use x_base_price for VAT math, 
-        while letting price_unit handle the 'Amount' column.
-        """
+        """Forces taxes to calculate ONLY on x_base_price."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
