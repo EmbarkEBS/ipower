@@ -19,14 +19,20 @@ class SaleOrder(models.Model):
 
     def _recalculate_line_prices(self):
         for order in self:
+            # Filter to get only product lines (ignore sections/notes)
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
+            
+            # Calculate the extra cost to add to EACH unit
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
+            
             for line in lines:
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
                 line.price_unit = base + extra_per_unit
+                # FIX FOR BUG 1: Manually trigger the subtotal update
+                line._compute_amount()
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -40,17 +46,13 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_final_price(self):
+        """When quantity or base price changes, tell the whole order to re-distribute costs."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
     def _prepare_base_line_for_taxes_computation(self):
-        """
-        Odoo 17/18/19 Hook: Intercepts the tax engine.
-        Forces the tax engine to use x_base_price for its math,
-        ignoring the internal charges added to price_unit.
-        """
+        """Taxes calculated on Base Price only."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
-            # We tell the tax engine that the price for TAX math is x_base_price
             res['price_unit'] = self.x_base_price
         return res
