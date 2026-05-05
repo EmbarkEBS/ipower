@@ -5,10 +5,8 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-
-            <!-- Global Charges Tab -->
             <xpath expr="//page[@name='order_lines']" position="after">
-                <page string="Internal Charges" name="internal_charges">
+                <page string="Internal Charges">
                     <group>
                         <field name="freight"/>
                         <field name="duty"/>
@@ -16,7 +14,6 @@
                     </group>
                 </page>
             </xpath>
-
         </field>
     </record>
 </odoo>
