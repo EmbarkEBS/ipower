@@ -68,7 +68,7 @@ class SaleOrderLine(models.Model):
                 line._update_price_unit()
 
     # -------------------------
-    # Update final unit price
+    # Update price_unit (UI)
     # -------------------------
     @api.onchange('x_base_price', 'x_internal_charge')
     def _update_price_unit(self):
@@ -76,13 +76,26 @@ class SaleOrderLine(models.Model):
             line.price_unit = (line.x_base_price or 0.0) + (line.x_internal_charge or 0.0)
 
     # -------------------------
-    # TAX FIX (IMPORTANT)
+    # 🔥 CRITICAL FIX
     # -------------------------
     def _prepare_base_line_for_taxes_computation(self):
+        """
+        This controls what Odoo uses for:
+        - subtotal
+        - tax
+        - total
+        """
+
         res = super()._prepare_base_line_for_taxes_computation()
 
-        # Force tax engine to use ONLY base price
-        if self.x_base_price:
-            res['price_unit'] = self.x_base_price
+        base_price = self.x_base_price or 0.0
+        charge = self.x_internal_charge or 0.0
+        qty = self.product_uom_qty or 0.0
+
+        # ✅ TAX → ONLY base price
+        res['price_unit'] = base_price
+
+        # ✅ SUBTOTAL → include internal charge
+        res['price_subtotal'] = (base_price + charge) * qty
 
         return res
