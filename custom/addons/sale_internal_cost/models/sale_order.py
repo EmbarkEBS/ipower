@@ -15,6 +15,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
     def _onchange_distribute_costs(self):
+        """Forces the Amount column to update by triggering the subtotal math."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -23,8 +24,9 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
                 line.x_internal_charge = extra_per_unit
-                # price_unit will include charges, ensuring 'Amount' is correct
                 line.price_unit = line.x_base_price + line.x_internal_charge
+                # CRITICAL: Manually trigger the subtotal recalculation for the UI
+                line.price_subtotal = line.price_unit * line.product_uom_qty
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -42,13 +44,8 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._onchange_distribute_costs()
 
-    # --- THE STABLE FIX FOR TAX AND AMOUNT ---
     def _prepare_base_line_for_taxes_computation(self):
-        """
-        Forces the tax engine to use x_base_price for VAT calculations,
-        while letting price_unit handle the Subtotal (Amount).
-        This method replaces the need for @api.depends on _compute_amount.
-        """
+        """Forces tax math to look only at the Base Price (1720)."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
