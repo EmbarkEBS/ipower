@@ -6,39 +6,25 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- 1. Add the Internal Charges Tab for global inputs -->
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges" name="internal_charges">
                     <group>
-                        <group string="Cost Inputs">
-                            <field name="freight"/>
-                            <field name="duty"/>
-                            <field name="misc"/>
-                        </group>
-                        <group string="Totals">
-                            <field name="total_extra" readonly="1" force_save="1"/>
-                        </group>
+                        <field name="freight"/>
+                        <field name="duty"/>
+                        <field name="misc"/>
+                        <field name="total_extra" readonly="1"/>
                     </group>
                 </page>
             </xpath>
 
-            <!-- 2. Modify Order Lines List View -->
-            <!-- We add the editable 'Unit Price' and the calculated 'Int. Charge' share -->
+            <!-- Show editable Unit Price and Resulting Price + Charges -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
                 <field name="x_base_price" string="Unit Price"/>
-                <field name="x_internal_charge" string="Int. Charge" readonly="1" force_save="1" optional="show"/>
             </xpath>
 
-            <!-- 3. Make the standard Price Unit Read-Only and rename it -->
-            <!-- This column will show (Unit Price + Int. Charge) -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
                 <attribute name="string">Price + Charges</attribute>
                 <attribute name="readonly">1</attribute>
-                <attribute name="force_save">1</attribute>
-            </xpath>
-
-            <!-- 4. Ensure the Amount (subtotal) column updates in the UI -->
-            <xpath expr="//field[@name='order_line']//list//field[@name='price_subtotal']" position="attributes">
                 <attribute name="force_save">1</attribute>
             </xpath>
 

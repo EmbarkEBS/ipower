@@ -15,26 +15,27 @@ class SaleOrder(models.Model):
 
     @api.onchange('freight', 'duty', 'misc')
     def _onchange_extra_costs(self):
-        """Distribute charges when global fields change."""
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
+        """Updates Unit Price (Base + Extra) for all lines."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
+            
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
+            
             for line in lines:
-                line.x_internal_charge = extra_per_unit
-                # Explicitly update price_unit so Amount recalculates
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                line.price_unit = base + line.x_internal_charge
+                # Update price_unit to include charges (This makes 'Amount' correct automatically)
+                line.price_unit = base + extra_per_unit
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    x_base_price = fields.Float(string="Unit Price (Base)", digits='Product Price')
+    x_base_price = fields.Float(string="Base Price", digits='Product Price')
     x_internal_charge = fields.Float(string="Int. Charge", readonly=True)
 
     @api.onchange('product_id')
@@ -44,27 +45,14 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_all(self):
-        """Redistribute charges if base price or quantity changes."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    # --- CRITICAL FIX FOR AMOUNT ---
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
-    def _compute_amount(self):
-        """
-        Forces the 'Amount' column to follow price_unit (Base + Charges).
-        Odoo's native method is called first, then we ensure our total is correct.
-        """
-        super(SaleOrderLine, self)._compute_amount()
-        for line in self:
-            # This ensures Amount = (1720 + 20) * 1 = 1740
-            line.price_subtotal = line.price_unit * line.product_uom_qty
-            line.price_total = line.price_subtotal + line.price_tax
-
-    # --- CRITICAL FIX FOR TAX ---
+    # --- THE TAX FIX: STABLE & CRASH-FREE ---
     def _prepare_base_line_for_taxes_computation(self):
         """
-        Forces Taxes to look only at x_base_price (1720).
+        Forces the tax engine to use x_base_price for math.
+        This ignores the extra charges added to price_unit.
         """
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
