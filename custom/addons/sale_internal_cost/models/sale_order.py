@@ -18,6 +18,7 @@ class SaleOrder(models.Model):
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
+        """Updates Unit Price (Base + Extra) for all lines."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -28,10 +29,8 @@ class SaleOrder(models.Model):
             
             for line in lines:
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                # Set the price including charges
+                # Update price_unit to include charges (This makes 'Amount' correct)
                 line.price_unit = base + extra_per_unit
-                # Manually trigger the subtotal refresh
-                line._compute_amount()
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -48,20 +47,14 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
-    # --- THE TAX FIX: Tax on Unit Price (1000) only ---
+    # --- THE FIX: TAXES ON BASE PRICE ONLY ---
     def _prepare_base_line_for_taxes_computation(self):
+        """
+        Interacts with the tax engine. 
+        Tells Odoo to use x_base_price for VAT math, 
+        while letting price_unit handle the 'Amount' column.
+        """
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
         return res
-
-    # --- THE AMOUNT FIX: Force Subtotal to use Price + Charges (1010) ---
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
-    def _compute_amount(self):
-        """
-        Forces the 'Amount' column to recalculate using price_unit (Base + Extra).
-        """
-        super(SaleOrderLine, self)._compute_amount()
-        for line in self:
-            # Re-confirm the subtotal matches the full price_unit
-            line.price_subtotal = line.price_unit * line.product_uom_qty
