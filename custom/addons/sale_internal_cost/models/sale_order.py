@@ -82,7 +82,7 @@ class SaleOrderLine(models.Model):
         'product_uom_qty',
         'discount',
         'price_unit',
-        'tax_id',
+        'tax_ids',
         'x_internal_charge'
     )
     def _compute_amount(self):
@@ -94,7 +94,7 @@ class SaleOrderLine(models.Model):
             total_unit_price = base_price + (line.x_internal_charge or 0.0)
 
             # TAX computed ONLY on base price
-            taxes = line.tax_id.compute_all(
+            taxes = line.tax_ids.compute_all(
                 base_price,
                 currency=line.order_id.currency_id,
                 quantity=line.product_uom_qty,
