@@ -18,25 +18,25 @@ class SaleOrder(models.Model):
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
+        # The context check prevents infinite loops
+        if self._context.get('skip_recalculation'):
+            return
+            
         for order in self:
-            # Get all physical product lines
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
             
-            # Calculate the total quantity accurately
+            # Recalculate total quantity fresh every time to fix Bug 2
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # Always start from the Base Price
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                
-                # Update the price
+                # Update price
                 line.price_unit = base + extra_per_unit
-                
-                # FIX BUG 1: Force Odoo to refresh the 'Amount' column for this line
-                line._onchange_price_unit()
+                # Force subtotal refresh to fix Bug 1
+                line._compute_amount()
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -50,12 +50,12 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_all(self):
-        """When quantity changes, the 'extra per unit' changes for EVERY line."""
         if self.order_id:
-            self.order_id._recalculate_line_prices()
+            # We use context to ensure we don't trigger a loop
+            self.with_context(skip_recalculation=True).order_id._recalculate_line_prices()
 
     def _prepare_base_line_for_taxes_computation(self):
-        """Force tax math to ignore the extra charges."""
+        """Ensure taxes apply only to base price."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
