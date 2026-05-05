@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherit_hide_charges" inherit_id="sale.report_saleorder_document">
+        <!-- We target the foreach loop that renders lines in the PDF -->
+        <xpath expr="//t[@t-foreach='lines_to_render']" position="attributes">
+            <!-- We filter out our custom charge line so the customer never sees it -->
+            <attribute name="t-foreach">lines_to_render.filtered(lambda l: not l.x_is_charge_line)</attribute>
+        </xpath>
+    </template>
+</odoo>
