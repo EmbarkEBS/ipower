@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="view_order_form_inherit_internal_cost" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.internal.cost</field>
+        <field name="name">sale.order.form.internal.charges</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- Internal Charges Tab -->
+            <!-- =========================
+                 INTERNAL CHARGES TAB
+            ========================== -->
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges">
                     <group>
@@ -18,18 +21,15 @@
                 </page>
             </xpath>
 
-            <!-- Line Columns -->
-            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
+            <!-- =========================
+                 LINE FIELDS
+            ========================== -->
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="before">
                 <field name="x_base_price" string="Unit Price"/>
-                <field name="x_internal_charge" string="Int. Charge" optional="show"/>
-            </xpath>
-
-            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
-                <attribute name="string">Price + Charges</attribute>
-                <attribute name="readonly">1</attribute>
-                <attribute name="force_save">1</attribute>
+                <field name="x_internal_charge" string="Int. Charge"/>
             </xpath>
 
         </field>
     </record>
+
 </odoo>
