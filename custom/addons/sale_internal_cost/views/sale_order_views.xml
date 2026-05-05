@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_order_form_inherit_internal_cost" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.internal.cost</field>
@@ -5,30 +6,35 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <!-- Internal Charges Tab -->
+            <!-- 1. Add the Internal Charges Tab -->
             <xpath expr="//page[@name='order_lines']" position="after">
-                <page string="Internal Charges">
+                <page string="Internal Charges" name="internal_charges">
                     <group>
-                        <field name="freight"/>
-                        <field name="duty"/>
-                        <field name="misc"/>
-                        <field name="total_extra" readonly="1"/>
+                        <group string="Cost Inputs">
+                            <field name="freight"/>
+                            <field name="duty"/>
+                            <field name="misc"/>
+                        </group>
+                        <group string="Totals">
+                            <field name="total_extra" readonly="1" force_save="1"/>
+                        </group>
                     </group>
                 </page>
             </xpath>
 
-            <!-- Line Columns -->
+            <!-- 2. Add Editable Base Price to the line -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
                 <field name="x_base_price" string="Unit Price"/>
             </xpath>
 
+            <!-- 3. Change standard Price Unit to show (Base + Charges) -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
                 <attribute name="string">Price + Charges</attribute>
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
 
-            <!-- Force Refresh Amount -->
+            <!-- 4. Force Amount (Subtotal) to save our calculated value -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_subtotal']" position="attributes">
                 <attribute name="force_save">1</attribute>
             </xpath>

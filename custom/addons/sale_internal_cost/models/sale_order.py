@@ -18,7 +18,6 @@ class SaleOrder(models.Model):
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
-        """Updates Price + Charges and forces the 'Amount' column to refresh."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -29,12 +28,9 @@ class SaleOrder(models.Model):
             
             for line in lines:
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                
-                # 1. Update the price including charges
+                # Update the display price
                 line.price_unit = base + extra_per_unit
-                
-                # 2. FIX: Manually trigger the subtotal update for the UI
-                # This ensures the 'Amount' column refreshes immediately
+                # IMPORTANT: This triggers the subtotal to recalculate using 220 instead of 200
                 line.price_subtotal = line.price_unit * line.product_uom_qty
 
 class SaleOrderLine(models.Model):
@@ -52,8 +48,8 @@ class SaleOrderLine(models.Model):
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
+    # THE TAX FIX: Tells the VAT engine to look only at 'Unit Price' (200)
     def _prepare_base_line_for_taxes_computation(self):
-        """Forces taxes to calculate ONLY on x_base_price."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
