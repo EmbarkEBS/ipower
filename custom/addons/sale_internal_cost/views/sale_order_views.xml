@@ -5,8 +5,9 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
+            <!-- 1. Internal Charges Tab (Hidden from Customers) -->
             <xpath expr="//page[@name='order_lines']" position="after">
-                <page string="Internal Charges" name="internal_charges">
+                <page string="Internal Charges" name="internal_charges" groups="sales_team.group_sale_manager">
                     <group>
                         <group>
                             <field name="freight"/>
@@ -17,15 +18,16 @@
                             <field name="total_extra" readonly="1"/>
                         </group>
                     </group>
+                    <p class="text-muted">These charges are automatically distributed into the unit price of items.</p>
                 </page>
             </xpath>
 
-            <!-- Add the editable Base Price -->
+            <!-- 2. Show Base Price in lines only for Managers -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
-                <field name="x_base_price" string="Base Price"/>
+                <field name="x_base_price" string="Base Price" groups="sales_team.group_sale_manager"/>
             </xpath>
 
-            <!-- Make the resulting Unit Price readonly so it doesn't loop -->
+            <!-- 3. Make Price Unit readonly as it is now calculated -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>
