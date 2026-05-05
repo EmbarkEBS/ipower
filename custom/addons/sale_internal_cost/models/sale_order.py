@@ -13,11 +13,8 @@ class SaleOrder(models.Model):
         for order in self:
             order.total_extra = (order.freight or 0.0) + (order.duty or 0.0) + (order.misc or 0.0)
 
-    @api.onchange('freight', 'duty', 'misc')
-    def _onchange_extra_costs(self):
-        self._recalculate_line_prices()
-
-    def _recalculate_line_prices(self):
+    @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
+    def _onchange_distribute_costs(self):
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -26,9 +23,8 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             for line in lines:
                 line.x_internal_charge = extra_per_unit
-                # Update the unit price to include charges
-                base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                line.price_unit = base + extra_per_unit
+                # price_unit will include charges, ensuring 'Amount' is correct
+                line.price_unit = line.x_base_price + line.x_internal_charge
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -44,34 +40,16 @@ class SaleOrderLine(models.Model):
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_all(self):
         if self.order_id:
-            self.order_id._recalculate_line_prices()
+            self.order_id._onchange_distribute_costs()
 
-    # --- CRITICAL FIX FOR SUBTOTAL AND TAX ---
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'x_base_price')
-    def _compute_amount(self):
+    # --- THE STABLE FIX FOR TAX AND AMOUNT ---
+    def _prepare_base_line_for_taxes_computation(self):
         """
-        Forces the 'Amount' column to include charges,
-        but calculates the 'Tax' using ONLY the base price.
+        Forces the tax engine to use x_base_price for VAT calculations,
+        while letting price_unit handle the Subtotal (Amount).
+        This method replaces the need for @api.depends on _compute_amount.
         """
-        for line in self:
-            # 1. Use Base Price for tax math
-            tax_base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-            
-            # 2. Compute taxes manually based on the base price
-            taxes = line.tax_id.compute_all(
-                tax_base, 
-                line.order_id.currency_id, 
-                line.product_uom_qty, 
-                product=line.product_id, 
-                partner=line.order_id.partner_shipping_id
-            )
-            
-            # 3. Apply the custom results
-            # Subtotal (Amount column) = Price with Charges * Qty
-            line.price_subtotal = line.price_unit * line.product_uom_qty
-            
-            # Tax = Tax on Base only
-            line.price_tax = sum(t.get('amount', 0.0) for t in taxes.get('taxes', []))
-            
-            # Total = Subtotal + Tax
-            line.price_total = line.price_subtotal + line.price_tax
+        res = super()._prepare_base_line_for_taxes_computation()
+        if self.x_base_price > 0:
+            res['price_unit'] = self.x_base_price
+        return res

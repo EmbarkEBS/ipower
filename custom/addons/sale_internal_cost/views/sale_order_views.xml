@@ -5,7 +5,6 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges">
                     <group>
@@ -27,12 +26,6 @@
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
-            
-            <!-- Force subtotal to refresh and save its value -->
-            <xpath expr="//field[@name='order_line']//list//field[@name='price_subtotal']" position="attributes">
-                <attribute name="force_save">1</attribute>
-            </xpath>
-
         </field>
     </record>
 </odoo>
