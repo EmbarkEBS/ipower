@@ -13,29 +13,24 @@ class SaleOrder(models.Model):
         for order in self:
             order.total_extra = (order.freight or 0.0) + (order.duty or 0.0) + (order.misc or 0.0)
 
-    @api.onchange('freight', 'duty', 'misc')
-    def _onchange_extra_costs(self):
-        self._recalculate_line_prices()
-
-    def _recalculate_line_prices(self):
-        """Updates Unit Price (Base + Extra) for all lines."""
+    @api.onchange('freight', 'duty', 'misc', 'order_line.product_uom_qty')
+    def _onchange_distribute_costs(self):
+        """Calculates charge share and triggers subtotal refresh."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
                 continue
-            
             total_qty = sum(lines.mapped('product_uom_qty')) or 1.0
             extra_per_unit = order.total_extra / total_qty
-            
             for line in lines:
-                base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                # Update price_unit to include charges (This makes 'Amount' correct automatically)
-                line.price_unit = base + extra_per_unit
+                line.x_internal_charge = extra_per_unit
+                # Force the Price + Charges field to update
+                line.price_unit = line.x_base_price + line.x_internal_charge
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    x_base_price = fields.Float(string="Base Price", digits='Product Price')
+    x_base_price = fields.Float(string="Unit Price", digits='Product Price')
     x_internal_charge = fields.Float(string="Int. Charge", readonly=True)
 
     @api.onchange('product_id')
@@ -43,17 +38,16 @@ class SaleOrderLine(models.Model):
         if self.product_id:
             self.x_base_price = self.product_id.lst_price
 
-    @api.onchange('x_base_price', 'product_uom_qty')
-    def _onchange_recompute_all(self):
-        if self.order_id:
-            self.order_id._recalculate_line_prices()
+    @api.onchange('x_base_price', 'x_internal_charge', 'product_uom_qty')
+    def _onchange_update_subtotal(self):
+        """Explicitly recalculates subtotal and total price including charges."""
+        for line in self:
+            line.price_unit = line.x_base_price + line.x_internal_charge
+            # Recalculates the 'Amount' column immediately in the UI
+            line._compute_amount()
 
-    # --- THE TAX FIX: STABLE & CRASH-FREE ---
     def _prepare_base_line_for_taxes_computation(self):
-        """
-        Forces the tax engine to use x_base_price for math.
-        This ignores the extra charges added to price_unit.
-        """
+        """Forces tax math to look only at the Base Price (1720)."""
         res = super()._prepare_base_line_for_taxes_computation()
         if self.x_base_price > 0:
             res['price_unit'] = self.x_base_price
