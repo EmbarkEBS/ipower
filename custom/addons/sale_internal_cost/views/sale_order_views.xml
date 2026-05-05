@@ -22,7 +22,7 @@
             </xpath>
 
             <!-- =========================
-                 LINE FIELDS
+                 ORDER LINE COLUMNS
             ========================== -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
                 <field name="x_base_price" string="Unit Price"/>
