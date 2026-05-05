@@ -18,7 +18,6 @@ class SaleOrder(models.Model):
         self._recalculate_line_prices()
 
     def _recalculate_line_prices(self):
-        """Spreads extra costs across all lines and forces subtotal updates."""
         for order in self:
             lines = order.order_line.filtered(lambda l: not l.display_type)
             if not lines:
@@ -28,22 +27,15 @@ class SaleOrder(models.Model):
             extra_per_unit = order.total_extra / total_qty
             
             for line in lines:
-                # 1. Determine Base (Edited price or Product default)
                 base = line.x_base_price if line.x_base_price > 0 else line.product_id.lst_price
-                
-                # 2. Update Unit Price (Base + Extra)
+                # Set the price including charges
                 line.price_unit = base + extra_per_unit
-                
-                # 3. Force Subtotal to refresh manually to include the extra charge
-                line.price_subtotal = line.price_unit * line.product_uom_qty
-                
-                # 4. Trigger Odoo's native tax/total calculation
+                # Manually trigger the subtotal refresh
                 line._compute_amount()
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # This field 'remembers' your edited price (e.g. 1720)
     x_base_price = fields.Float(string="Base Price", digits='Product Price')
 
     @api.onchange('product_id')
@@ -53,17 +45,23 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('x_base_price', 'product_uom_qty')
     def _onchange_recompute_all(self):
-        """When you edit the Base Price or Quantity, redistribute the global charges."""
         if self.order_id:
             self.order_id._recalculate_line_prices()
 
+    # --- THE TAX FIX: Tax on Unit Price (1000) only ---
     def _prepare_base_line_for_taxes_computation(self):
-        """
-        THE TAX FIX: Forces the tax engine to use Base Price (1720) 
-        instead of Unit Price (1740).
-        """
         res = super()._prepare_base_line_for_taxes_computation()
-        # Use our stored manual price for the tax math
-        tax_base = self.x_base_price if self.x_base_price > 0 else self.price_unit
-        res['price_unit'] = tax_base
+        if self.x_base_price > 0:
+            res['price_unit'] = self.x_base_price
         return res
+
+    # --- THE AMOUNT FIX: Force Subtotal to use Price + Charges (1010) ---
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount(self):
+        """
+        Forces the 'Amount' column to recalculate using price_unit (Base + Extra).
+        """
+        super(SaleOrderLine, self)._compute_amount()
+        for line in self:
+            # Re-confirm the subtotal matches the full price_unit
+            line.price_subtotal = line.price_unit * line.product_uom_qty
