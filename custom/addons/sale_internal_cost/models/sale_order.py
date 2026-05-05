@@ -47,7 +47,7 @@ class SaleOrderLine(models.Model):
             self.order_id._recalculate_line_prices()
 
     # --- CRITICAL FIX FOR SUBTOTAL AND TAX ---
-    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_ids', 'x_base_price')
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'x_base_price')
     def _compute_amount(self):
         """
         Forces the 'Amount' column to include charges,
