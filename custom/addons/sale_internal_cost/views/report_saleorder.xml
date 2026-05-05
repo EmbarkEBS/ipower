@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="report_saleorder_document_inherit_hide_charges" inherit_id="sale.report_saleorder_document">
-        <xpath expr="//tbody[hasclass('sale_tbody')]//tr" position="attributes">
-            <attribute name="t-if">not line.x_is_charge_line</attribute>
-        </xpath>
-    </template>
-</odoo>
