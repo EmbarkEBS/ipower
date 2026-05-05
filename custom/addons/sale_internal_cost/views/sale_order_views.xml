@@ -6,6 +6,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
+            <!-- Internal Charges Tab -->
             <xpath expr="//page[@name='order_lines']" position="after">
                 <page string="Internal Charges">
                     <group>
@@ -17,7 +18,7 @@
                 </page>
             </xpath>
 
-            <!-- Hide standard price_unit and show our editable x_base_price -->
+            <!-- Line Columns -->
             <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="before">
                 <field name="x_base_price" string="Unit Price"/>
                 <field name="x_internal_charge" string="Int. Charge" optional="show"/>
