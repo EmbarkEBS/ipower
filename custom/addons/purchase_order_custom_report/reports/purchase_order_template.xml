@@ -120,8 +120,8 @@
                         <div style="margin-top: 80px;">
                             <strong style="font-size: 14px; border-bottom: 1px solid #333; padding-bottom: 2px;">Notes</strong>
                             <div style="margin-top: 10px; color: #555;">
-                                <t t-if="o.notes">
-                                    <span t-field="o.notes"/>
+                                <t t-if="o.note">
+                                    <span t-field="o.note"/>
                                 </t>
                                 <t t-else="">
                                     <i class="fa fa-circle" style="font-size: 8px; color: #1a3a5a; margin-right: 5px;"/> Thanks for giving us the opportunity to serve you
