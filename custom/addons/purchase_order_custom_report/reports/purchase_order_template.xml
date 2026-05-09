@@ -10,9 +10,9 @@
                         <table style="width:100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">
                             <tr>
                                 <td style="width:50%;">
-                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height:70px;"/>
-                                    <div style="margin-top:10px; color: #1a237e;">
-                                        <strong><span t-esc="o.company_id.name"/></strong><br/>
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height:70px;margin-left:-30px"/>
+                                    <div style="margin-top:10px;">
+                                        <strong><span style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;" t-esc="o.company_id.name"/></strong><br/>
                                         <span t-esc="o.company_id.partner_id.street"/><br/>
                                         <span t-esc="o.company_id.partner_id.city"/>, <span t-esc="o.company_id.partner_id.country_id.name"/><br/>
                                         TRN: <span t-esc="o.company_id.vat"/>
@@ -40,15 +40,19 @@
                                 <td style="width:40%; vertical-align: top;">
                                     <table style="width:100%; text-align: left;">
                                         <tr>
-                                            <td style="padding: 2px;"><strong>Order Date</strong></td>
+                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Order Date</strong></td>
                                             <td style="padding: 2px;">: <span t-esc="o.date_order.strftime('%d %B %Y')"/></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding: 2px;"><strong>Terms</strong></td>
+                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Incoterm</strong></td>
                                             <td style="padding: 2px;">: <span t-esc="o.payment_term_id.name"/></td>
                                         </tr>
+                                         <tr>
+                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Sales Order</strong></td>
+                                            <td style="padding: 2px;">: <span t-field="o.origin" class="m-0"/></td>
+                                        </tr>
                                         <tr>
-                                            <td style="padding: 2px;"><strong>Shipping Terms</strong></td>
+                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Shipping Terms</strong></td>
                                             <td style="padding: 2px;">: <span t-esc="o.incoterm_id.code"/></td>
                                         </tr>
                                     </table>
@@ -116,9 +120,9 @@
                                             <td style="padding: 5px;"><strong>VAT (5%)</strong></td>
                                             <td style="padding: 5px;"><span t-esc="'{0:,.2f}'.format(o.amount_tax)"/></td>
                                         </tr>
-                                        <tr style="font-size: 14px; font-weight: bold; color: #1a237e;">
-                                            <td style="padding: 10px 5px; border-top: 2px solid #1a237e;">Total</td>
-                                            <td style="padding: 10px 5px; border-top: 2px solid #1a237e;">
+                                        <tr style="font-size: 14px; font-weight: bold; color: #385580;">
+                                            <td style="padding: 10px 5px; border-top: 2px solid #385580;">Total</td>
+                                            <td style="padding: 10px 5px; border-top: 2px solid #385580;">
                                                 <span t-esc="o.currency_id.name"/> <span t-esc="'{0:,.2f}'.format(o.amount_total)"/>
                                             </td>
                                         </tr>
