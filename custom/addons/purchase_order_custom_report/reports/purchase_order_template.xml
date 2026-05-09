@@ -4,56 +4,54 @@
             <meta charset="UTF-8"/>
             <t t-foreach="docs" t-as="o">
                 <main>
-                    <div class="page" style="padding:10px 40px; font-family: sans-serif; font-size:12px; color: #333;">
+                    <div class="page" style="padding:10px 40px; font-family: sans-serif; font-size:12px; color: #333; line-height: 1.4;">
                         
                         <!-- HEADER: LOGO AND COMPANY INFO -->
-                        <table style="width:100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                        <table style="width:100%; margin-bottom: 20px;">
                             <tr>
-                                <td style="width:50%;">
-                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width:80%;height:70px;margin-left:-60px;margin-top:-20px"/>
-                                    <div style="margin-top:10px;">
-                                        <strong><span style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;" t-esc="o.company_id.name"/></strong><br/>
-                                        <span t-esc="o.company_id.partner_id.street"/><br/>
-                                        <span t-esc="o.company_id.partner_id.city"/>, <span t-esc="o.company_id.partner_id.country_id.name"/><br/>
-                                        TRN: <span t-esc="o.company_id.vat"/>
+                                <td style="width:60%; vertical-align: top;">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 80px; margin-bottom: 10px;"/>
+                                    <div style="font-size: 13px;">
+                                        <strong style="color: #1a3a5a; font-size: 15px;"><span t-esc="o.company_id.name"/></strong><br/>
+                                        <span t-field="o.company_id.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                        TRN <span t-esc="o.company_id.vat"/>
                                     </div>
                                 </td>
-                                <td style="width:50%; text-align:right; vertical-align: top;">
-                                    <h2 style="color: #000; margin-bottom: 5px; font-weight: bold;">PURCHASE ORDER</h2>
-                                <p style="text-align:center;">    <span style="font-size: 14px;"># <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/></span></p>
+                                <td style="width:40%; text-align:right; vertical-align: top;">
+                                    <h1 style="color: #000; margin: 0; font-size: 28px; font-weight: bold; letter-spacing: 1px;">SALES ORDER</h1>
+                                    <div style="font-size: 16px; margin-top: 5px;"># <span t-field="o.name"/></div>
                                 </td>
                             </tr>
                         </table>
 
                         <!-- ADDRESSES AND META DATA -->
-                        <table style="width:100%; margin-top:30px;">
+                        <table style="width:100%; margin-top:40px; margin-bottom: 40px;">
                             <tr>
-                                <td style="width:60%; vertical-align: top;">
-                                    <strong style="color: #666;">To</strong><br/>
-                                    <div style="margin-top: 5px; font-size: 13px;">
+                                <td style="width:55%; vertical-align: top;">
+                                    <strong style="color: #1a3a5a; font-size: 13px;">To</strong><br/>
+                                    <div style="margin-top: 5px; font-size: 13px; line-height: 1.5;">
                                         <strong><span t-esc="o.partner_id.name"/></strong><br/>
-                                        <span t-esc="o.partner_id.street"/><br/>
-                                        <span t-esc="o.partner_id.city"/> - <span t-esc="o.partner_id.country_id.name"/><br/>
-                                        TRN: <span t-esc="o.partner_id.vat"/>
+                                        <span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/><br/>
+                                        TRN <span t-esc="o.partner_id.vat"/>
                                     </div>
                                 </td>
-                                <td style="width:40%; vertical-align: top;">
-                                    <table style="width:100%; text-align: left;">
+                                <td style="width:45%; vertical-align: top;">
+                                    <table style="width:100%; border-collapse: collapse;">
                                         <tr>
-                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Order Date</strong></td>
-                                            <td style="padding: 2px;">: <span t-esc="o.date_order.strftime('%d %B %Y')"/></td>
+                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a; width: 45%;">Order Date</td>
+                                            <td style="padding: 3px 0;">: <span t-field="o.date_order" t-options='{"format": "dd MMMM yyyy"}'/></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Incoterm</strong></td>
-                                            <td style="padding: 2px;">: <span t-esc="o.payment_term_id.name"/></td>
-                                        </tr>
-                                         <tr>
-                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Sales Order</strong></td>
-                                            <td style="padding: 2px;">: <span t-field="o.origin" class="m-0"/></td>
+                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Terms</td>
+                                            <td style="padding: 3px 0;">: <span t-field="o.payment_term_id.name"/></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;"><strong>Shipping Terms</strong></td>
-                                            <td style="padding: 2px;">: <span t-esc="o.incoterm_id.code"/></td>
+                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Shipping Terms</td>
+                                            <td style="padding: 3px 0;">: <span t-field="o.incoterm_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Your PO Ref#</td>
+                                            <td style="padding: 3px 0;">: <span t-field="o.partner_ref"/></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -61,90 +59,84 @@
                         </table>
 
                         <!-- PRODUCT TABLE -->
-                        <table style="width:100%; margin-top:30px; border-collapse: collapse;">
+                        <table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
                             <thead>
-                                <tr style="background-color: #4a4a4a; color: #ffffff;border-radius:25px;">
-                                    <th style="padding: 10px; border: 1px solid #4a4a4a; text-align: center; width: 5%;">SN</th>
-                                    <th style="padding: 10px; border: 1px solid #4a4a4a; width: 50%;">Description</th>
-                                    <th style="padding: 10px; border: 1px solid #4a4a4a; text-align: center; width: 10%;">Qty</th>
-                                    <th style="padding: 10px; border: 1px solid #4a4a4a; text-align: right; width: 15%;">Unit Price</th>
-                                    <th style="padding: 10px; border: 1px solid #4a4a4a; text-align: right; width: 20%;">Total Price</th>
+                                <tr style="background-color: #4b4b4b; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: center; width: 8%; border-top-left-radius: 5px; border-bottom-left-radius: 5px;">SN</th>
+                                    <th style="padding: 10px; text-align: left; width: 42%;">Description</th>
+                                    <th style="padding: 10px; text-align: center; width: 10%;">Qty</th>
+                                    <th style="padding: 10px; text-align: right; width: 15%;">Unit Price</th>
+                                    <th style="padding: 10px; text-align: right; width: 25%; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-set="sn" t-value="1"/>
                                 <t t-foreach="o.order_line" t-as="line">
-                                    <tr style="border-bottom: 1px solid #eee;">
-                                        <td style="padding: 10px; text-align: center;" t-esc="sn"/>
-                                        <td style="padding: 10px;">
-                                            <strong><span t-esc="line.product_id.name"/></strong><br/>
-                                              <strong>
-                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
-                        </strong> </td>
-                                        
-                                        <td style="padding: 10px; text-align: center;"><span t-esc="int(line.product_qty)"/></td>
-                                        <td style="padding: 10px; text-align: right;"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></td>
-                                        <td style="padding: 10px; text-align: right;"><span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/></td>
-                                
-                                      <tr><td><small t-esc="line.product_id.description or ''"/></td></tr> </tr>
+                                    <tr>
+                                        <td style="padding: 12px 10px; text-align: center; vertical-align: top;" t-esc="sn"/>
+                                        <td style="padding: 12px 10px; vertical-align: top;">
+                                            <div style="font-weight: bold; margin-bottom: 5px;"><span t-field="line.product_id.display_name"/></div>
+                                            <div style="color: #666; font-size: 11px;"><span t-field="line.name"/></div>
+                                        </td>
+                                        <td style="padding: 12px 10px; text-align: center; vertical-align: top;"><span t-esc="int(line.product_qty)"/></td>
+                                        <td style="padding: 12px 10px; text-align: right; vertical-align: top;"><span t-field="line.price_unit"/></td>
+                                        <td style="padding: 12px 10px; text-align: right; vertical-align: top;"><span t-field="line.price_subtotal"/></td>
+                                    </tr>
                                     <t t-set="sn" t-value="sn + 1"/>
                                 </t>
-                                 
                             </tbody>
                         </table>
 
                         <!-- TOTALS SECTION -->
-                        <table style="width:100%; margin-top:20px;">
+                        <table style="width:100%; margin-top:10px;">
                             <tr>
-                                <td style="width:60%; vertical-align: bottom;">
-                                    <div style="margin-bottom: 10px;">
-                                        <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> only.
+                                <td style="width:55%; vertical-align: middle; padding-top: 40px;">
+                                    <div style="font-size: 13px;">
+                                        <strong>AED <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> only.</strong>
                                     </div>
-    <div style="border-top: 1px solid #ccc; padding-top: 5px;">
-    <strong>Notes:</strong><br/>
-   <span t-field="o.note" class="mt-4"/>
-</div>
-
-
-
-
                                 </td>
-                                <td style="width:40%;">
-                                    <table style="width:100%; text-align: right; border-collapse: collapse;">
+                                <td style="width:45%;">
+                                    <table style="width:100%; text-align: right;">
                                         <tr>
-                                            <td style="padding: 5px;"><strong>Sub Total</strong></td>
-                                            <td style="padding: 5px;"><span t-esc="'{0:,.2f}'.format(o.amount_untaxed)"/></td>
+                                            <td style="padding: 5px; font-weight: bold; width: 50%;">Sub Total</td>
+                                            <td style="padding: 5px; width: 50%;"><span t-field="o.amount_untaxed"/></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding: 5px;"><strong>VAT (5%)</strong></td>
-                                            <td style="padding: 5px;"><span t-esc="'{0:,.2f}'.format(o.amount_tax)"/></td>
+                                            <td style="padding: 5px; font-weight: bold;">VAT (5%)</td>
+                                            <td style="padding: 5px;"><span t-field="o.amount_tax"/></td>
                                         </tr>
-                                        <tr style="font-size: 14px; font-weight: bold; color: #385580;">
-                                            <td style="padding: 10px 5px; border-top: 2px solid #385580;">Total</td>
-                                            <td style="padding: 10px 5px; border-top: 2px solid #385580;">
-                                                <span t-esc="o.currency_id.name"/> <span t-esc="'{0:,.2f}'.format(o.amount_total)"/>
+                                        <tr style="font-size: 16px; color: #1a3a5a;">
+                                            <td style="padding: 10px 5px; font-weight: bold;">Total</td>
+                                            <td style="padding: 10px 5px; font-weight: bold;">
+                                                <span t-field="o.currency_id.name"/> <span t-field="o.amount_total"/>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
                         </table>
-   <!-- FOOTER -->
-    <div style="position: fixed;
-    bottom: 0;
-    left: 20px;
-    right: 20px;
-    text-align: center;
-    border-top: 1px solid #aaa;
-    padding-top: 25px;
-    font-size: 10px;">
-        
-        <strong t-esc="o.company_id.name"/> |
-        <span t-esc="o.company_id.partner_id.street or ''"/> ,
-        <span t-esc="o.company_id.partner_id.city or ''"/> ,
-        <span t-esc="o.company_id.partner_id.country_id.name or ''"/>
 
-    </div>
+                        <!-- NOTES -->
+                        <div style="margin-top: 80px;">
+                            <strong style="font-size: 14px; border-bottom: 1px solid #333; padding-bottom: 2px;">Notes</strong>
+                            <div style="margin-top: 10px; color: #555;">
+                                <t t-if="o.notes">
+                                    <span t-field="o.notes"/>
+                                </t>
+                                <t t-else="">
+                                    <i class="fa fa-circle" style="font-size: 8px; color: #1a3a5a; margin-right: 5px;"/> Thanks for giving us the opportunity to serve you
+                                </t>
+                            </div>
+                        </div>
+
+                        <!-- FOOTER INFO -->
+                        <div style="position: absolute; bottom: 20px; left: 40px; right: 40px; font-size: 10px; color: #666; border-top: 1px solid #eee; padding-top: 10px; text-align: left;">
+                            <div t-field="o.company_id.report_footer"/>
+                            <div style="margin-top: 5px;">
+                                <span t-esc="o.company_id.street"/>, <span t-esc="o.company_id.city"/> - <span t-esc="o.company_id.country_id.name"/> | 
+                                CR No: <span t-esc="o.company_id.company_registry or 'N/A'"/> | <span t-esc="o.company_id.email"/> | <span t-esc="o.company_id.website"/>
+                            </div>
+                        </div>
                     </div>
                 </main>
             </t>
