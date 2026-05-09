@@ -92,10 +92,11 @@
                                     <div style="margin-bottom: 10px;">
                                         <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> only.
                                     </div>
-                   <div style="border-top: 1px solid #ccc; padding-top: 5px;">
+      <div style="border-top: 1px solid #ccc; padding-top: 5px;">
     <strong>Notes:</strong><br/>
     <span t-field="o.notes"/>
 </div>
+
 
 
                                 </td>
