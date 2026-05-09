@@ -94,7 +94,7 @@
                                     </div>
     <div style="border-top: 1px solid #ccc; padding-top: 5px;">
     <strong>Notes:</strong><br/>
-    <span t-field="o.notes"/>
+   <span t-field="o.note" class="mt-4"/>
 </div>
 
 
