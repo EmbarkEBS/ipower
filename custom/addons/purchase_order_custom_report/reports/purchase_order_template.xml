@@ -74,7 +74,12 @@
                                         <td style="padding: 10px; text-align: center;" t-esc="sn"/>
                                         <td style="padding: 10px;">
                                             <strong><span t-esc="line.product_id.name"/></strong><br/>
-                                            <small style="color: #666;"><span t-esc="line.name"/></small>
+                                            <small t-esc="line.product_id.description or ''"/><br/>
+                   
+                        <strong>
+                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                        </strong>
+                   
                                         </td>
                                         <td style="padding: 10px; text-align: center;"><span t-esc="int(line.product_qty)"/></td>
                                         <td style="padding: 10px; text-align: right;"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></td>
@@ -121,7 +126,22 @@
                                 </td>
                             </tr>
                         </table>
+   <!-- FOOTER -->
+    <div style="position: fixed;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+    border-top: 1px solid #aaa;
+    padding-top: 25px;
+    font-size: 10px;">
+        
+        <strong t-esc="o.company_id.name"/> |
+        <span t-esc="o.company_id.partner_id.street or ''"/> ,
+        <span t-esc="o.company_id.partner_id.city or ''"/> ,
+        <span t-esc="o.company_id.partner_id.country_id.name or ''"/>
 
+    </div>
                     </div>
                 </main>
             </t>
