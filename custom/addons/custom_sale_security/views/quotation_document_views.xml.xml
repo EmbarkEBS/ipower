@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="quotation_document_form_inherit"
+            model="ir.ui.view">
+        <field name="name">
+            quotation.document.form.inherit.custom
+        </field>
+
+        <field name="model">quotation.document</field>
+
+        <field name="inherit_id"
+               ref="sale.pdf_quote_builder_quotation_document_view_form"/>
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='quotation_template_ids']"
+                   position="attributes">
+
+                <attribute name="groups">
+                    sales_team.group_sale_manager,
+                    custom_sale_security.group_custom_sale_user
+                </attribute>
+
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
