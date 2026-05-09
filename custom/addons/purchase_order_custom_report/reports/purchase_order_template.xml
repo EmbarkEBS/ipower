@@ -10,7 +10,7 @@
                         <table style="width:100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">
                             <tr>
                                 <td style="width:50%;">
-                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width:100%;height:auto;margin-left:-30px"/>
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width:80%;height:100px;margin-left:-30px"/>
                                     <div style="margin-top:10px;">
                                         <strong><span style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;" t-esc="o.company_id.name"/></strong><br/>
                                         <span t-esc="o.company_id.partner_id.street"/><br/>
@@ -20,7 +20,7 @@
                                 </td>
                                 <td style="width:50%; text-align:right; vertical-align: top;">
                                     <h2 style="color: #000; margin-bottom: 5px; font-weight: bold;">PURCHASE ORDER</h2>
-                                    <span style="font-size: 14px;text-align: center;"># <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/></span>
+                                <p style="text-align:center;">    <span style="font-size: 14px;"># <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/></span></p>
                                 </td>
                             </tr>
                         </table>
@@ -87,10 +87,11 @@
                                         <td style="padding: 10px; text-align: center;"><span t-esc="int(line.product_qty)"/></td>
                                         <td style="padding: 10px; text-align: right;"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></td>
                                         <td style="padding: 10px; text-align: right;"><span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/></td>
-                                   <small t-esc="line.product_id.description or ''"/><br/>
+                                 
                    
                       
                                     </tr>
+                                      <small t-esc="line.product_id.description or ''"/><br/>
                                     <t t-set="sn" t-value="sn + 1"/>
                                 </t>
                             </tbody>
