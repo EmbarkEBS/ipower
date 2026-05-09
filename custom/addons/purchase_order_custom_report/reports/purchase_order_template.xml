@@ -89,7 +89,7 @@
                  
                       
                                     </tr>
-                                      <tr><small t-esc="line.product_id.description or ''"/></tr>
+                                      <tr><td><small t-esc="line.product_id.description or ''"/></td></tr>
                                     <t t-set="sn" t-value="sn + 1"/>
                                 </t>
                                  
