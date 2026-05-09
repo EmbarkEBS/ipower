@@ -92,10 +92,13 @@
                                     <div style="margin-bottom: 10px;">
                                         <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> only.
                                     </div>
-                                    <div style="border-top: 1px solid #ccc; padding-top: 5px;">
-                                        <strong>Notes:</strong><br/>
-                                        <span t-field="o.notes"/>
-                                    </div>
+                                  <div style="border-top: 1px solid #ccc; padding-top: 5px;">
+    <strong>Notes:</strong><br/>
+    <!-- This checks for 'notes' and 'notes' to be safe across different Odoo versions -->
+    <span t-if="hasattr(o, 'notes')" t-field="o.notes"/>
+    <span t-if="not hasattr(o, 'notes') and hasattr(o, 'notes')" t-field="o.notes"/>
+</div>
+
                                 </td>
                                 <td style="width:40%;">
                                     <table style="width:100%; text-align: right; border-collapse: collapse;">
