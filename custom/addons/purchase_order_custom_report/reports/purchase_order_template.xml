@@ -91,9 +91,10 @@
                    
                       
                                     </tr>
-                                      <small t-esc="line.product_id.description or ''"/><br/>
+                                    
                                     <t t-set="sn" t-value="sn + 1"/>
                                 </t>
+                                  <small t-esc="line.product_id.description or ''"/><br/>
                             </tbody>
                         </table>
 
