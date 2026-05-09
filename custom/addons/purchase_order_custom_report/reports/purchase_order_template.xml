@@ -10,7 +10,7 @@
                         <table style="width:100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">
                             <tr>
                                 <td style="width:50%;">
-                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width:80%;height:100px;margin-left:-30px"/>
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width:80%;height:70px;"/>
                                     <div style="margin-top:10px;">
                                         <strong><span style="padding: 2px; font-size: 14px; font-weight: bold; color: #385580;" t-esc="o.company_id.name"/></strong><br/>
                                         <span t-esc="o.company_id.partner_id.street"/><br/>
@@ -94,7 +94,7 @@
                                     
                                     <t t-set="sn" t-value="sn + 1"/>
                                 </t>
-                                  <small t-esc="line.product_id.description or ''"/><br/>
+                                 <small t-esc="line.product_id.description or ''"/><br/> 
                             </tbody>
                         </table>
 
