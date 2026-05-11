@@ -105,11 +105,11 @@
                                         <!-- ORANGE LINE -->
                                        <!-- CENTER POLYGON LINE -->
 <div style="
-    width:180px;
+    width:140px;
     height:12px;
     margin-top:10px;
     margin-bottom:10px;
-    margin-left:10px;
+    margin-left:40px;
     margin-right:0;
 ">
 
@@ -440,7 +440,7 @@
                                                 ">
                                                     <span t-field="line.product_id.display_name"/>
                                                 </div>
-</td><tr><td>
+
                                                 <div style="
                                                     font-size:11px;
                                                     color:#666;
@@ -455,7 +455,7 @@
 
                                                 </div>
 
-                                            </td></tr>
+                                            </td>
 
                                             <!-- QTY -->
                                             <td style="
