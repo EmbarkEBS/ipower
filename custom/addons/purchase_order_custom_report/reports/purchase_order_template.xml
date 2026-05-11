@@ -106,7 +106,7 @@
                                         <!-- ORANGE LINE -->
                                        <!-- CENTER POLYGON LINE -->
 <div style="
-    width:120px;
+    width:140px;
     height:12px;
     margin-top:10px;
     margin-bottom:10px;
@@ -293,18 +293,7 @@
 
                                                 </td>
                                                 </tr>
-                                                <tr>
-                                                <td style="
-                                                    padding:4px 0;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">Incoterm</td>
-                                <td style="padding:4px 0;">
-
-                                                    :<span t-esc="o.incoterm_id.code"/></td>
-                            
-
-                                            </tr>
+                                            
 
                                             <tr>
 
@@ -313,7 +302,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                    Shipping Terms
+                                               Incoterm
                                                 </td>
 
                                                 <td style="padding:4px 0;">
