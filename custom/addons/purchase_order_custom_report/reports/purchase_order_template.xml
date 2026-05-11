@@ -113,20 +113,20 @@
     margin-right:0;
 ">
 
-    <svg width="220"
-         height="12"
-         viewBox="0 0 220 12"
-         xmlns="http://www.w3.org/2000/svg">
+ <svg width="220"
+     height="2"
+     viewBox="0 0 220 2"
+     xmlns="http://www.w3.org/2000/svg">
 
-        <!-- BLUE 25% -->
-        <polygon points="0,0 60,0 50,12 0,12"
-                 fill="#1f3b73"/>
+    <!-- ORANGE FIRST -->
+    <polygon points="0,0 190,0 188,2 0,2"
+             fill="#e58b39"/>
 
-        <!-- ORANGE 75% -->
-        <polygon points="60,0 220,0 220,12 50,12"
-                 fill="#e58b39"/>
+    <!-- GREY SECOND -->
+    <polygon points="190,0 220,0 220,2 188,2"
+             fill="#d9d9d9"/>
 
-    </svg>
+</svg>
 
 </div>
 
