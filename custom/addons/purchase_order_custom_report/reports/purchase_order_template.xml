@@ -612,7 +612,7 @@
 
                                 <strong style="
                                     font-size:14px;
-                                    border-bottom:1px solid #333;
+                                    border-bottom:px solid #e58b39;
                                     padding-bottom:2px;
                                 ">
                                     Notes
@@ -654,8 +654,8 @@
                                 border-collapse:collapse;
                                 font-size:10px;
                                 color:#555; border-top:1px solid #1f3b73;
-    padding-top:6px;  margin-left:-40px;
-    margin-right:-40px;
+    padding-top:6px;  margin-left:-10px;
+    margin-right:-10px;
                             ">
 
                                 <tr>
