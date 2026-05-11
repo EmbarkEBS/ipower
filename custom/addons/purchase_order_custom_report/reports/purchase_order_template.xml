@@ -105,7 +105,7 @@
                                         <!-- ORANGE LINE -->
                                        <!-- CENTER POLYGON LINE -->
 <div style="
-    width:220px;
+    width:180px;
     height:12px;
     margin-top:10px;
     margin-bottom:10px;
@@ -173,21 +173,29 @@
                                             <tr>
 
                                                 <!-- ORANGE BORDER -->
-                                                <td style="
-                                                    height:80%;
-                                                    width:1px;
-                                                    background:#f39223;
-                                                    padding:0;
-                                                ">
-                                                </td>
+                                               <!-- SLANTED VERTICAL LINE -->
+<td style="
+    width:10px;
+    vertical-align:top;
+    padding:0;
+">
 
-                                                <td style="
-                                                    height:10%;
-                                                    width:1px;
-                                                    background:#f7d7b5;
-                                                    padding:0;
-                                                ">
-                                                </td>
+    <svg width="10"
+         height="120"
+         viewBox="0 0 10 120"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ORANGE FIRST -->
+        <polygon points="0,0 10,0 8,95 0,95"
+                 fill="#e58b39"/>
+
+        <!-- GREY SECOND -->
+        <polygon points="0,95 8,95 10,120 0,120"
+                 fill="#d9d9d9"/>
+
+    </svg>
+
+</td>
 
                                                 <td style="width:15px;">
                                                 </td>
