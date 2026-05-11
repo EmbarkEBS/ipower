@@ -109,158 +109,165 @@
 
                         </table>
 
-                        <!-- ===================================================== -->
-                        <!-- ADDRESS + META -->
-                        <!-- ===================================================== -->
+<!-- ===================================================== -->
+<!-- ADDRESS + META -->
+<!-- ===================================================== -->
 
-                        <table style="width:100%;
-                                      margin-top:40px;
-                                      margin-bottom:35px;">
+<table style="width:100%;
+              margin-top:30px;
+              margin-bottom:35px;
+              table-layout:fixed;">
 
-                            <tr>
+    <tr>
 
-                                <!-- VENDOR -->
-                                <td style="width:55%;
-                                           vertical-align:top;">
+        <!-- VENDOR ADDRESS -->
+        <td style="width:50%;
+                   vertical-align:top;
+                   padding-right:40px;">
 
-                                    <div style="display:flex;
-                                                align-items:flex-start;">
+            <div style="display:flex;
+                        align-items:flex-start;">
 
-                                        <!-- LEFT GRADIENT -->
-                                        <div style="width:4px;
-                                                    min-height:110px;
-                                                    margin-right:15px;
-                                                    background:linear-gradient(to bottom,#1f3b73,#ffffff);">
-                                        </div>
+                <!-- LEFT GRADIENT BORDER -->
+                <div style="width:4px;
+                            min-height:110px;
+                            margin-right:15px;
+                            background:linear-gradient(to bottom,#1f3b73,#ffffff);">
+                </div>
 
-                                        <div style="font-size:13px;
-                                                    line-height:1.7;">
+                <div style="font-size:13px;
+                            line-height:1.7;">
 
-                                            <strong style="color:#1a3a5a;
-                                                           font-size:13px;">
-                                                To
-                                            </strong>
-                                            <br/>
+                    <strong style="color:#1a3a5a;
+                                   font-size:13px;">
+                        To
+                    </strong>
+                    <br/>
 
-                                            <strong>
-                                                <span t-esc="o.partner_id.name"/>
-                                            </strong>
-                                            <br/>
+                    <strong>
+                        <span t-esc="o.partner_id.name"/>
+                    </strong>
+                    <br/>
 
-                                            <!-- FULL ADDRESS -->
-                                            <span t-esc="o.partner_id.street or ''"/>
+                    <!-- ADDRESS LINE 1 -->
+                    <span t-esc="o.partner_id.street or ''"/>
 
-                                            <br t-if="o.partner_id.street2 or o.partner_id.city"/>
+                    <br t-if="o.partner_id.street2"/>
 
-                                            <!-- SECOND LINE -->
-                                            <t t-if="o.partner_id.street2">
-                                                <span t-esc="o.partner_id.street2"/>
-                                                <br/>
-                                            </t>
+                    <!-- ADDRESS LINE 2 -->
+                    <t t-if="o.partner_id.street2">
+                        <span t-esc="o.partner_id.street2"/>
+                        <br/>
+                    </t>
 
-                                            <span t-esc="o.partner_id.city or ''"/>
+                    <!-- CITY -->
+                    <span t-esc="o.partner_id.city or ''"/>
 
-                                            <t t-if="o.partner_id.state_id">
-                                                , <span t-esc="o.partner_id.state_id.name"/>
-                                            </t>
+                    <t t-if="o.partner_id.state_id">
+                        , <span t-esc="o.partner_id.state_id.name"/>
+                    </t>
 
-                                            <br/>
+                    <br/>
 
-                                            <span t-esc="o.partner_id.country_id.name or ''"/>
-                                            <br/>
+                    <!-- COUNTRY -->
+                    <span t-esc="o.partner_id.country_id.name or ''"/>
+                    <br/>
 
-                                            TRN <span t-esc="o.partner_id.vat"/>
+                    <!-- VAT -->
+                    TRN <span t-esc="o.partner_id.vat"/>
 
-                                        </div>
+                </div>
 
-                                    </div>
+            </div>
 
-                                </td>
+        </td>
 
-                                <!-- META -->
-                                <td style="width:45%;
-                                           vertical-align:top;">
+        <!-- ORDER DETAILS -->
+        <td style="width:50%;
+                   vertical-align:top;
+                   padding-top:0;">
 
-                                    <table style="width:100%;
-                                                  border-collapse:collapse;">
+            <table style="width:100%;
+                          border-collapse:collapse;
+                          margin-top:0;">
 
-                                        <tr>
-                                            <td style="padding:3px 0;
-                                                       font-weight:bold;
-                                                       color:#1a3a5a;
-                                                       width:45%;">
+                <tr>
+                    <td style="padding:4px 0;
+                               font-weight:bold;
+                               color:#1a3a5a;
+                               width:45%;">
 
-                                                Order Date
+                        Order Date
 
-                                            </td>
+                    </td>
 
-                                            <td style="padding:3px 0;">
+                    <td style="padding:4px 0;">
 
-                                                :
-                                                <span t-field="o.date_order"
-                                                      t-options='{"format": "dd MMMM yyyy"}'/>
+                        :
+                        <span t-field="o.date_order"
+                              t-options='{"format": "dd MMMM yyyy"}'/>
 
-                                            </td>
-                                        </tr>
+                    </td>
+                </tr>
 
-                                        <tr>
-                                            <td style="padding:3px 0;
-                                                       font-weight:bold;
-                                                       color:#1a3a5a;">
+                <tr>
+                    <td style="padding:4px 0;
+                               font-weight:bold;
+                               color:#1a3a5a;">
 
-                                                Incoterm
+                        Incoterm
 
-                                            </td>
+                    </td>
 
-                                            <td style="padding:3px 0;">
+                    <td style="padding:4px 0;">
 
-                                                :
-                                                <span t-field="o.payment_term_id.name"/>
+                        :
+                        <span t-field="o.payment_term_id.name"/>
 
-                                            </td>
-                                        </tr>
+                    </td>
+                </tr>
 
-                                        <tr>
-                                            <td style="padding:3px 0;
-                                                       font-weight:bold;
-                                                       color:#1a3a5a;">
+                <tr>
+                    <td style="padding:4px 0;
+                               font-weight:bold;
+                               color:#1a3a5a;">
 
-                                                Shipping Terms
+                        Shipping Terms
 
-                                            </td>
+                    </td>
 
-                                            <td style="padding:3px 0;">
+                    <td style="padding:4px 0;">
 
-                                                :
-                                                <span t-field="o.incoterm_id.name"/>
+                        :
+                        <span t-field="o.incoterm_id.name"/>
 
-                                            </td>
-                                        </tr>
+                    </td>
+                </tr>
 
-                                        <tr>
-                                            <td style="padding:3px 0;
-                                                       font-weight:bold;
-                                                       color:#1a3a5a;">
+                <tr>
+                    <td style="padding:4px 0;
+                               font-weight:bold;
+                               color:#1a3a5a;">
 
-                                                Sales Order
+                        Sales Order
 
-                                            </td>
+                    </td>
 
-                                            <td style="padding:3px 0;">
+                    <td style="padding:4px 0;">
 
-                                                :
-                                                <span t-field="o.origin"/>
+                        :
+                        <span t-field="o.origin"/>
 
-                                            </td>
-                                        </tr>
+                    </td>
+                </tr>
 
-                                    </table>
+            </table>
 
-                                </td>
+        </td>
 
-                            </tr>
+    </tr>
 
-                        </table>
+</table>
 
                         <!-- ===================================================== -->
                         <!-- PRODUCT TABLE -->
