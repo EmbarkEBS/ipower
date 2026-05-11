@@ -19,7 +19,7 @@
                                 </td>
                                 <td style="width:40%; text-align:right; vertical-align: top;">
                                     <h1 style="color: #000; margin: 0; font-size: 28px; font-weight: bold; letter-spacing: 1px;">PURCHASE ORDER</h1>
-                                    <div style="font-size: 16px; margin-top: 5px;"># <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/></span></div>
+                                    <div style="font-size: 16px; margin-top: 5px;"># <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/></div>
                                 </td>
                             </tr>
                         </table>
@@ -42,7 +42,7 @@
                                             <td style="padding: 3px 0;">: <span t-field="o.date_order" t-options='{"format": "dd MMMM yyyy"}'/></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Terms</td>
+                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Incoterm</td>
                                             <td style="padding: 3px 0;">: <span t-field="o.payment_term_id.name"/></td>
                                         </tr>
                                         <tr>
@@ -50,8 +50,8 @@
                                             <td style="padding: 3px 0;">: <span t-field="o.incoterm_id.name"/></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Your PO Ref#</td>
-                                            <td style="padding: 3px 0;">: <span t-field="o.partner_ref"/></td>
+                                            <td style="padding: 3px 0; font-weight: bold; color: #1a3a5a;">Sales Order</td>
+                                            <td style="padding: 3px 0;">: <span t-field="o.origin" class="m-0"/></td>
                                         </tr>
                                     </table>
                                 </td>
