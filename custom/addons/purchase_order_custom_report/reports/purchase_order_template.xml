@@ -703,7 +703,7 @@
 <!-- FIXED FOOTER -->
 <!-- ===================================================== -->
 <div class="footer" style="font-family:sans-serif;position:fixed;
-            bottom:0;
+          
             left:0;
             width:100%;
             background:#ffffff;
