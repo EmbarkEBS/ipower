@@ -9,7 +9,7 @@
                 <main>
 
                     <div class="page"
-                         style="padding:10px 40px 60px 40px;
+                         style="padding:10px 40px 120px 40px;
                                 font-family:sans-serif;
                                 font-size:12px;
                                 color:#333;
@@ -374,36 +374,38 @@
 
                                         </td>
 
-                                        <!-- DESCRIPTION -->
-                                        <td style="padding:14px 10px;
-                                                   vertical-align:top;
-                                                   width:100%;
-                                                   white-space:normal;
-                                                   word-break:break-word;">
+                                      <!-- DESCRIPTION -->
+<td style="padding:14px 10px;
+           vertical-align:top;
+           width:65%;
+           white-space:normal;
+           word-break:break-word;">
 
-                                            <!-- PRODUCT NAME -->
-                                            <div style="font-weight:bold;
-                                                        margin-bottom:6px;
-                                                        font-size:13px;
-                                                        line-height:1.5;">
+    <!-- PRODUCT NAME -->
+    <div style="font-weight:bold;
+                margin-bottom:6px;
+                font-size:13px;
+                line-height:1.5;
+                width:100%;">
 
-                                                <span t-field="line.product_id.display_name"/>
+        <span t-field="line.product_id.display_name"/>
 
-                                            </div>
+    </div>
 
-                                            <!-- PRODUCT DESCRIPTION -->
-                                            <div style="font-size:11px;
-                                                        color:#666;
-                                                        line-height:1.7;
-                                                        width:100%;
-                                                        white-space:normal;
-                                                        word-break:break-word;">
+    <!-- PRODUCT DESCRIPTION -->
+    <div style="font-size:11px;
+                color:#666;
+                line-height:1.7;
+                width:100%;
+                display:block;
+                white-space:normal;
+                word-break:break-word;">
 
-                                                <span t-esc="line.product_id.description or ''"/>
+        <span t-esc="line.product_id.description or ''"/>
 
-                                            </div>
+    </div>
 
-                                        </td>
+</td>
 
                                         <!-- QTY -->
                                         <td style="padding:14px 10px;
@@ -690,34 +692,28 @@
                         </div>
 
 <!-- ===================================================== -->
-<!-- FOOTER -->
+<!-- FIXED FOOTER -->
 <!-- ===================================================== -->
 
 <div style="position:fixed;
             bottom:0;
             left:0;
-            width:100%;">
+            width:100%;
+            background:#ffffff;">
 
     <!-- GREY LINE -->
-    <table style="width:100%;
-                  border-collapse:collapse;">
-
-        <tr>
-            <td style="height:1px;
-                       background:#d9d9d9;
-                       padding:0;">
-            </td>
-        </tr>
-
-    </table>
+    <div style="height:1px;
+                background:#d9d9d9;
+                width:100%;">
+    </div>
 
     <!-- FOOTER CONTENT -->
     <table style="width:100%;
                   border-collapse:collapse;
-                  background:#ffffff;
                   font-size:10px;
                   color:#555;
-                  padding:0 40px;">
+                  padding:0;
+                  margin:0;">
 
         <tr>
 
@@ -734,6 +730,7 @@
                 <span t-esc="o.company_id.city or ''"/>
 
                 -
+
                 <span t-esc="o.company_id.country_id.name or ''"/>
 
                 <br/>
@@ -755,35 +752,17 @@
 
     </table>
 
-      <!-- ORANGE BORDER -->
-    <table style="width:100%;
-                  border-collapse:collapse;
-                  margin-top:8px;">
-
-        <tr>
-
-            <td style="height:4px;
-                       background:#e58b39;">
-            </td>
-
-        </tr>
-
-    </table>
+    <!-- ORANGE BORDER -->
+    <div style="height:4px;
+                background:#e58b39;
+                width:100%;">
+    </div>
 
     <!-- BLUE BORDER -->
-    <table style="width:100%;
-                  border-collapse:collapse;">
-
-        <tr>
-
-            <td style="height:12px;
-                       background:#1f3b73;">
-            </td>
-
-        </tr>
-
-    </table>
-
+    <div style="height:12px;
+                background:#1f3b73;
+                width:100%;">
+    </div>
 
 </div>
 
