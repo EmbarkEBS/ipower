@@ -692,100 +692,103 @@
                         <!-- ===================================================== -->
                         <!-- FOOTER -->
                         <!-- ===================================================== -->
+<!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
 
-                        <div style="width:100%;
-                                    margin-top:40px;">
+<div style="position:fixed;
+            bottom:0;
+            left:0;
+            width:100%;">
 
-                            <!-- GREY LINE -->
-                            <table style="width:100%;
-                                          border-collapse:collapse;">
+    <!-- GREY LINE -->
+    <table style="width:100%;
+                  border-collapse:collapse;">
 
-                                <tr>
+        <tr>
+            <td style="height:1px;
+                       background:#d9d9d9;
+                       padding:0;">
+            </td>
+        </tr>
 
-                                    <td style="height:1px;
-                                               background:#d9d9d9;
-                                               padding:0;">
-                                    </td>
+    </table>
 
-                                </tr>
+    <!-- FOOTER CONTENT -->
+    <table style="width:100%;
+                  border-collapse:collapse;
+                  background:#ffffff;
+                  font-size:10px;
+                  color:#555;
+                  padding:0 40px;">
 
-                            </table>
+        <tr>
 
-                            <!-- FOOTER CONTENT -->
-                            <table style="width:100%;
-                                          border-collapse:collapse;
-                                          margin-top:8px;
-                                          font-size:10px;
-                                          color:#555;">
+            <td style="padding:8px 40px;">
 
-                                <tr>
+                Office:
+                <span t-esc="o.company_id.street or ''"/>
 
-                                    <td>
+                <t t-if="o.company_id.street2">
+                    , <span t-esc="o.company_id.street2"/>
+                </t>
 
-                                        Office:
-                                        <span t-esc="o.company_id.street or ''"/>
+                ,
+                <span t-esc="o.company_id.city or ''"/>
 
-                                        <t t-if="o.company_id.street2">
-                                            , <span t-esc="o.company_id.street2"/>
-                                        </t>
+                -
+                <span t-esc="o.company_id.country_id.name or ''"/>
 
-                                        ,
-                                        <span t-esc="o.company_id.city or ''"/>
+                <br/>
 
-                                        -
-                                        <span t-esc="o.company_id.country_id.name or ''"/>
+                CR No:
+                <span t-esc="o.company_id.company_registry or 'N/A'"/>
 
-                                        <br/>
+                |
 
-                                        CR No:
-                                        <span t-esc="o.company_id.company_registry or 'N/A'"/>
+                <span t-esc="o.company_id.email or ''"/>
 
-                                        |
+                |
 
-                                        <span t-esc="o.company_id.email or ''"/>
+                <span t-esc="o.company_id.website or ''"/>
 
-                                        |
+            </td>
 
-                                        <span t-esc="o.company_id.website or ''"/>
+        </tr>
 
-                                    </td>
+    </table>
 
-                                </tr>
+    <!-- ORANGE BORDER -->
+    <table style="width:100%;
+                  border-collapse:collapse;">
 
-                            </table>
+        <tr>
 
-                            <!-- ORANGE BORDER -->
-                            <table style="width:100%;
-                                          border-collapse:collapse;
-                                          margin-top:8px;">
+            <td style="height:4px;
+                       background:#e58b39;
+                       padding:0;">
+            </td>
 
-                                <tr>
+        </tr>
 
-                                    <td style="height:4px;
-                                               background:#e58b39;
-                                               padding:0;">
-                                    </td>
+    </table>
 
-                                </tr>
+    <!-- BLUE BORDER -->
+    <table style="width:100%;
+                  border-collapse:collapse;">
 
-                            </table>
+        <tr>
 
-                            <!-- BLUE BORDER -->
-                            <table style="width:100%;
-                                          border-collapse:collapse;">
+            <td style="height:12px;
+                       background:#1f3b73;
+                       padding:0;">
+            </td>
 
-                                <tr>
+        </tr>
 
-                                    <td style="height:12px;
-                                               background:#1f3b73;
-                                               padding:0;">
-                                    </td>
+    </table>
 
-                                </tr>
-
-                            </table>
-
-                        </div>
+</div>
 
                     </div>
 
