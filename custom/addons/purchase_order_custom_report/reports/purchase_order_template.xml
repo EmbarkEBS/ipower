@@ -292,6 +292,8 @@
                                                     <span t-field="o.payment_term_id.name"/>
 
                                                 </td>
+                                                </tr>
+                                                <tr>
                                                 <td style="
                                                     padding:4px 0;
                                                     font-weight:bold;
@@ -300,7 +302,7 @@
                                 <td style="padding:4px 0;">
 
                                                     :<span t-esc="o.incoterm_id.code"/></td>
-                            </tr>
+                            
 
                                             </tr>
 
