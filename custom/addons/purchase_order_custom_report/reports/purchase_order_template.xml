@@ -170,7 +170,11 @@
                                             width:100%;
                                             border-collapse:collapse;
                                         ">
+  <strong style="color:#1a3a5a;">
+                                                        To
+                                                    </strong>
 
+                                                   
                                             <tr>
 
                                                 <!-- ORANGE BORDER -->
@@ -200,11 +204,7 @@
                                                     line-height:1.7;
                                                 ">
 
-                                                    <strong style="color:#1a3a5a;">
-                                                        To
-                                                    </strong>
-
-                                                    <br/>
+                                                  
 
                                                     <strong>
                                                         <span t-esc="o.partner_id.name"/>
@@ -440,6 +440,9 @@
                                                     width:100%;
                                                 ">
                                                     <span t-field="line.product_id.display_name"/>
+                                                    <strong>
+                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                        </strong>
                                                 </div>
 
                                                 <div style="
