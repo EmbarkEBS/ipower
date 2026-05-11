@@ -299,57 +299,56 @@
                                       border-collapse:collapse;
                                       margin-bottom:20px;">
 
-                           <thead>
+<thead>
 
-    <tr style="background-color:#4b4b4b;
-               color:#ffffff;">
+<tr style="background-color:#4b4b4b;
+           color:#ffffff;">
 
-        <th style="padding:10px;
-                   text-align:center;
-                   width:5%;
-                   border-top-left-radius:10px;
-                   border-bottom-left-radius:10px;">
+    <th style="padding:10px;
+               text-align:center;
+               width:5%;
+               border-top-left-radius:10px;
+               border-bottom-left-radius:10px;">
 
-            SN
+        SN
 
-        </th>
+    </th>
 
-        <!-- BIGGER DESCRIPTION -->
-        <th style="padding:10px;
-                   text-align:left;
-                   width:60%;">
+    <th style="padding:10px;
+               text-align:left;
+               width:65%;">
 
-            Description
+        Description
 
-        </th>
+    </th>
 
-        <th style="padding:10px;
-                   text-align:center;
-                   width:8%;">
+    <th style="padding:10px;
+               text-align:center;
+               width:7%;">
 
-            Qty
+        Qty
 
-        </th>
+    </th>
 
-        <th style="padding:10px;
-                   text-align:right;
-                   width:12%;">
+    <th style="padding:10px;
+               text-align:right;
+               width:11%;">
 
-            Unit Price
+        Unit Price
 
-        </th>
+    </th>
 
-        <th style="padding:10px;
-                   text-align:right;
-                   width:15%;
-                   border-top-right-radius:10px;
-                   border-bottom-right-radius:10px;">
+    <th style="padding:10px;
+               text-align:right;
+               width:12%;
+               border-top-right-radius:10px;
+               border-bottom-right-radius:10px;">
 
-            Total Price
+        Total Price
 
-        </th>
+    </th>
 
-    </tr>
+</tr>
 
 </thead>
 
@@ -367,9 +366,10 @@
                                             t-esc="sn"/>
 
                                         <!-- FULL WIDTH DESCRIPTION -->
-                                        <td style="padding:14px 10px;
-                                                   vertical-align:top;
-                                                   width:54%;">
+                                       <td style="padding:14px 10px;
+           vertical-align:top;
+           width:65%;
+           white-space:normal;">
 
                                             <div style="font-weight:bold;
                                                         margin-bottom:5px;
@@ -380,12 +380,10 @@
 
                                             </div>
 
-                                            <div style="color:#666;padding:14px 10px;
+                                           <td style="padding:14px 10px;
            vertical-align:top;
-           width:80%;
-                                                        font-size:11px;
-                                                        line-height:1.7;
-                                                        word-break:break-word;">
+           width:65%;
+           white-space:normal;">
 
                                                 <span t-esc="line.product_id.description or ''"/>
 
@@ -658,67 +656,91 @@
 
                         </div>
 
-                        <!-- ===================================================== -->
-                        <!-- FOOTER -->
-                        <!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
 
-                        <div style="position:absolute;
-                                    bottom:0;
-                                    left:0;
-                                    width:100%;">
+<div style="width:100%;
+            margin-top:40px;">
 
-                            <!-- TOP BORDER -->
-                            <div style="height:1px;
-                                        background:#d9d9d9;
-                                        width:100%;">
-                            </div>
+    <!-- TOP GREY LINE -->
+    <div style="height:1px;
+                background:#d9d9d9;
+                width:100%;">
+    </div>
 
-                            <!-- FOOTER CONTENT -->
-                            <div style="padding:10px 40px;
-                                        font-size:10px;
-                                        color:#555;">
+    <!-- FOOTER CONTENT -->
+    <table style="width:100%;
+                  padding-top:8px;
+                  font-size:10px;
+                  color:#555;
+                  border-collapse:collapse;">
 
-                                Office:
-                                <span t-esc="o.company_id.street"/>
+        <tr>
 
-                                <t t-if="o.company_id.street2">
-                                    , <span t-esc="o.company_id.street2"/>
-                                </t>
+            <td>
 
-                                ,
-                                <span t-esc="o.company_id.city"/>
+                Office:
+                <span t-esc="o.company_id.street"/>
 
-                                -
-                                <span t-esc="o.company_id.country_id.name"/>
+                <t t-if="o.company_id.street2">
+                    , <span t-esc="o.company_id.street2"/>
+                </t>
 
-                                <br/>
+                ,
+                <span t-esc="o.company_id.city"/>
 
-                                CR No:
-                                <span t-esc="o.company_id.company_registry or 'N/A'"/>
+                -
+                <span t-esc="o.company_id.country_id.name"/>
 
-                                |
+                <br/>
 
-                                <span t-esc="o.company_id.email"/>
+                CR No:
+                <span t-esc="o.company_id.company_registry or 'N/A'"/>
 
-                                |
+                |
 
-                                <span t-esc="o.company_id.website"/>
+                <span t-esc="o.company_id.email"/>
 
-                            </div>
+                |
 
-                            <!-- ORANGE LINE -->
-                            <div style="height:4px;
-                                        background:#e58b39;
-                                        width:100%;">
-                            </div>
+                <span t-esc="o.company_id.website"/>
 
-                            <!-- BLUE LINE -->
-                            <div style="height:12px;
-                                        background:#1f3b73;
-                                        width:100%;">
-                            </div>
+            </td>
 
-                        </div>
+        </tr>
+
+    </table>
+
+    <!-- ORANGE BORDER -->
+    <table style="width:100%;
+                  border-collapse:collapse;
+                  margin-top:8px;">
+
+        <tr>
+
+            <td style="height:4px;
+                       background:#e58b39;">
+            </td>
+
+        </tr>
+
+    </table>
+
+    <!-- BLUE BORDER -->
+    <table style="width:100%;
+                  border-collapse:collapse;">
+
+        <tr>
+
+            <td style="height:12px;
+                       background:#1f3b73;">
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
 
                     </div>
 
