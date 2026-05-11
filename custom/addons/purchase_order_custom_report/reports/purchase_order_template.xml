@@ -695,32 +695,33 @@
                             </table>
 
                             <!-- FULL WIDTH SVG BORDER -->
-                            <div style="
-                                width:100%;
-                                height:25px;
-                                overflow:hidden;
-                                margin-top:5px;
-                                padding:0;
-                            ">
+                           <!-- FULL WIDTH FOOTER BORDER -->
+<div style="
+    width:auto;
+    height:25px;
+    overflow:hidden;
+    margin-top:5px;
+    margin-left:-40px;
+    margin-right:-40px;
+">
 
-                                <svg width="100%"
-                                     height="25"
-                                     viewBox="0 0 1000 25"
-                                     preserveAspectRatio="none"
-                                     xmlns="http://www.w3.org/2000/svg">
+    <svg width="100%"
+         height="25"
+         viewBox="0 0 1000 25"
+         preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg">
 
-                                    <!-- BLUE -->
-                                    <polygon points="0,0 510,0 490,25 0,25"
-                                             fill="#1f3b73"/>
+        <!-- BLUE 25% -->
+        <polygon points="0,0 260,0 240,25 0,25"
+                 fill="#1f3b73"/>
 
-                                    <!-- ORANGE -->
-                                    <polygon points="510,0 1000,0 1000,25 490,25"
-                                             fill="#e58b39"/>
+        <!-- ORANGE 75% -->
+        <polygon points="260,0 1000,0 1000,25 240,25"
+                 fill="#e58b39"/>
 
-                                </svg>
+    </svg>
 
-                            </div>
-
+</div>
                         </div>
 
                     </div>
