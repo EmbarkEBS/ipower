@@ -377,7 +377,7 @@
                                         <!-- DESCRIPTION -->
                                         <td style="padding:14px 10px;
                                                    vertical-align:top;
-                                                   width:65%;
+                                                   width:100%;
                                                    white-space:normal;
                                                    word-break:break-word;">
 
@@ -689,9 +689,6 @@
 
                         </div>
 
-                        <!-- ===================================================== -->
-                        <!-- FOOTER -->
-                        <!-- ===================================================== -->
 <!-- ===================================================== -->
 <!-- FOOTER -->
 <!-- ===================================================== -->
@@ -758,15 +755,15 @@
 
     </table>
 
-    <!-- ORANGE BORDER -->
+      <!-- ORANGE BORDER -->
     <table style="width:100%;
-                  border-collapse:collapse;">
+                  border-collapse:collapse;
+                  margin-top:8px;">
 
         <tr>
 
             <td style="height:4px;
-                       background:#e58b39;
-                       padding:0;">
+                       background:#e58b39;">
             </td>
 
         </tr>
@@ -780,13 +777,13 @@
         <tr>
 
             <td style="height:12px;
-                       background:#1f3b73;
-                       padding:0;">
+                       background:#1f3b73;">
             </td>
 
         </tr>
 
     </table>
+
 
 </div>
 
