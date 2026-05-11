@@ -702,7 +702,13 @@
 <!-- ===================================================== -->
 <!-- FIXED FOOTER -->
 <!-- ===================================================== -->
-<div class="footer" style="font-family:sans-serif;">
+<div class="footer" style="font-family:sans-serif;position:fixed;
+            bottom:0;
+            left:0;
+            width:100%;
+            background:#ffffff;
+            margin:0;
+            padding:0;">
 
     <!-- GREY LINE -->
     <div style="height:1px;
