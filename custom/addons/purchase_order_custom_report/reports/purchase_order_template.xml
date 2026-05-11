@@ -109,8 +109,8 @@
     height:12px;
     margin-top:10px;
     margin-bottom:10px;
-    margin-left:40px;
-    margin-right:0;
+    margin-left:auto;
+    margin-right:auto;
 ">
 
  <svg width="220"
@@ -657,7 +657,7 @@
                                 <tr>
 
                                     <td style="
-                                        padding:5px 40px;
+                                        padding:20px 40px;
                                         text-align:left;
                                     ">
 
@@ -693,7 +693,7 @@
 
                             </table>
 
-                            <!-- FULL WIDTH SVG BORDER -->
+                          
                            <!-- FULL WIDTH FOOTER BORDER -->
 <div style="
     width:auto;
