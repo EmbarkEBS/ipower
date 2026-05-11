@@ -702,78 +702,32 @@
 <!-- ===================================================== -->
 <!-- FIXED FOOTER -->
 <!-- ===================================================== -->
-<div class="footer" style="font-family:sans-serif;position:fixed;
-          
-            left:0;
-            width:100%;
-            background:#ffffff;
-            margin:0;
-            padding:0;">
-
-    <!-- GREY LINE -->
-    <div style="height:1px;
-                background:#d9d9d9;
-                width:100%;">
-    </div>
-
+<!-- ===================================================== -->
+<!-- FIXED FOOTER -->
+<!-- ===================================================== -->
+<div class="footer" style="font-family:sans-serif;">
     <!-- FOOTER CONTENT -->
-    <table style="width:100%;
-                  border-collapse:collapse;
-                  font-size:10px;
-                  color:#555;
-                  padding:0;
-                  margin:0;">
-
+    <table style="width:100%; border-collapse:collapse; font-size:10px; color:#555;">
         <tr>
-
-            <td style="padding:8px 40px;">
-
-                Office:
-                <span t-esc="o.company_id.street or ''"/>
-
-                <t t-if="o.company_id.street2">
-                    , <span t-esc="o.company_id.street2"/>
-                </t>
-
-                ,
-                <span t-esc="o.company_id.city or ''"/>
-
-                -
-
-                <span t-esc="o.company_id.country_id.name or ''"/>
-
+            <td style="padding:5px 40px; text-align:left;">
+                Office: <span t-esc="o.company_id.street or ''"/>
+                <t t-if="o.company_id.street2">, <span t-esc="o.company_id.street2"/></t>, 
+                <span t-esc="o.company_id.city or ''"/> - <span t-esc="o.company_id.country_id.name or ''"/>
                 <br/>
-
-                CR No:
-                <span t-esc="o.company_id.company_registry or 'N/A'"/>
-
-                |
-
-                <span t-esc="o.company_id.email or ''"/>
-
-                |
-
+                CR No: <span t-esc="o.company_id.company_registry or 'N/A'"/> | 
+                <span t-esc="o.company_id.email or ''"/> | 
                 <span t-esc="o.company_id.website or ''"/>
-
             </td>
-
         </tr>
-
     </table>
 
-    <!-- ORANGE BORDER -->
-    <div style="height:4px;
-                background:#e58b39;
-                width:100%;">
-    </div>
+    <!-- ORANGE BORDER (Thin top line) -->
+    <div style="height:4px; background:#e58b39; width:100%;"></div>
 
-    <!-- BLUE BORDER -->
-    <div style="height:12px;
-                background:#1f3b73;
-                width:100%;">
-    </div>
-
+    <!-- BLUE BORDER (Thick bottom line) -->
+    <div style="height:15px; background:#1f3b73; width:100%;"></div>
 </div>
+
 
                     </div>
 
