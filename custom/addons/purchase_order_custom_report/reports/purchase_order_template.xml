@@ -12,7 +12,7 @@
 
                         <!-- MAIN CONTENT WRAPPER -->
                         <div style="
-                            padding:10px 40px 120px 40px;
+                            padding:10px 40px 40px 40px;
                             font-family:sans-serif;
                             font-size:12px;
                             color:#333;
@@ -652,7 +652,8 @@
                                 width:100%;
                                 border-collapse:collapse;
                                 font-size:10px;
-                                color:#555;
+                                color:#555; border-top:2px solid #1f3b73;
+    padding-top:6px;
                             ">
 
                                 <tr>
