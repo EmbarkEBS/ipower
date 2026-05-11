@@ -103,35 +103,32 @@
                                         </h1>
 
                                         <!-- ORANGE LINE -->
-                                        <table style="
-                                            width:70%;
-                                            border-collapse:collapse;
-                                            margin-top:8px;
-                                            margin-bottom:8px;
-                                            margin-left:50px;
-                                        ">
+                                       <!-- CENTER POLYGON LINE -->
+<div style="
+    width:220px;
+    height:12px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:auto;
+    margin-right:0;
+">
 
-                                            <tr>
+    <svg width="220"
+         height="12"
+         viewBox="0 0 220 12"
+         xmlns="http://www.w3.org/2000/svg">
 
-                                                <td style="
-                                                    height:2px;
-                                                    width:85%;
-                                                    background:#f39223;
-                                                    padding:0;
-                                                ">
-                                                </td>
+        <!-- BLUE 25% -->
+        <polygon points="0,0 60,0 50,12 0,12"
+                 fill="#1f3b73"/>
 
-                                                <td style="
-                                                    height:2px;
-                                                    width:15%;
-                                                    background:#f7d7b5;
-                                                    padding:0;
-                                                ">
-                                                </td>
+        <!-- ORANGE 75% -->
+        <polygon points="60,0 220,0 220,12 50,12"
+                 fill="#e58b39"/>
 
-                                            </tr>
+    </svg>
 
-                                        </table>
+</div>
 
                                         <div style="
                                             font-size:16px;
@@ -178,7 +175,7 @@
                                                 <!-- ORANGE BORDER -->
                                                 <td style="
                                                     height:80%;
-                                                    width:2px;
+                                                    width:1px;
                                                     background:#f39223;
                                                     padding:0;
                                                 ">
@@ -186,7 +183,7 @@
 
                                                 <td style="
                                                     height:10%;
-                                                    width:2px;
+                                                    width:1px;
                                                     background:#f7d7b5;
                                                     padding:0;
                                                 ">
@@ -652,8 +649,9 @@
                                 width:100%;
                                 border-collapse:collapse;
                                 font-size:10px;
-                                color:#555; border-top:2px solid #1f3b73;
-    padding-top:6px;
+                                color:#555; border-top:1px solid #1f3b73;
+    padding-top:6px;  margin-left:-40px;
+    margin-right:-40px;
                             ">
 
                                 <tr>
