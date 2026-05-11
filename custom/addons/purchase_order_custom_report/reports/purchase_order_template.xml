@@ -173,29 +173,23 @@
                                             <tr>
 
                                                 <!-- ORANGE BORDER -->
-                                               <!-- SLANTED VERTICAL LINE -->
-<td style="
-    width:10px;
-    vertical-align:top;
-    padding:0;
-">
+                                                 <div style="
+        width:3px;
+        height:90px;
+        background:#e58b39;
+        margin:0 auto;
+    ">
+    </div>
 
-    <svg width="10"
-         height="120"
-         viewBox="0 0 10 120"
-         xmlns="http://www.w3.org/2000/svg">
+    <!-- GREY -->
+    <div style="
+        width:3px;
+        height:25px;
+        background:#d9d9d9;
+        margin:0 auto;
+    ">
 
-        <!-- ORANGE FIRST -->
-        <polygon points="0,0 10,0 8,95 0,95"
-                 fill="#e58b39"/>
-
-        <!-- GREY SECOND -->
-        <polygon points="0,95 8,95 10,120 0,120"
-                 fill="#d9d9d9"/>
-
-    </svg>
-
-</td>
+                                                </div>
 
                                                 <td style="width:15px;">
                                                 </td>
