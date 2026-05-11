@@ -98,6 +98,7 @@
                                             font-size:28px;
                                             font-weight:bold;
                                             color:#000;
+                                            margin-top:20px;
                                         ">
                                             PURCHASE ORDER
                                         </h1>
@@ -282,7 +283,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                    Payment terms
+                                                    Payment Terms
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -291,8 +292,7 @@
                                                     <span t-field="o.payment_term_id.name"/>
 
                                                 </td>
-                               
-                                 <td style="
+                                                <td style="
                                                     padding:4px 0;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
@@ -300,7 +300,8 @@
                                 <td style="padding:4px 0;">
 
                                                     :<span t-esc="o.incoterm_id.code"/></td>
-                           
+                            </tr>
+
                                             </tr>
 
                                             <tr>
