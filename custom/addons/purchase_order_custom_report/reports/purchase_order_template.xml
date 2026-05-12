@@ -305,7 +305,7 @@
                                                Incoterm
                                                 </td>
 
-                                                <td style="padding:4px 0;">
+                                                <td style="padding:4px 0;text-align:left">
 
                                                     :
                                                     <span t-field="o.incoterm_id.name"/>
@@ -457,7 +457,7 @@
                                             <!-- UNIT PRICE -->
                                             <td style="
                                                 padding-top:15px;
-                                                text-align:right;
+                                                text-align:center;
                                                 vertical-align:top;
                                             ">
                                                 <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
@@ -466,7 +466,7 @@
                                             <!-- TOTAL -->
                                             <td style="
                                               padding-top:15px;
-                                                text-align:right;
+                                                text-align:center;
                                                 vertical-align:top;
                                             ">
                                                 <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
@@ -578,7 +578,7 @@
                                     <td style="
                                         width:55%;
                                         vertical-align:middle;
-                                        padding-top:40px;
+                                        padding-top:40px;text-align:right;
                                     ">
 
                                         <div style="font-size:13px;">
