@@ -473,6 +473,14 @@
                                             </td>
 
                                         </tr>
+                                        <tr >
+                                        <td></td>
+                                        <td  colspan="4" style="
+                                            color:black;;
+                                        ">                                <strong style="color:black;">
+                          <p t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                        </strong>
+</td></tr>
 <tr style="border-bottom:1px solid #d9d9d9;">
                                         <td></td>
                                         <td  colspan="4" style="
@@ -482,9 +490,7 @@
                                             line-height:1.7;
                                             white-space:normal;
                                             word-break:break-word;
-                                        ">                                <strong style="color:black;">
-                          <p t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
-                        </strong>
+                                        ">                               
 
                                                     <span t-esc="line.product_id.description or ''"/>
 
