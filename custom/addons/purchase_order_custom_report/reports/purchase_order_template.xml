@@ -713,7 +713,7 @@
                             width:100%;
                         ">
 <div style="
-    width:100%;
+    width:auto;
     height:1px;
     margin-left:-40px;
     margin-right:-40px;
