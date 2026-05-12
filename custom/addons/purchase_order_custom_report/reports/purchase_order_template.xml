@@ -445,7 +445,20 @@
                         </strong>
                                                 </div>
 
-                                             
+                                                <div style="
+                                                    font-size:11px;
+                                                    color:#666;
+                                                    line-height:1.7;
+                                                    width:100%;
+                                                    display:block;
+                                                    white-space:normal;
+                                                    word-break:break-word;
+                                                ">
+
+                                                    <span  t-field="line.product_id.description or ''"/>
+
+                                                </div>
+
                                             </td>
 
                                             <!-- QTY -->
@@ -476,19 +489,7 @@
                                             </td>
 
                                         </tr>
-<tr><td><div style="
-    font-size:11px;
-    color:#666;
-    line-height:1.7;
-    width:100%;
-    display:block;
-    white-space:pre-wrap;
-    word-break:break-word;
-">
-    <!-- Removed the 'or' logic; t-field handles empty values automatically -->
-    <span t-field="line.product_id.description"/>
-</div>
-</td></tr>
+
                                         <t t-set="sn" t-value="sn + 1"/>
 
                                     </t>
