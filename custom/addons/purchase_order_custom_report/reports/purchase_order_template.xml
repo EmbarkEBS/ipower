@@ -412,7 +412,7 @@
 
                                     <t t-foreach="o.order_line" t-as="line">
 
-                                        <tr style="border-bottom:1px solid #d9d9d9;">
+                                        <tr>
 
                                             <!-- SN -->
                                             <td style="
@@ -445,20 +445,7 @@
                         </strong>
                                                 </div>
 
-                                                <div style="
-                                                    font-size:11px;
-                                                    color:#666;
-                                                    line-height:1.7;
-                                                    width:100%;
-                                                    display:block;
-                                                    white-space:normal;
-                                                    word-break:break-word;
-                                                ">
-
-                                                    <span t-esc="line.product_id.description or ''"/>
-
-                                                </div>
-
+                                            
                                             </td>
 
                                             <!-- QTY -->
