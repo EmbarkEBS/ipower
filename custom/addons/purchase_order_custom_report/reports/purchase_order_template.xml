@@ -412,7 +412,7 @@
 
                                     <t t-foreach="o.order_line" t-as="line">
 
-                                        <tr>
+                                        <tr style=" padding-top:15px;">
 
                                             <!-- SN -->
                                             <td style="
@@ -478,16 +478,16 @@
                                         <td  colspan="4" style="
                                           font-weight:bold;
                                                     margin-bottom:6px;
-                                                    font-size:13px;
+                                                    font-size:11px;
                                                     line-height:1.5;
                                         ">                                
                           <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
                       
 </td></tr>
-<tr style="border-bottom:1px solid #d9d9d9;">
+<tr style="border-bottom:1px solid #d9d9d9; padding-botton:15px;>
                                         <td></td>
                                         <td  colspan="4" style="
-                                           padding-botton:5px;
+                                          
                                             font-size:11px;
                                             color:#666;
                                             line-height:1.7;
