@@ -444,21 +444,6 @@
                             <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
                         </strong>
                                                 </div>
-
-                                                <div style="
-                                                    font-size:11px;
-                                                    color:#666;
-                                                    line-height:1.7;
-                                                    width:100%;
-                                                    display:block;
-                                                    white-space:normal;
-                                                    word-break:break-word;
-                                                ">
-
-                                                    <span t-esc="line.product_id.description or ''"/>
-
-                                                </div>
-
                                             </td>
 
                                             <!-- QTY -->
@@ -489,6 +474,20 @@
                                             </td>
 
                                         </tr>
+
+                                                <div style="
+                                                    font-size:11px;
+                                                    color:#666;
+                                                    line-height:1.7;
+                                                    width:100%;
+                                                    display:block;
+                                                    white-space:normal;
+                                                    word-break:break-word;
+                                                ">
+
+                                                    <span t-esc="line.product_id.description or ''"/>
+
+                                                </div>
 
                                         <t t-set="sn" t-value="sn + 1"/>
 
