@@ -455,8 +455,7 @@
                                                     word-break:break-word;
                                                 ">
 
-                                                    <span  t-field="line.product_id.description or ''"/>
-
+                                                       <span t-esc="line.name or ''"/>
                                                 </div>
 
                                             </td>
