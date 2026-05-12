@@ -712,37 +712,14 @@
                             padding:0;
                             width:100%;
                         ">
-<div style="
-    width:auto;
-    height:1px;
-    margin-left:-40px;
-    margin-right:-40px;
-">
 
- <svg width="220"
-     height="2"
-     viewBox="0 0 220 2"
-     xmlns="http://www.w3.org/2000/svg">
-
-    <!-- ORANGE FIRST -->
-    <polygon points="0,0 190,0 188,2 0,2"
-             fill="#1f3b73"/>
-
-    <!-- GREY SECOND -->
-    <polygon points="190,0 220,0 220,2 188,2"
-             fill="#1f3b73"/>
-
-</svg>
-
-</div>
                             <!-- FOOTER CONTENT -->
                             <table style="
                                 width:auto;
                                 border-collapse:collapse;
                                 font-size:10px;
-                                color:#555; 
-    padding-top:6px;   margin-left:-40px;
-    margin-right:-40px;
+                                color:#555; border-top:1px solid #1f3b73;
+    padding-top:6px; 
                             ">
 
                                 <tr>
