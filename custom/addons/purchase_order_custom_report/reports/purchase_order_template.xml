@@ -715,7 +715,7 @@
 
                             <!-- FOOTER CONTENT -->
                             <table style="
-                                width:auto;
+                                width:100%;
                                 border-collapse:collapse;
                                 font-size:10px;
                                 color:#555; border-top:1px solid #1f3b73;
