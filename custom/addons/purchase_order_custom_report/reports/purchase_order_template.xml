@@ -473,8 +473,6 @@
                                                 <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
                                             </td>
 
-                                        </tr>
-
                                                 <div style="
                                                     font-size:11px;
                                                     color:#666;
@@ -488,6 +486,8 @@
                                                     <span t-esc="line.product_id.description or ''"/>
 
                                                 </div>
+
+                                        </tr>
 
                                         <t t-set="sn" t-value="sn + 1"/>
 
