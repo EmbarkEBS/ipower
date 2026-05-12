@@ -482,13 +482,13 @@
                                             line-height:1.7;
                                             white-space:normal;
                                             word-break:break-word;
-                                        ">  
+                                        ">                                <strong style="color:black;">
+                          <p t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                        </strong>
 
                                                     <span t-esc="line.product_id.description or ''"/>
 
-                                                               <strong>
-                          <p t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
-                        </strong>
+                                 
                                   
                                                 </td></tr>
                                         <t t-set="sn" t-value="sn + 1"/>
