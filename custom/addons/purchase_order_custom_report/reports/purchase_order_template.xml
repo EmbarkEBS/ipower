@@ -445,7 +445,19 @@
                         </strong>
                                                 </div>
 
-                                                
+                                                <div style="
+                                                    font-size:11px;
+                                                    color:#666;
+                                                    line-height:1.7;
+                                                    width:100%;
+                                                    display:block;
+                                                    white-space:normal;
+                                                    word-break:break-word;
+                                                ">
+
+                                                    <span t-esc="line.product_id.description or ''"/>
+
+                                                </div>
 
                                             </td>
 
@@ -477,19 +489,21 @@
                                             </td>
 
                                         </tr>
-<div style="
-                                                    font-size:11px;
-                                                    color:#666;
-                                                    line-height:1.7;
-                                                    width:100%;
-                                                    display:block;
-                                                    white-space:normal;
-                                                    word-break:break-word;
-                                                ">
+<tr style="border-bottom:1px solid #d9d9d9;">
+                                        <td></td>
+                                        <td  colspan="4" style="
+                                            padding:0 10px 14px 10px;
+                                            font-size:11px;
+                                            color:#666;
+                                            line-height:1.7;
+                                            white-space:normal;
+                                            word-break:break-word;
+                                        ">  
 
                                                     <span t-esc="line.product_id.description or ''"/>
 
-                                                </div>
+                                               
+                                                </td></tr>
                                         <t t-set="sn" t-value="sn + 1"/>
 
                                     </t>
