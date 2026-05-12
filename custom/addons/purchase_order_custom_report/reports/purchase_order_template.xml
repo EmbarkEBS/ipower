@@ -479,7 +479,7 @@
 <tr style="border-bottom:1px solid #d9d9d9;">
                                         <td></td>
                                         <td  colspan="4" style="
-                                            padding-top: 0px; padding-bottom: 0px;
+                                            padding:14px 10px;
                                             font-size:11px;
                                             color:#666;
                                             line-height:1.7;
@@ -487,8 +487,8 @@
                                             word-break:break-word;
                                         ">  
 
-                                            <div style="margin-top: 0px; margin-bottom: 0px; line-height: 1.1;">        <span t-esc="line.product_id.description or ''"/>
-</div>
+                                                    <span t-esc="line.product_id.description or ''"/>
+
                                                
                                                 </td></tr>
                                         <t t-set="sn" t-value="sn + 1"/>
