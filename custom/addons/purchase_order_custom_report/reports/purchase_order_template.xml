@@ -491,22 +491,40 @@
                                         </tr>
 
             <tr>
-                <td></td>
-                <td colspan="5">
-                <div style="
-    font-size:11px;
-    color:#666;
-    line-height:1.7;
-    width:100%;
-    display:block;
+            <!-- DESCRIPTION -->
+<td style="
+    padding:14px 10px;
+    vertical-align:top;
+    width:55%;
     white-space:normal;
     word-break:break-word;
 ">
 
-    <span t-esc="line.name or ''"/>
+    <div style="
+        font-weight:bold;
+        margin-bottom:6px;
+        font-size:13px;
+        line-height:1.5;
+        width:100%;
+    ">
+        <span t-field="line.product_id.display_name"/>
+    </div>
 
-</div>
-                </td>
+    <div style="
+        font-size:11px;
+        color:#666;
+        line-height:1.7;
+        width:100%;
+        display:block;
+        white-space:normal;
+        word-break:break-word;
+    ">
+
+        <span t-esc="line.name or ''"/>
+
+    </div>
+
+</td>
             </tr>
                                         <t t-set="sn" t-value="sn + 1"/>
 
