@@ -715,12 +715,12 @@
 
                             <!-- FOOTER CONTENT -->
                             <table style="
-                                width:100vw;
+                                width:auto;
                                 border-collapse:collapse;
                                 font-size:10px;
                                 color:#555; border-top:1px solid #1f3b73;
-    padding-top:6px;  margin-left:-40px;
-    margin-right:-50px;
+    padding-top:6px;   margin-left:-40px;
+    margin-right:-40px;
                             ">
 
                                 <tr>
