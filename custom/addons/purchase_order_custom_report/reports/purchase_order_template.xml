@@ -416,7 +416,7 @@
 
                                             <!-- SN -->
                                             <td style="
-                                                padding:14px 10px 0px;
+                                                padding:4px 10px 0px;
                                                 text-align:center;
                                                 vertical-align:top;
                                             ">
@@ -425,7 +425,7 @@
 
                                             <!-- DESCRIPTION -->
                                             <td style="
-                                                padding:14px 10px 0px;
+                                                padding:4px 10px 0px;
                                                 vertical-align:top;
                                                 width:55%;
                                                 white-space:normal;
@@ -450,7 +450,7 @@
 
                                             <!-- QTY -->
                                             <td style="
-                                                padding:14px 10px 0px;
+                                                padding:4px 10px 0px;
                                                 text-align:center;
                                                 vertical-align:top;
                                             ">
@@ -459,7 +459,7 @@
 
                                             <!-- UNIT PRICE -->
                                             <td style="
-                                                padding:14px 10px 0px;
+                                                padding:4px 10px 0px;
                                                 text-align:right;
                                                 vertical-align:top;
                                             ">
@@ -468,7 +468,7 @@
 
                                             <!-- TOTAL -->
                                             <td style="
-                                                padding:14px 10px 0px;
+                                                padding:4px 10px 0px;
                                                 text-align:right;
                                                 vertical-align:top;
                                             ">
@@ -479,7 +479,7 @@
 <tr style="border-bottom:1px solid #d9d9d9;">
                                         <td></td>
                                         <td  colspan="4" style="
-                                            padding:14px 10px;
+                                            padding:4px 10px;
                                             font-size:11px;
                                             color:#666;
                                             line-height:1.7;
