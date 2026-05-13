@@ -755,7 +755,16 @@
                                         |
 
                                         <span t-esc="o.company_id.website or ''"/>
+<br/>
 
+<div style="
+    margin-top:8px;
+    font-size:9px;
+    color:#888888;
+    font-style:italic;
+">
+    This purchase order is electronically generated and valid without signature or company stamp.
+</div>
                                     </td>
 
                                 </tr>
