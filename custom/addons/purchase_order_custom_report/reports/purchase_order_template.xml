@@ -439,7 +439,9 @@
                                                     line-height:1.5;
                                                     width:100%;
                                                 ">
-                                                    <span t-field="line.product_id.display_name"/>
+                                                    <!--<span t-field="line.product_id.display_name"/>-->
+                                                 
+                                                 <span t-field="line.product_id.name"/>
                                                   </div>
 
                                             
