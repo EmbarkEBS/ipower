@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Direct Purchase Order Sequence -->
+    <record id="seq_purchase_order_direct" model="ir.sequence">
+        <field name="name">Direct Purchase Order</field>
+        <field name="code">purchase.order.direct</field>
+        <field name="prefix">PO</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+        <field name="number_next">1</field>
+    </record>
+
+    <!-- RFQ Sequence -->
+    <record id="seq_purchase_order_rfq" model="ir.sequence">
+        <field name="name">RFQ Sequence</field>
+        <field name="code">purchase.order.rfq</field>
+        <field name="prefix">RFQ</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+        <field name="number_next">1</field>
+    </record>
+
+</odoo>
