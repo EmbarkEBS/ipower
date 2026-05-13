@@ -731,10 +731,10 @@
                                         text-align:left;
                                     ">
                                         Office:
-                                        <span t-esc="o.company_id.street or ''"/>
+                                      
 
                                         <t t-if="o.company_id.street2">
-                                            , <span t-esc="o.company_id.street2"/>
+                                            <span t-esc="o.company_id.street2"/>
                                         </t>
 
                                         ,
