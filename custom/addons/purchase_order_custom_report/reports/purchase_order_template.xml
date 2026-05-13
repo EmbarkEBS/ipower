@@ -730,7 +730,6 @@
                                         padding:20px 40px;
                                         text-align:left;
                                     ">
-
                                         Office:
                                         <span t-esc="o.company_id.street or ''"/>
 
