@@ -706,7 +706,7 @@
         font-weight:bold;
     ">
 
-        Total :
+      
         <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
 
     </td>
