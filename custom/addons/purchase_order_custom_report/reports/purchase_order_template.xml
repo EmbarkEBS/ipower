@@ -5,12 +5,11 @@
 <t t-call="web.html_container">
 <meta charset="UTF-8"/>
 <t t-foreach="docs" t-as="o">
-
-<!-- ✅ SAFE CURRENCY SYMBOL -->
+<!-- SAFE CURRENCY SYMBOL -->
 <t t-set="cur_symbol"
-   t-value="'€' if o.currency_id.name == 'EUR' or o.currency_id.symbol == '€'
-            else '$' if o.currency_id.name == 'USD' or o.currency_id.symbol == '$'
-            else '£' if o.currency_id.name == 'GBP' or o.currency_id.symbol == '£'
+   t-value="'&#8364;' if o.currency_id.name == 'EUR' or o.currency_id.symbol == '€'
+            else '&#36;' if o.currency_id.name == 'USD' or o.currency_id.symbol == '$'
+            else '&#163;' if o.currency_id.name == 'GBP' or o.currency_id.symbol == '£'
             else (o.currency_id.symbol or o.currency_id.name)"/>
 
 
@@ -695,23 +694,23 @@
                                                 color:#1a3a5a;
                                             ">
 
-                                                <td style="
-                                                    padding:10px 5px;
-                                                    font-weight:bold;
-                                                ">
-                                                    Total
-                                                </td>
+       <td style="
+        padding:10px 5px;
+        font-weight:bold;
+    ">
+        Total
+    </td>
 
-                              <td style="
-    padding:10px 5px;
-    font-weight:bold;
-">
+    <td style="
+        padding:10px 5px;
+        font-weight:bold;
+    ">
 
-    Total :
-<span t-esc="cur_symbol"/>
-<span t-esc="' {:,.2f}'.format(o.amount_total)"/>
+        Total :
+        <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
 
-</td>
+    </td>
+
                                             </tr>
 
                                         </table>
