@@ -1,11 +1,15 @@
 <odoo>
     <template id="purchase_order_template">
         <t t-call="web.html_container">
-<meta charset="UTF-8"/>
+
             <t t-foreach="docs" t-as="o">
+                <!-- ✅ CORRECT HEAD ELEMENT POSITION FOR COMPILER -->
+                <head>
+                    <meta charset="UTF-8"/>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                </head>
             <!-- ✅ SAFE CURRENCY SYMBOL -->
-<t t-set="cur_symbol"
-   t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
+  <t t-set="cur_symbol" t-value="'&#x20AC;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                                <main>
 
                     <div class="page">
@@ -698,7 +702,7 @@
     padding:10px 5px;
     font-weight:bold;
 ">
-  <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+<span t-esc="cur_symbol"/> <span t-esc="'%.2f' % o.amount_total"/>
  </td>
                                             </tr>
 
