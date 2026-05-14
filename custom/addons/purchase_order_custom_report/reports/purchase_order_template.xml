@@ -90,15 +90,14 @@
                                             PURCHASE ORDER
                                         </h1>
 
-                                        <!-- ORANGE LINE -->
-                                       <!-- CENTER POLYGON LINE -->
-<div style="
-    width:220px;
+                                    <div style="
+    width:300px;
     margin:5px auto;
+    text-align:center;
 ">
 
-<svg width="220"
-     height="2"
+<svg width="300"
+     height="4"
      xmlns="http://www.w3.org/2000/svg">
 
     <defs>
@@ -110,10 +109,16 @@
                         x2="100%"
                         y2="0%">
 
+            <!-- solid part -->
             <stop offset="0%"
                   stop-color="#f39223"
                   stop-opacity="1"/>
 
+            <stop offset="70%"
+                  stop-color="#f39223"
+                  stop-opacity="1"/>
+
+            <!-- fade -->
             <stop offset="100%"
                   stop-color="#f39223"
                   stop-opacity="0"/>
@@ -122,9 +127,10 @@
 
     </defs>
 
-    <rect x="0"
-          y="0"
-          width="220"
+    <!-- centered line -->
+    <rect x="95"
+          y="1"
+          width="120"
           height="2"
           fill="url(#horizontalFade)"/>
 
@@ -272,7 +278,7 @@
 
                                     <!-- META -->
                                     <td style="
-                                        width:45%;
+                                        width:45%; font-size:13px;
                                         vertical-align:top;
                                         padding-left:40px;
                                     ">
