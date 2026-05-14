@@ -74,7 +74,7 @@
 
                                             <br/>
 
-                                         <strong style="padding-top:10px">  TRN <span t-esc="o.company_id.vat or ''"/></strong>
+                                         <strong style="padding-top:20px">  TRN <span t-esc="o.company_id.vat or ''"/></strong>
 
                                         </div>
 
@@ -228,7 +228,7 @@
                                                     <br/>
 
                                                   <t t-if="o.partner_id.vat">
-<strong style="padding-top:10px">    TRN <span t-esc="o.partner_id.vat"/></strong>
+<strong style="padding-top:20px">    TRN <span t-esc="o.partner_id.vat"/></strong>
 </t>
 
                                                 </td>
@@ -654,7 +654,7 @@
                               <td style="
     padding:10px 5px;
     font-weight:bold;
-    font-family:'DejaVu Sans', sans-serif;
+     font-family:'Noto Sans', sans-serif;
 ">
 
     <t t-set="amt"
