@@ -13,7 +13,7 @@
                         <!-- MAIN CONTENT WRAPPER -->
                         <div style="
                             padding:10px 40px 40px 40px;
-                            font-family:sans-serif;
+                            font-family:'DejaVu Sans', sans-serif;
                             font-size:12px;
                             color:#333;
                             line-height:1.4;
@@ -59,9 +59,9 @@
 
                                             <br/>
 
-                                            <span t-esc="o.company_id.street or ''"/>
+                                            <span t-esc="o.company_id.street or ''"/>,
 
-                                          ,
+                                          
                                            
                                             <t t-if="o.company_id.state_id">
                                                  <span t-esc="o.company_id.state_id.name"/>
@@ -735,7 +735,7 @@
 
                                     <td style="
                                         padding:20px 40px;
-                                        text-align:left;
+                                        text-align:center;
                                     ">
                                         Office:
                                       
@@ -749,7 +749,7 @@
 
                                         -
                                         <span t-esc="o.company_id.country_id.name or ''"/>
-
+<br/>
                                        
 
                                         CR No:
