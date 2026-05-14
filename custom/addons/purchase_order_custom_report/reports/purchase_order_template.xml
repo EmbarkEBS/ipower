@@ -226,7 +226,9 @@
 
                                                     <br/>
 
-                                                    TRN <span t-esc="o.partner_id.vat or ''"/>
+                                                   <t t-if="o.partner_id.vat">
+    TRN <span t-esc="o.partner_id.vat"/>
+</t>
 
                                                 </td>
 
@@ -579,11 +581,11 @@
                                         vertical-align:middle;
                                         padding-top:40px;text-align:right;
                                     ">
-
+ <strong>Amount in Words:</strong><br/>
                                         <div style="font-size:13px;">
 
                                             <strong>
- <span>Total Amount in Words : </span>
+
                                                 <span t-esc="o.currency_id.name"/>
                                                 <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
                                                 only.
@@ -652,8 +654,8 @@
                                                     padding:10px 5px;
                                                     font-weight:bold;
                                                 ">
-
-                                                    <span t-esc=" o.currency_id"/>
+<span t-field="o.amount_total"
+      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                                     <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
 
                                                 </td>
