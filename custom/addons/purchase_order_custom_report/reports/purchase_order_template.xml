@@ -8,10 +8,7 @@
                     <meta charset="UTF-8"/>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                 </head>
-            <!-- ✅ SAFE CURRENCY SYMBOL -->
-  <!--  SAFE HEXADECIMAL DATA STREAM -->
-<t t-set="cur_symbol" t-value="'&#x20AC;' if o.currency_id.name == 'EUR' else (o.currency_id.symbol.encode('ascii', 'xmlcharrefreplace').decode('utf-8') if o.currency_id.symbol else '')"/>
-
+         
                                <main>
 
                     <div class="page">
