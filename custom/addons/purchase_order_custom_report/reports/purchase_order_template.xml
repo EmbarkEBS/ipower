@@ -2,10 +2,11 @@
     <template id="purchase_order_template">
 
         <t t-call="web.html_container">
-    <head>
+            <!-- Inject your document encoding requirements into the global layout header blocks -->
+            <t t-set="html_meta_tags">
                 <meta charset="UTF-8"/>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            </head>
+            </t>
             <t t-foreach="docs" t-as="o">
 
                 <main>
@@ -228,8 +229,8 @@
 
                                                     <br/>
 
-                                                  <t t-if="o.partner_id.vat" style="margin-top:20px">
-<strong >    TRN <span t-esc="o.partner_id.vat"/></strong>
+                                                  <t t-if="o.partner_id.vat">
+<p  style="margin-top:20px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
 </t>
 
                                                 </td>
