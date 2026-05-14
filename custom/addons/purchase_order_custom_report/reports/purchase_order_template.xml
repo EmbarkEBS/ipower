@@ -61,15 +61,8 @@
 
                                             <span t-esc="o.company_id.street or ''"/>
 
-                                            <t t-if="o.company_id.street2">
-                                                <br/>
-                                                <span t-esc="o.company_id.street2"/>
-                                            </t>
-
-                                            <br/>
-
-                                            <span t-esc="o.company_id.city or ''"/>
-
+                                          ,
+                                           
                                             <t t-if="o.company_id.state_id">
                                                  <span t-esc="o.company_id.state_id.name"/>
                                             </t>
@@ -80,7 +73,7 @@
 
                                             <br/>
 
-                                            TRN <span t-esc="o.company_id.vat or ''"/>
+                                          <strong>  TRN <span t-esc="o.company_id.vat or ''"/></strong>
 
                                         </div>
 
@@ -302,7 +295,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                               Incoterm
+                                               Incoterms
                                                 </td>
 
                                                 <td style="padding:4px 0;text-align:left">
@@ -321,7 +314,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                    Sales Order
+                                                    Our Ref
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -371,9 +364,9 @@
                                         <th style="
                                             padding:10px;
                                             width:55%;
-                                            text-align:left;
+                                            text-align:center;
                                         ">
-                                            Description
+                                            Product Specification
                                         </th>
 
                                         <th style="
@@ -435,7 +428,7 @@
                                                 <div style="
                                                     font-weight:bold;
                                                     margin-bottom:6px;
-                                                    font-size:13px;
+                                                    font-size:15px;
                                                     line-height:1.5;
                                                     width:100%;
                                                 ">
@@ -450,6 +443,7 @@
                                             <!-- QTY -->
                                             <td style="
                                               padding-top:15px;
+                                              font-size:15px;
                                                 text-align:center;
                                                 vertical-align:top;
                                             ">
@@ -459,6 +453,7 @@
                                             <!-- UNIT PRICE -->
                                             <td style="
                                                 padding-top:15px;
+                                                font-size:15px;
                                                 text-align:center;
                                                 vertical-align:top;
                                             ">
@@ -468,6 +463,7 @@
                                             <!-- TOTAL -->
                                             <td style="
                                               padding-top:15px;
+                                              font-size:15px;
                                                 text-align:center;
                                                 vertical-align:top;
                                             ">
@@ -479,17 +475,18 @@
                                         <td></td>
                                         <td  colspan="4" style="
                                           font-weight:bold;
+                                          font-size:12px;
                                                     margin-bottom:6px;
                                                     font-size:11px;
                                         ">                                
-                    <span>Code: </span>      <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                    <span>Ordering Code: </span>      <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
                       
 </td></tr>
 <tr style="border-bottom:1px solid #d9d9d9;">
                                         <td></td>
                                         <td  colspan="4" style="
                                            padding-botton:15px;
-                                            font-size:11px;
+                                            font-size:12px;
                                             color:#666;
                                             line-height:1.7;
                                             white-space:normal;
@@ -586,7 +583,7 @@
                                         <div style="font-size:13px;">
 
                                             <strong>
-
+ <span>Total Amount in Words : </span>
                                                 <span t-esc="o.currency_id.name"/>
                                                 <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
                                                 only.
@@ -656,7 +653,7 @@
                                                     font-weight:bold;
                                                 ">
 
-                                                    <span t-esc="o.currency_id.name"/>
+                                                    <span t-esc=" o.currency_id"/>
                                                     <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
 
                                                 </td>
@@ -687,6 +684,7 @@
 
                                 <div style="
                                     margin-top:10px;
+                                      font-size:12px;
                                     color:#555;
                                 ">
 
@@ -714,12 +712,19 @@
                             padding:0;
                             width:100%;
                         ">
-
+<div style="
+    margin-top:8px;
+    font-size:12px;
+    color:#888888;
+    font-style:italic;
+">
+    This purchase order is electronically generated and valid without signature or company stamp.
+</div>
                             <!-- FOOTER CONTENT -->
                             <table style="
                                 width:100%;
                                 border-collapse:collapse;
-                                font-size:10px;
+                                font-size:11px;
                                 color:#555; border-top:1px solid #1f3b73;
     padding-top:6px; 
                             ">
@@ -743,7 +748,7 @@
                                         -
                                         <span t-esc="o.company_id.country_id.name or ''"/>
 
-                                        <br/>
+                                       
 
                                         CR No:
                                         <span t-esc="o.company_id.company_registry or 'N/A'"/>
@@ -757,14 +762,7 @@
                                         <span t-esc="o.company_id.website or ''"/>
 <br/>
 
-<div style="
-    margin-top:8px;
-    font-size:9px;
-    color:#888888;
-    font-style:italic;
-">
-    This purchase order is electronically generated and valid without signature or company stamp.
-</div>
+
                                     </td>
 
                                 </tr>
