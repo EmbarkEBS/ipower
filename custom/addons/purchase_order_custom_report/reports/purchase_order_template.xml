@@ -805,28 +805,60 @@
 
                           
                            <!-- FULL WIDTH FOOTER BORDER -->
-   <div style="
+<div style="
     width:100%;
     height:25px;
     margin-top:5px;
 ">
 
-    <svg width="100%"
-         height="25"
-         viewBox="0 0 1000 25"
-         preserveAspectRatio="none"
-         xmlns="http://www.w3.org/2000/svg"
-         style="display:block;">
+<svg width="100%"
+     height="25"
+     viewBox="0 0 1000 25"
+     preserveAspectRatio="none"
+     xmlns="http://www.w3.org/2000/svg"
+     style="display:block;">
 
-        <!-- BLUE 25% -->
-        <polygon points="0,0 260,0 240,25 0,25"
-                 fill="#1f3b73"/>
+    <defs>
 
-        <!-- ORANGE 75% -->
-        <polygon points="260,0 1000,0 1000,25 240,25"
-                 fill="#e58b39"/>
+        <!-- BLUE TO ORANGE GRADIENT -->
+        <linearGradient id="blueOrangeGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%">
 
-    </svg>
+            <!-- blue starts -->
+            <stop offset="0%"
+                  stop-color="#1f3b73"
+                  stop-opacity="1"/>
+
+            <!-- blue ends around 25% -->
+            <stop offset="25%"
+                  stop-color="#1f3b73"
+                  stop-opacity="1"/>
+
+            <!-- transition to orange -->
+            <stop offset="50%"
+                  stop-color="#e58b39"
+                  stop-opacity="1"/>
+
+            <!-- orange continues -->
+            <stop offset="100%"
+                  stop-color="#e58b39"
+                  stop-opacity="1"/>
+
+        </linearGradient>
+
+    </defs>
+
+    <!-- single smooth bar -->
+    <rect x="0"
+          y="0"
+          width="1000"
+          height="25"
+          fill="url(#blueOrangeGradient)"/>
+
+</svg>
 
 </div>
        </div>    
