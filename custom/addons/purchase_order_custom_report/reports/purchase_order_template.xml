@@ -656,7 +656,7 @@
 ">
 <span t-esc="o.currency_id.symbol"/>
 <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
-
+<span t-raw="o.currency_id.symbol"/> <span t-esc="'%.2f' % o.amount_total"/>
  </td>
                                             </tr>
 
