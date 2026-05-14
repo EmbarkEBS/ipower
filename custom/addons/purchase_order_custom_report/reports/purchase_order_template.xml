@@ -271,7 +271,7 @@
                                                          <span t-esc="o.partner_id.state_id.name"/>
                                                     </t>
 
-                                                    <br/>
+                                                    -
 
                                                     <span t-esc="o.partner_id.country_id.name or ''"/>
 
@@ -707,10 +707,8 @@
     ">
 
         Total :
-             <span t-esc="'%.2f' % o.amount_total"/><span>&#8364;</span>
+        <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
 
-    
-    
     </td>
 
                                             </tr>
