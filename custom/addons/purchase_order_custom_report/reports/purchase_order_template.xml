@@ -2,10 +2,10 @@
 <odoo>
     <template id="purchase_order_template">
         <t t-call="web.html_container">
+         <meta charset="UTF-8"/>
+                    <meta http-equiv="Content-Type" content="text/html;" >
             <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-
-      
+           
 
                 <main>
 
@@ -806,6 +806,6 @@
             </t>
 
         </t>
-</t>
+
     </template>
 </odoo>
