@@ -662,6 +662,9 @@
 ">
 <span t-esc="o.currency_id.symbol"/>
 <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
+  <t t-call="purchase.document_tax_totals">
+                            <t t-set="tax_totals" t-value="o.tax_totals"/>
+                            <t t-set="currency" t-value="o.currency_id"/></t>
  </td>
                                             </tr>
 
