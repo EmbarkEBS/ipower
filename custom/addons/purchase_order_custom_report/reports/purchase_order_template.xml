@@ -5,7 +5,7 @@
 <t t-call="web.html_container">
 <style>
     @page {
-         margin: 20mm 0mm 25mm 0mm; /* bottom margin reserved for footer */
+         margin: 20mm 0mm 30mm 0mm; /* bottom margin reserved for footer */
     }
 .fixed-footer {
     position: fixed;
@@ -793,55 +793,56 @@
     </div>
 
     <!-- FULL BLEED BAR -->
-    <div style="
-        position:absolute;
-        left:-10mm;
-        bottom:0;
-        width:230mm;
-        height:22px;
-        overflow:hidden;
-    ">
+   <!-- ABSOLUTE FULL WIDTH BAR -->
+<div style="
+    position:fixed;
+    bottom:0;
+    left:-25mm;
+    width:297mm;
+    height:22px;
+    z-index:9999;
+">
 
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="230mm"
-             height="22"
-             viewBox="0 0 1000 22"
-             preserveAspectRatio="none"
-             style="display:block;">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="297mm"
+         height="22"
+         viewBox="0 0 297 22"
+         preserveAspectRatio="none"
+         style="display:block;">
 
-            <defs>
+        <defs>
 
-                <linearGradient id="footerGradient"
-                                x1="0%"
-                                y1="0%"
-                                x2="100%"
-                                y2="0%">
+            <linearGradient id="footerGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="0%">
 
-                    <stop offset="0%"
-                          stop-color="#1f3b73"/>
+                <stop offset="0%"
+                      stop-color="#1f3b73"/>
 
-                    <stop offset="40%"
-                          stop-color="#1f3b73"/>
+                <stop offset="45%"
+                      stop-color="#1f3b73"/>
 
-                    <stop offset="60%"
-                          stop-color="#e58b39"/>
+                <stop offset="60%"
+                      stop-color="#e58b39"/>
 
-                    <stop offset="100%"
-                          stop-color="#e58b39"/>
+                <stop offset="100%"
+                      stop-color="#e58b39"/>
 
-                </linearGradient>
+            </linearGradient>
 
-            </defs>
+        </defs>
 
-            <rect x="0"
-                  y="0"
-                  width="1000"
-                  height="22"
-                  fill="url(#footerGradient)"/>
+        <rect x="0"
+              y="0"
+              width="297"
+              height="22"
+              fill="url(#footerGradient)"/>
 
-        </svg>
+    </svg>
 
-    </div>
+</div>
 
 </div>   
 
