@@ -9,10 +9,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <style>
-    @font-face {
-    font-family: 'DejaVuSansCustom';
-    src: url('/purchase_order_custom_report/static/src/fonts/DejaVuSans.ttf') format('truetype');
-}
         * {
             font-family: 'DejaVu Sans' !important;
         }
