@@ -725,6 +725,23 @@
                             </div>
 
                                   <!-- FOOTER CONTENT -->
+                                  <div class="footer" style="
+    margin:0;
+    padding:0;
+    width:100%;
+    font-family: DejaVu Sans, sans-serif !important;
+    unicode-bidi: embed;
+    direction:ltr;
+">
+                                  <div style="
+    margin-top:8px;
+    font-size:12px;
+    color:#888888;
+    font-style:italic;
+    padding-bottom:2px;
+">
+    This document is electronically generated and valid without signature or company stamp.
+</div>
                             <table style="
                                 width:100%;
                                 border-collapse:collapse;
@@ -801,7 +818,7 @@
     </svg>
 
 </div>
-                       
+              </div>          
 
                     </div>
 
