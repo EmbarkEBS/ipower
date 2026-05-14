@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="purchase_order_template">
-
         <t t-call="web.html_container">
-               <t t-foreach="docs" t-as="o">
-                <!-- EXPLICIT RAW HEAD BLOCK FOR THE PDF PARSER -->
-                <head>
-                    <meta charset="UTF-8"/>
-                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                </head>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
 
       
 
@@ -659,7 +654,7 @@
     padding:10px 5px;
     font-weight:bold;
 ">
-<span t-esc="o.currency_id.symbol"/><span t-raw="o.currency_id.symbol.encode('ascii', 'xmlcharrefreplace').decode()"/>
+<span t-esc="o.currency_id.symbol"/>
 <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
 
  </td>
