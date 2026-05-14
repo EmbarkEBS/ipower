@@ -148,7 +148,107 @@
                             </table>
 
     <!-- SHIPPING + PO DETAILS -->
-                       <t t-if="o.partner_id.state_id">
+     <!-- ===================================================== -->
+                            <!-- ADDRESS + META -->
+                            <!-- ===================================================== -->
+
+                            <table style="
+                                width:100%;
+                                border-collapse:collapse;
+                                margin-top:35px;
+                                margin-bottom:35px;
+                            ">
+
+                                <tr>
+
+                                    <!-- ADDRESS -->
+                                    <td style="
+                                        width:55%;
+                                        vertical-align:top;
+                                    ">
+
+                                        <table style="
+                                            width:100%;
+                                            border-collapse:collapse;
+                                        ">
+  <strong style="color:#1a3a5a;">
+                                                        To
+                                                    </strong>
+
+                                                   
+                                            <tr>
+
+                                                <!-- ORANGE BORDER -->
+                                              <td style="
+    width:8px;
+    padding:0;
+    vertical-align:top;
+">
+
+    <svg width="8"
+         height="130"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+
+            <!-- VERTICAL ORANGE FADE -->
+            <linearGradient id="verticalFade"
+                            x1="0%"
+                            y1="0%"
+                            x2="0%"
+                            y2="100%">
+
+                <stop offset="0%"
+                      stop-color="#f39223"
+                      stop-opacity="1"/>
+
+                <stop offset="100%"
+                      stop-color="#f39223"
+                      stop-opacity="0"/>
+
+            </linearGradient>
+
+        </defs>
+
+        <rect x="0"
+              y="0"
+              width="2"
+              height="130"
+              fill="url(#verticalFade)"/>
+
+    </svg>
+
+</td>
+                                                <td style="width:15px;">
+                                                </td>
+
+                                                <!-- ADDRESS CONTENT -->
+                                                <td style="
+                                                    vertical-align:top;
+                                                    font-size:13px;
+                                                    line-height:1.7;
+                                                ">
+
+                                                  
+
+                                                    <strong>
+                                                        <span t-esc="o.partner_id.name"/>
+                                                    </strong>
+
+                                                    <br/>
+
+                                                    <span t-esc="o.partner_id.street or ''"/>
+
+                                                    <t t-if="o.partner_id.street2">
+                                                        <br/>
+                                                        <span t-esc="o.partner_id.street2"/>
+                                                    </t>
+
+                                                    <br/>
+
+                                                    <span t-esc="o.partner_id.city or ''"/>
+
+                                                    <t t-if="o.partner_id.state_id">
                                                          <span t-esc="o.partner_id.state_id.name"/>
                                                     </t>
 
