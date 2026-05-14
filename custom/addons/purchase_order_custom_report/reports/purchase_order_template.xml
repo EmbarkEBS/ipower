@@ -2,9 +2,10 @@
     <template id="purchase_order_template">
 
         <t t-call="web.html_container">
-        <meta charset="UTF-8"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <head>
+                <meta charset="UTF-8"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            </head>
             <t t-foreach="docs" t-as="o">
 
                 <main>
@@ -227,8 +228,8 @@
 
                                                     <br/>
 
-                                                  <t t-if="o.partner_id.vat">
-<strong style="padding-top:20px">    TRN <span t-esc="o.partner_id.vat"/></strong>
+                                                  <t t-if="o.partner_id.vat" style="margin-top:20px">
+<strong >    TRN <span t-esc="o.partner_id.vat"/></strong>
 </t>
 
                                                 </td>
@@ -657,10 +658,9 @@
      font-family:'Noto Sans', sans-serif;
 ">
 
-    <t t-set="amt"
-       t-value="'%s %0.2f' % (o.currency_id.symbol or '', o.amount_total)"/>
+   <!-- Example total line substitution to automatically fetch localized '€' or 'EUR' values safely -->
+<span t-field="o.amount_total" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
 
-    <span t-esc="amt"/>
 
 </td>
                                             </tr>
