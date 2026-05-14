@@ -93,52 +93,44 @@
                                         <!-- ORANGE LINE -->
                                        <!-- CENTER POLYGON LINE -->
 <div style="
-    width:140px;
-    height:12px;
-    margin-top:5px;
-    margin-bottom:5px;
-    margin-left:auto;
-    margin-right:auto;
+    width:220px;
+    margin:5px auto;
 ">
 
 <svg width="220"
      height="2"
-     viewBox="0 0 220 2"
      xmlns="http://www.w3.org/2000/svg">
 
     <defs>
 
-        <!-- FADING GREY -->
-        <linearGradient id="fadeGrey"
+        <!-- HORIZONTAL ORANGE FADE -->
+        <linearGradient id="horizontalFade"
                         x1="0%"
                         y1="0%"
                         x2="100%"
                         y2="0%">
 
             <stop offset="0%"
-                  stop-color="#d9d9d9"
+                  stop-color="#f39223"
                   stop-opacity="1"/>
 
             <stop offset="100%"
-                  stop-color="#d9d9d9"
+                  stop-color="#f39223"
                   stop-opacity="0"/>
 
         </linearGradient>
 
     </defs>
 
-    <!-- ORANGE FIRST -->
-    <polygon points="0,0 190,0 188,2 0,2"
-             fill="#e58b39"/>
-
-    <!-- GREY FADING -->
-    <polygon points="190,0 220,0 220,2 188,2"
-             fill="url(#fadeGrey)"/>
+    <rect x="0"
+          y="0"
+          width="220"
+          height="2"
+          fill="url(#horizontalFade)"/>
 
 </svg>
 
 </div>
-
                                         <div style="
                                             font-size:16px;
                                             text-align:center;
@@ -156,77 +148,125 @@
                             </table>
 
     <!-- SHIPPING + PO DETAILS -->
-    <table style="width:100%; margin-top:20px;">
-        <tr>
+                       <t t-if="o.partner_id.state_id">
+                                                         <span t-esc="o.partner_id.state_id.name"/>
+                                                    </t>
 
-            <!-- SHIPPING -->
-            <td style="width:50%;">
-                <strong>To</strong><br/>
+                                                    -
 
-                <t t-set="addr" t-value="(o.dest_address_id or o.partner_id)"/>
+                                                    <span t-esc="o.partner_id.country_id.name or ''"/>
 
-                <span t-esc="addr.name"/>,<br/>
+                                                    <br/>
 
-                <t t-if="addr.street">
-                    <span t-esc="addr.street"/>,<br/>
-                </t>
+                                                  <t t-if="o.partner_id.vat">
+<p  style="margin-top:15px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
+</t>
 
-                <t t-if="addr.city">
-                    <span t-esc="addr.city"/>,<br/>
-                </t>
+                                                </td>
 
-                <t t-if="addr.country_id">
-                    <span t-esc="addr.country_id.name"/>
-                </t>
-            </td>
+                                            </tr>
 
-            <!-- PO DETAILS -->
-            <td style="width:50%; position:relative;">
-                <div style="float:right; width:260px; text-align:left;">
+                                        </table>
 
-                   
+                                    </td>
 
-                    <table style="width:100%;">
-                      
+                                    <!-- META -->
+                                    <td style="
+                                        width:45%;
+                                        vertical-align:top;
+                                        padding-left:40px;
+                                    ">
 
-                        <tr>
-                            <td><strong>Order Date</strong></td>
-                            <td>
-                                <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
-                            </td>
-                        </tr>
+                                        <table style="
+                                            width:100%;
+                                            border-collapse:collapse;
+                                        ">
 
-                        <t t-if="o.incoterm_id">
-                            <tr>
-                                <td><strong>Incoterm</strong></td>
-                                <td><span t-esc="o.incoterm_id.code"/></td>
-                            </tr>
-                        </t>
- <t t-if="o.origin" class="col-3">
-  <tr>
-                    <td> <strong>Sales Order:</strong> </td>
-                    <td> <p t-field="o.origin" class="m-0"/> </td>
-                    </tr>
-                </t>
-                        <t t-if="o.payment_term_id">
-                            <tr>
-                                <td><strong>Payment Terms</strong></td>
-                                <td><span t-esc="o.payment_term_id.name"/></td>
-                            </tr>
-                        </t>
-                    </table>
+                                            <tr>
 
-                </div>
-            </td>
+                                                <td style="
+                                                    padding:4px 0;
+                                                    width:45%;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                    Order Date
+                                                </td>
 
-        </tr>
-    </table>
-  <div>
-                            <p style="color:#f26836 ;font-size:20px;"> <strong><span>Purchase Order </span>
-                            
-                                <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
-                          </strong>  </p>
-                        </div>
+                                                <td style="padding:4px 0;">
+
+                                                    :
+                                                    <span t-field="o.date_order"
+                                                          t-options='{"format": "dd MMMM yyyy"}'/>
+
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                                <td style="
+                                                    padding:4px 0;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                    Payment Terms
+                                                </td>
+
+                                                <td style="padding:4px 0;">
+
+                                                    :
+                                                    <span t-field="o.payment_term_id.name"/>
+
+                                                </td>
+                                                </tr>
+                                            
+
+                                            <tr>
+
+                                                <td style="
+                                                    padding:4px 0;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                               Incoterms
+                                                </td>
+
+                                                <td style="padding:4px 0;text-align:left">
+
+                                                    :
+                                                    <span t-field="o.partner_id.x_studio_incoterm.code"/>
+
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                                <td style="
+                                                    padding:4px 0;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                    Our Ref
+                                                </td>
+
+                                                <td style="padding:4px 0;">
+
+                                                    :
+                                                    <span t-field="o.origin"/>
+
+                                                </td>
+
+                                            </tr>
+
+                                        </table>
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
     <!-- LINE HEADER -->
     <table style="width:100%; margin-top:20px; background-color:#fff5e6;">
         <tr>
