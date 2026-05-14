@@ -18,7 +18,7 @@
                         <!-- MAIN CONTENT WRAPPER -->
                         <div style="
                             padding:10px 40px 40px 40px;
-                            font-family: 'DejaVu Sans', sans-serif !important;
+                            font-family: 'Arial Unicode MS' !important;
                             font-size:12px;
                             color:#333;
                             line-height:1.4;
@@ -658,13 +658,11 @@
                               <td style="
     padding:10px 5px;
     font-weight:bold;
- font-family: 'DejaVu Sans', sans-serif;
+ font-family: 'Arial Unicode MS';
 ">
 <span t-esc="o.currency_id.symbol"/>
 <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
-  <t t-call="purchase.document_tax_totals">
-                            <t t-set="tax_totals" t-value="o.tax_totals"/>
-                            <t t-set="currency" t-value="o.currency_id"/></t>
+
  </td>
                                             </tr>
 
@@ -715,7 +713,7 @@
                         <!-- ===================================================== -->
 
                         <div class="footer" style="
-                          font-family: 'DejaVu Sans', sans-serif;
+                          font-family: 'Arial Unicode MS';
                             margin:0;
                             padding:0;
                             width:100%;
