@@ -107,18 +107,39 @@
     margin-right:auto;
 ">
 
- <svg width="220"
+<svg width="220"
      height="2"
      viewBox="0 0 220 2"
      xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+
+        <!-- FADING GREY -->
+        <linearGradient id="fadeGrey"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%">
+
+            <stop offset="0%"
+                  stop-color="#d9d9d9"
+                  stop-opacity="1"/>
+
+            <stop offset="100%"
+                  stop-color="#d9d9d9"
+                  stop-opacity="0"/>
+
+        </linearGradient>
+
+    </defs>
 
     <!-- ORANGE FIRST -->
     <polygon points="0,0 190,0 188,2 0,2"
              fill="#e58b39"/>
 
-    <!-- GREY SECOND -->
+    <!-- GREY FADING -->
     <polygon points="190,0 220,0 220,2 188,2"
-             fill="#d9d9d9"/>
+             fill="url(#fadeGrey)"/>
 
 </svg>
 
@@ -654,9 +675,7 @@
     padding:10px 5px;
     font-weight:bold;
 ">
-<span t-esc="o.currency_id.symbol"/>
-<span t-esc="'{:,.2f}'.format(o.amount_total)"/>
-<span t-raw="o.currency_id.symbol"/> <span t-esc="'%.2f' % o.amount_total"/>
+<span t-out="o.currency_id.symbol"/> <span t-esc="'%.2f' % o.amount_total"/>
  </td>
                                             </tr>
 
