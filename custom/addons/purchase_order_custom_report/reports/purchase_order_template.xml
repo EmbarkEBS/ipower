@@ -4,13 +4,20 @@
 
         <t t-call="web.html_container">
                <t t-foreach="docs" t-as="o">
-                <!-- EXPLICIT RAW HEAD BLOCK FOR THE PDF PARSER -->
-                <head>
-                    <meta charset="UTF-8"/>
-                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                </head>
+               <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-      
+    <style>
+    @font-face {
+    font-family: 'DejaVuSansCustom';
+    src: url('/purchase_order_custom_report/static/src/fonts/DejaVuSans.ttf') format('truetype');
+}
+        * {
+            font-family: 'DejaVu Sans' !important;
+        }
+    </style>
+</head>
 
                 <main>
 
@@ -19,8 +26,8 @@
                         <!-- MAIN CONTENT WRAPPER -->
                         <div style="
                             padding:10px 40px 40px 40px;
-                            font-family: 'Arial Unicode MS' !important;
-                            font-size:12px;
+                          font-family:'DejaVu Sans' !important;
+                            font-size:11px;
                             color:#333;
                             line-height:1.4;
                         ">
@@ -659,9 +666,9 @@
                               <td style="
     padding:10px 5px;
     font-weight:bold;
- font-family: 'Arial Unicode MS';
+font-family:'DejaVu Sans' !important;
 ">
-<span t-esc="o.currency_id.symbol"/>
+<span t-esc="o.currency_id.symbol"/><span>€</span>
 <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
 
  </td>
@@ -714,7 +721,7 @@
                         <!-- ===================================================== -->
 
                         <div class="footer" style="
-                          font-family: 'Arial Unicode MS';
+                         font-family:'DejaVu Sans' !important;
                             margin:0;
                             padding:0;
                             width:100%;
