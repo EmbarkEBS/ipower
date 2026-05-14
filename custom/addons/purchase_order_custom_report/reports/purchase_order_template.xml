@@ -7,9 +7,9 @@
 <t t-foreach="docs" t-as="o">
 <!-- SAFE CURRENCY SYMBOL -->
 <t t-set="cur_symbol"
-   t-value="'&#8364;' if o.currency_id.name == 'EUR' or o.currency_id.symbol == '€'
-            else '&#36;' if o.currency_id.name == 'USD' or o.currency_id.symbol == '$'
-            else '&#163;' if o.currency_id.name == 'GBP' or o.currency_id.symbol == '£'
+   t-value="'€' if o.currency_id.name == 'EUR'
+            else '$' if o.currency_id.name == 'USD'
+            else '£' if o.currency_id.name == 'GBP'
             else (o.currency_id.symbol or o.currency_id.name)"/>
 
 
@@ -707,7 +707,8 @@
     ">
 
         Total :
-        <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+         <span t-esc="cur_symbol"/>
+        <span t-esc="'%.2f' % o.amount_total"/>
 
     </td>
 
