@@ -8,7 +8,11 @@
 
 <!-- ✅ SAFE CURRENCY SYMBOL -->
 <t t-set="cur_symbol"
-   t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
+   t-value="'€' if o.currency_id.name == 'EUR' or o.currency_id.symbol == '€'
+            else '$' if o.currency_id.name == 'USD' or o.currency_id.symbol == '$'
+            else '£' if o.currency_id.name == 'GBP' or o.currency_id.symbol == '£'
+            else (o.currency_id.symbol or o.currency_id.name)"/>
+
 
                                <main>
 
@@ -704,16 +708,8 @@
 ">
 
     Total :
-
-    <!-- SAFE CURRENCY SYMBOL -->
-    <t t-set="cur_symbol"
-       t-value="'&#8364;' if o.currency_id.name == 'EUR' or o.currency_id.symbol == '€'
-                else '$' if o.currency_id.name == 'USD' or o.currency_id.symbol == '$'
-                else '£' if o.currency_id.name == 'GBP' or o.currency_id.symbol == '£'
-                else (o.currency_id.symbol or o.currency_id.name)"/>
-
-    <!-- PRINT SYMBOL + AMOUNT -->
-    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+<span t-esc="cur_symbol"/>
+<span t-esc="' {:,.2f}'.format(o.amount_total)"/>
 
 </td>
                                             </tr>
