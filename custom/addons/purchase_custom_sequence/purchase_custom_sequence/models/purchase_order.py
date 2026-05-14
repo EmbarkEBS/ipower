@@ -8,32 +8,34 @@ class PurchaseOrder(models.Model):
         string='Direct Purchase Order'
     )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
 
-        # Direct PO
-        if vals.get('is_direct_po'):
+        for vals in vals_list:
 
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'purchase.order.direct'
-            ) or '/'
+            # Direct Purchase Order
+            if vals.get('is_direct_po'):
 
-        # RFQ
-        else:
+                vals['name'] = self.env['ir.sequence'].next_by_code(
+                    'purchase.order.direct'
+                ) or '/'
 
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'purchase.order.rfq'
-            ) or '/'
+            # RFQ
+            else:
 
-        return super(PurchaseOrder, self).create(vals)
+                vals['name'] = self.env['ir.sequence'].next_by_code(
+                    'purchase.order.rfq'
+                ) or '/'
+
+        return super().create(vals_list)
 
     def button_confirm(self):
 
-        res = super(PurchaseOrder, self).button_confirm()
+        res = super().button_confirm()
 
         for order in self:
 
-            # Only convert RFQ sequence to PO sequence
+            # Convert RFQ to PO sequence
             if order.name.startswith('RFQ'):
 
                 order.name = self.env['ir.sequence'].next_by_code(
