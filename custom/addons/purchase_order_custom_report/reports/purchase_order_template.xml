@@ -707,9 +707,10 @@
     ">
 
         Total :
-         <span t-field="o.amount_total"
-      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+             <span t-esc="'%.2f' % o.amount_total"/><span>&#8364;</span>
 
+    
+    
     </td>
 
                                             </tr>
