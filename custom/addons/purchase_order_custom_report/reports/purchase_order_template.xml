@@ -91,7 +91,7 @@
 
                                 <div style="
     width:300px;
-    margin:5px auto;
+    margin:5px auto;padding top:10px;
     text-align:center;
 ">
 
@@ -611,12 +611,12 @@
                                         vertical-align:middle;
                                          font-size:15px;
                                         padding-top:40px;text-align:right;">
-            <strong>Amount in Words:</strong>
+   
            
                                         <div style="font-size:13px;">
 
                                             <strong>
-
+         Amount in Words:
                                                 <span t-esc="o.currency_id.name"/>
                                                 <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
                                                 only.
@@ -643,7 +643,7 @@
                                                 ">
                                                     Sub Total
                                                 </td> <td style="padding:5px;">
-                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
+               <span t-raw="'%.2f' % o.amount_untaxed"/>
                 </td>
 
                                             </tr>
