@@ -7,16 +7,13 @@
     @page {
          margin: 20mm 0mm 25mm 0mm; /* bottom margin reserved for footer */
     }
-
-    .fixed-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 20mm;
-        font-size: 11px;
-        color: #555;
-    }
+.fixed-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 35mm;
+}
 </style>
 <meta charset="UTF-8"/>
 <t t-foreach="docs" t-as="o">
@@ -745,118 +742,108 @@
 
                 </main>
                    <!-- FOOTER CONTENT -->
-                                  <div class="fixed-footer">
-                                  <div style="
-    margin-top:8px;
-    font-size:12px;
-    color:#888888;
-    font-style:italic;
-    padding-bottom:2px;
-">
-    This document is electronically generated and valid without signature or company stamp.
-</div>
-                            <table style="
-                                width:100%;
-                                border-collapse:collapse;
-                                font-size:11px;
-                                color:#555; border-top:1px solid #1f3b73;
-    padding-top:6px; 
-                            ">
+                          <!-- FOOTER -->
+<div class="fixed-footer">
 
-                                <tr>
+    <!-- FOOTER TEXT -->
+    <div style="
+        padding:0 40px;
+        font-size:11px;
+        color:#555;
+    ">
 
-                                    <td style="
-                                        padding:20px 40px;
-                                        text-align:center;
-                                    ">
-                                      
-                                      
+        <div style="
+            margin-bottom:5px;
+            color:#888;
+            font-style:italic;
+        ">
+            This document is electronically generated and valid without signature or company stamp.
+        </div>
 
-                                        <t t-if="o.company_id.street2">
-                                            <span t-esc="o.company_id.street2"/>
-                                        </t>
+        <div style="
+            border-top:1px solid #1f3b73;
+            padding-top:6px;
+            text-align:center;
+        ">
 
-                                        ,
-                                        <span t-esc="o.company_id.city or ''"/>
+            <t t-if="o.company_id.street2">
+                <span t-esc="o.company_id.street2"/>
+            </t>
 
-                                        -
-                                        <span t-esc="o.company_id.country_id.name or ''"/>
-<br/>
-                                       
+            ,
+            <span t-esc="o.company_id.city or ''"/>
+            -
+            <span t-esc="o.company_id.country_id.name or ''"/>
 
-                                        CR No:
-                                        <span t-esc="o.company_id.company_registry or 'N/A'"/>
+            <br/>
 
-                                        |
+            CR No:
+            <span t-esc="o.company_id.company_registry or 'N/A'"/>
 
-                                        <span t-esc="o.company_id.email or ''"/>
+            |
 
-                                        |
+            <span t-esc="o.company_id.email or ''"/>
 
-                                        <span t-esc="o.company_id.website or ''"/>
-<br/>
+            |
 
+            <span t-esc="o.company_id.website or ''"/>
 
-                                    </td>
+        </div>
 
-                                </tr>
+    </div>
 
-                            </table>
+    <!-- FULL BLEED BAR -->
+    <div style="
+        position:absolute;
+        left:-10mm;
+        bottom:0;
+        width:230mm;
+        height:22px;
+        overflow:hidden;
+    ">
 
-                          
-                           <!-- FULL WIDTH FOOTER BORDER -->
-<div style="
-    position:absolute;
-    left:-10mm;
-    right:-10mm;
-    bottom:0;
-    width:calc(100% + 20mm);
-    height:25px;
-    margin:0;
-    padding:0;
-">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="230mm"
+             height="22"
+             viewBox="0 0 1000 22"
+             preserveAspectRatio="none"
+             style="display:block;">
 
-    <svg xmlns="http://www.w3.org/2000/svg"
-         style="display:block;"
-         width="100%"
-         height="25"
-         viewBox="0 0 1000 25"
-         preserveAspectRatio="none">
+            <defs>
 
-        <defs>
+                <linearGradient id="footerGradient"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="0%">
 
-            <linearGradient id="blueOrangeGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="0%">
+                    <stop offset="0%"
+                          stop-color="#1f3b73"/>
 
-                <stop offset="0%"
-                      stop-color="#1f3b73"/>
+                    <stop offset="40%"
+                          stop-color="#1f3b73"/>
 
-                <stop offset="35%"
-                      stop-color="#1f3b73"/>
+                    <stop offset="60%"
+                          stop-color="#e58b39"/>
 
-                <stop offset="55%"
-                      stop-color="#e58b39"/>
+                    <stop offset="100%"
+                          stop-color="#e58b39"/>
 
-                <stop offset="100%"
-                      stop-color="#e58b39"/>
+                </linearGradient>
 
-            </linearGradient>
+            </defs>
 
-        </defs>
+            <rect x="0"
+                  y="0"
+                  width="1000"
+                  height="22"
+                  fill="url(#footerGradient)"/>
 
-        <rect x="0"
-              y="0"
-              width="1000"
-              height="25"
-              fill="url(#blueOrangeGradient)"/>
+        </svg>
 
-    </svg>
+    </div>
 
-</div>
-       </div>    
+</div>   
 
             </t>
 
