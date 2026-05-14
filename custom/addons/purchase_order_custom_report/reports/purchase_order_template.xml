@@ -73,8 +73,8 @@
 
                                             <br/>
 
-                                          <strong>  TRN <span t-esc="o.company_id.vat or ''"/></strong>
-
+                                        <div>  <strong>  TRN <span t-esc="o.company_id.vat or ''"/></strong>
+ </div>
                                         </div>
 
                                     </td>
@@ -226,9 +226,9 @@
 
                                                     <br/>
 
-                                                   <t t-if="o.partner_id.vat">
-    TRN <span t-esc="o.partner_id.vat"/>
-</t>
+                                                 <div>  <t t-if="o.partner_id.vat">
+<strong>    TRN <span t-esc="o.partner_id.vat"/></strong>
+</t></div>
 
                                                 </td>
 
@@ -650,16 +650,15 @@
                                                     Total
                                                 </td>
 
-                                                <td style="
-                                                    padding:10px 5px;
-                                                    font-weight:bold;
-                                                ">
-<span t-field="o.amount_total"
-      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                    <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
+                                               <td style="
+    padding:10px 5px;
+    font-weight:bold;
+">
 
-                                                </td>
+    <span t-field="o.amount_total"
+          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
 
+</td>
                                             </tr>
 
                                         </table>
@@ -719,8 +718,9 @@
     font-size:12px;
     color:#888888;
     font-style:italic;
+    padding-bottom:2px;
 ">
-    This purchase order is electronically generated and valid without signature or company stamp.
+    This document is electronically generated and valid without signature or company stamp.
 </div>
                             <!-- FOOTER CONTENT -->
                             <table style="
