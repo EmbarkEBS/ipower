@@ -19,7 +19,6 @@
                         <!-- MAIN CONTENT WRAPPER -->
                         <div style="
                             padding:10px 40px 40px 40px;
-                          font-family:'DejaVu Sans' !important;
                             font-size:11px;
                             color:#333;
                             line-height:1.4;
@@ -659,7 +658,6 @@
                               <td style="
     padding:10px 5px;
     font-weight:bold;
-font-family:'DejaVu Sans' !important;
 ">
 <span t-esc="o.currency_id.symbol"/><span t-raw="o.currency_id.symbol.encode('ascii', 'xmlcharrefreplace').decode()"/>
 <span t-esc="'{:,.2f}'.format(o.amount_total)"/>
@@ -714,7 +712,6 @@ font-family:'DejaVu Sans' !important;
                         <!-- ===================================================== -->
 
                         <div class="footer" style="
-                         font-family:'DejaVu Sans' !important;
                             margin:0;
                             padding:0;
                             width:100%;
