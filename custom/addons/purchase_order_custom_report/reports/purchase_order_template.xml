@@ -22,7 +22,7 @@
                             padding:10px 40px 40px 40px;
                             font-size:11px;
                             color:#333;
-                            line-height:1.4;  font-family:sans-serif;
+                            line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;
                         ">
 
                             <!-- ===================================================== -->
@@ -630,9 +630,10 @@
                                     <td style="
                                         width:55%;
                                         vertical-align:middle;
+                                         font-size:15px;
                                         padding-top:40px;text-align:right;
                                     ">
- <strong>Amount in Words:</strong><br/>
+ <strong>Amount in Words</strong><br/>
                                         <div style="font-size:13px;">
 
                                             <strong>
