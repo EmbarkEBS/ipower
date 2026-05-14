@@ -660,8 +660,8 @@
     font-weight:bold;
  font-family: 'DejaVu Sans', sans-serif;
 ">
-<span t-field="o.amount_total"
-      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+<span t-esc="o.currency_id.symbol"/>
+<span t-esc="'{:,.2f}'.format(o.amount_total)"/>
  </td>
                                             </tr>
 
