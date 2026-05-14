@@ -805,30 +805,30 @@
 
                           
                            <!-- FULL WIDTH FOOTER BORDER -->
-    <div style="
-        width:auto;
-        height:25px;
-        overflow:hidden;
-        margin-top:5px;
-    ">
+   <div style="
+    width:100%;
+    height:25px;
+    margin-top:5px;
+">
 
-        <svg width="100%"
-            height="25"
-            viewBox="0 0 1000 25"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg">
+    <svg width="100%"
+         height="25"
+         viewBox="0 0 1000 25"
+         preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg"
+         style="display:block;">
 
-            <!-- BLUE 25% -->
-            <polygon points="0,0 260,0 240,25 0,25"
-                    fill="#1f3b73"/>
+        <!-- BLUE 25% -->
+        <polygon points="0,0 260,0 240,25 0,25"
+                 fill="#1f3b73"/>
 
-            <!-- ORANGE 75% -->
-            <polygon points="260,0 1000,0 1000,25 240,25"
-                    fill="#e58b39"/>
+        <!-- ORANGE 75% -->
+        <polygon points="260,0 1000,0 1000,25 240,25"
+                 fill="#e58b39"/>
 
-        </svg>
+    </svg>
 
-    </div>
+</div>
        </div>    
 
             </t>
