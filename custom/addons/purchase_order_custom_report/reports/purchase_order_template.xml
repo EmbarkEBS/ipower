@@ -3,55 +3,6 @@
 <template id="purchase_order_template">
 
 <t t-call="web.html_container">
-<style>
-    @page {
-        size: A4;
-        margin: 0mm !important;
-    }
-
-    html,
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 210mm;
-    }
-
-    body > div {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .article,
-    .page,
-    .o_report_layout,
-    .o_main_table,
-    .o_standard_footer,
-    .o_standard_header,
-    main {
-        margin: 0 !important;
-        padding: 0 !important;
-        border: 0 !important;
-    }
-
-    .page {
-        position: relative;
-        width: 210mm;
-        min-height: 297mm;
-        box-sizing: border-box;
-
-        /* YOUR CONTENT SPACE */
-        padding: 8mm 15mm 28mm 15mm !important;
-
-        overflow: hidden;
-    }
-.fixed-footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 35mm;
-}
-</style>
 <meta charset="UTF-8"/>
 <t t-foreach="docs" t-as="o">
 
@@ -60,540 +11,159 @@
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
 <main>
-<div class="page" style=" padding:10px 40px 40px 40px;
-                            color:#333;
-                            line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;">
+<div class="page" style="padding:10px 20px 60px 20px; font-size:12px; line-height:1.4; position:relative; min-height:1000px;">
 
     <!-- HEADER -->
-    <table style="
-                                width:100%;
-                                border-collapse:collapse;
-                                margin-bottom:20px;
-                            ">
-
-                                <tr>
-
-                                    <!-- COMPANY -->
-                                    <td style="
-                                        width:60%;
-                                        vertical-align:top;
-                                    ">
-
-                                        <img t-if="o.company_id.logo"
-                                             t-att-src="image_data_uri(o.company_id.logo)"
-                                             style="
-                                                max-height:80px;
-                                                margin-bottom:10px;
-                                                margin-left:-30px;
-                                             "/>
-
-                                        <div style="
-                                            font-size:13px;
-                                            line-height:1.7;
-                                        ">
-
-                                            <strong style="
-                                                color:#1a3a5a;
-                                                font-size:15px;
-                                            ">
-                                                <span t-esc="o.company_id.name"/>
-                                            </strong>
-
-                                            <br/>
-
-                                            <span t-esc="o.company_id.street or ''"/>,
-
-                                          
-                                           
-                                            <t t-if="o.company_id.state_id">
-                                                 <span t-esc="o.company_id.state_id.name"/>
-                                            </t>
-
-                                            <br/>
-
-                                            <span t-esc="o.company_id.country_id.name or ''"/>
-
-                                            <br/>
-
-                                        <p  style="margin-top:15px"> <strong>  TRN <span t-esc="o.company_id.vat or ''"/></strong></p>
-
-                                        </div>
-
-                                    </td>
-
-                                    <!-- PURCHASE ORDER -->
-                                    <td style="
-                                        width:40%;
-                                        vertical-align:top;
-                                        text-align:right;
-                                    ">
-
-                                        <h1 style="
-                                            margin:0;
-                                            font-size:28px;
-                                            font-weight:bold;
-                                            color:#000;
-                                            margin-top:20px;
-                                        ">
-                                            PURCHASE ORDER
-                                        </h1>
-
-                                <div style="
-    width:300px;
-    margin:5px auto;
-    text-align:center;
-">
-
-<svg width="300"
-     height="4"
-     xmlns="http://www.w3.org/2000/svg">
-
-    <defs>
-
-        <!-- HORIZONTAL ORANGE FADE -->
-        <linearGradient id="horizontalFade"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="0%">
-
-            <!-- longer solid orange -->
-            <stop offset="0%"
-                  stop-color="#f39223"
-                  stop-opacity="1"/>
-
-            <stop offset="82%"
-                  stop-color="#f39223"
-                  stop-opacity="1"/>
-
-            <!-- smooth fade -->
-            <stop offset="100%"
-                  stop-color="#f39223"
-                  stop-opacity="0"/>
-
-        </linearGradient>
-
-    </defs>
-
-    <!-- longer centered line -->
-    <rect x="90"
-          y="1"
-          width="155"
-          height="2"
-          fill="url(#horizontalFade)"/>
-
-</svg>
-
-</div>
-                                        <div style="
-                                            font-size:16px;
-                                            text-align:center;margin-top:10px;
-                                        ">
-
-                                            #
-                                            <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
-                            </table>
-
-  
-     <!-- ===================================================== -->
-                            <!-- ADDRESS + META -->
-                            <!-- ===================================================== -->
-
-                            <table style="
-                                width:100%;
-                                font-size:13px;
-                                border-collapse:collapse;
-                                margin-top:35px;
-                                margin-bottom:35px;
-                            ">
-
-                                <tr>
-
-                                    <!-- ADDRESS -->
-                                    <td style="
-                                        width:55%;font-size:13px;
-                                        vertical-align:top;
-                                    ">
-
-                                        <table style="
-                                            width:100%;font-size:13px;
-                                            border-collapse:collapse;
-                                        ">
-  <strong style="color:#1a3a5a;">
-                                                        To
-                                                    </strong>
-
-                                                   
-                                            <tr>
-
-                                                <!-- ORANGE BORDER -->
-                                              <td style="
-    width:8px;
-    padding:0;
-    vertical-align:top;
-">
-
-    <svg width="8"
-         height="130"
-         xmlns="http://www.w3.org/2000/svg">
-
-        <defs>
-
-            <!-- VERTICAL ORANGE FADE -->
-            <linearGradient id="verticalFade"
-                            x1="0%"
-                            y1="0%"
-                            x2="0%"
-                            y2="100%">
-
-                <stop offset="0%"
-                      stop-color="#f39223"
-                      stop-opacity="1"/>
-
-                <stop offset="100%"
-                      stop-color="#f39223"
-                      stop-opacity="0"/>
-
-            </linearGradient>
-
-        </defs>
-
-        <rect x="0"
-              y="0"
-              width="2"
-              height="130"
-              fill="url(#verticalFade)"/>
-
-    </svg>
-
-</td>
-                                                <td style="width:15px;">
-                                                </td>
-
-                                                <!-- ADDRESS CONTENT -->
-                                                <td style="
-                                                    vertical-align:top;
-                                                    font-size:13px;
-                                                    line-height:1.7;
-                                                ">
-
-                                                  
-
-                                                    <strong>
-                                                        <span t-esc="o.partner_id.name"/>
-                                                    </strong>
-
-                                                    <br/>
-
-                                                    <span t-esc="o.partner_id.street or ''"/>
-
-                                                    <t t-if="o.partner_id.street2">
-                                                        <br/>
-                                                        <span t-esc="o.partner_id.street2"/>
-                                                    </t>
-
-                                                    <br/>
-
-                                                    <span t-esc="o.partner_id.city or ''"/>
-
-                                                    <t t-if="o.partner_id.state_id">
-                                                         <span t-esc="o.partner_id.state_id.name"/>
-                                                    </t>
-
-                                                    -
-
-                                                    <span t-esc="o.partner_id.country_id.name or ''"/>
-
-                                                    <br/>
-
-                                                  <t t-if="o.partner_id.vat">
-<p  style="margin-top:15px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
-</t>
-
-                                                </td>
-
-                                            </tr>
-
-                                        </table>
-
-                                    </td>
-
-                                    <!-- META -->
-                                    <td style="
-                                        width:45%; font-size:13px;
-                                        vertical-align:top;
-                                        font-size:13px;
-                                        padding-left:40px;
-                                    ">
-
-                                        <table style="
-                                            width:100%;font-size:13px;
-                                            border-collapse:collapse;
-                                        ">
-
-                                            <tr>
-
-                                                <td style="
-                                                    padding:4px 0;
-                                                    width:45%;font-size:13px;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">
-                                                    Order Date
-                                                </td>
-
-                                                <td style="padding:4px 0;">
-
-                                                    :
-                                                    <span t-field="o.date_order"
-                                                          t-options='{"format": "dd MMMM yyyy"}'/>
-
-                                                </td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td style="
-                                                    padding:4px 0;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">
-                                                    Payment Terms
-                                                </td>
-
-                                                <td style="padding:4px 0;">
-
-                                                    :
-                                                    <span t-field="o.payment_term_id.name"/>
-
-                                                </td>
-                                                </tr>
-                                            
-
-                                            <tr>
-
-                                                <td style="
-                                                    padding:4px 0;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">
-                                               Incoterms
-                                                </td>
-
-                                                <td style="padding:4px 0;text-align:left">
-
-                                                    :
-                                                    <span t-field="o.partner_id.x_studio_incoterm.code"/>
-
-                                                </td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td style="
-                                                    padding:4px 0;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">
-                                                    Our Ref
-                                                </td>
-
-                                                <td style="padding:4px 0;">
-
-                                                    :
-                                                    <span t-field="o.origin"/>
-
-                                                </td>
-
-                                            </tr>
-
-                                        </table>
-
-                                    </td>
-
-                                </tr>
-
-                            </table>
-      <!-- ===================================================== -->
-                            <!-- PRODUCT TABLE -->
-                            <!-- ===================================================== -->
-
-                            <table style="
-                                width:100%;
-                                border-collapse:collapse;
-                                margin-bottom:20px;
-                            ">
-
-                                <thead>
-
-                                    <tr style="
-                                        background:#4b4b4b;
-                                        color:#fff;
-                                    ">
-
-                                        <th style="
-                                            padding:10px;
-                                            width:5%;
-                                            text-align:center;
-                                            border-top-left-radius:10px;
-                                            border-bottom-left-radius:10px;
-                                        ">
-                                            SN
-                                        </th>
-
-                                        <th style="
-                                            padding:10px;
-                                            width:55%;
-                                            text-align:center;
-                                        ">
-                                            Product Specification
-                                        </th>
-
-                                        <th style="
-                                            padding:10px;
-                                            width:7%;
-                                            text-align:center;
-                                        ">
-                                            Qty
-                                        </th>
-
-                                        <th style="
-                                            padding:10px;
-                                            width:11%;
-                                            text-align:right;
-                                        ">
-                                            Unit Price
-                                        </th>
-
-                                        <th style="
-                                            padding:10px;
-                                            width:12%;
-                                            text-align:right;
-                                            border-top-right-radius:10px;
-                                            border-bottom-right-radius:10px;
-                                        ">
-                                            Total Price
-                                        </th>
-
-                                    </tr>
-
-                                </thead>
-
-                                <tbody>
-
-                                    <t t-set="sn" t-value="1"/>
-
-                                    <t t-foreach="o.order_line" t-as="line">
-
-                                        <tr>
-
-                                            <!-- SN -->
-                                            <td style="
-                                               padding-top:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="sn"/>
-                                            </td>
-
-                                            <!-- DESCRIPTION -->
-                                            <td style="
-                                                padding-top:15px;
-                                                vertical-align:top;
-                                                width:55%;
-                                                white-space:normal;
-                                                word-break:break-word;
-                                            ">
-
-                                                <div style="
-                                                    font-weight:bold;
-                                                    margin-bottom:6px;
-                                                    font-size:15px;
-                                                    line-height:1.5;
-                                                    width:100%;
-                                                ">
-                                                    <!--<span t-field="line.product_id.display_name"/>-->
-                                                 
-                                                 <span t-field="line.product_id.name"/>
-                                                  </div>
-
-                                            
-                                            </td>
-
-                                            <!-- QTY -->
-                                            <td style="
-                                              padding-top:15px;
-                                              font-size:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="int(line.product_qty)"/>
-                                            </td>
-
-                                            <!-- UNIT PRICE -->
-                                            <td style="
-                                                padding-top:15px;
-                                                font-size:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
-                                            </td>
-
-                                            <!-- TOTAL -->
-                                            <td style="
-                                              padding-top:15px;
-                                              font-size:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                                            </td>
-
-                                        </tr>
-                                        <tr >
-                                        <td></td>
-                                        <td  colspan="4" style="
-                                          font-weight:bold;
-                                          font-size:12px;
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">                                
-                    <span>Ordering Code: </span>      <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+    <table style="width:100%;">
+        <tr>
+            <td style="width:60%;">
+                <strong>
+                    <span t-esc="o.company_id.name"/>
+                </strong>,<br/>
+
+                <span t-esc="o.company_id.partner_id.street or ''"/>,<br/>
+                <span t-esc="o.company_id.partner_id.city or ''"/>,<br/>
+                <span t-esc="o.company_id.partner_id.country_id.name if o.company_id.partner_id.country_id else ''"/>
+            </td>
+
+            <td style="width:40%; text-align:right;">
+                <img t-if="o.company_id.logo"
+                     t-att-src="image_data_uri(o.company_id.logo)"
+                     style="height:60px;"/>
+            </td>
+        </tr>
+    </table>
+
+    <!-- SHIPPING + PO DETAILS -->
+    <table style="width:100%; margin-top:20px;">
+        <tr>
+
+            <!-- SHIPPING -->
+            <td style="width:50%;">
+                <strong>To</strong><br/>
+
+                <t t-set="addr" t-value="(o.dest_address_id or o.partner_id)"/>
+
+                <span t-esc="addr.name"/>,<br/>
+
+                <t t-if="addr.street">
+                    <span t-esc="addr.street"/>,<br/>
+                </t>
+
+                <t t-if="addr.city">
+                    <span t-esc="addr.city"/>,<br/>
+                </t>
+
+                <t t-if="addr.country_id">
+                    <span t-esc="addr.country_id.name"/>
+                </t>
+            </td>
+
+            <!-- PO DETAILS -->
+            <td style="width:50%; position:relative;">
+                <div style="float:right; width:260px; text-align:left;">
+
+                   
+
+                    <table style="width:100%;">
                       
-</td></tr>
-<tr style="border-bottom:1px solid #d9d9d9;">
-                                        <td></td>
-                                        <td  colspan="4" style="
-                                           padding-botton:15px;
-                                            font-size:12px;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">                               
 
-                                                    <span t-esc="line.product_id.description or ''"/>
+                        <tr>
+                            <td><strong>Order Date</strong></td>
+                            <td>
+                                <span t-esc="o.date_order.strftime('%d-%m-%Y') if o.date_order else ''"/>
+                            </td>
+                        </tr>
 
-                                 
-                                  
-                                                </td></tr>
-                                        <t t-set="sn" t-value="sn + 1"/>
+                        <t t-if="o.incoterm_id">
+                            <tr>
+                                <td><strong>Incoterm</strong></td>
+                                <td><span t-esc="o.incoterm_id.code"/></td>
+                            </tr>
+                        </t>
+ <t t-if="o.origin" class="col-3">
+  <tr>
+                    <td> <strong>Sales Order:</strong> </td>
+                    <td> <p t-field="o.origin" class="m-0"/> </td>
+                    </tr>
+                </t>
+                        <t t-if="o.payment_term_id">
+                            <tr>
+                                <td><strong>Payment Terms</strong></td>
+                                <td><span t-esc="o.payment_term_id.name"/></td>
+                            </tr>
+                        </t>
+                    </table>
 
-                                    </t>
+                </div>
+            </td>
 
-                                </tbody>
+        </tr>
+    </table>
+  <div>
+                            <p style="color:#f26836 ;font-size:20px;"> <strong><span>Purchase Order </span>
+                            
+                                <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
+                          </strong>  </p>
+                        </div>
+    <!-- LINE HEADER -->
+    <table style="width:100%; margin-top:20px; background-color:#fff5e6;">
+        <tr>
+            <th style="width:5%;">S.No</th>
+            <th style="width:45%;">Description</th>
+            <th style="width:10%; text-align:center;">Qty</th>
+           <th style="width:15%; text-align:right;">Unit Price</th>
+            <th style="width:15%; text-align:right;">Total Price</th>
+        </tr>
+    </table>
 
-                            </table>
+    <!-- LINES -->
+    <t t-set="i" t-value="0"/>
+    <t t-foreach="o.order_line" t-as="line">
+        <t t-set="i" t-value="i+1"/>
+
+        <table style="width:100%; margin-top:4px;">
+            <tr>
+                <td style="width:5%;" t-esc="i"/>
+
+                <td style="width:45%;">
+                    <span t-esc="line.name"/>
+                </td>
+
+                <td style="width:10%; text-align:center;">
+                   <span t-esc="int(round(line.product_qty))"/>
+                </td>
+
+              <!-- <td style="width:10%; text-align:center;">
+                    <t t-set="seller" t-value="line.product_id.seller_ids.filtered(lambda s: s.partner_id == o.partner_id)[:1]"/>
+                    <t t-if="seller">
+                        <span t-esc="seller.delay"/>
+                    </t>
+                </td>--> 
+
+                <!-- ✅ SAFE CURRENCY -->
+              <td style="width:15%; text-align:right;">
+    <span t-esc="'%.2f' % line.price_unit"/>
+</td>
+
+<td style="width:15%; text-align:right;">
+    <span t-esc="'%.2f' % line.price_subtotal"/>
+</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td colspan="5">
+                    <small t-esc="line.product_id.description or ''"/>
+                    <div>
+                        <strong>
+                            <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                        </strong>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </t>
 <!-- SHIPPING DETAILS (ONLY FOR FREIGHT FORWARDER) -->
 <t t-if="o.partner_id.category_id.filtered(lambda c: c.name == 'Freight Forwarders')">
 
@@ -652,240 +222,71 @@
 
 </t>
     <!-- TOTAL -->
-    <table style="width:100%; margin-top:20px border-collapse:collapse;">
+    <table style="width:100%; margin-top:20px;">
     <tr>
 
         <!-- LEFT: AMOUNT IN WORDS -->
-        <td style="  width:55%;
-                                        vertical-align:middle;
-                                         font-size:15px;
-                                        padding-top:40px;text-align:left;">
-   
-           
-                                        <div style="font-size:13px;">
-
-                                            <strong>
-         Amount in Words:
-                                                <span t-esc="o.currency_id.name"/>
-                                                <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
-                                                only.
-
-                                            </strong>
-
-                                        </div>
+        <td style="width:60%;">
+            <strong>Amount in Words:</strong><br/>
+            <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> Only
         </td>
 
         <!-- RIGHT: TOTAL BOX -->
-        <td style="width:45%; ">
+        <td style="width:40%; text-align:right;">
 
-         <table style="
-                                            width:100%;
-                                            border-collapse:collapse;
-                                            text-align:right;
-                                        ">
+            <div style="width:220px; margin-left:auto;">
 
-                                            <tr>
-
-                                                <td style="
-                                                    padding:5px;
-                                                    font-weight:bold;
-                                                ">
-                                                    Sub Total
-                                                </td> <td style="padding:5px;">
+                <!-- TOP BORDER (SUBTOTAL START) -->
+                <div style="border-top:1px solid #000; padding-top:5px;">
+                    Subtotal :
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
-                </td>
+                </div>
 
-                                            </tr>
-
-                                            <tr>
-
-                                                <td style="
-                                                    padding:5px;
-                                                    font-weight:bold;
-                                                ">
-                                                    VAT (5%)
-                                                </td>
-
-                                                <td style="padding:5px;">
+                <!-- TAX -->
+                <div style="padding:3px 0;">
+                    Tax :
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
-                  </td>
+                </div>
 
-                                            </tr>
+                <!-- BOTTOM BORDER (AFTER TAX) -->
+                <div style="border-bottom:1px solid #000; margin-bottom:5px;"></div>
 
-                                            <tr style="
-                                                font-size:16px;
-                                                color:#1a3a5a;
-                                            ">
-
-       <td style="
-        padding:10px 5px;
-        font-weight:bold;
-    ">
-        Total
-    </td>
-
-    <td style="
-        padding:10px 5px;
-        font-weight:bold;
-    ">
+                <!-- TOTAL -->
+                <div style="font-weight:bold;">
+                    Total :
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
-               </td>
+                </div>
 
-                                            </tr>
+            </div>
 
-                                        </table>
+        </td>
 
-                                    </td>
-
-                                </tr>
-
-                            </table>
-
- <!-- ===================================================== -->
-                            <!-- NOTES -->
-                            <!-- ===================================================== -->
-
-                            <div style="margin-top:60px;">
-
-                                <strong style="
-                                    font-size:14px;
-                                    border-bottom:1px solid #e58b39;
-                                    padding-bottom:2px;
-                                ">
-                                    Notes
-                                </strong>
-
-                                <div style="
-                                    margin-top:10px;
-                                      font-size:12px;
-                                    color:#555;
-                                ">
-
-                                    <t t-if="o.note">
-                                        <span t-field="o.note"/>
-                                    </t>
-
-                                    <t t-else="">
-                                        Thanks for giving us the opportunity to serve you
-                                    </t>
-
-                                </div>
-
-                            </div>
-
-                                           
-
-                    </div>
-
-                </main>
-                   <!-- FOOTER CONTENT -->
-                          <!-- FOOTER -->
-<div class="fixed-footer">
-
-    <!-- FOOTER TEXT -->
-    <div style="
-        padding:0 40px;
-        font-size:11px;
-        color:#555;
-    ">
-
-        <div style="
-            margin-bottom:5px;
-            color:#888;
-            font-style:italic;
-        ">
-            This document is electronically generated and valid without signature or company stamp.
-        </div>
-
-        <div style="
-            border-top:1px solid #1f3b73;
-            padding-top:6px;
-            text-align:center;
-        ">
-
-            <t t-if="o.company_id.street2">
-                <span t-esc="o.company_id.street2"/>
-            </t>
-
-            ,
-            <span t-esc="o.company_id.city or ''"/>
-            -
-            <span t-esc="o.company_id.country_id.name or ''"/>
-
-            <br/>
-
-            CR No:
-            <span t-esc="o.company_id.company_registry or 'N/A'"/>
-
-            |
-
-            <span t-esc="o.company_id.email or ''"/>
-
-            |
-
-            <span t-esc="o.company_id.website or ''"/>
-
-        </div>
+    </tr>
+</table>
+ <p t-field="o.note" class="mt-4"/>
+    <!-- FOOTER -->
+    <div style="position: fixed;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+    border-top: 1px solid #aaa;
+    padding-top: 25px;
+    font-size: 10px;">
+        
+        <strong t-esc="o.company_id.name"/> |
+        <span t-esc="o.company_id.partner_id.street or ''"/> ,
+        <span t-esc="o.company_id.partner_id.city or ''"/> ,
+        <span t-esc="o.company_id.partner_id.country_id.name or ''"/>
 
     </div>
 
-    <!-- FULL BLEED BAR -->
-   <!-- ABSOLUTE FULL WIDTH BAR -->
-<div style="
-    position:fixed;
-    bottom:0;
-    left:-25mm;
-    width:297mm;
-    height:22px;
-    z-index:9999;
-">
-
-    <svg xmlns="http://www.w3.org/2000/svg"
-         width="297mm"
-         height="22"
-         viewBox="0 0 297 22"
-         preserveAspectRatio="none"
-         style="display:block;">
-
-        <defs>
-
-            <linearGradient id="footerGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="0%">
-
-                <stop offset="0%"
-                      stop-color="#1f3b73"/>
-
-                <stop offset="45%"
-                      stop-color="#1f3b73"/>
-
-                <stop offset="60%"
-                      stop-color="#e58b39"/>
-
-                <stop offset="100%"
-                      stop-color="#e58b39"/>
-
-            </linearGradient>
-
-        </defs>
-
-        <rect x="0"
-              y="0"
-              width="297"
-              height="22"
-              fill="url(#footerGradient)"/>
-
-    </svg>
-
 </div>
+</main>
 
-</div>   
+</t>
+</t>
 
-            </t>
+</template>
 
-        </t>
-
-    </template>
 </odoo>
