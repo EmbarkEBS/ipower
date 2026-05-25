@@ -260,7 +260,6 @@
             </div>
 
         </td>
-
     </tr>
 </table>
  <p t-field="o.note" class="mt-4"/>
