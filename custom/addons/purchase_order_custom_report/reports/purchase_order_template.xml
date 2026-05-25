@@ -1,37 +1,44 @@
 <odoo>
+  <!-- CUSTOM PAPER FORMAT -->
+    <record id="paperformat_purchase_custom" model="report.paperformat">
+        <field name="name">Purchase Order Full Width</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+
+        <!-- REMOVE PDF MARGINS -->
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+
+        <!-- REMOVE HEADER SPACE -->
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+
+        <field name="dpi">90</field>
+    </record>
+
+
+    <!-- REPORT ACTION -->
+    <record id="action_purchase_order_report" model="ir.actions.report">
+        <field name="paperformat_id"
+               ref="purchase_order_custom_report.paperformat_purchase_custom"/>
+    </record>
 
 <template id="purchase_order_template">
 
 <t t-call="web.html_container">
 <style>
-
-@page {
-    margin-top: 0mm !important;
-    margin-bottom: 0mm !important;
-    margin-left: 8mm !important;
-    margin-right: 8mm !important;
-}
-
-.page {
-    padding: 0 !important;
+body {
     margin: 0 !important;
-}
-
-main {
     padding: 0 !important;
-    margin: 0 !important;
 }
-
 .fixed-footer {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     height: 35mm;
-}
-body {
-    margin: 0 !important;
-    padding: 0 !important;
 }
 </style>
 <meta charset="UTF-8"/>
@@ -42,12 +49,10 @@ body {
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
 <main>
-<div class="page" style="
-    margin:0;
-    padding:0;
-    color:#333;
-    line-height:1.4;
-    font-family: Helvetica, Arial, sans-serif !important;">
+<div class="page" style=" 
+                            color:#333;
+                            line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;">
+
     <!-- HEADER -->
     <table style="
                                 width:100%;
@@ -117,6 +122,7 @@ body {
                                             font-size:28px;
                                             font-weight:bold;
                                             color:#000;
+                                            margin-top:20px;
                                         ">
                                             PURCHASE ORDER
                                         </h1>
