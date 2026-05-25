@@ -1,47 +1,16 @@
 <odoo>
-  <!-- CUSTOM PAPER FORMAT -->
-    <record id="paperformat_purchase_custom" model="report.paperformat">
-        <field name="name">Purchase Order Full Width</field>
-        <field name="default" eval="False"/>
-        <field name="format">A4</field>
-
-        <!-- REMOVE PDF MARGINS -->
-        <field name="margin_top">0</field>
-        <field name="margin_bottom">0</field>
-        <field name="margin_left">5</field>
-        <field name="margin_right">5</field>
-
-        <!-- REMOVE HEADER SPACE -->
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">0</field>
-
-        <field name="dpi">90</field>
-    </record>
-
-
-    <!-- REPORT ACTION -->
-    <record id="purchase.action_report_purchase_order"
-        model="ir.actions.report">
-
-    <field name="paperformat_id"
-           ref="purchase_order_custom_report.paperformat_purchase_custom"/>
-
-</record>
 
 <template id="purchase_order_template">
 
 <t t-call="web.html_container">
 <style>
-body {
-    margin: 0 !important;
-    padding: 0 !important;
-}
+
 .fixed-footer {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 35mm;
+    height: 22px;
 }
 </style>
 <meta charset="UTF-8"/>
@@ -52,7 +21,7 @@ body {
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
 <main>
-<div class="page" style=" 
+<div class="page" style=" padding:0px 40px 0px 40px;
                             color:#333;
                             line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;">
 
