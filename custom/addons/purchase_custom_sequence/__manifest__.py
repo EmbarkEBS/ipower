@@ -4,6 +4,8 @@
     'category': 'Purchase',
     'summary': 'Separate RFQ and PO Sequence',
     'depends': ['purchase'],
+    'depends': ['base', 'sale', 'stock', 'account','purchase' , 'crm','sale_management', 'stock'],
+     'author': 'Embark',
     'data': [
         'data/sequence.xml',
         'views/purchase_order_views.xml',
