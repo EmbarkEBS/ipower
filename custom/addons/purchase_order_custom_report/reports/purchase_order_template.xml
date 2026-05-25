@@ -20,10 +20,13 @@
 
 
     <!-- REPORT ACTION -->
-    <record id="action_purchase_order_report" model="ir.actions.report">
-        <field name="paperformat_id"
-               ref="purchase_order_custom_report.paperformat_purchase_custom"/>
-    </record>
+    <record id="purchase.action_report_purchase_order"
+        model="ir.actions.report">
+
+    <field name="paperformat_id"
+           ref="purchase_order_custom_report.paperformat_purchase_custom"/>
+
+</record>
 
 <template id="purchase_order_template">
 
