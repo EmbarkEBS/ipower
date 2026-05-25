@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 22px;
+    height: 55mm;
 }
 </style>
 <meta charset="UTF-8"/>
@@ -21,7 +21,7 @@
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
 <main>
-<div class="page" style=" padding:0px 40px 0px 40px;
+<div class="page" style=" padding:-10px 40px 0px 40px;
                             color:#333;
                             line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;">
 
