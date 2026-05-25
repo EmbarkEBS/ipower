@@ -4,9 +4,7 @@
 
 <t t-call="web.html_container">
 <style>
-    @page {
-         margin: 20mm 0mm 30mm 0mm; /* bottom margin reserved for footer */
-    }
+  
 .fixed-footer {
     position: fixed;
     left: 0;
