@@ -5,12 +5,33 @@
 <t t-call="web.html_container">
 <style>
 
+@page {
+    margin-top: 0mm !important;
+    margin-bottom: 0mm !important;
+    margin-left: 8mm !important;
+    margin-right: 8mm !important;
+}
+
+.page {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+main {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 .fixed-footer {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     height: 35mm;
+}
+body {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 </style>
 <meta charset="UTF-8"/>
@@ -21,10 +42,12 @@
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
 <main>
-<div class="page" style=" 
-                            color:#333;
-                            line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;">
-
+<div class="page" style="
+    margin:0;
+    padding:0;
+    color:#333;
+    line-height:1.4;
+    font-family: Helvetica, Arial, sans-serif !important;">
     <!-- HEADER -->
     <table style="
                                 width:100%;
