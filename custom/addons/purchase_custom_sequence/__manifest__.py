@@ -4,6 +4,8 @@
     'category': 'Purchase',
     'summary': 'Separate RFQ and PO Sequence',
     'depends': ['purchase'],
+     'author': 'Embark',
+    'license': 'LGPL-3',
     'data': [
         'data/sequence.xml',
         'views/purchase_order_views.xml',
