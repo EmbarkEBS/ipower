@@ -5,7 +5,44 @@
 <t t-call="web.html_container">
 <style>
     @page {
-         margin: 20mm 0mm 30mm 0mm; /* bottom margin reserved for footer */
+        size: A4;
+        margin: 0mm !important;
+    }
+
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 210mm;
+    }
+
+    body > div {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .article,
+    .page,
+    .o_report_layout,
+    .o_main_table,
+    .o_standard_footer,
+    .o_standard_header,
+    main {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+    }
+
+    .page {
+        position: relative;
+        width: 210mm;
+        min-height: 297mm;
+        box-sizing: border-box;
+
+        /* YOUR CONTENT SPACE */
+        padding: 8mm 15mm 28mm 15mm !important;
+
+        overflow: hidden;
     }
 .fixed-footer {
     position: fixed;
