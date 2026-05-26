@@ -14,7 +14,7 @@
                         left: 0;
                         right: 0;
                         bottom: 0;
-                        height: 20mm;
+                        height: 22mm;
                     }
 
              @page {
@@ -645,7 +645,7 @@
         <td style="  width:55%;
                                         vertical-align:middle;
                                          font-size:15px;
-                                        padding-top:40px;padding-left:25px;text-align:left;">
+                                        padding-top:40px;padding-left:20px;text-align:left;">
    
            
                                         <div style="font-size:13px;">
@@ -731,7 +731,7 @@
                             <!-- NOTES -->
                             <!-- ===================================================== -->
 
-                            <div style="margin-top:60px;padding-left:25px;">
+                            <div style="margin-top:60px;padding-left:20px;">
 
                                 <strong style="
                                     font-size:14px;
