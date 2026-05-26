@@ -19,12 +19,12 @@
 
              @page {
         margin: 0px 40px 0px 40px !important;
-        padding: 0px 40px 0px 40px !important;
+        padding: 0 !important;
     }
 
     html, body {
-        margin: 0px 40px 0px 40px !important;
-        padding: 0px 40px 0px 40px !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .article {
@@ -33,7 +33,7 @@
     }
 
     .page {
-        margin: 0px 40px 0px 40px !important;
+        margin: 0 !important;
         padding: 0px 40px 0px 40px !important;
     }
 
@@ -637,7 +637,7 @@
     </div>
 
 </t>
-    <!-- TOTAL -->
+     <!-- TOTAL -->
     <table style="width:100%; margin-top:20px border-collapse:collapse;">
     <tr>
 
@@ -678,8 +678,7 @@
                                                 ">
                                                     Sub Total
                                                 </td> <td style="padding:5px;">
-                  <span t-field="o.amount_untaxed"
-      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
                 </td>
 
                                             </tr>
@@ -694,8 +693,7 @@
                                                 </td>
 
                                                 <td style="padding:5px;">
-                 <span t-field="o.amount_tax"
-      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
                   </td>
 
                                             </tr>
@@ -716,8 +714,7 @@
         padding:10px 5px;
         font-weight:bold;
     ">
-                <span t-field="o.amount_total"
-      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
                </td>
 
                                             </tr>
