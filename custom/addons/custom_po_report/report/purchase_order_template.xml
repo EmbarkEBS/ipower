@@ -1,7 +1,7 @@
 <odoo>
     <template id="purchase_order_template">
 
-        <t t-call="web.html_container">
+        <t t-call="web.basic_layout">
 
             <t t-foreach="docs" t-as="o">
 
@@ -14,14 +14,24 @@
                         height: 35mm;
                     }
 
-                    .page {
-                        padding-bottom: 140px;
-                    }
+                      @page {
+                    margin: 0mm;
+                }
+
+                body {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .page {
+                    margin: 0;
+                    padding: 0;
+                }
                 </style>
 <main>
                 <div class="page"
                      style="padding:10px 40px 40px 40px;
-                            color:#333;
+                            color:#333; margin:0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
 
