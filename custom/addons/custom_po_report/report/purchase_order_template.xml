@@ -271,10 +271,27 @@
                                                 ">
 
                                                   
+<!-- IF CONTACT EXISTS, SHOW COMPANY NAME -->
+<t t-if="o.partner_id.parent_id">
+    
+    <!-- COMPANY NAME -->
+    <strong>
+        <span t-esc="o.partner_id.parent_id.name"/>
+    </strong>
 
-                                                    <strong>
-                                                        <span t-esc="o.partner_id.name"/>
-                                                    </strong>
+    <br/>
+
+    <!-- CONTACT PERSON -->
+    <span t-esc="o.partner_id.name"/>
+
+</t>
+
+<!-- OTHERWISE NORMAL VENDOR -->
+<t t-else="">
+    <strong>
+        <span t-esc="o.partner_id.name"/>
+    </strong>
+</t>
 
                                                     <br/>
 
@@ -302,7 +319,13 @@
                                                   <t t-if="o.partner_id.vat">
 <p  style="margin-top:15px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
 </t>
-
+<!-- ATTN (only if contact person exists) -->
+<t t-if="o.partner_id.child_ids">
+    <p style="margin-top:5px">
+        <strong>Attn </strong>
+        <span t-esc="o.partner_id.child_ids[0].name"/>
+    </p>
+</t>
                                                 </td>
 
                                             </tr>
