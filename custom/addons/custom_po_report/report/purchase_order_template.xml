@@ -1,0 +1,166 @@
+<odoo>
+    <template id="purchase_order_template">
+
+        <t t-call="web.external_layout">
+
+            <t t-foreach="docs" t-as="o">
+
+                <style>
+                    .fixed-footer {
+                        position: fixed;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 35mm;
+                    }
+
+                    .page {
+                        padding-bottom: 140px;
+                    }
+                </style>
+
+                <div class="page"
+                     style="padding:10px 40px 40px 40px;
+                            color:#333;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
+
+                    <h1 style="font-size:28px;">
+                        PURCHASE ORDER
+                    </h1>
+
+                    <table style="width:100%; margin-top:20px;">
+                        <tr>
+                            <td>
+                                <strong>Vendor</strong><br/>
+                                <span t-field="o.partner_id"/>
+                            </td>
+
+                            <td style="text-align:right;">
+                                <strong>PO Number:</strong>
+                                <span t-field="o.name"/>
+                                <br/>
+
+                                <strong>Date:</strong>
+                                <span t-field="o.date_order"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%;
+                                  border-collapse:collapse;
+                                  margin-top:30px;">
+
+                        <thead>
+                            <tr style="background:#4b4b4b;color:#fff;">
+                                <th style="padding:10px;">SN</th>
+                                <th style="padding:10px;">Product</th>
+                                <th style="padding:10px;">Qty</th>
+                                <th style="padding:10px;">Unit Price</th>
+                                <th style="padding:10px;">Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <t t-set="sn" t-value="1"/>
+
+                            <t t-foreach="o.order_line" t-as="line">
+
+                                <tr style="border-bottom:1px solid #ddd;">
+                                    <td style="padding:10px;text-align:center;">
+                                        <span t-esc="sn"/>
+                                    </td>
+
+                                    <td style="padding:10px;">
+                                        <strong>
+                                            <span t-field="line.product_id.name"/>
+                                        </strong>
+
+                                        <br/>
+
+                                        <span t-esc="line.product_id.description or ''"/>
+                                    </td>
+
+                                    <td style="padding:10px;text-align:center;">
+                                        <span t-esc="int(line.product_qty)"/>
+                                    </td>
+
+                                    <td style="padding:10px;text-align:right;">
+                                        <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
+                                    </td>
+
+                                    <td style="padding:10px;text-align:right;">
+                                        <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                                    </td>
+                                </tr>
+
+                                <t t-set="sn" t-value="sn + 1"/>
+
+                            </t>
+
+                        </tbody>
+
+                    </table>
+
+                    <table style="width:40%;
+                                  margin-left:auto;
+                                  margin-top:30px;">
+
+                        <tr>
+                            <td><strong>Sub Total</strong></td>
+                            <td style="text-align:right;">
+                                <span t-field="o.amount_untaxed"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Tax</strong></td>
+                            <td style="text-align:right;">
+                                <span t-field="o.amount_tax"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td style="text-align:right;">
+                                <span t-field="o.amount_total"/>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <div style="margin-top:40px;">
+                        <strong>Notes</strong>
+                        <br/>
+
+                        <t t-if="o.note">
+                            <span t-field="o.note"/>
+                        </t>
+
+                        <t t-else="">
+                            Thanks for giving us the opportunity to serve you.
+                        </t>
+                    </div>
+
+                    <div class="fixed-footer">
+                        <div style="border-top:1px solid #1f3b73;
+                                    padding-top:10px;
+                                    text-align:center;
+                                    font-size:11px;">
+                            <span t-esc="o.company_id.name"/>
+                            |
+                            <span t-esc="o.company_id.website or ''"/>
+                            |
+                            <span t-esc="o.company_id.email or ''"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </t>
+
+        </t>
+
+    </template>
+</odoo>
