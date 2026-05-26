@@ -131,7 +131,13 @@
                     </table>
 
                     <div style="margin-top:40px;">
-                        <strong>Notes</strong>
+                         <strong style="
+                                    font-size:14px;
+                                    border-bottom:1px solid #e58b39;
+                                    padding-bottom:2px;
+                                ">
+                                    Notes
+                                </strong>
                         <br/>
 
                         <t t-if="o.note">
