@@ -675,7 +675,7 @@
                                                 ">
                                                     Sub Total
                                                 </td> <td style="padding:5px;">
-                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
+                   <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
                 </td>
 
                                             </tr>
@@ -711,7 +711,7 @@
         padding:10px 5px;
         font-weight:bold;
     ">
-                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+                    <span t-raw="(o.currency_id.symbol or '') + ' ' + ('%.2f' % o.amount_total)"/>
                </td>
 
                                             </tr>
