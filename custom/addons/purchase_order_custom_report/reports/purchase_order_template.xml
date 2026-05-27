@@ -1,19 +1,38 @@
 <odoo>
 
-<template id="purchase_order_template">
+<template id="purchase_order_template_custom">
 
 <t t-call="web.html_container">
+<div style="margin:0;padding:0;">
 <style>
     @page {
-         margin: 20mm 0mm 30mm 0mm; /* bottom margin reserved for footer */
+        margin: 0mm !important;
+        padding: 0 !important;
     }
-.fixed-footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 35mm;
-}
+
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .page {
+        margin: 0 !important;
+        padding: 0 40px !important;
+    }
+
+    main {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .fixed-footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+     height: auto;
+    }
+
 </style>
 <meta charset="UTF-8"/>
 <t t-foreach="docs" t-as="o">
@@ -22,10 +41,10 @@
 <t t-set="cur_symbol"
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
-<main>
-<div class="page" style=" padding:10px 40px 40px 40px;
-                            color:#333;
-                            line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important;">
+<div style="margin:0;padding:0;">
+<div class="page" style="margin:0 !important; padding:0 40px !important;color:#333;
+                            line-height:1.4;  font-family: Helvetica, Arial, sans-serif !important">
+
 
     <!-- HEADER -->
     <table style="
@@ -740,7 +759,7 @@
 
                     </div>
 
-                </main>
+                </div>
                    <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
 <div class="fixed-footer">
@@ -794,51 +813,29 @@
 
     <!-- FULL BLEED BAR -->
    <!-- ABSOLUTE FULL WIDTH BAR -->
+                           <!-- FULL WIDTH FOOTER BORDER -->
 <div style="
-    position:fixed;
-    bottom:0;
-    left:-25mm;
-    width:297mm;
-    height:22px;
-    z-index:9999;
+    width:auto;
+    height:25px;
+    overflow:hidden;
+    margin-top:5px;
+    margin-left:-40px;
+    margin-right:-50px;
 ">
 
-    <svg xmlns="http://www.w3.org/2000/svg"
-         width="297mm"
-         height="22"
-         viewBox="0 0 297 22"
+    <svg width="100%"
+         height="25"
+         viewBox="0 0 1000 25"
          preserveAspectRatio="none"
-         style="display:block;">
+         xmlns="http://www.w3.org/2000/svg">
 
-        <defs>
+        <!-- BLUE 25% -->
+        <polygon points="0,0 260,0 240,25 0,25"
+                 fill="#1f3b73"/>
 
-            <linearGradient id="footerGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="0%">
-
-                <stop offset="0%"
-                      stop-color="#1f3b73"/>
-
-                <stop offset="45%"
-                      stop-color="#1f3b73"/>
-
-                <stop offset="60%"
-                      stop-color="#e58b39"/>
-
-                <stop offset="100%"
-                      stop-color="#e58b39"/>
-
-            </linearGradient>
-
-        </defs>
-
-        <rect x="0"
-              y="0"
-              width="297"
-              height="22"
-              fill="url(#footerGradient)"/>
+        <!-- ORANGE 75% -->
+        <polygon points="260,0 1000,0 1000,25 240,25"
+                 fill="#e58b39"/>
 
     </svg>
 
@@ -847,7 +844,7 @@
 </div>   
 
             </t>
-
+</div>
         </t>
 
     </template>
