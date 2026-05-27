@@ -275,7 +275,6 @@
                                                     <strong>
                                                       <span t-esc="o.partner_id.parent_id.name if o.partner_id.parent_id else o.partner_id.name"/>
    
-                                                        <span t-esc="o.partner_id.name"/>
                                                     </strong>
 
                                                     <br/>
@@ -304,13 +303,22 @@
                                                   <t t-if="o.partner_id.vat">
 <p  style="margin-top:15px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
 </t>
+   
    <!-- ATTN ONLY IF CONTACT PERSON -->
-    <t t-if="o.partner_id.parent_id">
-        <p style="margin-top:5px">
-            <strong>Attn:</strong>
-            <span t-esc="o.partner_id.name"/>
-        </p>
-    </t>
+<t t-if="o.partner_id.parent_id">
+    <p style="margin-top:5px">
+
+        <strong>Attn:</strong>
+
+        <!-- Salutation -->
+        <t t-if="o.partner_id.title">
+            <span t-esc="o.partner_id.title.name"/>
+        </t>
+
+        <span t-esc="o.partner_id.name"/>
+
+    </p>
+</t>
                                                 </td>
 
                                             </tr>
