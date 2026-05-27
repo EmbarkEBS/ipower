@@ -6,16 +6,19 @@ class PurchaseOrder(models.Model):
 
     is_rfq = fields.Boolean(default=True)
 
-    @api.model
-    def create(self, vals):
-        if vals.get('name', 'New') == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'purchase.rfq'
-            ) or 'New'
+    @api.model_create_multi
+    def create(self, vals_list):
 
-        return super().create(vals)
+        for vals in vals_list:
+            if vals.get('name', 'New') == 'New':
+                vals['name'] = self.env['ir.sequence'].next_by_code(
+                    'purchase.rfq'
+                ) or 'New'
+
+        return super().create(vals_list)
 
     def button_confirm(self):
+
         for order in self:
             if order.is_rfq:
                 order.name = self.env['ir.sequence'].next_by_code(
