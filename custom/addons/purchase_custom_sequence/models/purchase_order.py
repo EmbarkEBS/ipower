@@ -8,7 +8,10 @@ class PurchaseOrder(models.Model):
         string='Direct Purchase Order',
         help='If enabled, PO sequence is generated directly.'
     )
-
+    original_rfq_name = fields.Char(
+        string='Original RFQ Number',
+        copy=False
+    )
     @api.model_create_multi
     def create(self, vals_list):
 
@@ -28,9 +31,12 @@ class PurchaseOrder(models.Model):
             # RFQ
             else:
 
-                vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'purchase.order.rfq'
-                ) or '/'
+                rfq_number = self.env['ir.sequence'].next_by_code(
+                        'purchase.order.rfq'
+                    ) or '/'
+
+                vals['name'] = rfq_number
+                vals['original_rfq_name'] = rfq_number
 
         return super().create(vals_list)
 
@@ -47,8 +53,26 @@ class PurchaseOrder(models.Model):
                 # Prevent duplicate conversion
                 if 'RFQ' in order.name:
 
-                    order.name = self.env['ir.sequence'].next_by_code(
-                        'purchase.order.direct'
-                    ) or '/'
+                    # Convert:
+                    # IP/RFQ/2025-26/004
+                    # to
+                    # IP/PO/2025-26/004
+
+                    order.name = order.name.replace(
+                        '/RFQ/',
+                        '/PO/'
+                    )
+
+        return res
+    def button_draft(self):
+
+        res = super().button_draft()
+
+        for order in self:
+
+        # Restore RFQ number
+         if not order.is_direct_po and order.original_rfq_name:
+
+            order.name = order.original_rfq_name
 
         return res
