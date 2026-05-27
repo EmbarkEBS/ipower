@@ -323,13 +323,24 @@
 <p  style="margin-top:15px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
 </t>
    
-   <!-- ATTN ONLY IF CONTACT PERSON -->
 <!-- ATTN ONLY IF CONTACT PERSON -->
 <t t-if="o.partner_id.parent_id">
+
     <p style="margin-top:5px">
+
         <strong>Attn:</strong>
-        Mr/Ms <span t-esc="o.partner_id.name"/>
+
+        <!-- Dynamic Salutation -->
+        <t t-if="o.partner_id.title">
+            <span t-esc="o.partner_id.title.name"/>
+            <span> </span>
+        </t>
+
+        <!-- Contact Name -->
+        <span t-esc="o.partner_id.name"/>
+
     </p>
+
 </t>
                                                 </td>
 
@@ -816,7 +827,7 @@
                 <span t-esc="o.company_id.street2"/>
             </t>
 
-            ,
+            
             <span t-esc="o.company_id.city or ''"/>
             -
             <span t-esc="o.company_id.country_id.name or ''"/>
