@@ -326,16 +326,15 @@
 <!-- ATTN ONLY IF CONTACT PERSON -->
 <t t-if="o.partner_id.parent_id">
     <p style="margin-top:5px">
-        <strong>Attn </strong>
 
-        <t t-if="o.partner_id.x_salutation">
-            <span t-esc="dict(
-                o.partner_id._fields['x_salutation'].selection
-            ).get(o.partner_id.x_salutation)"/>
-            <span> </span>
+        <strong>Attn</strong>
+
+        <t t-if="o.partner_id.x_studio_salutation">
+            <span t-esc="o.partner_id.x_studio_salutation"/>
         </t>
 
         <span t-esc="o.partner_id.name"/>
+
     </p>
 </t>
                                                 </td>
