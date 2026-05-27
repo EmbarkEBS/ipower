@@ -53,8 +53,8 @@
     position:absolute;
     top:60%;
     left:25%;
-    transform:translate(-50%, -50%) rotate(-30deg);
-    opacity:0.08;
+    opacity:0.03;
+    transform:translate(-50%, -50%) rotate(-25deg);
     z-index:0;
     width:420px;
     text-align:center;
