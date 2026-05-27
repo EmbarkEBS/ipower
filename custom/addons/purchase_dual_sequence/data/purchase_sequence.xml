@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- RFQ Sequence -->
+    <record id="seq_purchase_rfq" model="ir.sequence">
+        <field name="name">Purchase RFQ</field>
+        <field name="code">purchase.rfq</field>
+        <field name="prefix">IP/RFQ/%(y)s/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+    </record>
+
+    <!-- Purchase Order Sequence -->
+    <record id="seq_purchase_order_custom" model="ir.sequence">
+        <field name="name">Purchase Order</field>
+        <field name="code">purchase.order.custom</field>
+        <field name="prefix">IP/PO/%(y)s/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+    </record>
+
+</odoo>
