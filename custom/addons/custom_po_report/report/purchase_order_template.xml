@@ -193,7 +193,9 @@
                                         ">
 
                                             #
-                                            <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>
+                                          <!---  <span t-esc="'IP/PO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>-->
+                                          #
+<span t-field="o.name"/>
 
                                         </div>
 
