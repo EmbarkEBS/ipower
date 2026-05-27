@@ -325,22 +325,18 @@
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
 <t t-if="o.partner_id.parent_id">
-
     <p style="margin-top:5px">
+        <strong>Attn </strong>
 
-        <strong>Attn:</strong>
-
-        <!-- Dynamic Salutation -->
-        <t t-if="o.partner_id.title">
-            <span t-esc="o.partner_id.title.name"/>
+        <t t-if="o.partner_id.x_salutation">
+            <span t-esc="dict(
+                o.partner_id._fields['x_salutation'].selection
+            ).get(o.partner_id.x_salutation)"/>
             <span> </span>
         </t>
 
-        <!-- Contact Name -->
         <span t-esc="o.partner_id.name"/>
-
     </p>
-
 </t>
                                                 </td>
 

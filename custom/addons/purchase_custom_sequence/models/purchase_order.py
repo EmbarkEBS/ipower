@@ -35,17 +35,34 @@ class PurchaseOrder(models.Model):
 
     def button_confirm(self):
 
-        res = super().button_confirm()
+    # Confirm PO first
+     res = super().button_confirm()
 
-        for order in self:
+     for order in self:
 
-            # Only RFQ conversion
+        # Only RFQ conversion
             if not order.is_direct_po:
 
-                # Prevent duplicate conversion
-                if 'RFQ' in order.name:
+            # Prevent duplicate conversion
+             if 'RFQ' in order.name:
 
-                  order.name = self.env['ir.sequence'].next_by_code( 'purchase.order.direct' ) or '/'
+                old_name = order.name
 
-        return res
+                # Generate new PO number
+                new_name = self.env['ir.sequence'].next_by_code(
+                    'purchase.order.direct'
+                ) or '/'
+
+                # Update PO number
+                order.name = new_name
+
+                # Update related receipts
+                pickings = self.env['stock.picking'].search([
+                    ('origin', '=', old_name)
+                ])
+
+                for picking in pickings:
+                    picking.origin = new_name
+
+            return res
 
