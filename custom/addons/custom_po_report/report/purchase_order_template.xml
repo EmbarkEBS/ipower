@@ -51,10 +51,10 @@
                             <!-- WATERMARK -->
 <div style="
     position:absolute;
-    top:55%;
-    left:30%;
+    top:60%;
+    left:25%;
     transform:translate(-50%, -50%) rotate(-30deg);
-    opacity:0.04;
+    opacity:0.06;
     z-index:0;
     width:420px;
     text-align:center;
