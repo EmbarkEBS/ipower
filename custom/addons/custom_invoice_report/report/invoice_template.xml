@@ -9,83 +9,44 @@
 
             <t t-foreach="docs" t-as="o">
 
+<!-- ✅ SAFE CURRENCY SYMBOL -->
+<t t-set="cur_symbol"
+   t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
-
-                    * {
-                        font-family: Helvetica, Arial, sans-serif;
+                    .fixed-footer {
+                        position: fixed;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 22mm;
                     }
 
-                    @page {
-                        margin: 0px 40px 0px 40px !important;
-                    }
+             @page {
+        margin: 0px 40px 0px 40px !important;
+        padding: 0 !important;
+    }
 
-                    .page {
-                        position: relative;
-                        padding: 20px 40px 40px 40px;
-                        color: #333;
-                        line-height: 1.5;
-                    }
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-                    .invoice-title {
-                        color: #1a3a5a;
-                        font-size: 28px;
-                        font-weight: bold;
-                    }
+    .article {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-                    .section-box {
-                        border: 1px solid #dcdcdc;
-                        border-radius: 8px;
-                        padding: 14px;
-                    }
+    .page {
+        margin: 0 !important;
+        padding: 0px 40px 0px 40px !important;
+    }
 
-                    .table-main {
-                        width: 100%;
-                        border-collapse: collapse;
-                        font-size: 13px;
-                    }
-
-                    .table-main thead tr {
-                        background: #1a3a5a;
-                        color: white;
-                    }
-
-                    .table-main th {
-                        padding: 10px;
-                        border: 1px solid #dcdcdc;
-                    }
-
-                    .table-main td {
-                        padding: 10px;
-                        border: 1px solid #dcdcdc;
-                    }
-
-                    .text-right {
-                        text-align: right;
-                    }
-
-                    .text-center {
-                        text-align: center;
-                    }
-
-                    .mt20 {
-                        margin-top: 20px;
-                    }
-
-                    .mt30 {
-                        margin-top: 30px;
-                    }
-
-                    .total-table {
-                        width: 40%;
-                        margin-left: auto;
-                        border-collapse: collapse;
-                    }
-
-                    .total-table td {
-                        padding: 8px;
-                    }
-
+    header,
+    footer {
+        display: none !important;
+    }
                 </style>
+                
 
                 <main>
 
@@ -410,35 +371,35 @@
 
 
                         <!-- NOTES -->
-                        <div class="margin-top:60px;padding-left:20px;">
- <strong style="
-                                    font-size:14px;
-                                    border-bottom:1px solid #e58b39;
-                                    padding-bottom:2px;
-                                ">
-                                    Notes
-                                </strong>
-                            <strong style="color:#1a3a5a;">
-                                Notes
-                            </strong>
+                        <!-- NOTES -->
+<div style="margin-top:60px;padding-left:20px;">
 
-                            <div style="
-                                    margin-top:10px;
-                                      font-size:14px;
-                                    color:#555;
-                                ">
+    <strong style="
+        font-size:14px;
+        border-bottom:1px solid #e58b39;
+        padding-bottom:2px;
+        color:#1a3a5a;
+    ">
+        Notes
+    </strong>
 
-                                    <t t-if="o.narration">
+    <div style="
+        margin-top:10px;
+        font-size:14px;
+        color:#555;
+    ">
 
-                             </t>
+        <t t-if="o.narration">
+            <span t-esc="o.narration"/>
+        </t>
 
-                                    <t t-else="">
-                                        Thanks for giving us the opportunity to serve you
-                                    </t>
+        <t t-else="">
+            Thanks for giving us the opportunity to serve you
+        </t>
 
-                                </div>
+    </div>
 
-                        </div>
+</div>
 
                 <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
