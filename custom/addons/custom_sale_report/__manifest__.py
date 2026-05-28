@@ -8,8 +8,8 @@
     'license': 'LGPL-3',
 
     'data': [
-        'reports/sale_report.xml',
-        'reports/sale_order_template.xml',
+        'report/sale_order_template.xml',
+        'report/sale_report.xml',
     ],
 
     'installable': True,
