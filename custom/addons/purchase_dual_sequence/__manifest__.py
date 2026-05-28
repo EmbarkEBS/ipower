@@ -3,7 +3,8 @@
     'version': '19.0.1.0.0',
     'summary': 'Separate sequences for RFQ and Purchase Orders',
     'category': 'Purchase',
-    'author': 'OpenAI',
+    'author': 'Embark',
+    'license': 'LGPL-3',
     'depends': ['purchase'],
     'data': [
         'data/purchase_sequence.xml',
