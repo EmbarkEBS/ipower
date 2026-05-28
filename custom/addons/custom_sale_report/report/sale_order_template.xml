@@ -430,7 +430,7 @@
                                                 <td style="padding:4px 0;">
 
                                                     :
-                                                    <span t-field="o.origin"/>
+                                                    <span t-esc="o.x_studio_project_reference or ''"/>
 
                                                 </td>
 
