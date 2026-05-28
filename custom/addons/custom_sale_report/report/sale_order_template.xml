@@ -435,7 +435,7 @@
                                                 </td>
 
                                             </tr>
- <t t-if="doc.commitment_date"><tr>
+ <t t-if="o.commitment_date"><tr>
 
                                                 <td style="
                                                     padding:4px 0;
@@ -448,7 +448,7 @@
                                                 <td style="padding:4px 0;">
 
                                                     :
-                                                    <span t-field="doc.commitment_date or ''"/>
+                                                    <span t-field="o.commitment_date"/>
 
                                                 </td>
 
