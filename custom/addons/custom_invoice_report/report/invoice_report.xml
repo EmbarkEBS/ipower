@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- PAPER FORMAT -->
+      <!-- PAPER FORMAT -->
     <record id="paperformat_zero_margin" model="report.paperformat">
         <name>A4 Zero Margin for Custom Invoice</name>
         <default>True</default>
