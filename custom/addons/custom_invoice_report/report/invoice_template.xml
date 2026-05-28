@@ -2,7 +2,7 @@
 
     <template id="invoice_template">
 
-        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
 
             <meta charset="UTF-8"/>
 
@@ -409,25 +409,7 @@
 
                                         </tr>
 
-                                        <tr>
-
-                                            <td style="
-                                                padding:4px 0;
-                                                font-weight:bold;
-                                                color:#1a3a5a;
-                                            ">
-                                                Customer Ref
-                                            </td>
-
-                                            <td style="padding:4px 0;">
-
-                                                :
-                                                <span t-esc="o.ref or ''"/>
-
-                                            </td>
-
-                                        </tr>
-<tr>
+                                       <tr>
 
                                             <td style="
                                                 padding:5px 0;
