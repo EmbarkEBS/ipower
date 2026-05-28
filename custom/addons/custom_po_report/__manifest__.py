@@ -4,6 +4,8 @@
     "category": "Purchase",
     "summary": "Custom Purchase Order PDF Report",
     "depends": ["purchase"],
+    'author': 'Embark',
+    'license': 'LGPL-3',
     "data": [
         "report/purchase_order_report.xml",
         "report/purchase_order_template.xml",
