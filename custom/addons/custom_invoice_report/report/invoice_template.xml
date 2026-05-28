@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="invoice_template">
+
+        <t t-call="web.html_container">
+
+            <meta charset="UTF-8"/>
+
+            <t t-foreach="docs" t-as="o">
+
+                <style>
+
+                    * {
+                        font-family: Helvetica, Arial, sans-serif;
+                    }
+
+                    @page {
+                        margin: 0px 40px 0px 40px !important;
+                    }
+
+                    .page {
+                        position: relative;
+                        padding: 20px 40px 40px 40px;
+                        color: #333;
+                        line-height: 1.5;
+                    }
+
+                    .invoice-title {
+                        color: #1a3a5a;
+                        font-size: 28px;
+                        font-weight: bold;
+                    }
+
+                    .section-box {
+                        border: 1px solid #dcdcdc;
+                        border-radius: 8px;
+                        padding: 14px;
+                    }
+
+                    .table-main {
+                        width: 100%;
+                        border-collapse: collapse;
+                        font-size: 13px;
+                    }
+
+                    .table-main thead tr {
+                        background: #1a3a5a;
+                        color: white;
+                    }
+
+                    .table-main th {
+                        padding: 10px;
+                        border: 1px solid #dcdcdc;
+                    }
+
+                    .table-main td {
+                        padding: 10px;
+                        border: 1px solid #dcdcdc;
+                    }
+
+                    .text-right {
+                        text-align: right;
+                    }
+
+                    .text-center {
+                        text-align: center;
+                    }
+
+                    .mt20 {
+                        margin-top: 20px;
+                    }
+
+                    .mt30 {
+                        margin-top: 30px;
+                    }
+
+                    .total-table {
+                        width: 40%;
+                        margin-left: auto;
+                        border-collapse: collapse;
+                    }
+
+                    .total-table td {
+                        padding: 8px;
+                    }
+
+                </style>
+
+                <main>
+
+                    <div class="page">
+
+                        <!-- WATERMARK -->
+                        <div style="
+                            position:absolute;
+                            top:45%;
+                            left:20%;
+                            opacity:0.08;
+                            transform:rotate(-25deg);
+                            z-index:0;
+                            width:450px;
+                        ">
+
+                            <img t-if="o.company_id.logo"
+                                 t-att-src="image_data_uri(o.company_id.logo)"
+                                 style="width:100%;"/>
+
+                        </div>
+
+
+                        <!-- HEADER -->
+                        <table style="width:100%; margin-bottom:25px;">
+
+                            <tr>
+
+                                <!-- COMPANY -->
+                                <td style="width:60%; vertical-align:top;">
+
+                                    <img t-if="o.company_id.logo"
+                                         t-att-src="image_data_uri(o.company_id.logo)"
+                                         style="max-height:90px; margin-left:-10px; margin-bottom:10px;"/>
+
+                                    <div>
+
+                                        <div style="
+                                            font-size:18px;
+                                            font-weight:bold;
+                                            color:#1a3a5a;
+                                        ">
+                                            <span t-esc="o.company_id.name"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.company_id.street or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.company_id.street2 or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.company_id.city or ''"/>
+                                            <span t-esc="o.company_id.zip or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.company_id.country_id.name or ''"/>
+                                        </div>
+
+                                        <div>
+                                            GSTIN:
+                                            <span t-esc="o.company_id.vat or ''"/>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- INVOICE INFO -->
+                                <td style="width:40%; vertical-align:top; text-align:right;">
+
+                                    <div class="invoice-title">
+                                        TAX INVOICE
+                                    </div>
+
+                                    <br/>
+
+                                    <table style="width:100%; font-size:13px;">
+
+                                        <tr>
+                                            <td><strong>Invoice No</strong></td>
+                                            <td class="text-right">
+                                                <span t-esc="o.name"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>Invoice Date</strong></td>
+                                            <td class="text-right">
+                                                <span t-esc="o.invoice_date"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>Due Date</strong></td>
+                                            <td class="text-right">
+                                                <span t-esc="o.invoice_date_due"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>Customer Ref</strong></td>
+                                            <td class="text-right">
+                                                <span t-esc="o.ref or ''"/>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+
+                        <!-- CUSTOMER DETAILS -->
+                        <table style="width:100%; margin-bottom:25px;">
+
+                            <tr>
+
+                                <!-- BILL TO -->
+                                <td style="width:48%; vertical-align:top;">
+
+                                    <div class="section-box">
+
+                                        <div style="
+                                            font-weight:bold;
+                                            color:#1a3a5a;
+                                            margin-bottom:10px;
+                                        ">
+                                            BILL TO
+                                        </div>
+
+                                        <div>
+                                            <strong>
+                                                <span t-esc="o.partner_id.name"/>
+                                            </strong>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_id.street or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_id.street2 or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_id.city or ''"/>
+                                            <span t-esc="o.partner_id.zip or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_id.country_id.name or ''"/>
+                                        </div>
+
+                                        <div>
+                                            GSTIN:
+                                            <span t-esc="o.partner_id.vat or ''"/>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- SHIPPING -->
+                                <td style="width:4%;"></td>
+
+                                <td style="width:48%; vertical-align:top;">
+
+                                    <div class="section-box">
+
+                                        <div style="
+                                            font-weight:bold;
+                                            color:#1a3a5a;
+                                            margin-bottom:10px;
+                                        ">
+                                            SHIPPING ADDRESS
+                                        </div>
+
+                                        <div>
+                                            <strong>
+                                                <span t-esc="o.partner_shipping_id.name or ''"/>
+                                            </strong>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_shipping_id.street or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_shipping_id.street2 or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_shipping_id.city or ''"/>
+                                            <span t-esc="o.partner_shipping_id.zip or ''"/>
+                                        </div>
+
+                                        <div>
+                                            <span t-esc="o.partner_shipping_id.country_id.name or ''"/>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+
+                        <!-- PRODUCT TABLE -->
+                        <table class="table-main">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th style="width:5%;">
+                                        #
+                                    </th>
+
+                                    <th style="width:45%;">
+                                        Description
+                                    </th>
+
+                                    <th style="width:10%;">
+                                        Qty
+                                    </th>
+
+                                    <th style="width:15%;">
+                                        Unit Price
+                                    </th>
+
+                                    <th style="width:10%;">
+                                        Taxes
+                                    </th>
+
+                                    <th style="width:15%;">
+                                        Amount
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr t-foreach="o.invoice_line_ids" t-as="line">
+
+                                    <td class="text-center">
+                                        <span t-esc="line.sequence"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-esc="line.name"/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-esc="line.quantity"/>
+                                    </td>
+
+                                    <td class="text-right">
+                                        <span t-esc="line.price_unit"/>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
+                                    </td>
+
+                                    <td class="text-right">
+                                        <span t-esc="line.price_subtotal"/>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- TOTALS -->
+                        <table class="total-table mt30">
+
+                            <tr>
+                                <td>
+                                    <strong>Untaxed Amount</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="o.amount_untaxed"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Tax</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="o.amount_tax"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>
+                                        <span t-esc="o.amount_total"/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <!-- NOTES -->
+                        <div class="margin-top:60px;padding-left:20px;">
+ <strong style="
+                                    font-size:14px;
+                                    border-bottom:1px solid #e58b39;
+                                    padding-bottom:2px;
+                                ">
+                                    Notes
+                                </strong>
+                            <strong style="color:#1a3a5a;">
+                                Notes
+                            </strong>
+
+                            <div style="
+                                    margin-top:10px;
+                                      font-size:14px;
+                                    color:#555;
+                                ">
+
+                                    <t t-if="o.narration">
+
+                             </t>
+
+                                    <t t-else="">
+                                        Thanks for giving us the opportunity to serve you
+                                    </t>
+
+                                </div>
+
+                        </div>
+
+                <!-- FOOTER CONTENT -->
+                          <!-- FOOTER -->
+<div class="fixed-footer">
+
+    <!-- FOOTER TEXT -->
+    <div style="
+        padding:0 40px;
+        font-size:11px;
+        color:#555;
+    ">
+
+        <div style="
+            margin-bottom:5px;
+            color:#888;
+            font-style:italic;
+        ">
+            This document is electronically generated and valid without signature or company stamp.
+        </div>
+
+        <div style="
+            border-top:1px solid #1f3b73;
+            padding-top:6px;
+            text-align:center;
+        ">
+
+            <t t-if="o.company_id.street2">
+                <span t-esc="o.company_id.street2"/>
+            </t>
+
+            
+            <span t-esc="o.company_id.city or ''"/>
+            -
+            <span t-esc="o.company_id.country_id.name or ''"/>
+
+            <br/>
+
+            CR No:
+            <span t-esc="o.company_id.company_registry or 'N/A'"/>
+
+            |
+
+            <span t-esc="o.company_id.email or ''"/>
+
+            |
+
+            <span t-esc="o.company_id.website or ''"/>
+
+        </div>
+
+    </div>
+
+    <!-- FULL BLEED BAR -->
+   <!-- ABSOLUTE FULL WIDTH BAR -->
+                           <!-- FULL WIDTH FOOTER BORDER -->
+<div style="
+    width:auto;
+    height:25px;
+    overflow:hidden;
+    margin-top:5px;
+    margin-left:-40px;
+    margin-right:-50px;
+">
+
+    <svg width="100%"
+         height="25"
+         viewBox="0 0 1000 25"
+         preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <!-- BLUE 25% -->
+        <polygon points="0,0 260,0 240,25 0,25"
+                 fill="#1f3b73"/>
+
+        <!-- ORANGE 75% -->
+        <polygon points="260,0 1000,0 1000,25 240,25"
+                 fill="#e58b39"/>
+
+    </svg>
+
+</div>
+
+                    </div>
+
+                </main>
+
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>
