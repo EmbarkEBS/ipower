@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<template id="sale_order_template">
+
+<t t-call="web.html_container">
+
+<t t-foreach="docs" t-as="o">
+
+<div class="page"
+     style="padding:40px;
+            font-family:Arial;
+            font-size:13px;">
+
+    <!-- WATERMARK -->
+    <t t-if="o.company_id.logo">
+
+        <div style="
+            position:fixed;
+            top:35%;
+            left:18%;
+            width:500px;
+            text-align:center;
+            z-index:0;
+            opacity:0.12;
+            transform:rotate(-35deg);
+        ">
+
+            <img t-att-src="image_data_uri(o.company_id.logo)"
+                 style="width:450px;"/>
+
+        </div>
+
+    </t>
+
+    <!-- HEADER -->
+    <table style="width:100%; margin-bottom:30px;">
+
+        <tr>
+
+            <td style="width:60%;">
+
+                <img t-if="o.company_id.logo"
+                     t-att-src="image_data_uri(o.company_id.logo)"
+                     style="max-height:80px;"/>
+
+                <br/>
+
+                <strong>
+                    <span t-esc="o.company_id.name"/>
+                </strong>
+
+            </td>
+
+            <td style="width:40%; text-align:right;">
+
+                <h1>SALES ORDER</h1>
+
+                <strong>
+                    <span t-field="o.name"/>
+                </strong>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <!-- CUSTOMER -->
+    <table style="width:100%; margin-bottom:30px;">
+
+        <tr>
+
+            <td style="width:60%; vertical-align:top;">
+
+                <strong>Customer</strong>
+
+                <br/><br/>
+
+                <strong>
+                    <span t-esc="o.partner_id.name"/>
+                </strong>
+
+                <br/>
+
+                <span t-esc="o.partner_id.street or ''"/>
+
+                <br/>
+
+                <span t-esc="o.partner_id.city or ''"/>
+
+                <br/>
+
+                <span t-esc="o.partner_id.country_id.name or ''"/>
+
+            </td>
+
+            <td style="width:40%; vertical-align:top;">
+
+                <table style="width:100%;">
+
+                    <tr>
+                        <td><strong>Quotation Date</strong></td>
+                        <td>
+                            <span t-field="o.date_order"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Customer Ref</strong></td>
+                        <td>
+                            <span t-field="o.client_order_ref"/>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <!-- PRODUCT TABLE -->
+    <table style="
+        width:100%;
+        border-collapse:collapse;
+    ">
+
+        <thead>
+
+            <tr style="
+                background:#4b4b4b;
+                color:white;
+            ">
+
+                <th style="padding:10px;">#</th>
+
+                <th style="padding:10px;">
+                    Description
+                </th>
+
+                <th style="padding:10px;">
+                    Qty
+                </th>
+
+                <th style="padding:10px;">
+                    Unit Price
+                </th>
+
+                <th style="padding:10px;">
+                    Total
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <t t-set="sn" t-value="1"/>
+
+            <t t-foreach="o.order_line" t-as="line">
+
+                <tr style="border-bottom:1px solid #ddd;">
+
+                    <td style="padding:10px;">
+                        <span t-esc="sn"/>
+                    </td>
+
+                    <td style="padding:10px;">
+                        <span t-field="line.name"/>
+                    </td>
+
+                    <td style="padding:10px;">
+                        <span t-field="line.product_uom_qty"/>
+                    </td>
+
+                    <td style="padding:10px;">
+                        <span t-field="line.price_unit"/>
+                    </td>
+
+                    <td style="padding:10px;">
+                        <span t-field="line.price_subtotal"/>
+                    </td>
+
+                </tr>
+
+                <t t-set="sn" t-value="sn + 1"/>
+
+            </t>
+
+        </tbody>
+
+    </table>
+
+    <!-- TOTAL -->
+    <div style="
+        width:300px;
+        margin-left:auto;
+        margin-top:30px;
+    ">
+
+        <table style="width:100%;">
+
+            <tr>
+
+                <td>
+                    <strong>Subtotal</strong>
+                </td>
+
+                <td style="text-align:right;">
+                    <span t-field="o.amount_untaxed"/>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <strong>Tax</strong>
+                </td>
+
+                <td style="text-align:right;">
+                    <span t-field="o.amount_tax"/>
+                </td>
+
+            </tr>
+
+            <tr style="font-size:16px;">
+
+                <td>
+                    <strong>Total</strong>
+                </td>
+
+                <td style="text-align:right;">
+                    <strong>
+                        <span t-field="o.amount_total"/>
+                    </strong>
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</t>
+
+</t>
+
+</template>
+
+</odoo>
