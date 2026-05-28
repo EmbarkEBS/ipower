@@ -1,73 +1,69 @@
 <odoo>
 
-   <template id="invoice_template">
+    <template id="invoice_template">
 
-        <t t-call="web.basic_layout">
+        <t t-call="web.html_container">
 
-            <main style="margin:0 !important; padding:0 !important;">
+            <meta charset="UTF-8"/>
 
-                <t t-foreach="docs" t-as="o">
+            <t t-foreach="docs" t-as="o">
 
-                    <!-- Currency -->
-                    <t t-set="cur_symbol"
-                       t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
+                <!-- SAFE CURRENCY -->
+                <t t-set="cur_symbol"
+                   t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
 
-                    <style>
+                <style>
 
-                        @page {
-                            size: A4;
-                            margin: 0mm 0mm 0mm 0mm;
-                        }
+                    .fixed-footer {
+                        position: fixed;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 22mm;
+                    }
 
-                        html,
-                        body,
-                        main,
-                        .article {
-                            margin: 0 !important;
-                            padding: 0 !important;
-                        }
+             @page {
+        margin: 0px 40px 0px 40px !important;
+        padding: 0 !important;
+    }
 
-                        header,
-                        footer {
-                            display: none !important;
-                        }
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-                        .custom-page {
-                            position: relative;
-                            min-height: 1120px;
-                            padding: 20px 40px 0px 40px;
-                            font-family: Helvetica, Arial, sans-serif;
-                            color: #333;
-                            line-height: 1.4;
-                        }
+    .article {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-                        .fixed-footer {
-                            position: absolute;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            height: 22mm;
-                        }
+    .page {
+        margin: 0 !important;
+        padding: 0px 40px 0px 40px !important;
+    }
+ @page {
+        size: A4;
+        margin: 0 !important;
+    }
+    header,
+    footer {
+        display: none !important;
+    }
+                </style>
 
-                        table {
-                            border-collapse: collapse;
-                        }
+                <main>
 
-                    </style>
-
-                    <!-- ================================================= -->
-                    <!-- PAGE -->
-                    <!-- ================================================= -->
-
-                    <div class="custom-page">
+                    <div class="page" style="padding:0px 40px 0px 40px;position:relative;
+                            color:#333; margin:0;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
 
                         <!-- WATERMARK -->
-
                         <div style="
                             position:absolute;
-                            top:50%;
+                            top:60%;
                             left:25%;
-                            opacity:0.08;
+                            opacity:0.10;
                             transform:translate(-50%, -50%) rotate(-25deg);
                             z-index:0;
                             width:420px;
@@ -80,20 +76,16 @@
 
                         </div>
 
-
-                        <!-- ================================================= -->
                         <!-- HEADER -->
-                        <!-- ================================================= -->
-
                         <table style="
                             width:100%;
-                            margin-bottom:25px;
+                            border-collapse:collapse;
+                            margin-bottom:20px;
                         ">
 
                             <tr>
 
                                 <!-- COMPANY -->
-
                                 <td style="
                                     width:60%;
                                     vertical-align:top;
@@ -102,8 +94,9 @@
                                     <img t-if="o.company_id.logo"
                                          t-att-src="image_data_uri(o.company_id.logo)"
                                          style="
-                                            max-height:75px;
+                                            max-height:80px;
                                             margin-bottom:10px;
+                                            margin-left:-30px;
                                          "/>
 
                                     <div style="
@@ -113,7 +106,7 @@
 
                                         <strong style="
                                             color:#1a3a5a;
-                                            font-size:16px;
+                                            font-size:15px;
                                         ">
                                             <span t-esc="o.company_id.name"/>
                                         </strong>
@@ -131,42 +124,87 @@
 
                                         <span t-esc="o.company_id.country_id.name or ''"/>
 
-                                        <br/><br/>
+                                        <br/>
 
-                                        <strong>
-                                            TRN:
-                                            <span t-esc="o.company_id.vat or ''"/>
-                                        </strong>
+                                        <p style="margin-top:15px">
+                                            <strong>
+                                                TRN
+                                                <span t-esc="o.company_id.vat or ''"/>
+                                            </strong>
+                                        </p>
 
                                     </div>
 
                                 </td>
 
-
                                 <!-- TITLE -->
-
                                 <td style="
                                     width:40%;
-                                    text-align:center;
                                     vertical-align:top;
+                                    text-align:center;
                                 ">
 
                                     <h1 style="
                                         margin:0;
-                                        margin-top:15px;
                                         font-size:28px;
+                                        font-weight:bold;
                                         color:#000;
+                                        margin-top:20px;
                                     ">
                                         TAX INVOICE
                                     </h1>
 
                                     <div style="
-                                        font-size:16px;
-                                        margin-top:12px;
+                                        width:350px;
+                                        margin:5px auto;
+                                        text-align:center;
                                     ">
 
-                                        #
-                                        <span t-field="o.name"/>
+                                        <svg width="330"
+                                             height="4"
+                                             xmlns="http://www.w3.org/2000/svg">
+
+                                            <defs>
+
+                                                <linearGradient id="horizontalFade"
+                                                                x1="0%"
+                                                                y1="0%"
+                                                                x2="100%"
+                                                                y2="0%">
+
+                                                    <stop offset="0%"
+                                                          stop-color="#f39223"
+                                                          stop-opacity="1"/>
+
+                                                    <stop offset="82%"
+                                                          stop-color="#f39223"
+                                                          stop-opacity="1"/>
+
+                                                    <stop offset="100%"
+                                                          stop-color="#f39223"
+                                                          stop-opacity="0"/>
+
+                                                </linearGradient>
+
+                                            </defs>
+
+                                            <rect x="90"
+                                                  y="1"
+                                                  width="155"
+                                                  height="2"
+                                                  fill="url(#horizontalFade)"/>
+
+                                        </svg>
+
+                                    </div>
+
+                                    <div style="
+                                        font-size:16px;
+                                        text-align:center;
+                                        margin-top:10px;
+                                    ">
+
+                                        # <span t-field="o.name"/>
 
                                     </div>
 
@@ -176,85 +214,132 @@
 
                         </table>
 
-
-                        <!-- ================================================= -->
-                        <!-- CUSTOMER + META -->
-                        <!-- ================================================= -->
-
+                        <!-- ADDRESS + META -->
                         <table style="
                             width:100%;
-                            margin-top:20px;
-                            margin-bottom:35px;
                             font-size:13px;
+                            border-collapse:collapse;
+                            margin-top:35px;
+                            margin-bottom:35px;
                         ">
 
                             <tr>
 
                                 <!-- BILL TO -->
-
                                 <td style="
                                     width:55%;
                                     vertical-align:top;
                                 ">
 
-                                    <strong style="
-                                        color:#1a3a5a;
-                                        font-size:14px;
-                                    ">
-                                        Bill To
-                                    </strong>
-
-                                    <div style="
-                                        margin-top:10px;
-                                        border-left:2px solid #f39223;
-                                        padding-left:15px;
-                                        line-height:1.8;
+                                    <table style="
+                                        width:100%;
+                                        border-collapse:collapse;
                                     ">
 
-                                        <strong>
-                                            <span t-esc="o.partner_id.name"/>
+                                        <strong style="color:#1a3a5a;">
+                                            Bill To
                                         </strong>
 
-                                        <br/>
+                                        <tr>
 
-                                        <span t-esc="o.partner_id.street or ''"/>
+                                            <td style="
+                                                width:8px;
+                                                padding:0;
+                                                vertical-align:top;
+                                            ">
 
-                                        <t t-if="o.partner_id.street2">
-                                            <br/>
-                                            <span t-esc="o.partner_id.street2"/>
-                                        </t>
+                                                <svg width="8"
+                                                     height="130"
+                                                     xmlns="http://www.w3.org/2000/svg">
 
-                                        <br/>
+                                                    <defs>
 
-                                        <span t-esc="o.partner_id.city or ''"/>
+                                                        <linearGradient id="verticalFade"
+                                                                        x1="0%"
+                                                                        y1="0%"
+                                                                        x2="0%"
+                                                                        y2="100%">
 
-                                        <t t-if="o.partner_id.state_id">
-                                            ,
-                                            <span t-esc="o.partner_id.state_id.name"/>
-                                        </t>
+                                                            <stop offset="0%"
+                                                                  stop-color="#f39223"
+                                                                  stop-opacity="1"/>
 
-                                        <br/>
+                                                            <stop offset="100%"
+                                                                  stop-color="#f39223"
+                                                                  stop-opacity="0"/>
 
-                                        <span t-esc="o.partner_id.country_id.name or ''"/>
+                                                        </linearGradient>
 
-                                        <t t-if="o.partner_id.vat">
+                                                    </defs>
 
-                                            <br/><br/>
+                                                    <rect x="0"
+                                                          y="0"
+                                                          width="2"
+                                                          height="130"
+                                                          fill="url(#verticalFade)"/>
 
-                                            <strong>
-                                                TRN:
-                                                <span t-esc="o.partner_id.vat"/>
-                                            </strong>
+                                                </svg>
 
-                                        </t>
+                                            </td>
 
-                                    </div>
+                                            <td style="width:15px;"></td>
+
+                                            <td style="
+                                                vertical-align:top;
+                                                font-size:13px;
+                                                line-height:1.7;
+                                            ">
+
+                                                <strong>
+                                                    <span t-esc="o.partner_id.name"/>
+                                                </strong>
+
+                                                <br/>
+
+                                                <span t-esc="o.partner_id.street or ''"/>
+
+                                                <t t-if="o.partner_id.street2">
+                                                    <br/>
+                                                    <span t-esc="o.partner_id.street2"/>
+                                                </t>
+
+                                                <br/>
+
+                                                <span t-esc="o.partner_id.city or ''"/>
+
+                                                <t t-if="o.partner_id.state_id">
+                                                    ,
+                                                    <span t-esc="o.partner_id.state_id.name"/>
+                                                </t>
+
+                                                -
+
+                                                <span t-esc="o.partner_id.country_id.name or ''"/>
+
+                                                <br/>
+
+                                                <t t-if="o.partner_id.vat">
+
+                                                    <p style="margin-top:15px">
+
+                                                        <strong>
+                                                            TRN
+                                                            <span t-esc="o.partner_id.vat"/>
+                                                        </strong>
+
+                                                    </p>
+
+                                                </t>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </table>
 
                                 </td>
 
-
                                 <!-- META -->
-
                                 <td style="
                                     width:45%;
                                     vertical-align:top;
@@ -263,13 +348,13 @@
 
                                     <table style="
                                         width:100%;
-                                        font-size:13px;
+                                        border-collapse:collapse;
                                     ">
 
                                         <tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:4px 0;
                                                 width:45%;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
@@ -277,9 +362,11 @@
                                                 Invoice Date
                                             </td>
 
-                                            <td>
+                                            <td style="padding:4px 0;">
+
                                                 :
                                                 <span t-field="o.invoice_date"/>
+
                                             </td>
 
                                         </tr>
@@ -287,16 +374,18 @@
                                         <tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:4px 0;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
                                                 Due Date
                                             </td>
 
-                                            <td>
+                                            <td style="padding:4px 0;">
+
                                                 :
                                                 <span t-field="o.invoice_date_due"/>
+
                                             </td>
 
                                         </tr>
@@ -304,21 +393,41 @@
                                         <tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:4px 0;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
                                                 Payment Terms
                                             </td>
 
-                                            <td>
+                                            <td style="padding:4px 0;">
+
                                                 :
-                                                <span t-esc="o.invoice_payment_term_id.name or ''"/>
+                                                <span t-field="o.invoice_payment_term_id.name"/>
+
                                             </td>
 
                                         </tr>
 
                                         <tr>
+
+                                            <td style="
+                                                padding:4px 0;
+                                                font-weight:bold;
+                                                color:#1a3a5a;
+                                            ">
+                                                Customer Ref
+                                            </td>
+
+                                            <td style="padding:4px 0;">
+
+                                                :
+                                                <span t-esc="o.ref or ''"/>
+
+                                            </td>
+
+                                        </tr>
+<tr>
 
                                             <td style="
                                                 padding:5px 0;
@@ -360,14 +469,11 @@
 
                         </table>
 
-
-                        <!-- ================================================= -->
                         <!-- PRODUCT TABLE -->
-                        <!-- ================================================= -->
-
                         <table style="
                             width:100%;
-                            margin-top:10px;
+                            border-collapse:collapse;
+                            margin-bottom:20px;
                         ">
 
                             <thead>
@@ -381,6 +487,8 @@
                                         padding:10px;
                                         width:5%;
                                         text-align:center;
+                                        border-top-left-radius:10px;
+                                        border-bottom-left-radius:10px;
                                     ">
                                         SN
                                     </th>
@@ -388,14 +496,14 @@
                                     <th style="
                                         padding:10px;
                                         width:55%;
-                                        text-align:left;
+                                        text-align:center;
                                     ">
                                         Product Specification
                                     </th>
 
                                     <th style="
                                         padding:10px;
-                                        width:10%;
+                                        width:7%;
                                         text-align:center;
                                     ">
                                         Qty
@@ -403,7 +511,7 @@
 
                                     <th style="
                                         padding:10px;
-                                        width:15%;
+                                        width:11%;
                                         text-align:right;
                                     ">
                                         Unit Price
@@ -411,10 +519,12 @@
 
                                     <th style="
                                         padding:10px;
-                                        width:15%;
+                                        width:12%;
                                         text-align:right;
+                                        border-top-right-radius:10px;
+                                        border-bottom-right-radius:10px;
                                     ">
-                                        Total
+                                        Total Price
                                     </th>
 
                                 </tr>
@@ -427,60 +537,99 @@
 
                                 <t t-foreach="o.invoice_line_ids" t-as="line">
 
-                                    <tr style="
-                                        border-bottom:1px solid #ddd;
-                                    ">
+                                    <tr>
 
                                         <td style="
-                                            padding:12px 5px;
-                                            text-align:center;
-                                            vertical-align:top;
+                                           font-size:15px;
+                                           padding-top:15px;
+                                           text-align:center;
+                                           vertical-align:top;
                                         ">
                                             <span t-esc="sn"/>
                                         </td>
 
                                         <td style="
-                                            padding:12px 5px;
+                                            padding-top:15px;
                                             vertical-align:top;
+                                            width:55%;
+                                            white-space:normal;
+                                            word-break:break-word;
                                         ">
 
-                                            <strong>
-                                                <span t-esc="line.product_id.name"/>
-                                            </strong>
-
-                                            <br/>
-
-                                            <span style="
-                                                font-size:12px;
-                                                color:#666;
+                                            <div style="
+                                                font-weight:bold;
+                                                margin-bottom:6px;
+                                                font-size:15px;
+                                                line-height:1.5;
+                                                width:100%;
                                             ">
-                                                <span t-esc="line.product_id.description or ''"/>
-                                            </span>
+
+                                                <span t-esc="line.product_id.name"/>
+
+                                            </div>
 
                                         </td>
 
                                         <td style="
-                                            padding:12px 5px;
-                                            text-align:center;
-                                            vertical-align:top;
+                                          padding-top:15px;
+                                          font-size:15px;
+                                          text-align:center;
+                                          vertical-align:top;
                                         ">
                                             <span t-esc="int(line.quantity)"/>
                                         </td>
 
                                         <td style="
-                                            padding:12px 5px;
-                                            text-align:right;
+                                            padding-top:15px;
+                                            font-size:15px;
+                                            text-align:center;
                                             vertical-align:top;
                                         ">
                                             <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
                                         </td>
 
                                         <td style="
-                                            padding:12px 5px;
-                                            text-align:right;
-                                            vertical-align:top;
+                                          padding-top:15px;
+                                          font-size:15px;
+                                          text-align:center;
+                                          vertical-align:top;
                                         ">
                                             <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td></td>
+
+                                        <td colspan="4" style="
+                                            font-weight:bold;
+                                            font-size:11px;
+                                        ">
+
+                                            <span>Taxes: </span>
+
+                                            <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr style="border-bottom:1px solid #d9d9d9;">
+
+                                        <td></td>
+
+                                        <td colspan="4" style="
+                                            font-size:12px;
+                                            color:#666;
+                                            line-height:1.7;
+                                            white-space:normal;
+                                            word-break:break-word;
+                                        ">
+
+                                            <span t-esc="line.product_id.description or ''"/>
+
                                         </td>
 
                                     </tr>
@@ -493,60 +642,55 @@
 
                         </table>
 
-
-                        <!-- ================================================= -->
                         <!-- TOTAL -->
-                        <!-- ================================================= -->
-
                         <table style="
                             width:100%;
-                            margin-top:30px;
+                            margin-top:20px;
+                            border-collapse:collapse;
                         ">
 
                             <tr>
 
                                 <td style="
                                     width:55%;
-                                    vertical-align:top;
+                                    vertical-align:middle;
+                                    font-size:15px;
+                                    padding-top:40px;
+                                    padding-left:20px;
+                                    text-align:left;
                                 ">
 
-                                    <div style="
-                                        font-size:13px;
-                                        padding-top:20px;
-                                    ">
+                                    <div style="font-size:13px;">
 
                                         <strong>
                                             Amount in Words:
+                                            <span t-esc="o.currency_id.name"/>
+                                            <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
+                                            only.
                                         </strong>
-
-                                        <br/>
-
-                                        <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
 
                                     </div>
 
                                 </td>
 
-
-                                <td style="
-                                    width:45%;
-                                ">
+                                <td style="width:45%;">
 
                                     <table style="
                                         width:100%;
+                                        border-collapse:collapse;
                                         text-align:right;
                                     ">
 
                                         <tr>
 
                                             <td style="
-                                                padding:6px;
+                                                padding:5px;
                                                 font-weight:bold;
                                             ">
                                                 Sub Total
                                             </td>
 
-                                            <td style="padding:6px;">
+                                            <td style="padding:5px;">
                                                 <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
                                             </td>
 
@@ -555,13 +699,13 @@
                                         <tr>
 
                                             <td style="
-                                                padding:6px;
+                                                padding:5px;
                                                 font-weight:bold;
                                             ">
                                                 VAT
                                             </td>
 
-                                            <td style="padding:6px;">
+                                            <td style="padding:5px;">
                                                 <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
                                             </td>
 
@@ -573,14 +717,14 @@
                                         ">
 
                                             <td style="
-                                                padding:10px 6px;
+                                                padding:10px 5px;
                                                 font-weight:bold;
                                             ">
                                                 Total
                                             </td>
 
                                             <td style="
-                                                padding:10px 6px;
+                                                padding:10px 5px;
                                                 font-weight:bold;
                                             ">
                                                 <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
@@ -596,11 +740,36 @@
 
                         </table>
 
+                        <!-- NOTES -->
+                        <div style="margin-top:60px;padding-left:20px;">
 
-                        <!-- ================================================= -->
+                            <strong style="
+                                font-size:14px;
+                                border-bottom:1px solid #e58b39;
+                                padding-bottom:2px;
+                            ">
+                                Notes
+                            </strong>
+
+                            <div style="
+                                margin-top:10px;
+                                font-size:14px;
+                                color:#555;
+                            ">
+
+                                <t t-if="o.narration">
+                                    <span t-esc="o.narration"/>
+                                </t>
+
+                                <t t-else="">
+                                    Thanks for giving us the opportunity to serve you
+                                </t>
+
+                            </div>
+
+                        </div>
+
                         <!-- FOOTER -->
-                        <!-- ================================================= -->
-
                         <div class="fixed-footer">
 
                             <div style="
@@ -610,14 +779,31 @@
                             ">
 
                                 <div style="
+                                    margin-bottom:5px;
+                                    color:#888;
+                                    font-style:italic;
+                                ">
+                                    This document is electronically generated and valid without signature or company stamp.
+                                </div>
+
+                                <div style="
                                     border-top:1px solid #1f3b73;
-                                    padding-top:8px;
+                                    padding-top:6px;
                                     text-align:center;
                                 ">
+
+                                    <t t-if="o.company_id.street2">
+                                        <span t-esc="o.company_id.street2"/>
+                                    </t>
 
                                     <span t-esc="o.company_id.city or ''"/>
                                     -
                                     <span t-esc="o.company_id.country_id.name or ''"/>
+
+                                    <br/>
+
+                                    CR No:
+                                    <span t-esc="o.company_id.company_registry or 'N/A'"/>
 
                                     |
 
@@ -632,11 +818,13 @@
                             </div>
 
                             <!-- COLOR BAR -->
-
                             <div style="
-                                width:100%;
+                                width:auto;
                                 height:25px;
+                                overflow:hidden;
                                 margin-top:5px;
+                                margin-left:-40px;
+                                margin-right:-50px;
                             ">
 
                                 <svg width="100%"
@@ -655,13 +843,13 @@
 
                             </div>
 
-                        </div>
+                        </div> <!-- fixed-footer -->
 
-                    </div>
+                    </div> <!-- page -->
 
-                </t>
+                </main>
 
-            </main>
+            </t>
 
         </t>
 
