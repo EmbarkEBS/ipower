@@ -1,6 +1,6 @@
 {
     'name': 'Custom Sale Order Report',
-    'version': '17.0.1.0',
+    'version': '19.0.1.0',
     'category': 'Sales',
     'summary': 'Custom Sales Order PDF Report',
     'depends': ['sale'],
