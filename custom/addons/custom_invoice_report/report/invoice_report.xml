@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <!-- PAPER FORMAT -->
-        <record id="paperformat_zero_margin" model="report.paperformat">
-            <name>A4 Zero Margin for Custom Invoice</name>
-            <default>True</default>
-            <format>A4</format>
-            <orientation>Portrait</orientation>
-            <margin_top>0</margin_top>
-            <margin_bottom>0</margin_bottom>
-            <margin_left>0</margin_left>
-            <margin_right>0</margin_right>
-            <header_line>False</header_line>
-            <header_spacing>0</header_spacing>
-            <dpi>96</dpi>
-        </record>
 
-        <!-- REPORT -->
-        <record id="action_report_invoice_custom" model="ir.actions.report">
-            <field name="name">Custom Invoice</field>
-            <field name="model">account.move</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_name">custom_invoice_report.invoice_template</field>
-            <field name="report_file">custom_invoice_report.invoice_template</field>
-            <field name="binding_model_id" ref="account.model_account_move"/>
-            <field name="binding_type">report</field>
-            <!-- FIX: Wrapped inside a proper field tag using an external ID relation -->
-            <field name="paperformat_id" ref="custom_invoice_report.paperformat_zero_margin"/>
-        </record>
-    </data>
+    <!-- PAPER FORMAT -->
+    <record id="paperformat_zero_margin" model="report.paperformat">
+        <name>A4 Zero Margin for Custom Invoice</name>
+        <default>True</default>
+        <format>A4</format>
+        <orientation>Portrait</orientation>
+        <margin_top>0</margin_top>
+        <margin_bottom>0</margin_bottom>
+        <margin_left>0</margin_left>
+        <margin_right>0</margin_right>
+        <header_line>False</header_line>
+        <header_spacing>0</header_spacing>
+        <dpi>96</dpi>
+    </record>
+
+    <!-- REPORT ACTION -->
+    <record id="action_report_invoice_custom" model="ir.actions.report">
+        <field name="name">Custom Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_invoice_report.invoice_template</field>
+        <field name="report_file">custom_invoice_report.invoice_template</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="custom_invoice_report.paperformat_zero_margin"/>
+    </record>
+
 </odoo>
