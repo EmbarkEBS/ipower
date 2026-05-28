@@ -2,7 +2,7 @@
 
     <template id="invoice_template">
 
-        <t t-call="web.html_container">
+        <t t-call="web.minimal_layout">
 
             <meta charset="UTF-8"/>
 
@@ -26,7 +26,10 @@
         margin: 0px 40px 0px 40px !important;
         padding: 0 !important;
     }
-
+ @page {
+        size: A4;
+        margin: 0 !important;
+    }
     html, body {
         margin: 0 !important;
         padding: 0 !important;
@@ -48,7 +51,7 @@
     }
                 </style>
 
-                <main>
+               
 
                     <div class="page" style="padding:0px 40px 0px 40px;position:relative;
                             color:#333; margin:0;
@@ -811,7 +814,7 @@
 
                     </div> <!-- page -->
 
-                </main>
+             
 
             </t>
 
