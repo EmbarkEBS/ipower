@@ -556,7 +556,7 @@
                                                 text-align:center;
                                                 vertical-align:top;
                                             ">
-                                                <span t-esc="int(line.product_qty)"/>
+                                                <span t-esc="int(line.product_uom_qty)"/>
                                             </td>
 
                                             <!-- UNIT PRICE -->
