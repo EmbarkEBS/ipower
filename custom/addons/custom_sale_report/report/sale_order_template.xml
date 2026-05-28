@@ -448,7 +448,9 @@
                                                 <td style="padding:4px 0;">
 
                                                     :
-                                                    <span t-field="o.commitment_date"/>
+                                                       <span t-field="o.commitment_date"
+          t-field-options='{"format": "dd/MM/yyyy"}'/>
+
 
                                                 </td>
 
