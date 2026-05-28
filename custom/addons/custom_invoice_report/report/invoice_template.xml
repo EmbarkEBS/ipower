@@ -24,7 +24,7 @@
                         left: 0;
                         right: 0;
                         bottom: 0;
-                        height: 12mm;
+                        height: 22mm;
                     }
 
                     @page {
@@ -59,7 +59,7 @@
 
                 <main>
 
-                    <div class="page" style="padding:10px 40px 40px 40px;position:relative;
+                    <div class="page" style="padding:0px 40px 0px 40px;position:relative;
                             color:#333; margin:0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
