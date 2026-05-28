@@ -27,13 +27,9 @@
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
 
-        <field name="report_name">
-            custom_invoice_report.invoice_template
-        </field>
+        <field name="report_name">custom_invoice_report.invoice_template</field>
 
-        <field name="report_file">
-            custom_invoice_report.invoice_template
-        </field>
+        <field name="report_file">custom_invoice_report.invoice_template</field>
 
         <field name="binding_model_id"
                ref="account.model_account_move"/>
