@@ -94,7 +94,8 @@
 
                             <tbody>
 
-                                <tr t-foreach="o.move_ids_without_package" t-as="line">
+                               <tr t-foreach="o.move_ids"
+    t-as="line">
 
                                     <td style="padding:8px; border:1px solid #ccc;">
                                         <span t-esc="line.product_id.display_name"/>
