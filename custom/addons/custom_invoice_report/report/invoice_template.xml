@@ -448,35 +448,26 @@
                                 </td>
 
                             </tr>
-<t t-set="pickings"
-   t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state != 'cancel')"/>
+<tr>
+    <td style="
+        padding:4px 0;
+        font-weight:bold;
+        color:#1a3a5a;
+    ">
+        Delivery Note No
+    </td>
 
-<t t-if="pickings"><tr>
+    <td style="padding:4px 0;">
+        :
+        <t t-set="pickings"
+           t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
 
-                                            <td style="
-                                                padding:5px 0;
-                                                font-weight:bold;
-                                                color:#1a3a5a;
-                                            ">
-                                              Delivery Note Number
-                                            </td>
-
-                                            <td>
-                                                :
-                                               <t t-foreach="pickings" t-as="p">
-                <span t-esc="p.name"/>
-                <t t-if="not loop.last">, </t>
-          
-                                            </td>
-
-                                        </tr>
-                                      
-                                        </t>
-                                    </table>
-
-                                </td>
-
-                            </tr>
+        <t t-foreach="pickings" t-as="p">
+            <span t-esc="p.name"/>
+            <t t-if="not loop.last">, </t>
+        </t>
+    </td>
+</tr>
                         </table>
 
                         <!-- PRODUCT TABLE -->
