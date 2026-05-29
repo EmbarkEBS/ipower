@@ -24,13 +24,9 @@
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
 
-        <field name="report_name">
-            custom_delivery_slip_report.delivery_slip_template
-        </field>
+        <field name="report_name">custom_delivery_slip_report.delivery_slip_template</field>
 
-        <field name="report_file">
-            custom_delivery_slip_report.delivery_slip_template
-        </field>
+        <field name="report_file">custom_delivery_slip_report.delivery_slip_template</field>
 
         <field name="binding_model_id"
                ref="stock.model_stock_picking"/>
