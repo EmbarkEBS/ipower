@@ -443,12 +443,8 @@
                                             </td>
 
                                         </tr></t>
-                                    </table>
 
-                                </td>
-
-                            </tr>
-<tr>
+                                        <tr>
     <td style="
         padding:4px 0;
         font-weight:bold;
@@ -462,12 +458,18 @@
         <t t-set="pickings"
            t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
 
-        <t t-foreach="pickings" t-as="p">
-            <span t-esc="p.name"/>
-            <t t-if="not loop.last">, </t>
-        </t>
+        <t t-set="pickings"
+   t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
+
+<span t-esc="', '.join(pickings.mapped('name'))"/>
     </td>
 </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+
                         </table>
 
                         <!-- PRODUCT TABLE -->
