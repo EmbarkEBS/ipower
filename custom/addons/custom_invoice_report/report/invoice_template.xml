@@ -840,7 +840,21 @@
 
                             </div>
 
-                        </div>
+                        </div> <div style="margin-top:60px;padding-left:20px;">
+
+                            <strong style="
+                                font-size:14px;
+                                border-bottom:1px solid #e58b39;
+                                padding-bottom:2px;
+                            ">
+                             Our Bank Info:
+                            </strong>
+
+                            <div style="
+                                margin-top:10px;
+                                font-size:14px;
+                                color:#555;
+                            ">
 <t t-if="o.company_id.partner_id.bank_ids">
 
     <t t-foreach="o.company_id.partner_id.bank_ids" t-as="bank">
@@ -886,7 +900,7 @@
 
     </t>
 
-</t>
+</t></div></div>
                         <!-- FOOTER -->
                         <div class="fixed-footer">
 
