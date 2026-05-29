@@ -517,7 +517,13 @@
                                     ">
                                         Product Specification
                                     </th>
-
+   <th style="
+                                        padding:10px;
+                                        width:7%;
+                                        text-align:center;
+                                    ">
+                                      HS Code
+                                    </th>
                                     <th style="
                                         padding:10px;
                                         width:7%;
@@ -586,7 +592,14 @@
                                             </div>
 
                                         </td>
-
+    <td style="
+                                          padding-top:15px;
+                                          font-size:15px;
+                                          text-align:center;
+                                          vertical-align:top;
+                                        ">
+                                            <span t-esc="line.product_id.product_tmpl_id.hs_code"/>
+                                        </td>
                                         <td style="
                                           padding-top:15px;
                                           font-size:15px;
