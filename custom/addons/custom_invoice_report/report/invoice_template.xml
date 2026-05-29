@@ -641,24 +641,31 @@
                       
 </td></tr>
 <tr t-foreach="o.invoice_line_ids" t-as="line">
-<td></td>
-    <td colspan="4" style="
-                                          font-weight:bold;
-                                          font-size:14px;
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">
-       <span> Serial No:</span>
+
+    <td>
+
+        <t t-if="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
+
+            <span>Serial No:</span>
+            <br/>
+
             <t t-foreach="line.sale_line_ids.move_ids.move_line_ids" t-as="ml">
+
                 <t t-if="ml.lot_id">
+
                     <small>
-                      
                         <span t-esc="ml.lot_id.name"/>
                     </small>
-              ,
+
+                    <br/>
+
                 </t>
+
             </t>
-         </td>
+
+        </t>
+
+    </td>
 
 </tr>
                                     <tr>
