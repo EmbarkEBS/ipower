@@ -643,21 +643,18 @@
 <tr t-foreach="o.invoice_line_ids" t-as="line">
 
     <td>
-      
-
-        <t t-if="line.sale_line_ids">
-            <br/>
-
-            <t t-foreach="line.sale_line_ids.move_ids.move_line_ids" t-as="ml">
-                <t t-if="ml.lot_id">
+       <t t-if="ml.lot_id">
                     <small>
                         Serial No:
                         <span t-esc="ml.lot_id.name"/>
                     </small>
                     <br/>
                 </t>
-            </t>
-        </t>
+
+        <t t-if="line.sale_line_ids">
+            <br/>
+
+               </t>
 
     </td>
 
