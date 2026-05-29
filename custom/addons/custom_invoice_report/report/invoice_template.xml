@@ -291,8 +291,9 @@
                                             ">
 
                                                 <strong>
-                                                    <span t-esc="o.partner_id.name"/>
-                                                </strong>
+                                                      <span t-esc="o.partner_id.parent_id.name if o.partner_id.parent_id else o.partner_id.name"/>
+   
+                                                    </strong>
 
                                                 <br/>
 
@@ -330,7 +331,20 @@
                                                     </p>
 
                                                 </t>
+<!-- ATTN ONLY IF CONTACT PERSON -->
+<t t-if="o.partner_id.parent_id">
+    <p style="margin-top:5px">
 
+        <strong>Attn</strong>
+
+        <t t-if="o.partner_id.x_studio_salutation">
+            <span t-esc="o.partner_id.x_studio_salutation"/>
+        </t>
+
+        <span t-esc="o.partner_id.name"/>
+
+    </p>
+</t>
                                             </td>
 
                                         </tr>
