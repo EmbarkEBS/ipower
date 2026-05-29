@@ -608,6 +608,9 @@
                                                     font-size:11px;
                                         ">                                
                     <span>Ordering Code: </span>      <span t-field="line.x_studio_related_field_8b0_1jmkth7qs"/><br/>
+              <t t-if="line.product_id.product_tmpl_id.x_studio_customer_lead_time_weeks">
+    <span t-esc="line.product_id.product_tmpl_id.x_studio_customer_lead_time_weeks"/>
+</t>
                  <t t-if="line.product_id.product_tmpl_id.x_studio_warranty">   <span>Warranty: </span> <span t-esc="line.product_id.product_tmpl_id.x_studio_warranty or ''"/></t>
                       
 </td></tr>
