@@ -466,11 +466,11 @@
                                                <t t-foreach="pickings" t-as="p">
                 <span t-esc="p.name"/>
                 <t t-if="not loop.last">, </t>
-            </t>
+          
                                             </td>
 
                                         </tr>
-                                        </t>
+                                      
                                         </t>
                                     </table>
 
