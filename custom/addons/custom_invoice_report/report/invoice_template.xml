@@ -643,7 +643,7 @@
 <tr t-foreach="o.invoice_line_ids" t-as="line">
 
     <td>
-        <span t-field="line.name"/>
+      
 
         <t t-if="line.sale_line_ids">
             <br/>
