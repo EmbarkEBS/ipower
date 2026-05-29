@@ -663,8 +663,6 @@
                         <span t-esc="ml.lot_id.name"/>
                     </small>
 
-                    ,
-
                 </t>
 
             </t>
@@ -674,7 +672,7 @@
     </td>
 
 </tr>
-                                    <tr>
+                                 <!--   <tr>
 
                                         <td></td>
 
@@ -689,7 +687,7 @@
 
                                         </td>
 
-                                    </tr>
+                                    </tr>-->
 
                                     <tr style="border-bottom:1px solid #d9d9d9;">
 
