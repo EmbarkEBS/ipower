@@ -856,48 +856,35 @@
         color:#555;
     ">
 
-        <t t-if="o.partner_bank_id">
+       <t t-if="o.partner_bank_id">
 
-            <table style="font-size:13px;">
+    <table style="font-size:13px;">
 
-                <tr>
-                    <td><strong>Account Name:</strong></td>
-                    <td>
-                        <span t-esc="o.partner_bank_id.acc_holder_name or o.company_id.name"/>
-                    </td>
-                </tr>
+      
+  <tr>
+            <td><strong>Account Name:</strong></td>
+            <td>
+                <span t-esc="o.partner_bank_id.acc_holder_name or o.company_id.name"/>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Account Number:</strong></td>
+            <td><span t-esc="o.partner_bank_id.acc_number"/></td>
+        </tr>
 
-                <tr>
-                    <td><strong>A/C Number:</strong></td>
-                    <td>
-                        <span t-esc="o.partner_bank_id.acc_number"/>
-                    </td>
-                </tr>
+        <tr t-if="o.partner_bank_id.sanitized_acc_number">
+            <td><strong>IBAN Number:</strong></td>
+            <td><span t-esc="o.partner_bank_id.sanitized_acc_number"/></td>
+        </tr>
 
-                <tr t-if="o.partner_bank_id.sanitized_acc_number">
-                    <td><strong>IBAN Number:</strong></td>
-                    <td>
-                        <span t-esc="o.partner_bank_id.sanitized_acc_number"/>
-                    </td>
-                </tr>
+        <tr>
+            <td><strong>Bank Name:</strong></td>
+            <td><span t-esc="o.partner_bank_id.bank_id.name"/></td>
+        </tr>
 
-                <tr>
-                    <td><strong>Bank Name:</strong></td>
-                    <td>
-                        <span t-esc="o.partner_bank_id.bank_id.name"/>
-                    </td>
-                </tr>
+    </table>
 
-                <tr t-if="o.partner_bank_id.bank_bic">
-                    <td><strong>SWIFT:</strong></td>
-                    <td>
-                        <span t-esc="o.partner_bank_id.bank_bic"/>
-                    </td>
-                </tr>
-
-            </table>
-
-        </t>
+</t>
 
     </div>
 
