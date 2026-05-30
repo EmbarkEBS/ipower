@@ -445,43 +445,29 @@
 
                                     <th style="
                                         padding:10px;
-                                        width:55%;
+                                        width:65%;
                                         text-align:center;
                                     ">
                                         Product Specification
                                     </th>
    <th style="
                                         padding:10px;
-                                        width:12%;
+                                        width:15%;
                                         text-align:center;
                                     ">
                                       HS Code
                                     </th>
-                                    <th style="
+                                   <th style="
                                         padding:10px;
-                                        width:7%;
-                                        text-align:center;
-                                    ">
-                                        Qty
-                                    </th>
-
-                                    <th style="
-                                        padding:10px;
-                                        width:11%;
-                                        text-align:right;
-                                    ">
-                                        Unit Price
-                                    </th>
-
-                                    <th style="
-                                        padding:10px;
-                                        width:12%;
+                                        width:15%;
                                         text-align:right;
                                         border-top-right-radius:10px;
                                         border-bottom-right-radius:10px;
                                     ">
-                                        Total Price
+                                        Qty
                                     </th>
+
+                                  
                                 </tr>
 
                             </thead>
@@ -507,7 +493,7 @@
          <td style="
                                             padding-top:15px;
                                             vertical-align:top;
-                                            width:55%;
+                                            width:65%;
                                             white-space:normal;
                                             word-break:break-word;
                                         ">
