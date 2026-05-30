@@ -896,14 +896,7 @@
                     </td>
                 </tr>
 
-                <tr t-if="o.company_bank_id.bank_bic">
-                    <td style="padding-right:10px;">
-                        <strong>SWIFT:</strong>
-                    </td>
-                    <td>
-                        <span t-esc="o.company_bank_id.bank_bic"/>
-                    </td>
-                </tr>
+              
 
             </table>
 
