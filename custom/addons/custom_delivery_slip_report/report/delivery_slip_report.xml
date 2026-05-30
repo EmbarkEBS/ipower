@@ -17,29 +17,28 @@
 
     </record>
 
+
     <record id="action_report_custom_delivery_slip"
             model="ir.actions.report">
 
         <field name="name">Custom Delivery Slip</field>
+
         <field name="model">stock.picking</field>
+
         <field name="report_type">qweb-pdf</field>
 
-        <field name="report_name">
-            custom_delivery_slip_report.delivery_slip_template
-        </field>
+        <!-- IMPORTANT -->
+        <field name="report_name">custom_delivery_slip_report.delivery_slip_template</field>
 
-        <field name="report_file">
-            custom_delivery_slip_report.delivery_slip_template
-        </field>
+        <!-- IMPORTANT -->
+        <field name="report_file">custom_delivery_slip_report.delivery_slip_template</field>
 
         <field name="binding_model_id"
                ref="stock.model_stock_picking"/>
 
         <field name="binding_type">report</field>
 
-        <field name="print_report_name">
-            'Delivery Slip - %s' % (object.name)
-        </field>
+        <field name="print_report_name">'Delivery Slip - %s' % (object.name)</field>
 
         <field name="paperformat_id"
                ref="custom_delivery_slip_report.paperformat_custom_delivery"/>

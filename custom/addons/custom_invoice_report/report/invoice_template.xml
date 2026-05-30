@@ -842,66 +842,69 @@
 
                         </div> <div style="margin-top:60px;padding-left:20px;">
 
-                            <strong style="
-                                font-size:14px;
-                                border-bottom:1px solid #e58b39;
-                                padding-bottom:2px;
-                            ">
-                             Our Bank Info:
-                            </strong>
+    <strong style="
+        font-size:14px;
+        border-bottom:1px solid #e58b39;
+        padding-bottom:2px;
+    ">
+        Our Bank Info:
+    </strong>
 
-                            <div style="
-                                margin-top:10px;
-                                font-size:14px;
-                                color:#555;
-                            ">
-<t t-if="o.company_id.partner_id.bank_ids">
+    <div style="
+        margin-top:10px;
+        font-size:14px;
+        color:#555;
+    ">
 
-    <t t-foreach="o.company_id.partner_id.bank_ids" t-as="bank">
+        <t t-if="o.company_bank_id">
 
-        <table style="font-size:13px;">
+            <table style="font-size:13px; border-collapse:collapse;">
 
-            <tr>
-                <td><strong>Account Name:</strong></td>
-                <td>
-                    <span t-esc="bank.acc_holder_name or o.company_id.name"/>
-                </td>
-            </tr>
+                <tr>
+                    <td style="padding-right:10px;">
+                        <strong>Account Name:</strong>
+                    </td>
+                    <td>
+                        <span t-esc="o.company_bank_id.acc_holder_name or o.company_id.name"/>
+                    </td>
+                </tr>
 
-            <tr>
-                <td><strong>A/C Number:</strong></td>
-                <td>
-                    <span t-esc="bank.acc_number"/>
-                </td>
-            </tr>
+                <tr>
+                    <td style="padding-right:10px;">
+                        <strong>A/C Number:</strong>
+                    </td>
+                    <td>
+                        <span t-esc="o.company_bank_id.acc_number"/>
+                    </td>
+                </tr>
 
-            <tr t-if="bank.sanitized_acc_number">
-                <td><strong>IBAN Number:</strong></td>
-                <td>
-                    <span t-esc="bank.sanitized_acc_number"/>
-                </td>
-            </tr>
+              <tr t-if="o.company_bank_id.iban">
+                    <td style="padding-right:10px;">
+                        <strong>IBAN Number:</strong>
+                    </td>
+                    <td>
+                    <span t-esc="o.company_bank_id.iban"/>
+                    </td>
+                </tr>
 
-            <tr>
-                <td><strong>Bank Name:</strong></td>
-                <td>
-                    <span t-esc="bank.bank_id.name"/>
-                </td>
-            </tr>
+                <tr t-if="o.company_bank_id.bank_id">
+                    <td style="padding-right:10px;">
+                        <strong>Bank Name:</strong>
+                    </td>
+                    <td>
+                        <span t-esc="o.company_bank_id.bank_id.name"/>
+                    </td>
+                </tr>
 
-            <tr t-if="bank.bank_bic">
-                <td><strong>SWIFT:</strong></td>
-                <td>
-                    <span t-esc="bank.bank_bic"/>
-                </td>
-            </tr>
+              
 
-        </table>
+            </table>
 
-    </t>
+        </t>
 
-</t></div></div>
-                        <!-- FOOTER -->
+    </div>
+
+</div> <!-- FOOTER -->
                         <div class="fixed-footer">
 
                             <div style="
