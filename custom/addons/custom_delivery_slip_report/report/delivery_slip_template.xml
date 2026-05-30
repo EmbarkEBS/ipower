@@ -390,7 +390,7 @@
                                                 <td style="padding:4px 0;">
 
                                                     :
-                                                    <span t-esc="o.ref or ''"/>
+                                                   <span t-esc="o.origin or ''"/>
 
                                                 </td>
 
