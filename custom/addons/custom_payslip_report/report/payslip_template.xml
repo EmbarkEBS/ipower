@@ -133,7 +133,7 @@ Work Email :
 <br/><br/>
 
 Bank :
-<span t-field="o.employee_id.bank_account_id.bank_id.name"/>
+<span></span>
 
 <br/><br/>
 
