@@ -200,7 +200,7 @@ EARNINGS
 
 <t t-set="earnings" t-value="0"/>
 
-<t t-foreach="o.line_ids.filtered(lambda l: l.total > 0)"
+<t t-foreach="o.line_ids.filtered(lambda l: l.total &gt; 0)"
    t-as="line">
 
 <t t-set="earnings"
@@ -255,7 +255,7 @@ DEDUCTIONS
 
 <t t-set="deductions" t-value="0"/>
 
-<t t-foreach="o.line_ids.filtered(lambda l: l.total < 0)"
+<t t-foreach="o.line_ids.filtered(lambda l: l.total &lt; 0)"
    t-as="line">
 
 <t t-set="deductions"
