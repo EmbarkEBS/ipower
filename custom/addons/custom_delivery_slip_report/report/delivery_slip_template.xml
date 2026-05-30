@@ -50,7 +50,7 @@
                             <!-- WATERMARK -->
 <div style="
     position:absolute;
-    top:60%;
+    top:65%;
     left:25%;
     opacity:0.10;
     transform:translate(-50%, -50%) rotate(-25deg);
@@ -591,6 +591,32 @@
 
 </tbody>
                         </table>
+                        <!-- NOTES -->
+                        <div style="margin-top:60px;padding-left:20px;">
+
+                            <strong style="
+                                font-size:14px;
+                                border-bottom:1px solid #e58b39;
+                                padding-bottom:2px;
+                            ">
+                                Notes
+                            </strong>
+
+                            <div style="
+                                margin-top:10px;
+                                font-size:14px;
+                                color:#555;
+                            ">
+
+                                <t t-if="o.narration">
+                                    <span t-esc="o.narration"/>
+                                </t>
+
+                                <t t-else="">
+                                    Thanks for giving us the opportunity to serve you
+                                </t>
+
+                            </div>
      <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
 <div class="fixed-footer">
