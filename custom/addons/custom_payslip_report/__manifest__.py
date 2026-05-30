@@ -7,6 +7,7 @@
     'data': [
         'report/payslip_report.xml',
         'report/payslip_template.xml',
+        'views/hr_payslip_view.xml',
     ],
     'installable': True,
 }
