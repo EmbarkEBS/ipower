@@ -138,7 +138,7 @@ Bank :
 <br/><br/>
 
 IBAN :
-<span t-field="o.employee_id.bank_account_id.acc_number"/>
+<span></span>
 
 </td>
 
