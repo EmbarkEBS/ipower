@@ -396,28 +396,21 @@
 
                                             </tr>
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref">
+    <tr>
+        <td style="
+            padding:5px 0;
+            font-weight:bold;
+            color:#1a3a5a;
+        ">
+            Customer PO Ref
+        </td>
 
-<tr>
-
-                                            <td style="
-                                                padding:5px 0;
-                                                font-weight:bold;
-                                                color:#1a3a5a;
-                                            ">
-                                                Customer PO Ref
-                                            </td>
-
-                                            <td>
-                                                :
-                                              <span t-esc="sale_order.x_studio_customer_po_ref"/>
-                                            </td>
-
-                                        </tr></t>
-                                        </table>
-
-                                    </td>
-
-                                </tr>
+        <td>
+            :
+            <span t-esc="sale_order.x_studio_customer_po_ref"/>
+        </td>
+    </tr>
+</t>
 
                             </table>
                          <table style="
