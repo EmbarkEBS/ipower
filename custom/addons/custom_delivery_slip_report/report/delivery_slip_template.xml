@@ -397,7 +397,7 @@
                                             </tr>
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref">
 
-<t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
+<tr>
 
                                             <td style="
                                                 padding:5px 0;
