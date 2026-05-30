@@ -517,25 +517,25 @@
 
     <tr>
         <td></td>
-        <td colspan="4">
+     <td colspan="4">
 
-           <t t-if="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
+    <t t-if="line.move_line_ids.filtered(lambda ml: ml.lot_id)">
 
-    <span>Serial No:</span>
+        <span>Serial No:</span>
 
-    <t t-foreach="line.sale_line_ids.move_ids.move_line_ids" t-as="ml">
+        <t t-foreach="line.move_line_ids" t-as="ml">
 
-        <t t-if="ml.lot_id">
-            <small>
-                <span t-esc="ml.lot_id.name"/>
-            </small>
+            <t t-if="ml.lot_id">
+                <small>
+                    <span t-esc="ml.lot_id.name"/>
+                </small>
+            </t>
+
         </t>
 
     </t>
 
-</t>
-
-        </td>
+</td>
     </tr>
 
     <tr style="border-bottom:1px solid #d9d9d9;">
