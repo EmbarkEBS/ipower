@@ -487,19 +487,48 @@
 
     <tr>
 
-        <td>
+        <td style="
+                                           font-size:15px;
+                                           padding-top:15px;
+                                           text-align:center;
+                                           vertical-align:top;
+                                        ">
             <span t-esc="sn"/>
         </td>
 
-        <td>
-            <span t-esc="line.product_id.name"/>
+         <td style="
+                                            padding-top:15px;
+                                            vertical-align:top;
+                                            width:45%;
+                                            white-space:normal;
+                                            word-break:break-word;
+                                        ">
+
+                                            <div style="
+                                                font-weight:bold;
+                                                margin-bottom:6px;
+                                                font-size:15px;
+                                                line-height:1.5;
+                                                width:100%;
+                                            ">
+            <span t-esc="line.product_id.name"/></div>
         </td>
 
-        <td>
+          <td style="
+                                          padding-top:15px;
+                                          font-size:15px;
+                                          text-align:center;
+                                          vertical-align:top;
+                                        ">
             <span t-esc="line.product_id.product_tmpl_id.hs_code or ''"/>
         </td>
 
-        <td>
+        <td style="
+                                          padding-top:15px;
+                                          font-size:15px;
+                                          text-align:center;
+                                          vertical-align:top;
+                                        ">
             <span t-esc="line.quantity or 0"/>
         </td>
 
@@ -509,15 +538,25 @@
 
     <tr>
         <td></td>
-        <td colspan="4">
-            Ordering Code:
+           <td  colspan="4" style="
+                                          font-weight:bold;
+                                          font-size:14px;
+                                                    margin-bottom:6px;
+                                                    font-size:11px;
+                                        ">
+          <span>Ordering Code: </span> 
             <span t-esc="line.product_id.product_tmpl_id.x_studio_sku_code or ''"/>
         </td>
     </tr>
 
     <tr>
         <td></td>
-     <td colspan="4">
+       <td colspan="4" style="
+                                          font-weight:bold;
+                                          font-size:14px;
+                                                    margin-bottom:6px;
+                                                    font-size:11px;
+                                        ">
 
     <t t-if="line.move_line_ids.filtered(lambda ml: ml.lot_id)">
 
@@ -540,7 +579,14 @@
 
     <tr style="border-bottom:1px solid #d9d9d9;">
         <td></td>
-        <td colspan="4">
+       
+                                        <td colspan="4" style="
+                                            font-size:12px;
+                                            color:#666;
+                                            line-height:1.7;
+                                            white-space:normal;
+                                            word-break:break-word;
+                                        ">
             <span t-esc="line.product_id.description or ''"/>
         </td>
     </tr>
