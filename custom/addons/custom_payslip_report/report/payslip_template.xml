@@ -93,7 +93,7 @@ Period:
 
 <div>
 Payslip:
-<span t-field="o.number"/>
+<span t-field="o.name"/>
 </div>
 
 </td>
@@ -346,7 +346,7 @@ NET PAY
 <br/><br/>
 
 <h2>
-<span t-field="o.net_wage"/>
+<span t-out="o.net_wage if 'net_wage' in o._fields else ''"/>
 </h2>
 
 </div>
