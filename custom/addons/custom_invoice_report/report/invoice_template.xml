@@ -878,12 +878,12 @@
                     </td>
                 </tr>
 
-                <tr t-if="o.company_bank_id.sanitized_acc_number">
+              <tr t-if="o.company_bank_id.iban">
                     <td style="padding-right:10px;">
                         <strong>IBAN Number:</strong>
                     </td>
                     <td>
-                        <span t-esc="o.company_bank_id.sanitized_acc_number"/>
+                    <span t-esc="o.company_bank_id.iban"/>
                     </td>
                 </tr>
 
