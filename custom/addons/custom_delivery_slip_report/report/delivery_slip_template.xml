@@ -6,10 +6,6 @@
             <meta charset="UTF-8"/>
 
             <t t-foreach="docs" t-as="o">
-
-<!-- ✅ SAFE CURRENCY SYMBOL -->
-<t t-set="cur_symbol"
-   t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
                     .fixed-footer {
                         position: fixed;
