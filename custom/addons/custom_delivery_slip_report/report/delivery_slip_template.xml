@@ -608,8 +608,8 @@
                                 color:#555;
                             ">
 
-                                <t t-if="o.narration">
-                                    <span t-esc="o.narration"/>
+                                <t t-if="o.note">
+                                 <span t-esc="o.note or ''"/>
                                 </t>
 
                                 <t t-else="">
