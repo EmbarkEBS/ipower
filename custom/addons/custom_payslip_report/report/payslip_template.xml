@@ -346,7 +346,7 @@ NET PAY
 <br/><br/>
 
 <h2>
-<span t-out="o.net_wage if 'net_wage' in o._fields else ''"/>
+<span t-field="o.net_wage if 'net_wage' in o._fields else ''"/>
 </h2>
 
 </div>
