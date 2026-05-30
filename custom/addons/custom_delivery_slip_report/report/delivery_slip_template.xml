@@ -395,7 +395,7 @@
                                                 </td>
 
                                             </tr>
- <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
+<t t-if="sale_order and sale_order.x_studio_customer_po_ref">
 
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
 
@@ -409,7 +409,7 @@
 
                                             <td>
                                                 :
-                                               <span t-esc="sale_order.x_studio_customer_po_ref"/>
+                                              <span t-esc="sale_order.x_studio_customer_po_ref"/>
                                             </td>
 
                                         </tr></t>
