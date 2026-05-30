@@ -395,23 +395,19 @@
                                                 </td>
 
                                             </tr>
-<t t-if="sale_order and sale_order.x_studio_customer_po_ref">
+<t t-set="sale_order"
+   t-value="o.move_ids and o.move_ids[0].sale_line_id.order_id or False"/>
+<t t-if="sale_order">
     <tr>
-        <td style="
-            padding:5px 0;
-            font-weight:bold;
-            color:#1a3a5a;
-        ">
+        <td style="font-weight:bold;color:#1a3a5a;">
             Customer PO Ref
         </td>
-
         <td>
             :
-            <span t-esc="sale_order.x_studio_customer_po_ref"/>
+            <span t-esc="sale_order.x_studio_customer_po_ref or ''"/>
         </td>
     </tr>
 </t>
-
                             </table>
 </td>
 </tr>
