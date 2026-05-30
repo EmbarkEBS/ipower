@@ -368,7 +368,88 @@ NET PAY
 </div>
 
 <br/>
+<!-- Notes & Footer Section -->
+<div class="row mt32" style="margin-top:30px;">
 
+    <!-- Left Side : Notes -->
+    <div class="col-7">
+        <div style="font-size:12px;">
+
+            <h5 style="
+                color:#1F3A93;
+                font-weight:bold;
+                margin-bottom:10px;
+            ">
+                Notes
+            </h5>
+
+            <div style="
+                width:80px;
+                height:2px;
+                background:#F58220;
+                margin-bottom:10px;
+            "/>
+
+            <p style="margin:0;">
+                ● This is a system-generated document and does not require any signature.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Right Side : Company Footer -->
+    <div class="col-5 text-end">
+
+        <table style="
+            width:100%;
+            font-size:11px;
+            border-collapse:collapse;
+        ">
+            <tr>
+                <td style="padding:3px 0;">
+                    <strong>Address :</strong>
+                </td>
+                <td style="padding:3px 0;">
+                    <span t-esc="o.company_id.street"/>
+                    <t t-if="o.company_id.street2">
+                        , <span t-esc="o.company_id.street2"/>
+                    </t>
+                    <br/>
+                    <span t-esc="o.company_id.city"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding:3px 0;">
+                    <strong>Email :</strong>
+                </td>
+                <td style="padding:3px 0;">
+                    <span t-esc="o.company_id.email"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding:3px 0;">
+                    <strong>Website :</strong>
+                </td>
+                <td style="padding:3px 0;">
+                    <span t-esc="o.company_id.website"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding:3px 0;">
+                    <strong>Phone :</strong>
+                </td>
+                <td style="padding:3px 0;">
+                    <span t-esc="o.company_id.phone"/>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
 <div style="font-size:11px">
 
 This is a system generated payslip and does not require signature.
