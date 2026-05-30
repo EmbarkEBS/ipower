@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-   <record id="action_custom_payslip_report" model="ir.actions.report">
-    <field name="name">Custom Payslip</field>
-    <field name="model">hr.payslip</field>
-    <field name="report_type">qweb-pdf</field>
-    <field name="report_name">custom_payslip_report.custom_payslip_template</field>
+    <record id="action_custom_payslip_report"
+            model="ir.actions.report">
+
+        <field name="name">Custom Payslip</field>
+
+        <field name="model">hr.payslip</field>
+
+        <field name="report_type">qweb-pdf</field>
+
+          <field name="report_name">custom_payslip_report.custom_payslip_template</field>
     <field name="report_file">custom_payslip_report.custom_payslip_template</field>
-    <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
-    <field name="binding_type">report</field>
-</record>
+
+        <field name="binding_model_id"
+               ref="hr_payroll.model_hr_payslip"/>
+
+        <field name="binding_type">report</field>
+
+    </record>
 
 </odoo>
