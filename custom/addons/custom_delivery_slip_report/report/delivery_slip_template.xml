@@ -608,7 +608,7 @@
 
                                     <t t-set="sn" t-value="sn + 1"/>
 
-                                </t>
+                                </tr>
 
                             </tbody>
 
