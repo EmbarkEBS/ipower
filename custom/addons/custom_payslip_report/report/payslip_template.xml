@@ -12,39 +12,114 @@
 
 <style>
 
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:11px;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
 }
 
-th{
-    background:#555;
-    color:white;
-    padding:6px;
-}
-
-td{
-    padding:5px;
+.header-line{
+    border-top:3px solid #F58220;
+    margin-top:10px;
+    margin-bottom:15px;
 }
 
 .section-title{
-    background:#555;
-    color:white;
-    padding:6px;
+    background:#666666;
+    color:#fff;
+    font-size:11px;
+    font-weight:bold;
+    padding:5px 8px;
+    text-transform:uppercase;
+}
+
+.info-table td{
+    padding:2px 4px;
+    font-size:10px;
+}
+
+.salary-table{
+    width:100%;
+}
+
+.salary-table th{
+    background:none;
+    color:#24478f;
+    font-size:10px;
+    text-align:left;
+    padding:4px;
+    border-bottom:1px solid #ddd;
+}
+
+.salary-table td{
+    font-size:10px;
+    padding:4px;
+    border-bottom:1px solid #eee;
+}
+
+.total-row td{
+    border-top:2px solid #888;
     font-weight:bold;
 }
 
+.summary-table td{
+    border:1px solid #1F3A93;
+}
+
 .summary-box{
-    border:1px solid #0d3b8e;
     text-align:center;
-    padding:15px;
+    padding:12px;
+    min-height:65px;
+}
+
+.summary-title{
+    color:#1F3A93;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.summary-amount{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:5px;
 }
 
 .net-box{
-    background:#0d3b8e;
-    color:white;
+    background:#082B84;
+    color:#fff;
     text-align:center;
-    padding:15px;
+    padding:12px;
+    min-height:65px;
+}
+
+.net-box .summary-title{
+    color:white;
+}
+
+.net-box .summary-amount{
+    color:white;
+}
+
+.notes-title{
+    color:#1F3A93;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.orange-line{
+    width:60px;
+    height:2px;
+    background:#F58220;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+.footer{
+    font-size:10px;
 }
 
 </style>
@@ -54,52 +129,66 @@ td{
 <table>
 <tr>
 
-<td width="30%">
-
-<img
-t-if="o.company_id.logo"
-t-att-src="image_data_uri(o.company_id.logo)"
-style="max-height:90px;"/>
-
+<td style="width:28%;vertical-align:middle;">
+    <img t-if="o.company_id.logo"
+         t-att-src="image_data_uri(o.company_id.logo)"
+         style="max-height:80px;"/>
 </td>
 
-<td width="40%">
+<td style="width:42%;vertical-align:top;">
+    <div style="font-size:20px;font-weight:bold;color:#1F3A93;">
+        <span t-field="o.company_id.name"/>
+    </div>
 
-<h3>
-<span t-field="o.company_id.name"/>
-</h3>
+    <div>
+        <span t-field="o.company_id.street"/>
+    </div>
 
-<div>
-<span t-field="o.company_id.street"/>
-</div>
+    <div>
+        <span t-field="o.company_id.country_id.name"/>
+    </div>
 
-<div>
-TRN :
-<span t-field="o.company_id.vat"/>
-</div>
-
+    <div>
+        TRN :
+        <span t-field="o.company_id.vat"/>
+    </div>
 </td>
 
-<td width="30%" style="text-align:right">
+<td style="width:30%;text-align:right;vertical-align:top;">
+    <div style="
+        color:#1F3A93;
+        font-size:28px;
+        font-weight:bold;
+    ">
+        PAYSLIP
+    </div>
 
-<h1>PAYSLIP</h1>
+    <div style="font-size:16px;">
+        <span t-esc="o.date_to.strftime('%B %Y')"/>
+    </div>
 
-<div>
-Period:
-<span t-field="o.date_from"/>
--
-<span t-field="o.date_to"/>
-</div>
+    <br/>
 
-<div>
-Payslip:
-<span t-field="o.name"/>
-</div>
+    <div>
+        Payslip No :
+        <span t-field="o.number"/>
+    </div>
 
+    <div>
+        Payment Date :
+        <span t-field="o.date_to"/>
+    </div>
+
+    <div>
+        Currency :
+        AED
+    </div>
 </td>
 
 </tr>
 </table>
+
+<div class="header-line"/>
 
 <hr/>
 
