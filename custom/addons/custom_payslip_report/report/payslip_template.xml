@@ -331,7 +331,17 @@
                                     <th style="text-align:right;">Amount</th>
                                 </tr>
 
-                                <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0)" t-as="line">
+                               <t t-foreach="o.line_ids.filtered(
+    lambda l:
+        l.appears_on_payslip
+        and l.total > 0
+        and l.code not in (
+            'NET',
+            'GROSS',
+            'TAXABLE',
+            'ALP'
+        )
+)" t-as="line">
 
                                     <tr>
                                         <td><span t-field="line.name"/></td>
@@ -472,7 +482,7 @@
                             "/>
 
                             <div class="footer-note">
-                                ● This is a system-generated document and does not require any signature.
+                                This is a system-generated document and does not require any signature.
                             </div>
 
                         </td>
