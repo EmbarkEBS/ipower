@@ -134,7 +134,7 @@ table{
          t-att-src="image_data_uri(o.company_id.logo)"
          style="max-height:80px;"/>
 </td>
- 
+  <tr>
 
                                                 <!-- ORANGE BORDER -->
                                               <td style="
@@ -202,7 +202,7 @@ table{
         font-size:28px;
         font-weight:bold;
     ">
-        PAYSLIP
+        PAYSLIP1
     </div>
 
     <div style="font-size:16px;">
