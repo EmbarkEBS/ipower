@@ -134,7 +134,49 @@ table{
          t-att-src="image_data_uri(o.company_id.logo)"
          style="max-height:80px;"/>
 </td>
+ 
 
+                                                <!-- ORANGE BORDER -->
+                                              <td style="
+    width:8px;
+    padding:0;
+    vertical-align:top;
+">
+
+    <svg width="8"
+         height="130"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+
+            <!-- VERTICAL ORANGE FADE -->
+            <linearGradient id="verticalFade"
+                            x1="0%"
+                            y1="0%"
+                            x2="0%"
+                            y2="100%">
+
+                <stop offset="0%"
+                      stop-color="#f39223"
+                      stop-opacity="1"/>
+
+                <stop offset="100%"
+                      stop-color="#f39223"
+                      stop-opacity="0"/>
+
+            </linearGradient>
+
+        </defs>
+
+        <rect x="0"
+              y="0"
+              width="2"
+              height="130"
+              fill="url(#verticalFade)"/>
+
+    </svg>
+
+</td>
 <td style="width:42%;vertical-align:top;">
     <div style="font-size:20px;font-weight:bold;color:#1F3A93;">
         <span t-field="o.company_id.name"/>
@@ -145,7 +187,7 @@ table{
     </div>
 
     <div>
-        <span t-field="o.company_id.country_id.name"/>
+        <span t-esc="o.company_id.country_id.name or ''"/>
     </div>
 
     <div>
