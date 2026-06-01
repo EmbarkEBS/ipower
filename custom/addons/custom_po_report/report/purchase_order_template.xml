@@ -417,7 +417,7 @@
 
                                             </tr>
 
-                                            <tr>
+                                         <t t-if="o.origin">   <tr>
 
                                                 <td style="
                                                     padding:4px 0;
@@ -434,7 +434,7 @@
 
                                                 </td>
 
-                                            </tr>
+                                            </tr></t>
 <t t-if="o.x_studio_your_ref">
     <tr>
         <td style="font-weight:bold;">
