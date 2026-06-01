@@ -8,8 +8,18 @@
 
         <t t-foreach="docs" t-as="o">
             <t t-set="earnings"
-               t-value="sum(o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0).mapped('total'))"/>
-
+   t-value="sum(
+       o.line_ids.filtered(
+           lambda l:
+               l.appears_on_payslip
+               and l.total > 0
+               and l.name not in (
+                   'Annual Leave Provision',
+                   'Taxable Salary',
+                   'Net Salary'
+               )
+       ).mapped('total')
+   )"/>
             <t t-set="deductions"
                t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
 
@@ -328,7 +338,7 @@
 
                                 <tr>
                                     <th>Description</th>
-                                    <th style="text-align:right;">Amount</th>
+                                    <th style="text-align:right;">Amount (AED)</th>
                                 </tr>
 
                                <t t-foreach="o.line_ids.filtered(
@@ -346,9 +356,7 @@
                                     <tr>
                                         <td><span t-field="line.name"/></td>
                                         <td style="text-align:right;">
-                                            <span t-out="line.total"
-                                                  t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
-                                        </td>
+                                            <span t-esc="'{:,.2f}'.format(line.total)"/>  </td>
                                     </tr>
 
                                 </t>
@@ -356,9 +364,7 @@
                                 <tr class="total-line">
                                     <td>Total Earnings</td>
                                     <td style="text-align:right;">
-                                        <span t-out="earnings"
-                                              t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
-                                    </td>
+                                        <span t-esc="'{:,.2f}'.format(earnings or 0.0)"/></td>
                                 </tr>
 
                             </table>
@@ -375,7 +381,7 @@
 
                                 <tr>
                                     <th>Description</th>
-                                    <th style="text-align:right;">Amount</th>
+                                    <th style="text-align:right;">Amount (AED)</th>
                                 </tr>
 
                                 <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0)" t-as="line">
