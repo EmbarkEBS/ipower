@@ -604,7 +604,7 @@
                                           font-weight:bold;
                                           font-size:14px;
                                                     margin-bottom:6px;
-                                                    font-size:11px;
+                                                    font-size:11px;line-height:1.7;
                                         ">                                
                     <span>Ordering Code: </span>      <span t-field="line.x_studio_related_field_8b0_1jmkth7qs"/><br/>
               <t t-if="line.product_id.product_tmpl_id.x_studio_customer_lead_time_weeks">
