@@ -4,595 +4,508 @@
 
 <template id="custom_payslip_template">
 
-<t t-call="web.html_container">
-
-<t t-foreach="docs" t-as="o">
-
-<div class="page">
-
-<style>
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:11px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-.header-line{
-    border-top:3px solid #F58220;
-    margin-top:10px;
-    margin-bottom:15px;
-}
-
-.section-title{
-    background:#666666;
-    color:#fff;
-    font-size:11px;
-    font-weight:bold;
-    padding:5px 8px;
-    text-transform:uppercase;
-}
-
-.info-table td{
-    padding:2px 4px;
-    font-size:10px;
-}
-
-.salary-table{
-    width:100%;
-}
-
-.salary-table th{
-    background:none;
-    color:#24478f;
-    font-size:10px;
-    text-align:left;
-    padding:4px;
-    border-bottom:1px solid #ddd;
-}
-
-.salary-table td{
-    font-size:10px;
-    padding:4px;
-    border-bottom:1px solid #eee;
-}
-
-.total-row td{
-    border-top:2px solid #888;
-    font-weight:bold;
-}
-
-.summary-table td{
-    border:1px solid #1F3A93;
-}
-
-.summary-box{
-    text-align:center;
-    padding:12px;
-    min-height:65px;
-}
-
-.summary-title{
-    color:#1F3A93;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.summary-amount{
-    font-size:18px;
-    font-weight:bold;
-    margin-top:5px;
-}
-
-.net-box{
-    background:#082B84;
-    color:#fff;
-    text-align:center;
-    padding:12px;
-    min-height:65px;
-}
-
-.net-box .summary-title{
-    color:white;
-}
-
-.net-box .summary-amount{
-    color:white;
-}
-
-.notes-title{
-    color:#1F3A93;
-    font-size:14px;
-    font-weight:bold;
-}
-
-.orange-line{
-    width:60px;
-    height:2px;
-    background:#F58220;
-    margin-top:5px;
-    margin-bottom:10px;
-}
-
-.footer{
-    font-size:10px;
-}
-
-</style>
-
-<!-- HEADER -->
-
-<table>
-<tr>
-
-<td style="width:28%;vertical-align:middle;">
-    <img t-if="o.company_id.logo"
-         t-att-src="image_data_uri(o.company_id.logo)"
-         style="max-height:80px;"/>
-</td>
-  <tr>
-
-                                                <!-- ORANGE BORDER -->
-                                              <td style="
-    width:8px;
-    padding:0;
-    vertical-align:top;
-">
-
-    <svg width="8"
-         height="130"
-         xmlns="http://www.w3.org/2000/svg">
-
-        <defs>
+    <t t-call="web.html_container">
+
+        <t t-foreach="docs" t-as="o">
+
+            <t t-set="earnings"
+               t-value="sum(o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0).mapped('total'))"/>
+
+            <t t-set="deductions"
+               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
+
+            <t t-set="working_days"
+               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
+
+            <div class="page">
+
+                <style>
+
+                    body{
+                        font-family:Arial,Helvetica,sans-serif;
+                        font-size:11px;
+                        color:#222;
+                    }
+
+                    table{
+                        width:100%;
+                        border-collapse:collapse;
+                    }
+
+                    .section-title{
+                        background:#666;
+                        color:#fff;
+                        font-weight:bold;
+                        font-size:11px;
+                        padding:6px 10px;
+                        text-transform:uppercase;
+                    }
+
+                    .top-orange{
+                        height:3px;
+                        background:#f58220;
+                        margin-top:10px;
+                        margin-bottom:25px;
+                    }
+
+                    .info td{
+                        padding:3px 0;
+                        font-size:11px;
+                    }
+
+                    .salary-table th{
+                        color:#1f3a93;
+                        font-size:11px;
+                        text-align:left;
+                        padding:4px;
+                    }
+
+                    .salary-table td{
+                        padding:4px;
+                        font-size:11px;
+                    }
+
+                    .total-line{
+                        border-top:2px solid #777;
+                        border-bottom:2px solid #ddd;
+                        font-weight:bold;
+                        color:#1f3a93;
+                    }
+
+                    .summary td{
+                        border:1px solid #18327e;
+                    }
+
+                    .summary-box{
+                        text-align:center;
+                        height:70px;
+                        padding:10px;
+                    }
+
+                    .summary-title{
+                        color:#18327e;
+                        font-weight:bold;
+                        font-size:12px;
+                    }
+
+                    .summary-value{
+                        font-size:18px;
+                        font-weight:bold;
+                        margin-top:5px;
+                    }
+
+                    .net-box{
+                        background:#072a8a;
+                        color:white;
+                        text-align:center;
+                        height:70px;
+                        padding:10px;
+                    }
+
+                    .footer-note{
+                        font-size:11px;
+                    }
 
-            <!-- VERTICAL ORANGE FADE -->
-            <linearGradient id="verticalFade"
-                            x1="0%"
-                            y1="0%"
-                            x2="0%"
-                            y2="100%">
+                </style>
 
-                <stop offset="0%"
-                      stop-color="#f39223"
-                      stop-opacity="1"/>
+                <!-- HEADER -->
 
-                <stop offset="100%"
-                      stop-color="#f39223"
-                      stop-opacity="0"/>
+                <table>
+                    <tr>
 
-            </linearGradient>
+                        <td style="width:25%;vertical-align:top;">
 
-        </defs>
+                            <img t-if="o.company_id.logo"
+                                 t-att-src="image_data_uri(o.company_id.logo)"
+                                 style="max-height:90px;"/>
 
-        <rect x="0"
-              y="0"
-              width="2"
-              height="130"
-              fill="url(#verticalFade)"/>
+                        </td>
 
-    </svg>
+                        <td style="width:2%;">
 
-</td>
-<td style="width:42%;vertical-align:top;">
-    <div style="font-size:20px;font-weight:bold;color:#1F3A93;">
-        <span t-field="o.company_id.name"/>
-    </div>
+                            <div style="
+                                width:2px;
+                                height:120px;
+                                background:#f58220;
+                            "/>
 
-    <div>
-        <span t-field="o.company_id.street"/>
-    </div>
+                        </td>
 
-    <div>
-        <span t-esc="o.company_id.country_id.name or ''"/>
-    </div>
+                        <td style="width:43%;padding-left:15px;vertical-align:top;">
 
-    <div>
-        TRN 1:
-        <span t-field="o.company_id.vat"/>
-    </div>
-</td>
+                            <div style="
+                                color:#1f3a93;
+                                font-size:20px;
+                                font-weight:bold;
+                            ">
+                                <span t-field="o.company_id.name"/>
+                            </div>
 
-<td style="width:30%;text-align:right;vertical-align:top;">
-    <div style="
-        color:#1F3A93;
-        font-size:28px;
-        font-weight:bold;
-    ">
-        PAYSLIP1
-    </div>
+                            <div>
+                                <span t-field="o.company_id.street"/>
+                            </div>
 
-    <div style="font-size:16px;">
-        <span t-esc="o.date_to.strftime('%B %Y')"/>
-    </div>
+                            <div>
+                                <span t-esc="o.company_id.country_id.name or ''"/>
+                            </div>
 
-    <br/>
+                            <div style="margin-top:10px;">
+                                TRN :
+                                <span t-field="o.company_id.vat"/>
+                            </div>
+
+                        </td>
+
+                        <td style="width:30%;vertical-align:top;">
+
+                            <div style="
+                                color:#0b2d8d;
+                                font-size:36px;
+                                font-weight:bold;
+                            ">
+                                PAYSLIP
+                            </div>
 
-    <div>
-        Payslip No :
-        <span t-field="o.number"/>
-    </div>
+                            <div style="font-size:18px;">
+                                <span t-esc="o.date_to.strftime('%B %Y')"/>
+                            </div>
 
-    <div>
-        Payment Date :
-        <span t-field="o.date_to"/>
-    </div>
+                            <br/>
 
-    <div>
-        Currency :
-        AED
-    </div>
-</td>
+                            <table style="font-size:11px;">
+                                <tr>
+                                    <td>Payslip No</td>
+                                    <td>:</td>
+                                    <td><span t-field="o.name"/></td>
+                                </tr>
 
-</tr>
-</table>
+                                <tr>
+                                    <td>Payment Date</td>
+                                    <td>:</td>
+                                    <td><span t-field="o.date_to"/></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Currency</td>
+                                    <td>:</td>
+                                    <td><span t-field="o.currency_id.name"/></td>
+                                </tr>
+                            </table>
+
+                        </td>
+
+                    </tr>
+                </table>
+
+                <div class="top-orange"/>
+
+                <!-- INFO -->
+
+                <table>
+                    <tr>
+
+                        <td style="width:45%;vertical-align:top;">
+
+                            <div class="section-title">
+                                Employee Information
+                            </div>
+
+                            <table class="info">
+
+                                <tr>
+                                    <td>Employee Name</td>
+                                    <td>:</td>
+                                    <td><span t-field="o.employee_id.legal_name"/></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Employee Mail</td>
+                                    <td>:</td>
+                                    <td><span t-field="o.employee_id.work_email"/></td>
+                                </tr>
 
-<div class="header-line"/>
+                                <tr>
+                                    <td>Designation</td>
+                                    <td>:</td>
+                                    <td><span t-field="o.version_id.job_id"/></td>
+                                </tr>
 
-<hr/>
+                                <tr>
+                                    <td>Date of Joining</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-out="o.version_id.employee_id.with_context(before_date=o.date_to)._get_first_contract_date()"/>
+                                    </td>
+                                </tr>
 
-<!-- EMPLOYEE -->
+                                <tr>
+                                    <td>Bank Name</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-esc="o.employee_id.bank_account_ids[:1].bank_id.name if o.employee_id.bank_account_ids else ''"/>
+                                    </td>
+                                </tr>
 
-<table>
+                                <tr>
+                                    <td>IBAN</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-esc="o.employee_id.bank_account_ids[:1].acc_number if o.employee_id.bank_account_ids else ''"/>
+                                    </td>
+                                </tr>
 
-<tr>
+                            </table>
 
-<td width="45%">
+                        </td>
 
-<div class="section-title">
-EMPLOYEE INFORMATION
-</div>
+                        <td style="width:5%;"/>
 
-<br/>
+                        <td style="width:50%;vertical-align:top;">
 
-Employee :
-<span t-field="o.employee_id.name"/>
+                            <div class="section-title">
+                                Salary Information
+                            </div>
 
-<br/><br/>
+                            <table class="info">
 
-Job Title :
-<span t-field="o.employee_id.job_id.name"/>
+                                <tr>
+                                    <td>Pay Period</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-field="o.date_from"/>
+                                        -
+                                        <span t-field="o.date_to"/>
+                                    </td>
+                                </tr>
 
-<br/><br/>
+                                <tr>
+                                    <td>Working Days</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-esc="working_days"/>
+                                    </td>
+                                </tr>
 
-Work Email :
-<span t-field="o.employee_id.work_email"/>
+                                <tr>
+                                    <td>Paid Days</td>
+                                    <td>:</td>
+                                    <td>
+                                        <span t-esc="working_days"/>
+                                    </td>
+                                </tr>
 
-<br/><br/>
+                                <tr>
+                                    <td>Leave Days</td>
+                                    <td>:</td>
+                                    <td>0</td>
+                                </tr>
 
-Bank :
-<span></span>
+                                <tr>
+                                    <td>Loss Of Pay Days</td>
+                                    <td>:</td>
+                                    <td>0</td>
+                                </tr>
 
-<br/><br/>
+                            </table>
 
-IBAN :
-<span></span>
+                        </td>
 
-</td>
+                    </tr>
+                </table>
 
-<td width="10%"></td>
+                <br/>
 
-<td width="45%">
+                <!-- EARNINGS + DEDUCTIONS -->
 
-<div class="section-title">
-SALARY INFORMATION
-</div>
+                <table>
 
-<br/>
+                    <tr>
 
-Pay Period :
-<span t-field="o.date_from"/>
--
-<span t-field="o.date_to"/>
+                        <td style="width:48%;vertical-align:top;">
 
-<br/><br/>
+                            <div class="section-title">Earnings</div>
 
-Worked Days :
+                            <table class="salary-table">
 
-<t t-set="days"
-   t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
+                                <tr>
+                                    <th>Description</th>
+                                    <th style="text-align:right;">Amount</th>
+                                </tr>
 
-<span t-esc="days"/>
+                                <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0)" t-as="line">
 
-<br/><br/>
+                                    <tr>
+                                        <td><span t-field="line.name"/></td>
+                                        <td style="text-align:right;">
+                                            <span t-out="line.total"
+                                                  t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
+                                        </td>
+                                    </tr>
 
-Status :
-<span t-field="o.state"/>
+                                </t>
 
-</td>
+                                <tr class="total-line">
+                                    <td>Total Earnings</td>
+                                    <td style="text-align:right;">
+                                        <span t-out="earnings"
+                                              t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
+                                    </td>
+                                </tr>
 
-</tr>
+                            </table>
 
-</table>
+                        </td>
 
-<br/>
+                        <td style="width:4%;"/>
 
-<!-- EARNINGS / DEDUCTIONS -->
+                        <td style="width:48%;vertical-align:top;">
 
-<table>
+                            <div class="section-title">Deductions</div>
 
-<tr>
+                            <table class="salary-table">
 
-<td width="48%" valign="top">
+                                <tr>
+                                    <th>Description</th>
+                                    <th style="text-align:right;">Amount</th>
+                                </tr>
 
-<div class="section-title">
-EARNINGS
-</div>
+                                <t t-foreach="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0)" t-as="line">
 
-<table border="1">
+                                    <tr>
+                                        <td><span t-field="line.name"/></td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="'{:,.2f}'.format(abs(line.total))"/>
+                                        </td>
+                                    </tr>
 
-<tr>
-<th>Description</th>
-<th>Amount</th>
-</tr>
+                                </t>
 
-<t t-set="earnings" t-value="0"/>
+                                <tr class="total-line">
+                                    <td>Total Deductions</td>
+                                    <td style="text-align:right;">
+                                        <span t-esc="'{:,.2f}'.format(deductions)"/>
+                                    </td>
+                                </tr>
 
-<t t-foreach="o.line_ids.filtered(lambda l: l.total &gt; 0)"
-   t-as="line">
+                            </table>
 
-<t t-set="earnings"
-   t-value="earnings + line.total"/>
+                        </td>
 
-<tr>
+                    </tr>
 
-<td>
-<span t-field="line.name"/>
-</td>
+                </table>
 
-<td style="text-align:right">
-<span t-esc="'{:,.2f}'.format(line.total)"/>
-</td>
+                <br/><br/>
 
-</tr>
+                <!-- SUMMARY -->
 
-</t>
+                <table class="summary">
 
-<tr>
+                    <tr>
 
-<td>
-<b>Total Earnings</b>
-</td>
+                        <td>
+                            <div class="summary-box">
+                                <div class="summary-title">TOTAL EARNINGS (AED)</div>
+                                <div class="summary-value">
+                                    <span t-esc="'{:,.2f}'.format(earnings)"/>
+                                </div>
+                            </div>
+                        </td>
 
-<td style="text-align:right">
-<b>
-<span t-esc="'{:,.2f}'.format(earnings)"/>
-</b>
-</td>
+                        <td>
+                            <div class="summary-box">
+                                <div class="summary-title">TOTAL DEDUCTIONS (AED)</div>
+                                <div class="summary-value">
+                                    <span t-esc="'{:,.2f}'.format(deductions)"/>
+                                </div>
+                            </div>
+                        </td>
 
-</tr>
+                        <td>
+                            <div class="net-box">
+                                <div>NET PAY (AED)</div>
+                                <div style="font-size:22px;font-weight:bold;">
+                                    <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
+                                </div>
+                            </div>
+                        </td>
 
-</table>
+                        <td>
+                            <div class="summary-box">
+                                <div class="summary-title">AMOUNT IN WORDS</div>
+                                <div style="font-size:10px;">
+                                    <span t-esc="o.company_id.currency_id.amount_to_text(o.net_wage)"/>
+                                </div>
+                            </div>
+                        </td>
 
-</td>
+                        <td>
+                            <div class="summary-box">
+                                <div class="summary-title">PAYMENT MODE</div>
+                                <div>Bank Transfer</div>
+                            </div>
+                        </td>
 
-<td width="4%"></td>
+                    </tr>
 
-<td width="48%" valign="top">
+                </table>
 
-<div class="section-title">
-DEDUCTIONS
-</div>
+                <br/><br/>
 
-<table border="1">
+                <!-- FOOTER -->
 
-<tr>
-<th>Description</th>
-<th>Amount</th>
-</tr>
+                <table>
 
-<t t-set="deductions" t-value="0"/>
+                    <tr>
 
-<t t-foreach="o.line_ids.filtered(lambda l: l.total &lt; 0)"
-   t-as="line">
+                        <td style="width:50%;">
 
-<t t-set="deductions"
-   t-value="deductions + abs(line.total)"/>
+                            <div style="font-size:24px;">
+                                Notes
+                            </div>
 
-<tr>
+                            <div style="
+                                width:80px;
+                                height:2px;
+                                background:#f58220;
+                                margin-top:5px;
+                                margin-bottom:10px;
+                            "/>
 
-<td>
-<span t-field="line.name"/>
-</td>
+                            <div class="footer-note">
+                                ● This is a system-generated document and does not require any signature.
+                            </div>
 
-<td style="text-align:right">
-<span t-esc="'{:,.2f}'.format(abs(line.total))"/>
-</td>
+                        </td>
 
-</tr>
+                        <td style="
+                            width:50%;
+                            text-align:right;
+                            font-size:11px;
+                            vertical-align:bottom;
+                        ">
 
-</t>
+                            <span t-field="o.company_id.street"/>
+                            |
+                            <span t-field="o.company_id.email"/>
+                            |
+                            <span t-field="o.company_id.website"/>
+                            |
+                            <span t-field="o.company_id.phone"/>
 
-<tr>
+                        </td>
 
-<td>
-<b>Total Deductions</b>
-</td>
+                    </tr>
 
-<td style="text-align:right">
-<b>
-<span t-esc="'{:,.2f}'.format(deductions)"/>
-</b>
-</td>
+                </table>
 
-</tr>
+            </div>
 
-</table>
+        </t>
 
-</td>
-
-</tr>
-
-</table>
-
-<br/>
-
-<!-- SUMMARY -->
-
-<table>
-
-<tr>
-
-<td width="33%">
-
-<div class="summary-box">
-
-TOTAL EARNINGS
-
-<br/><br/>
-
-<b>
-<span t-esc="'{:,.2f}'.format(earnings)"/>
-</b>
-
-</div>
-
-</td>
-
-<td width="33%">
-
-<div class="summary-box">
-
-TOTAL DEDUCTIONS
-
-<br/><br/>
-
-<b>
-<span t-esc="'{:,.2f}'.format(deductions)"/>
-</b>
-
-</div>
-
-</td>
-
-<td width="34%">
-
-<div class="net-box">
-
-NET PAY
-
-<br/><br/>
-
-<h2>
-<span t-out="o.net_wage if 'net_wage' in o._fields else ''"/>
-</h2>
-
-</div>
-
-</td>
-
-</tr>
-
-</table>
-
-<br/>
-
-<div>
-
-<b>Amount In Words :</b>
-
-<span t-esc="o.company_id.currency_id.amount_to_text(o.net_wage)"/>
-
-</div>
-
-<br/>
-<!-- Notes & Footer Section -->
-<div class="row mt32" style="margin-top:30px;">
-
-    <!-- Left Side : Notes -->
-    <div class="col-7">
-        <div style="font-size:12px;">
-
-            <h5 style="
-                color:#1F3A93;
-                font-weight:bold;
-                margin-bottom:10px;
-            ">
-                Notes
-            </h5>
-
-            <div style="
-                width:80px;
-                height:2px;
-                background:#F58220;
-                margin-bottom:10px;
-            "/>
-
-            <p style="margin:0;">
-                ● This is a system-generated document and does not require any signature.
-            </p>
-
-        </div>
-    </div>
-
-    <!-- Right Side : Company Footer -->
-    <div class="col-5 text-end">
-
-        <table style="
-            width:100%;
-            font-size:11px;
-            border-collapse:collapse;
-        ">
-            <tr>
-                <td style="padding:3px 0;">
-                    <strong>Address :</strong>
-                </td>
-                <td style="padding:3px 0;">
-                    <span t-esc="o.company_id.street"/>
-                    <t t-if="o.company_id.street2">
-                        , <span t-esc="o.company_id.street2"/>
-                    </t>
-                    <br/>
-                    <span t-esc="o.company_id.city"/>
-                </td>
-            </tr>
-
-            <tr>
-                <td style="padding:3px 0;">
-                    <strong>Email :</strong>
-                </td>
-                <td style="padding:3px 0;">
-                    <span t-esc="o.company_id.email"/>
-                </td>
-            </tr>
-
-            <tr>
-                <td style="padding:3px 0;">
-                    <strong>Website :</strong>
-                </td>
-                <td style="padding:3px 0;">
-                    <span t-esc="o.company_id.website"/>
-                </td>
-            </tr>
-
-            <tr>
-                <td style="padding:3px 0;">
-                    <strong>Phone :</strong>
-                </td>
-                <td style="padding:3px 0;">
-                    <span t-esc="o.company_id.phone"/>
-                </td>
-            </tr>
-        </table>
-
-    </div>
-
-</div>
-<div style="font-size:11px">
-
-This is a system generated payslip and does not require signature.
-
-</div>
-
-</div>
-
-</t>
-
-</t>
+    </t>
 
 </template>
+
 
 </odoo>
