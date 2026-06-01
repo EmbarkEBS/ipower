@@ -435,24 +435,17 @@
                                                 </td>
 
                                             </tr>
-  <t t-if="o.x_studio_your_ref"> <tr>
-
-                                                <td style="
-                                                    padding:4px 0;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">
-                                                    Your Ref
-                                                </td>
-
-                                                <td style="padding:4px 0;">
-
-                                                    :
-                                                    <span t-field="o.x_studio_your_ref"/>
-
-                                                </td>
-
-                                            </tr></t>
+<t t-if="o.x_studio_your_ref">
+    <tr>
+        <td style="font-weight:bold;">
+            Your Ref
+        </td>
+        <td>
+            :
+            <span t-esc="o.x_studio_your_ref"/>
+        </td>
+    </tr>
+</t>
                                         </table>
 
                                     </td>
