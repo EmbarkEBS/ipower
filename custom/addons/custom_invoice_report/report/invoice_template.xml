@@ -632,8 +632,8 @@
                                         <td></td>
                                         <td  colspan="4" style="
                                           font-weight:bold;
-                                          font-size:14px;
-                                                    margin-bottom:6px;line-height:1.7;
+                                          font-size:13px;
+                                                    margin-bottom:6px;
                                         ">                                
                     <span>Ordering Code: </span>     <span t-esc="line.product_id.product_tmpl_id.x_studio_sku_code or ''"/><br/>
                             
