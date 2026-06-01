@@ -653,7 +653,7 @@
 
             |
 
-            <span t-esc="o.company_id.website or ''"/>
+          <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
 
         </div>
 
