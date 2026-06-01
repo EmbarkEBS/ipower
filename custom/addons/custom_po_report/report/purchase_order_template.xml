@@ -437,10 +437,12 @@
                                             </tr></t>
 <t t-if="o.x_studio_your_ref">
     <tr>
-        <td style="font-weight:bold;">
+        <td style="  padding:4px 0;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;">
             Your Ref
         </td>
-        <td>
+        <td style="padding:4px 0;">
             :
             <span t-esc="o.x_studio_your_ref"/>
         </td>
