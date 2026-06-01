@@ -4,9 +4,9 @@
 <template id="custom_payslip_template">
 
     <t t-call="web.html_container">
+<meta charset="UTF-8"/>
 
         <t t-foreach="docs" t-as="o">
-
             <t t-set="earnings"
                t-value="sum(o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0).mapped('total'))"/>
 
