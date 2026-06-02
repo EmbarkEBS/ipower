@@ -4,7 +4,32 @@
 <template id="custom_payslip_template">
 
     <t t-call="web.html_container">
- <style>
+<meta charset="UTF-8"/>
+
+        <t t-foreach="docs" t-as="o">
+            <t t-set="earnings"
+   t-value="sum(
+       o.line_ids.filtered(
+           lambda l:
+               l.appears_on_payslip
+               and l.total > 0
+               and l.name not in (
+                   'Annual Leave Provision',
+                   'Taxable Salary',
+                   'Net Salary'
+               )
+       ).mapped('total')
+   )"/>
+            <t t-set="deductions"
+               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
+
+            <t t-set="working_days"
+               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
+
+            <div class="page">
+
+                <style>
+
                     body{
                         font-family:Arial,Helvetica,sans-serif;
                         font-size:11px;
@@ -100,43 +125,9 @@
                     .footer-note{
                         font-size:11px;
                     }
- @page {
-            margin: 0px 40px !important;
-        }
 
-        html,
-        body,
-        .page {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
                 </style>
-<meta charset="UTF-8"/>
 
-        <t t-foreach="docs" t-as="o">
-         
-
-            <t t-set="earnings"
-   t-value="sum(
-       o.line_ids.filtered(
-           lambda l:
-               l.appears_on_payslip
-               and l.total > 0
-               and l.name not in (
-                   'Annual Leave Provision',
-                   'Taxable Salary',
-                   'Net Salary'
-               )
-       ).mapped('total')
-   )"/>
-            <t t-set="deductions"
-               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
-
-            <t t-set="working_days"
-               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
-
-  <div class="page" style="position:relative; top:-15px;z-index:9">
-              
                 <!-- HEADER -->
 
                 <table>
