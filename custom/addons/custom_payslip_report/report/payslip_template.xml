@@ -425,7 +425,7 @@
                                                           <!-- Top Line -->
 <tr>
     <td colspan="3" style="padding:0;">
-        <svg width="100%" height="4" xmlns="http://www.w3.org/2000/svg">
+        <svg width="100%" height="1" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="deductionLineTop" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#666666"/>
@@ -433,13 +433,13 @@
                 </linearGradient>
             </defs>
 
-            <rect x="0" y="0" width="100%" height="3"
+            <rect x="0" y="0" width="100%" height="1"
                   fill="url(#deductionLineTop)"/>
         </svg>
     </td>
 </tr>
 <tr class="total-line">
-    <td colspan="3" style="font-weight:bold;">
+    <td colspan="2" style="font-weight:bold;">
         Total Earnings
     </td>
     <td style="text-align:right;font-weight:bold;">
@@ -448,7 +448,7 @@
 </tr>
 <tr>
     <td colspan="3" style="padding:0;">
-        <svg width="100%" height="4" xmlns="http://www.w3.org/2000/svg">
+        <svg width="100%" height="1" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="deductionLineBottom" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#666666"/>
@@ -456,7 +456,7 @@
                 </linearGradient>
             </defs>
 
-             <rect x="0" y="0" width="100%" height="3"
+             <rect x="0" y="0" width="100%" height="1"
                   fill="url(#deductionLineTop)"/>
         </svg>
     </td>
@@ -491,7 +491,7 @@
                              <!-- Top Line -->
 <tr>
     <td colspan="2" style="padding:0;">
-        <svg width="100%" height="4" xmlns="http://www.w3.org/2000/svg">
+        <svg width="100%" height="1" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="deductionLineTop" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#666666"/>
@@ -499,7 +499,7 @@
                 </linearGradient>
             </defs>
 
-            <rect x="0" y="0" width="100%" height="3"
+            <rect x="0" y="0" width="100%" height="1"
                   fill="url(#deductionLineTop)"/>
         </svg>
     </td>
@@ -518,7 +518,7 @@
 <!-- Bottom Line -->
 <tr>
     <td colspan="2" style="padding:0;">
-        <svg width="100%" height="4" xmlns="http://www.w3.org/2000/svg">
+        <svg width="100%" height="1" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="deductionLineBottom" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#666666"/>
@@ -526,7 +526,7 @@
                 </linearGradient>
             </defs>
 
-             <rect x="0" y="0" width="100%" height="3"
+             <rect x="0" y="0" width="100%" height="1"
                   fill="url(#deductionLineTop)"/>
         </svg>
     </td>
