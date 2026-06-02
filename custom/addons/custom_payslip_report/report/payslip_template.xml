@@ -394,6 +394,7 @@
 
                                 <tr>
                                     <th>Description</th>
+                                    <th style="text-align:right;">Rate</th>
                                     <th style="text-align:right;">Amount (AED)</th>
                                 </tr>
 
@@ -411,6 +412,9 @@
 
                                     <tr>
                                         <td><span t-field="line.name"/></td>
+                                         <td style="text-align:right;">
+                <span t-esc="'{:,.2f}'.format(line.amount or 0.0)"/>
+            </td>
                                         <td style="text-align:right;">
                                             <span t-esc="'{:,.2f}'.format(line.total)"/>  </td>
                                     </tr>
