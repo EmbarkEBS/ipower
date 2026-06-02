@@ -362,14 +362,13 @@
                                 <tr>
                                     <td>Loss Of Pay Days</td>
                                     <td>:</td>
-                                    <td><t t-set="lop_days"
-   t-value="sum(
-       o.worked_days_line_ids.filtered(
-           lambda w: w.code == 'OUT'
-       ).mapped('number_of_days')
-   )"/>
-
-<span t-esc="lop_days"/></td>
+                                    <td> <t t-set="lop_days"
+           t-value="sum(
+               o.worked_days_line_ids.filtered(
+                   lambda w: w.code == 'LEAVE90'
+               ).mapped('number_of_days')
+           )"/>
+        <span t-esc="lop_days"/></td>
                                 </tr>
 
                             </table>
