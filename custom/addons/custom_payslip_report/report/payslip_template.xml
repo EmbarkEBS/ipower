@@ -82,16 +82,23 @@
                         color:#1f3a93;
                     }
 
-                    .summary td{
-                        border:1px solid #18327e;
-                    }
+                  .summary{
+    width:100%;
+    table-layout:fixed;
+}
 
-                    .summary-box{
-                        text-align:center;
-                        height:70px;
-                        padding:10px;
-                    }
+.summary td{
+    width:20%;
+    border:1px solid #18327e;
+    vertical-align:top;
+}
 
+.summary-box,
+.net-box{
+    height:90px;
+    padding:10px;
+    box-sizing:border-box;
+}
                     .summary-title{
                         color:#18327e;
                         font-weight:bold;
@@ -108,8 +115,7 @@
                         background:#072a8a;
                         color:white;
                         text-align:center;
-                        height:70px;
-                        padding:10px;
+                     
                     }
 
                     .footer-note{
@@ -176,21 +182,23 @@
 
                             <div style="
                                 color:#1f3a93;
-                                font-size:18px;
+                                font-size:16px;
                                 font-weight:bold;
                             ">
                                 <span t-field="o.company_id.name"/>
                             </div>
 
-                            <div>
+                            <div style="
+                                font-size:16px;">
                                 <span t-field="o.company_id.street"/>
                             </div>
 
-                            <div>
+                            <div style="
+                                font-size:16px;">
                                 <span t-esc="o.company_id.country_id.name or ''"/>
                             </div>
 
-                            <div style="margin-top:10px;">
+                            <div style="margin-top:10px;font-size:16px;">
                                 TRN :
                                 <span t-field="o.company_id.vat"/>
                             </div>
@@ -460,56 +468,56 @@
 
                 <!-- SUMMARY -->
 
-                <table class="summary">
+               <table class="summary" style="width:100%; table-layout:fixed;">
 
-                    <tr>
+    <tr>
 
-                        <td>
-                            <div class="summary-box">
-                                <div class="summary-title">TOTAL EARNINGS (AED)</div>
-                                <div class="summary-value">
-                                    <span t-esc="'{:,.2f}'.format(earnings)"/>
-                                </div>
-                            </div>
-                        </td>
+        <td style="width:20%;">
+            <div class="summary-box">
+                <div class="summary-title">TOTAL EARNINGS (AED)</div>
+                <div class="summary-value">
+                    <span t-esc="'{:,.2f}'.format(earnings)"/>
+                </div>
+            </div>
+        </td>
 
-                        <td>
-                            <div class="summary-box">
-                                <div class="summary-title">TOTAL DEDUCTIONS (AED)</div>
-                                <div class="summary-value">
-                                    <span t-esc="'{:,.2f}'.format(deductions)"/>
-                                </div>
-                            </div>
-                        </td>
+        <td style="width:20%;">
+            <div class="summary-box">
+                <div class="summary-title">TOTAL DEDUCTIONS (AED)</div>
+                <div class="summary-value">
+                    <span t-esc="'{:,.2f}'.format(deductions)"/>
+                </div>
+            </div>
+        </td>
 
-                        <td>
-                            <div class="net-box">
-                                <div>NET PAY (AED)</div>
-                                <div style="font-size:22px;font-weight:bold;">
-                                    <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
-                                </div>
-                            </div>
-                        </td>
+        <td style="width:20%;">
+            <div class="net-box">
+                <div>NET PAY (AED)</div>
+                <div style="font-size:22px;font-weight:bold;">
+                    <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
+                </div>
+            </div>
+        </td>
 
-                        <td>
-                            <div class="summary-box">
-                                <div class="summary-title">AMOUNT IN WORDS</div>
-                                <div style="font-size:10px;">
-                                    <span t-esc="o.company_id.currency_id.amount_to_text(o.net_wage)"/>
-                                </div>
-                            </div>
-                        </td>
+        <td style="width:20%;">
+            <div class="summary-box">
+                <div class="summary-title">AMOUNT IN WORDS</div>
+                <div style="font-size:10px;">
+                    <span t-esc="o.company_id.currency_id.amount_to_text(o.net_wage)"/>
+                </div>
+            </div>
+        </td>
 
-                        <td>
-                            <div class="summary-box">
-                                <div class="summary-title">PAYMENT MODE</div>
-                                <div>Bank Transfer</div>
-                            </div>
-                        </td>
+        <td style="width:20%;">
+            <div class="summary-box">
+                <div class="summary-title">PAYMENT MODE</div>
+                <div>Bank Transfer</div>
+            </div>
+        </td>
 
-                    </tr>
+    </tr>
 
-                </table>
+</table>
 
                 <br/><br/>
 
