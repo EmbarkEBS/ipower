@@ -568,8 +568,8 @@
                         ">
                            <i class="fa fa-map-marker"
        style="color:#f58220;"></i>
-                        </span> <i class="fa fa-map-marker"
-       style="color:#f58220;"></i><span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
+                        </span><span> <i class="fa fa-map-marker"
+       style="color:#f58220;"></i></span><span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
                             <br/>
                                <span style="
                             display:inline-block;
