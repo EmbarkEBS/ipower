@@ -7,28 +7,7 @@
 <meta charset="UTF-8"/>
 
         <t t-foreach="docs" t-as="o">
-            <t t-set="earnings"
-   t-value="sum(
-       o.line_ids.filtered(
-           lambda l:
-               l.appears_on_payslip
-               and l.total > 0
-               and l.name not in (
-                   'Annual Leave Provision',
-                   'Taxable Salary',
-                   'Net Salary'
-               )
-       ).mapped('total')
-   )"/>
-            <t t-set="deductions"
-               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
-
-            <t t-set="working_days"
-               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
-
-            <div class="page">
-
-                <style>
+                    <style>
 
                     body{
                         font-family:Arial,Helvetica,sans-serif;
@@ -150,6 +129,28 @@
                     }
 
                 </style>
+            <t t-set="earnings"
+   t-value="sum(
+       o.line_ids.filtered(
+           lambda l:
+               l.appears_on_payslip
+               and l.total > 0
+               and l.name not in (
+                   'Annual Leave Provision',
+                   'Taxable Salary',
+                   'Net Salary'
+               )
+       ).mapped('total')
+   )"/>
+            <t t-set="deductions"
+               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
+
+            <t t-set="working_days"
+               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
+
+            <div class="page">
+
+    
 
                 <!-- HEADER -->
 
