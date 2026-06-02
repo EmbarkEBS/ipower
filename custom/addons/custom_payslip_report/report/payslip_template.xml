@@ -588,7 +588,7 @@
                             line-height:14px;
                             border-radius:50%;
                             background:#0b2d8d;
-                            color:white;padding:4px 0px 0px 3px;
+                            color:white;padding:4px 2px 0px 1px;
                         ">
                             🌐
                         </span>  <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
