@@ -4,10 +4,7 @@
 <template id="custom_payslip_template">
 
     <t t-call="web.html_container">
-<meta charset="UTF-8"/>
-
-        <t t-foreach="docs" t-as="o">
-          <style>
+ <style>
                     body{
                         font-family:Arial,Helvetica,sans-serif;
                         font-size:11px;
@@ -103,8 +100,21 @@
                     .footer-note{
                         font-size:11px;
                     }
+ @page {
+            margin: 0mm !important;
+        }
 
+        html,
+        body,
+        .page {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
                 </style>
+<meta charset="UTF-8"/>
+
+        <t t-foreach="docs" t-as="o">
+         
 
             <t t-set="earnings"
    t-value="sum(
@@ -125,7 +135,7 @@
             <t t-set="working_days"
                t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
 
-    <div class="page">
+  <div class="page" style="position:relative; top:-15px;">
               
                 <!-- HEADER -->
 
