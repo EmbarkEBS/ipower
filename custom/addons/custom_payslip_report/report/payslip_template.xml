@@ -125,7 +125,7 @@
             <t t-set="working_days"
                t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
 
-    <div class="page" >
+    <div class="page">
               
                 <!-- HEADER -->
 
