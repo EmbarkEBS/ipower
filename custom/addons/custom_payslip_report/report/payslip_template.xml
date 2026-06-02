@@ -557,8 +557,7 @@
                         ">
 
                             <span style="vertical-align:middle; display:inline-block;
-                            width:14px;
-                            height:14px;
+                            margin-left:0px;padding-left:-20px;
                             line-height:14px;">
                            <svg width="18" height="18" viewBox="0 0 24 24">
         <path fill="#f58220"
