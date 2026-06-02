@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<link rel="stylesheet"
+      href="/web/static/lib/fontawesome/css/font-awesome.css"/>
 <odoo>
 <template id="custom_payslip_template">
 
@@ -568,7 +569,7 @@
                         ">
                            <i class="fa fa-map-marker"
        style="color:#f58220;"></i>
-                        </span><span> <i class="fa fa-map-marker"
+                        </span><span> <i class="fa fa-location-arrow"
        style="color:#f58220;"></i></span><span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
                             <br/>
                                <span style="
