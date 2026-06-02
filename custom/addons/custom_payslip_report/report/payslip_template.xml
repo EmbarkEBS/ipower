@@ -556,8 +556,20 @@
                             vertical-align:bottom;margin-bottom:15px;
                         ">
 
+                            <span style="
+                            display:inline-block;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
+                            border-radius:50%;
+                            background:#f58220;
+                            color:white;
+                            font-weight:bold;
+                        ">
                            <i class="fa fa-map-marker"
-       style="color:#f58220;"></i> <span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
+       style="color:#f58220;"></i>
+                        </span> <i class="fa fa-map-marker"
+       style="color:#f58220;"></i><span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
                             <br/>
                                <span style="
                             display:inline-block;
