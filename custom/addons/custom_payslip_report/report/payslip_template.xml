@@ -99,7 +99,7 @@
     padding:10px;
     box-sizing:border-box;
     text-align:center;
-    margin-top:20px;
+    padding-top:20px;
 }
                     .summary-title{
                         color:#18327e;
@@ -531,7 +531,7 @@
 
                         <td style="width:50%;">
 
-                            <div style="font-size:24px;">
+                            <div style="font-size:20px;">
                                 Notes
                             </div>
 
@@ -552,17 +552,63 @@
                         <td style="
                             width:50%;
                             text-align:right;
-                            font-size:11px;
+                            font-size:12px;
                             vertical-align:bottom;
                         ">
 
-                            <span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
+                            <span style="
+                            display:inline-block;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
+                            border-radius:50%;
+                            background:#f58220;
+                            color:white;
+                            font-size:9px;
+                            font-weight:bold;
+                        ">
+                            📍
+                        </span><span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
+                            <br/>
+                               <span style="
+                            display:inline-block;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:9px;
+                        ">
+                            ✉
+                        </span><span t-field="o.company_id.email"/>
                             |
-                            <span t-field="o.company_id.email"/>
+                       <span style="
+                            display:inline-block;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:9px;
+                        ">
+                            🌐
+                        </span>  <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
                             |
-                       <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
-                            |
-                            <span t-field="o.company_id.phone"/>
+                           
+                        <span style="
+                            display:inline-block;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:9px;
+                        ">
+                            ☎
+                        </span> <span t-field="o.company_id.phone"/>
 
                         </td>
 
