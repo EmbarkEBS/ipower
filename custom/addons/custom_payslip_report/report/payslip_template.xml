@@ -26,7 +26,7 @@
             <t t-set="working_days"
                t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
 
-            <div class="page"  style="margin:0 40px !important;">
+            <div class="page">
 
                 <style>
 
@@ -99,7 +99,6 @@
 .net-box{
     height:90px;
     padding:10px;
-    box-sizing:border-box;
     text-align:center;
     padding-top:20px;
 }
@@ -253,7 +252,7 @@
                 <div class="top-orange"/>
 
                 <!-- INFO -->
-
+<div class="page1"  style="margin:0 40px !important;">
                 <table>
                     <tr>
 
@@ -727,7 +726,7 @@
 
     </tr>
 </table>
-
+</div>
             </div>
 
         </t>

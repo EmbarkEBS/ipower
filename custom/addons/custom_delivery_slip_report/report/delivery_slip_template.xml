@@ -364,7 +364,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                 Scheduled Date
+                                                 Delivery Date
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -515,7 +515,7 @@
                                           text-align:center;
                                           vertical-align:top;
                                         ">
-            <span t-esc="line.quantity or 0"/>
+             <span t-esc="int(line.quantity)"/>
         </td>
 
         <td></td>
