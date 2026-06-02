@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="crm_lead_category_line_tree"
+            model="ir.ui.view">
+        <field name="name">
+            crm.lead.category.line.tree
+        </field>
+
+        <field name="model">
+            crm.lead.category.line
+        </field>
+
+        <field name="arch" type="xml">
+
+            <list>
+                <field name="lead_id"/>
+                <field name="category_id"/>
+                <field name="status"/>
+                <field name="amount"/>
+            </list>
+
+        </field>
+    </record>
+
+</odoo>
