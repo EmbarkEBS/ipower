@@ -678,7 +678,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:12px;
+                            font-size:12px;padding-top:3px;
                         ">✉</span>
 
                         <span t-field="o.company_id.email"/>
@@ -695,7 +695,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:12px;
+                            font-size:12px;padding-top:3px;
                         ">🌐</span>
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
@@ -712,7 +712,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:12px;
+                            font-size:12px;padding-top:3px;
                         ">☎</span>
 
                         <span t-field="o.company_id.phone"/>
