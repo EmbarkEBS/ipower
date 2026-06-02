@@ -26,7 +26,7 @@
             <t t-set="working_days"
                t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
 
-            <div class="page">
+            <div class="page"style="padding-top:20mm;">
 
                 <style>
 
@@ -52,6 +52,7 @@
 
                     .top-orange{
                         height:3px;
+                        width:100%;
                         background:#f58220;
                         margin-top:10px;
                         margin-bottom:25px;
