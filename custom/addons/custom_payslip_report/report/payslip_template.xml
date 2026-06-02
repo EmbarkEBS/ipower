@@ -567,7 +567,7 @@
                             font-weight:bold;
                         ">
                             📍
-                        </span><span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
+                        </span> <span style="color:#f58220;">📍</span> <span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
                             <br/>
                                <span style="
                             display:inline-block;
