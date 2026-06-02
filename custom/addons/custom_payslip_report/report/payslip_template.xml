@@ -98,13 +98,18 @@
     height:90px;
     padding:10px;
     box-sizing:border-box;
+    texl-align:center;
 }
                     .summary-title{
                         color:#18327e;
                         font-weight:bold;
                         font-size:12px;
                     }
-
+ .summary-title{
+                        color:white;
+                        font-weight:bold;
+                        font-size:12px;
+                    }
                     .summary-value{
                         font-size:18px;
                         font-weight:bold;
@@ -492,7 +497,7 @@
 
         <td style="width:20%;">
             <div class="net-box">
-                <div class="summary-title">NET PAY (AED)</div>
+                <div class="summary-title1">NET PAY (AED)</div>
                 <div style="font-size:18px;font-weight:bold;">
                     <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
                 </div>
