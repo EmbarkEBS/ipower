@@ -483,7 +483,7 @@
             </div>
         </td>
 
-        <td style="width:20%;">
+        <td style="width:24%;">
             <div class="summary-box">
                 <div class="summary-title">TOTAL DEDUCTIONS (AED)</div>
                 <div class="summary-value">
@@ -501,7 +501,7 @@
             </div>
         </td>
 
-        <td style="width:20%;">
+        <td style="width:18%;">
             <div class="summary-box">
                 <div class="summary-title">AMOUNT IN WORDS</div>
                 <div style="font-size:10px;">
@@ -510,7 +510,7 @@
             </div>
         </td>
 
-        <td style="width:20%;">
+        <td style="width:18%;">
             <div class="summary-box">
                 <div class="summary-title">PAYMENT MODE</div>
                 <div>Bank Transfer</div>
