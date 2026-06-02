@@ -101,7 +101,7 @@
                         font-size:11px;
                     }
  @page {
-            margin: 0mm !important;
+            margin: 0px 40px !important;
         }
 
         html,
@@ -135,7 +135,7 @@
             <t t-set="working_days"
                t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
 
-  <div class="page" style="position:relative; top:-15px;">
+  <div class="page" style="position:relative; top:-15px;z-index:9">
               
                 <!-- HEADER -->
 
