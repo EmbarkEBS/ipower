@@ -576,7 +576,7 @@
                             line-height:14px;
                             border-radius:50%;
                             background:#0b2d8d;
-                            color:white;padding:5px 2px 2px;
+                            color:white;padding:3px 2px 0px;
                         ">
                             ✉
                         </span><span t-field="o.company_id.email"/>
