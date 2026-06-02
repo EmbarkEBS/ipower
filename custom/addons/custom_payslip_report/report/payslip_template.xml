@@ -525,107 +525,136 @@
 
                 <!-- FOOTER -->
 
-                <table>
-
-                    <tr>
-
-                        <td style="width:50%;">
-
-                            <div style="font-size:18px;">
-                                Notes
-                            </div>
-
-                            <div style="
-                                width:60px;
-                                height:2px;
-                                background:#f58220;
-                                margin-top:5px;
-                                margin-bottom:10px;
-                            "/>
-
-                            <div class="footer-note">
-                                This is a system-generated document and does not require any signature.
-                            </div>
-
-                        </td>
-
-                        <td style="
-                            width:50%;
-                            text-align:right;
-                            font-size:12px;
-                            vertical-align:bottom;
-                        ">
-<table style="float:right; font-size:12px;">
+                <table style="width:100%; margin-top:20px;">
     <tr>
-        <td style="width:20px; vertical-align:top; padding-top:2px;">
-            <svg width="16" height="16" viewBox="0 0 24 24">
-                <path fill="#f58220"
-                      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
-            </svg>
+
+        <!-- LEFT SIDE -->
+        <td style="width:50%; vertical-align:top;">
+
+            <div style="font-size:18px;">
+                Notes
+            </div>
+
+            <div style="
+                width:60px;
+                height:2px;
+                background:#f58220;
+                margin-top:5px;
+                margin-bottom:10px;
+            "/>
+
+            <div class="footer-note">
+                This is a system-generated document and does not require any signature.
+            </div>
+
         </td>
 
-        <td style="text-align:left;">
-            <span t-field="o.company_id.street"/>
-            <t t-if="o.company_id.street2">
-                , <span t-field="o.company_id.street2"/>
-            </t>
+        <!-- RIGHT SIDE -->
+        <td style="
+            width:50%;
+            vertical-align:top;
+            font-size:12px;
+            text-align:right;
+        ">
+
+            <table style="
+                width:auto;
+                margin-left:auto;
+                border-collapse:collapse;
+            ">
+
+                <!-- ADDRESS -->
+                <tr>
+                    <td style="
+                        vertical-align:top;
+                        padding-right:6px;
+                        padding-bottom:8px;
+                    ">
+
+                        <svg width="14" height="14" viewBox="0 0 24 24">
+                            <path fill="#f58220"
+                                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+                        </svg>
+
+                    </td>
+
+                    <td style="
+                        text-align:left;
+                        padding-bottom:8px;
+                    ">
+
+                        <span t-field="o.company_id.street"/>
+                        <t t-if="o.company_id.street2">
+                            , <span t-field="o.company_id.street2"/>
+                        </t>
+
+                    </td>
+                </tr>
+
+                <!-- CONTACTS -->
+                <tr>
+
+                    <td colspan="2" style="text-align:left;">
+
+                        <!-- EMAIL -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;
+                        ">✉</span>
+
+                        <span t-field="o.company_id.email"/>
+
+                        <span style="padding:0 6px;">|</span>
+
+                        <!-- WEBSITE -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;
+                        ">🌐</span>
+
+                        <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
+
+                        <span style="padding:0 6px;">|</span>
+
+                        <!-- PHONE -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;
+                        ">☎</span>
+
+                        <span t-field="o.company_id.phone"/>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
         </td>
+
     </tr>
 </table>
-
-<br/>
-
-<span style="
-    display:inline-block;
-    width:14px;
-    height:14px;
-    line-height:14px;
-    border-radius:50%;
-    background:#0b2d8d;
-    color:white;
-    padding:4px 3px 0px 2px;
-">
-    ✉
-</span>
-<span t-field="o.company_id.email"/>
-
-|
-
-<span style="
-    display:inline-block;
-    width:14px;
-    height:14px;
-    line-height:14px;
-    border-radius:50%;
-    background:#0b2d8d;
-    color:white;
-    padding:4px 4px 0px 1px;
-">
-    🌐
-</span>
-<span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
-
-|
-
-<span style="
-    display:inline-block;
-    width:14px;
-    height:14px;
-    line-height:14px;
-    border-radius:50%;
-    background:#0b2d8d;
-    color:white;
-    padding:4px 2px 0px 2px;
-">
-    ☎
-</span>
-<span t-field="o.company_id.phone"/>
-
-                        </td>
-
-                    </tr>
-
-                </table>
 
             </div>
 
