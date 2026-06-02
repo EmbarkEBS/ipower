@@ -526,7 +526,11 @@
                 </linearGradient>
             </defs>
 
-            <rect x="
+             <rect x="0" y="0" width="100%" height="3"
+                  fill="url(#deductionLineTop)"/>
+        </svg>
+    </td>
+</tr>
 
                             </table>
 
