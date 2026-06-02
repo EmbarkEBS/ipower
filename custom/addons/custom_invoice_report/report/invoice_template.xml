@@ -632,9 +632,8 @@
                                         <td></td>
                                         <td  colspan="4" style="
                                           font-weight:bold;
-                                          font-size:14px;
+                                          font-size:13px;
                                                     margin-bottom:6px;
-                                                    font-size:11px;
                                         ">                                
                     <span>Ordering Code: </span>     <span t-esc="line.product_id.product_tmpl_id.x_studio_sku_code or ''"/><br/>
                             
@@ -946,7 +945,7 @@
 
                                     |
 
-                                    <span t-esc="o.company_id.website or ''"/>
+                                   <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
 
                                 </div>
 

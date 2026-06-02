@@ -417,7 +417,7 @@
 
                                             </tr>
 
-                                            <tr>
+                                         <t t-if="o.origin">   <tr>
 
                                                 <td style="
                                                     padding:4px 0;
@@ -434,8 +434,20 @@
 
                                                 </td>
 
-                                            </tr>
-
+                                            </tr></t>
+<t t-if="o.x_studio_your_ref">
+    <tr>
+        <td style="  padding:4px 0;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;">
+            Your Ref
+        </td>
+        <td style="padding:4px 0;">
+            :
+            <span t-esc="o.x_studio_your_ref"/>
+        </td>
+    </tr>
+</t>
                                         </table>
 
                                     </td>
@@ -584,9 +596,9 @@
                                         <td></td>
                                         <td  colspan="4" style="
                                           font-weight:bold;
-                                          font-size:14px;
+                                          font-size:13px;
                                                     margin-bottom:6px;
-                                                    font-size:11px;
+                                                    
                                         ">                                
                     <span>Ordering Code: </span>      <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
                       
@@ -838,7 +850,7 @@
 
             |
 
-            <span t-esc="o.company_id.website or ''"/>
+           <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
 
         </div>
 
