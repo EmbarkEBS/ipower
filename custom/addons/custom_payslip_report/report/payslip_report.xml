@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- PAPER FORMAT -->
-    <record id="paperformat_zero_margin" model="report.paperformat">
+    <record id="paperformat_zero_margin1" model="report.paperformat">
         <field name="name">A4 Zero Margin for Custom Invoice</field>
         <field name="default">True</field>
         <field name="format">A4</field>
@@ -30,7 +30,7 @@
                ref="hr_payroll.model_hr_payslip"/>
 
         <field name="binding_type">report</field>
-<field name="paperformat_id" ref="custom_payslip_report.paperformat_zero_margin"/>
+<field name="paperformat_id" ref="custom_payslip_report.paperformat_zero_margin1"/>
     </record>
 
 </odoo>
