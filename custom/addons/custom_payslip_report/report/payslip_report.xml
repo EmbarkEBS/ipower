@@ -30,7 +30,7 @@
                ref="hr_payroll.model_hr_payslip"/>
 
         <field name="binding_type">report</field>
-<field name="paperformat_id" ref="custom_invoice_report.paperformat_zero_margin"/>
+<field name="paperformat_id" ref="custom_payslip_report.paperformat_zero_margin"/>
     </record>
 
 </odoo>
