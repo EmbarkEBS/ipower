@@ -7,29 +7,24 @@
 <meta charset="UTF-8"/>
 
         <t t-foreach="docs" t-as="o">
-            <t t-set="earnings"
-   t-value="sum(
-       o.line_ids.filtered(
-           lambda l:
-               l.appears_on_payslip
-               and l.total > 0
-               and l.name not in (
-                   'Annual Leave Provision',
-                   'Taxable Salary',
-                   'Net Salary'
-               )
-       ).mapped('total')
-   )"/>
-            <t t-set="deductions"
-               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
+          <style>
+.page{
+    margin-top:0 !important;
+    padding-top:0 !important;
+}
 
-            <t t-set="working_days"
-               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
+body{
+    margin:0 !important;
+    padding:0 !important;
+}
 
-            <div class="page"  style="padding-top:15mm;">
-
-                <style>
-
+table{
+    margin-top:0 !important;
+}
+  header,
+    footer {
+        display: none !important;
+    }
                     body{
                         font-family:Arial,Helvetica,sans-serif;
                         font-size:11px;
@@ -128,6 +123,31 @@
 
                 </style>
 
+            <t t-set="earnings"
+   t-value="sum(
+       o.line_ids.filtered(
+           lambda l:
+               l.appears_on_payslip
+               and l.total > 0
+               and l.name not in (
+                   'Annual Leave Provision',
+                   'Taxable Salary',
+                   'Net Salary'
+               )
+       ).mapped('total')
+   )"/>
+            <t t-set="deductions"
+               t-value="sum(abs(l.total) for l in o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &lt; 0))"/>
+
+            <t t-set="working_days"
+               t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
+
+    <div class="page" style="
+    margin:0 !important;
+    padding:0 !important;margin-top:-20px;
+">
+
+              
                 <!-- HEADER -->
 
                 <table>
@@ -638,7 +658,7 @@
                 <!-- ADDRESS -->
                 <tr>
                     <td style="
-                        vertical-align:top;
+                        vertical-align:middle;
                         padding-right:6px;
                         padding-bottom:8px;font-size:12px;
                     ">
@@ -652,7 +672,7 @@
 
                     <td style="
                         text-align:left;
-                        padding-bottom:8px;font-size:12px;
+                        padding-bottom:8px;font-size:10px;
                     ">
 
                         <span t-field="o.company_id.street"/>
@@ -666,7 +686,7 @@
                 <!-- CONTACTS -->
                 <tr>
 
-                    <td colspan="2" style="text-align:left;font-size:12px;">
+                    <td colspan="2" style="text-align:left;font-size:10px;">
 
                         <!-- EMAIL -->
                         <span style="
@@ -678,7 +698,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;
+                            font-size:12px;padding-top:3px;
                         ">✉</span>
 
                         <span t-field="o.company_id.email"/>
@@ -695,7 +715,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;
+                            font-size:12px;padding-top:3px;
                         ">🌐</span>
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
@@ -712,7 +732,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;
+                            font-size:12px;padding-top:3px;
                         ">☎</span>
 
                         <span t-field="o.company_id.phone"/>
