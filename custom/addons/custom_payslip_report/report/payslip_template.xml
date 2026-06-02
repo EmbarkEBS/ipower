@@ -555,51 +555,71 @@
                             font-size:12px;
                             vertical-align:bottom;
                         ">
+<table style="float:right; font-size:12px;">
+    <tr>
+        <td style="width:20px; vertical-align:top; padding-top:2px;">
+            <svg width="16" height="16" viewBox="0 0 24 24">
+                <path fill="#f58220"
+                      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+            </svg>
+        </td>
 
-                            <span style="vertical-align:middle; display:inline-block;
-                            margin-left:-20px;padding-left:-20px;
-                            line-height:14px;">
-                           <svg width="18" height="18" viewBox="0 0 24 24">
-        <path fill="#f58220"
-              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
-    </svg></span> <span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
-                            <br/>
-                               <span style="
-                            display:inline-block;
-                            width:14px;
-                            height:14px;
-                            line-height:14px;
-                            border-radius:50%;
-                            background:#0b2d8d;
-                            color:white;padding:4px 3px 0px 2px;margin-top:10px;
-                        ">
-                            ✉
-                        </span>  <span t-field="o.company_id.email"/>
-                            |
-                       <span style="
-                            display:inline-block;
-                            width:14px;
-                            height:14px;
-                            line-height:14px;
-                            border-radius:50%;
-                            background:#0b2d8d;
-                            color:white;padding:4px 4px 0px 1px;
-                        ">
-                            🌐
-                        </span>  <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
-                            |
-                           
-                        <span style="
-                            display:inline-block;
-                            width:14px;
-                            height:14px;
-                            line-height:14px;
-                            border-radius:50%;
-                            background:#0b2d8d;
-                            color:white;padding:4px 2px 0px 2px;
-                        ">
-                            ☎
-                        </span> <span t-field="o.company_id.phone"/>
+        <td style="text-align:left;">
+            <span t-field="o.company_id.street"/>
+            <t t-if="o.company_id.street2">
+                , <span t-field="o.company_id.street2"/>
+            </t>
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+<span style="
+    display:inline-block;
+    width:14px;
+    height:14px;
+    line-height:14px;
+    border-radius:50%;
+    background:#0b2d8d;
+    color:white;
+    padding:4px 3px 0px 2px;
+">
+    ✉
+</span>
+<span t-field="o.company_id.email"/>
+
+|
+
+<span style="
+    display:inline-block;
+    width:14px;
+    height:14px;
+    line-height:14px;
+    border-radius:50%;
+    background:#0b2d8d;
+    color:white;
+    padding:4px 4px 0px 1px;
+">
+    🌐
+</span>
+<span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
+
+|
+
+<span style="
+    display:inline-block;
+    width:14px;
+    height:14px;
+    line-height:14px;
+    border-radius:50%;
+    background:#0b2d8d;
+    color:white;
+    padding:4px 2px 0px 2px;
+">
+    ☎
+</span>
+<span t-field="o.company_id.phone"/>
 
                         </td>
 
