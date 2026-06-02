@@ -421,7 +421,8 @@
                                             <span t-esc="'{:,.2f}'.format(line.total)"/>  </td>
                                     </tr>
 
-                                </t><tr>
+                                </t>
+                                <tr>
     <td colspan="3" style="padding:0;">
         <svg width="100%" height="3" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -487,12 +488,45 @@
 
                                 </t>
 
-                                <tr class="total-line">
-                                    <td>Total Deductions</td>
-                                    <td style="text-align:right;">
-                                        <span t-esc="'{:,.2f}'.format(deductions)"/>
-                                    </td>
-                                </tr>
+                             <!-- Top Line -->
+<tr>
+    <td colspan="2" style="padding:0;">
+        <svg width="100%" height="5" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="deductionLineTop" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#666666"/>
+                    <stop offset="100%" stop-color="#dddddd"/>
+                </linearGradient>
+            </defs>
+
+            <rect x="0" y="0" width="100%" height="3"
+                  fill="url(#deductionLineTop)"/>
+        </svg>
+    </td>
+</tr>
+
+<!-- Total Row -->
+<tr class="total-line">
+    <td style="font-weight:bold;">
+        Total Deductions
+    </td>
+    <td style="text-align:right;font-weight:bold;">
+        <span t-esc="'{:,.2f}'.format(deductions)"/>
+    </td>
+</tr>
+
+<!-- Bottom Line -->
+<tr>
+    <td colspan="2" style="padding:0;">
+        <svg width="100%" height="5" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="deductionLineBottom" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#666666"/>
+                    <stop offset="100%" stop-color="#dddddd"/>
+                </linearGradient>
+            </defs>
+
+            <rect x="
 
                             </table>
 
