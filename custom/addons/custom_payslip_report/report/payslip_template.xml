@@ -557,12 +557,12 @@
             <span style="color:#0b2d8d;">✉</span>
             <span t-field="o.company_id.email"/>
 
-            &nbsp;|&nbsp;
+            <span style="padding:0 8px;">|</span>
 
             <span style="color:#0b2d8d;">🌐</span>
             <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
 
-            &nbsp;|&nbsp;
+           <span style="padding:0 8px;">|</span>
 
             <span style="color:#0b2d8d;">☎</span>
             <span t-field="o.company_id.phone"/>
