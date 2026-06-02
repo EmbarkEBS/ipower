@@ -130,15 +130,46 @@
 
                         </td>
 
-                        <td style="width:2%;">
+                      <td style="
+    width:8px;
+    padding:0;
+    vertical-align:top;
+">
 
-                            <div style="
-                                width:2px;
-                                height:120px;
-                                background:#f58220;
-                            "/>
+    <svg width="8"
+         height="130"
+         xmlns="http://www.w3.org/2000/svg">
 
-                        </td>
+        <defs>
+
+            <!-- VERTICAL ORANGE FADE -->
+            <linearGradient id="verticalFade"
+                            x1="0%"
+                            y1="0%"
+                            x2="0%"
+                            y2="100%">
+
+                <stop offset="0%"
+                      stop-color="#f39223"
+                      stop-opacity="1"/>
+
+                <stop offset="100%"
+                      stop-color="#f39223"
+                      stop-opacity="0"/>
+
+            </linearGradient>
+
+        </defs>
+
+        <rect x="0"
+              y="0"
+              width="2"
+              height="130"
+              fill="url(#verticalFade)"/>
+
+    </svg>
+
+</td>
 
                         <td style="width:43%;padding-left:15px;vertical-align:top;">
 
