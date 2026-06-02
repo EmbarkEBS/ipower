@@ -350,33 +350,15 @@
                                 <tr>
                                     <td>Leave Days</td>
                                     <td>:</td>
-                                    <td><t t-set="lop_days"
-   t-value="sum(
-       o.worked_days_line_ids.filtered(
-           lambda w: w.code in ('LOP', 'OUT', 'UNPAID')
-       ).mapped('number_of_days')
-   )"/>
-
-<span t-esc="lop_days"/></td>
+                                    <td><t t-set="leave_days"
+           t-value="sum(
+               o.worked_days_line_ids.filtered(
+                   lambda w: w.code == 'LEAVE90'
+               ).mapped('number_of_days')
+           )"/>
+        <span t-esc="leave_days"/></td>
                                 </tr>
-<tr>
-    <td colspan="3">
 
-        <t t-foreach="o.worked_days_line_ids" t-as="wd">
-            <div>
-                Code:
-                <span t-esc="wd.code"/>
-                |
-                Name:
-                <span t-esc="wd.name"/>
-                |
-                Days:
-                <span t-esc="wd.number_of_days"/>
-            </div>
-        </t>
-
-    </td>
-</tr>
                                 <tr>
                                     <td>Loss Of Pay Days</td>
                                     <td>:</td>
