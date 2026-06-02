@@ -359,7 +359,13 @@
 
 <span t-esc="lop_days"/></td>
                                 </tr>
-
+<t t-foreach="o.worked_days_line_ids" t-as="wd">
+    <p>
+        <span t-esc="wd.code"/> -
+        <span t-esc="wd.name"/> -
+        <span t-esc="wd.number_of_days"/>
+    </p>
+</t>
                                 <tr>
                                     <td>Loss Of Pay Days</td>
                                     <td>:</td>
