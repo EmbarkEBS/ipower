@@ -98,18 +98,14 @@
     height:90px;
     padding:10px;
     box-sizing:border-box;
-    texl-align:center;
+    text-align:center;
 }
                     .summary-title{
                         color:#18327e;
                         font-weight:bold;
                         font-size:12px;
                     }
- .summary-title{
-                        color:white;
-                        font-weight:bold;
-                        font-size:12px;
-                    }
+
                     .summary-value{
                         font-size:18px;
                         font-weight:bold;
@@ -497,7 +493,7 @@
 
         <td style="width:20%;">
             <div class="net-box">
-                <div class="summary-title1">NET PAY (AED)</div>
+                <div style="font-size:18px;font-weight:bold;">NET PAY (AED)</div>
                 <div style="font-size:18px;font-weight:bold;">
                     <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
                 </div>
@@ -528,54 +524,50 @@
 
                 <!-- FOOTER -->
 
-                         <table style="width:100%;margin-top:20px;">
-    <tr>
+                <table>
 
-        <!-- NOTES -->
-        <td style="width:50%;vertical-align:top;">
+                    <tr>
 
-            <div style="font-size:16px;">Notes</div>
+                        <td style="width:50%;">
 
-            <div style="
-                width:40px;
-                height:2px;
-                background:#f58220;
-                margin:5px 0 10px 0;
-            "></div>
+                            <div style="font-size:24px;">
+                                Notes
+                            </div>
 
-            <div style="font-size:11px;">
-                <span style="color:#1f3a93;">●</span>
-                This is a system-generated document and does not require any signature.
-            </div>
+                            <div style="
+                                width:80px;
+                                height:2px;
+                                background:#f58220;
+                                margin-top:5px;
+                                margin-bottom:10px;
+                            "/>
 
-        </td>
+                            <div class="footer-note">
+                                This is a system-generated document and does not require any signature.
+                            </div>
 
-        <!-- CONTACT DETAILS -->
-        <td style="
-            width:60%;
-            text-align:right;
-            vertical-align:bottom;
-            font-size:11px;
-            white-space:nowrap;
-        ">
+                        </td>
 
-            <span style="color:#0b2d8d;">✉</span>
-            <span t-field="o.company_id.email"/>
+                        <td style="
+                            width:50%;
+                            text-align:right;
+                            font-size:11px;
+                            vertical-align:bottom;
+                        ">
 
-            <span style="padding:0 8px;">|</span>
+                            <span t-field="o.company_id.street"/> <span t-esc="o.company_id.street2"/>
+                            |
+                            <span t-field="o.company_id.email"/>
+                            |
+                       <span t-esc="(o.company_id.website or '').replace('http://', '').replace('https://', '')"/>
+                            |
+                            <span t-field="o.company_id.phone"/>
 
-            <span style="color:#0b2d8d;">🌐</span>
-            <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
+                        </td>
 
-           <span style="padding:0 8px;">|</span>
+                    </tr>
 
-            <span style="color:#0b2d8d;">☎</span>
-            <span t-field="o.company_id.phone"/>
-
-        </td>
-
-    </tr>
-</table>
+                </table>
 
             </div>
 
