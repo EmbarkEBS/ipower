@@ -129,7 +129,14 @@
                     .footer-note{
                         font-size:11px;
                     }
-
+@page {
+        size: A4;
+        margin: 0 !important;
+    }
+    header,
+    footer {
+        display: none !important;
+    }
                 </style>
 
                 <!-- HEADER -->
