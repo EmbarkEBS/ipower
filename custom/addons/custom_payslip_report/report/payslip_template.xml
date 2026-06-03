@@ -627,7 +627,7 @@
             width:65%;
             vertical-align:top;
             font-size:12px;
-            text-align:right;
+            text-align:left;
         ">
 
             <table style="
