@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- PAPER FORMAT -->
-    <record id="paperformat_zero_margin" model="report.paperformat">
+    <record id="paperformat_proforma_custom" model="report.paperformat">
         <field name="name">A4 Zero Margin for Custom Proforma Invoice</field>
         <field name="default">True</field>
         <field name="format">A4</field>
@@ -17,7 +17,7 @@
     </record>
 
     <!-- REPORT ACTION -->
-    <record id="action_report_proforma_custom" model="ir.actions.report">
+    <record id="sale.action_report_saleorder_pro_forma" model="ir.actions.report">
         <field name="name">Custom Proforma Invoice</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
@@ -26,7 +26,7 @@
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="binding_type">report</field>
          <field name="print_report_name">'Proforma- %s' % (object.name)</field>
-        <field name="paperformat_id" ref="custom_proforma_report.paperformat_zero_margin"/>
+        <field name="paperformat_id" ref="custom_proforma_report.paperformat_proforma_custom"/>
     </record>
 
 </odoo>
