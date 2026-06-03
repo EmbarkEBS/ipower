@@ -106,11 +106,11 @@
                     .summary-title{
                         color:#18327e;
                         font-weight:bold;
-                        font-size:12px;
+                        font-size:14px;
                     }
 
                     .summary-value{
-                        font-size:12px;
+                        font-size:14px;
                         font-weight:bold;
                         margin-top:5px;
                     }
@@ -123,7 +123,7 @@
                     }
 
                     .footer-note{
-                        font-size:8px;
+                        font-size:11px;
                     }
 
                 </style>
@@ -568,8 +568,8 @@
 
         <td style="width:18%;">
             <div class="net-box">
-                <div style="font-size:12px;font-weight:bold;">NET PAY (AED)</div>
-                <div style="font-size:12px;font-weight:bold;">
+                <div style="font-size:14px;font-weight:bold;">NET PAY (AED)</div>
+                <div style="font-size:14px;font-weight:bold;">
                     <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
                 </div>
             </div>
@@ -603,14 +603,14 @@
     <tr>
 
         <!-- LEFT SIDE -->
-        <td style="width:40%; vertical-align:top;">
+        <td style="width:50%; vertical-align:top;">
 
-            <div style="font-size:16px;">
+            <div style="font-size:18px;">
                 Notes
             </div>
 
             <div style="
-                width:55px;
+                width:60px;
                 height:2px;
                 background:#f58220;
                 margin-top:5px;
@@ -625,7 +625,7 @@
 
         <!-- RIGHT SIDE -->
         <td style="
-            width:60%;
+            width:50%;
             vertical-align:top;
             font-size:12px;
             text-align:right;
@@ -654,7 +654,7 @@
 
                     <td style="
                         text-align:left;
-                        padding-bottom:8px;font-size:8px;
+                        padding-bottom:8px;font-size:10px;
                     ">
 
                         <span t-field="o.company_id.street"/>
@@ -668,7 +668,7 @@
                 <!-- CONTACTS -->
                 <tr>
 
-                    <td colspan="2" style="text-align:left;font-size:8px;">
+                    <td colspan="2" style="text-align:left;font-size:10px;">
 
                         <!-- EMAIL -->
                         <span style="
@@ -685,7 +685,7 @@
 
                         <span t-field="o.company_id.email"/>
 
-                        <span style="padding:0 4px;">|</span>
+                        <span style="padding:0 6px;">|</span>
 
                         <!-- WEBSITE -->
                         <span style="
@@ -702,7 +702,7 @@
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
 
-                        <span style="padding:0 4px;">|</span>
+                        <span style="padding:0 6px;">|</span>
 
                         <!-- PHONE -->
                         <span style="
