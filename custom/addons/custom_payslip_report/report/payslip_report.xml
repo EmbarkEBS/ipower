@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- PAPER FORMAT -->
-    <record id="paperformat_zero_margin" model="report.paperformat">
-        <field name="name">A4 Zero Margin for Custom payslip</field>
-        <field name="default">True</field>
-        <field name="format">A4</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">0</field>
-        <field name="margin_bottom">0</field>
-        <field name="margin_left">50</field>
-        <field name="margin_right">50</field>
-        <field name="header_line">False</field>
-        <field name="header_spacing">0</field>
-        <field name="dpi">90</field>
-    </record>
+  <record id="paperformat_zero_margin" model="report.paperformat">
+    <field name="name">A4 Zero Margin for Custom payslip</field>
+    <field name="default">False</field> <!-- Change to False so it does not conflict with global layout settings -->
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">0</field>
+    <field name="margin_bottom">0</field>
+    <!-- Note: Left/Right margins of 50mm are very wide. Reduce if your content clips. -->
+    <field name="margin_left">50</field>
+    <field name="margin_right">50</field>
+    <field name="header_line">False</field>
+    <field name="header_spacing">0</field> <!-- Crucial: Must be 0 if margin_top is 0 -->
+    <field name="dpi">90</field>
+</record>
     <record id="action_custom_payslip_report"
             model="ir.actions.report">
 
