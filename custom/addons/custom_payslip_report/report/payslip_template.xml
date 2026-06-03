@@ -335,7 +335,8 @@
                                     <td>Working Days</td>
                                     <td>:</td>
                                     <td>
-                                        <span t-esc="working_days"/>
+                                               <span t-esc="round(working_days)"/>
+
                                     </td>
                                 </tr>
 
@@ -343,7 +344,8 @@
                                     <td>Paid Days</td>
                                     <td>:</td>
                                     <td>
-                                        <span t-esc="working_days"/>
+                                       <span t-esc="round(working_days)"/>
+
                                     </td>
                                 </tr>
 
