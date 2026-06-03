@@ -576,7 +576,7 @@
         <td style="width:20%;">
             <div class="summary-box">
                 <div class="summary-title">AMOUNT IN WORDS</div>
-                <div style="font-size:10px;">
+                <div style="margin-top:5px;font-size:10px;">
                     <span t-esc="o.company_id.currency_id.amount_to_text(o.net_wage)"/>
                 </div>
             </div>
@@ -585,7 +585,7 @@
         <td style="width:18%;">
             <div class="summary-box">
                 <div class="summary-title">PAYMENT MODE</div>
-                <div style="font-size:10px;">Bank Transfer</div>
+                <div style="margin-top:5px;font-size:10px;">Bank Transfer</div>
             </div>
         </td>
 
