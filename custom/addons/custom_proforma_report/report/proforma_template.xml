@@ -876,7 +876,7 @@
                     </td>
                 </tr>
 
-                <tr t-if="o.company_bank_id.bank_id">
+               <tr t-if="bank.bank_id">
                     <td style="padding-right:10px;">
                         <strong>Bank Name:</strong>
                     </td>
