@@ -575,7 +575,7 @@
             </div>
         </td>
 
-        <td style="width:20%;">
+        <td style="width:22%;">
             <div class="summary-box">
                 <div class="summary-title">AMOUNT IN WORDS</div>
                 <div style="margin-top:5px;font-size:10px;">
@@ -584,7 +584,7 @@
             </div>
         </td>
 
-        <td style="width:18%;">
+        <td style="width:16%;">
             <div class="summary-box">
                 <div class="summary-title">PAYMENT MODE</div>
                 <div style="margin-top:5px;font-size:10px;">Bank Transfer</div>
@@ -603,14 +603,14 @@
     <tr>
 
         <!-- LEFT SIDE -->
-        <td style="width:40%; vertical-align:top;">
+        <td style="width:35%; vertical-align:top;">
 
             <div style="font-size:16px;">
                 Notes
             </div>
 
             <div style="
-                width:55px;
+                width:50px;
                 height:2px;
                 background:#f58220;
                 margin-top:5px;
@@ -625,7 +625,7 @@
 
         <!-- RIGHT SIDE -->
         <td style="
-            width:60%;
+            width:65%;
             vertical-align:top;
             font-size:12px;
             text-align:right;
