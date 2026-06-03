@@ -487,17 +487,7 @@
                                     </tr>
 
                                 </t>
-<t t-set="advrec_line"
-   t-value="o.line_ids.filtered(lambda l: l.code == 'ADVREC')"/>
 
-<t t-if="advrec_line">
-    <tr>
-        <td>Advance Recovery</td>
-        <td style="text-align:right;">
-            <span t-esc="'{:,.2f}'.format(abs(advrec_line[0].total))"/>
-        </td>
-    </tr>
-</t>
                              <!-- Top Line -->
 <tr>
     <td colspan="2" style="padding:0;">
