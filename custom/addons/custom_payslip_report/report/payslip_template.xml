@@ -26,7 +26,7 @@
             <t t-set="working_days"
                t-value="sum(o.worked_days_line_ids.mapped('number_of_days'))"/>
 
-            <div class="page" style="margin-top: 0px !important; padding-top: 0px !important;">
+            <div class="page"  style="padding-top:15mm;">
 
                 <style>
 
@@ -125,46 +125,12 @@
                     .footer-note{
                         font-size:11px;
                     }
-   /* Target Odoo's hidden asset injection blocks directly */
-                        html, body, .container, .row, .page, .article {
-                            margin: 0 !important;
-                            padding: 0 !important;
-                            top: 0 !important;
-                            min-height: auto !important;
-                        }
-                        
-                        @page {
-                            size: A4;
-                            margin-top: 0 !important;
-                            margin-bottom: 0 !important;
-                            /* Rely on paperformat settings for side spaces */
-                        }
-
-                        body {
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 11px;
-                            color: #222;
-                        }
-
-                        /* Target your header table to stick to the absolute top pixel */
-                        table.payslip-header-table {
-                            width: 100%;
-                            border-collapse: collapse;
-                            margin-top: 0px !important;
-                            padding-top: 0px !important;
-                            border-spacing: 0;
-                        }
-
-                        table.payslip-header-table td {
-                            padding-top: 0px !important;
-                            vertical-align: top;
-                        }
 
                 </style>
 
                 <!-- HEADER -->
 
-                <table class="payslip-header-table">
+                <table>
                     <tr>
 
                         <td style="width:25%;vertical-align:top;">
@@ -672,7 +638,7 @@
                 <!-- ADDRESS -->
                 <tr>
                     <td style="
-                        vertical-align:middle;
+                        vertical-align:top;
                         padding-right:6px;
                         padding-bottom:8px;font-size:12px;
                     ">
@@ -686,7 +652,7 @@
 
                     <td style="
                         text-align:left;
-                        padding-bottom:8px;font-size:10px;
+                        padding-bottom:8px;font-size:12px;
                     ">
 
                         <span t-field="o.company_id.street"/>
@@ -700,7 +666,7 @@
                 <!-- CONTACTS -->
                 <tr>
 
-                    <td colspan="2" style="text-align:left;font-size:10px;">
+                    <td colspan="2" style="text-align:left;font-size:12px;">
 
                         <!-- EMAIL -->
                         <span style="
@@ -712,7 +678,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:12px;padding-top:3px;
+                            font-size:10px;
                         ">✉</span>
 
                         <span t-field="o.company_id.email"/>
@@ -729,7 +695,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:12px;padding-top:3px;
+                            font-size:10px;
                         ">🌐</span>
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
@@ -746,7 +712,7 @@
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:12px;padding-top:3px;
+                            font-size:10px;
                         ">☎</span>
 
                         <span t-field="o.company_id.phone"/>
@@ -765,8 +731,8 @@
             </div>
 
         </t>
- </t>
-   
+
+    </t>
 
 </template>
 
