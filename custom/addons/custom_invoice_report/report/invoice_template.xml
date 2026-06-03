@@ -113,7 +113,7 @@
 
                                         <br/>
 
-                                        <span t-esc="o.company_id.street or ''"/>
+                                        <span t-esc="o.company_id.street or ''"/>, Dubai,
 
                                         <t t-if="o.company_id.state_id">
                                             ,

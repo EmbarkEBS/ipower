@@ -194,7 +194,7 @@
 
                             <div style="
                                 font-size:16px;">
-                                <span t-field="o.company_id.street"/>
+                                <span t-field="o.company_id.street"/> , Dubai,
                             </div>
 
                             <div style="

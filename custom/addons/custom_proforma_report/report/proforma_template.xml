@@ -297,7 +297,7 @@
 
                                                 <br/>
 
-                                                <span t-esc="o.partner_id.street or ''"/>
+                                                <span t-esc="o.partner_id.street or ''"/>, Dubai,
 
                                                 <t t-if="o.partner_id.street2">
                                                     <br/>
