@@ -585,7 +585,7 @@
         <td style="width:18%;">
             <div class="summary-box">
                 <div class="summary-title">PAYMENT MODE</div>
-                <div>Bank Transfer</div>
+                <div style="font-size:10px;">Bank Transfer</div>
             </div>
         </td>
 
