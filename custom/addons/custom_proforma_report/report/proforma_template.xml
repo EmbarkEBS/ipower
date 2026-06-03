@@ -151,7 +151,7 @@
                                         color:#000;
                                         margin-top:20px;
                                     ">
-                                        Pro-Forma Invoice INVOICE
+                                        Pro-Forma Invoice 
                                     </h1>
 
                                     <div style="
@@ -435,7 +435,7 @@
 
                                             <td>
                                                 :
-                                               <span t-field="o.client_order_ref"/>
+                                               <span t-field="o.name"/>
                                             </td>
 
                                         </tr>
@@ -449,7 +449,7 @@
     </tr>
 </t>
 
-                                        <tr>
+                                     <!--   <tr>
     <td style="
         padding:4px 0;
         font-weight:bold;
@@ -465,7 +465,7 @@
 
 <span t-esc="', '.join(pickings.mapped('name'))"/>
     </td>
-</tr>
+</tr>-->
                                     </table>
 
                                 </td>
