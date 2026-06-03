@@ -101,7 +101,6 @@
     padding:10px;
     box-sizing:border-box;
     text-align:center;
-    padding-top:20px;
 }
                     .summary-title{
                         color:#18327e;
