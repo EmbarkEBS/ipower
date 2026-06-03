@@ -4,7 +4,6 @@
 <template id="custom_payslip_template">
 
     <t t-call="web.html_container">
-    <t t-call="web.basic_layout"> 
 <meta charset="UTF-8"/>
 
         <t t-foreach="docs" t-as="o">
@@ -30,10 +29,7 @@
             <div class="page" style="margin-top: 0px !important; padding-top: 0px !important;">
 
                 <style>
-.page{
-    margin-top:0 !important;
-    padding-top:0 !important;
-}
+
                     body{
                         font-family:Arial,Helvetica,sans-serif;
                         font-size:11px;
@@ -129,22 +125,46 @@
                     .footer-note{
                         font-size:11px;
                     }
-@page {
-        size: A4;
-        margin: 0 !important;
-    }
-    header,
-    footer {
-        display: none !important;
-    }
-      body { margin: 0 !important; padding: 0 !important; }
-    .page { margin-top: 0px !important; padding-top: 0px !important; }
-    table { border-collapse: collapse; margin-top: 0px !important; }
+   /* Target Odoo's hidden asset injection blocks directly */
+                        html, body, .container, .row, .page, .article {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            top: 0 !important;
+                            min-height: auto !important;
+                        }
+                        
+                        @page {
+                            size: A4;
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                            /* Rely on paperformat settings for side spaces */
+                        }
+
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-size: 11px;
+                            color: #222;
+                        }
+
+                        /* Target your header table to stick to the absolute top pixel */
+                        table.payslip-header-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 0px !important;
+                            padding-top: 0px !important;
+                            border-spacing: 0;
+                        }
+
+                        table.payslip-header-table td {
+                            padding-top: 0px !important;
+                            vertical-align: top;
+                        }
+
                 </style>
 
                 <!-- HEADER -->
 
-                <table style="margin-top: 0px !important; padding-top: 0px !important;">
+                <table class="payslip-header-table">
                     <tr>
 
                         <td style="width:25%;vertical-align:top;">
@@ -746,7 +766,7 @@
 
         </t>
  </t>
-    </t>
+   
 
 </template>
 
