@@ -27,6 +27,6 @@
     <field name="binding_type">report</field>
     <field name="paperformat_id" ref="custom_proforma_report.paperformat_zero_margin"/>
 </record>
-    </record>
+    
 
 </odoo>
