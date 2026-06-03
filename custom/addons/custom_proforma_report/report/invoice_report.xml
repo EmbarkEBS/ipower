@@ -18,15 +18,15 @@
 
     <!-- REPORT ACTION -->
     <record id="action_report_proforma_custom" model="ir.actions.report">
-        <field name="name">Custom Proforma Invoice</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">custom_proforma_report.proforma_template</field>
-        <field name="report_file">custom_proforma_report.proforma_template</field>
- <field name="model">sale.order</field>
-<field name="binding_model_id" ref="sale.model_sale_order"/>
+    <field name="name">Custom Proforma Invoice</field>
+    <field name="model">sale.order</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">custom_proforma_report.proforma_template</field>
+    <field name="report_file">custom_proforma_report.proforma_template</field>
+    <field name="binding_model_id" ref="sale.model_sale_order"/>
     <field name="binding_type">report</field>
-         <field name="print_report_name">'Proforma- %s' % (object.name)</field>
-        <field name="paperformat_id" ref="custom_proforma_report.paperformat_zero_margin"/>
+    <field name="paperformat_id" ref="custom_proforma_report.paperformat_zero_margin"/>
+</record>
     </record>
 
 </odoo>

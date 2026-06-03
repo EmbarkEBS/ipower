@@ -379,7 +379,7 @@
                                             <td style="padding:4px 0;">
 
                                                 :
-                                                <span t-field="o.invoice_date"/>
+                                               <span t-field="o.date_order"/>
 
                                             </td>
 
@@ -398,7 +398,7 @@
                                             <td style="padding:4px 0;">
 
                                                 :
-                                                <span t-field="o.invoice_date_due"/>
+                                                <span t-field="o.validity_date"/>
 
                                             </td>
 
@@ -417,7 +417,7 @@
                                             <td style="padding:4px 0;">
 
                                                 :
-                                                <span t-field="o.invoice_payment_term_id.name"/>
+                                               <span t-field="o.payment_term_id.name"/>
 
                                             </td>
 
@@ -435,28 +435,19 @@
 
                                             <td>
                                                 :
-                                                <span t-esc="o.ref or ''"/>
+                                               <span t-field="o.client_order_ref"/>
                                             </td>
 
                                         </tr>
-<t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
-
-<t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
-
-                                            <td style="
-                                                padding:5px 0;
-                                                font-weight:bold;
-                                                color:#1a3a5a;
-                                            ">
-                                                Customer PO Ref
-                                            </td>
-
-                                            <td>
-                                                :
-                                               <span t-esc="sale_order.x_studio_customer_po_ref"/>
-                                            </td>
-
-                                        </tr></t>
+<t t-if="o.x_studio_customer_po_ref">
+    <tr>
+        <td>Customer PO Ref</td>
+        <td>
+            :
+            <span t-field="o.x_studio_customer_po_ref"/>
+        </td>
+    </tr>
+</t>
 
                                         <tr>
     <td style="
@@ -469,11 +460,8 @@
 
     <td style="padding:4px 0;">
         :
-        <t t-set="pickings"
-           t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
-
-        <t t-set="pickings"
-   t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
+       <t t-set="pickings"
+   t-value="o.picking_ids.filtered(lambda p: p.state == 'done')"/>
 
 <span t-esc="', '.join(pickings.mapped('name'))"/>
     </td>
@@ -558,7 +546,7 @@
 
                                 <t t-set="sn" t-value="1"/>
 
-                                <t t-foreach="o.invoice_line_ids" t-as="line">
+                               <t t-foreach="o.order_line.filtered(lambda l: not l.display_type)" t-as="line">
 
                                     <tr>
 
@@ -606,7 +594,7 @@
                                           text-align:center;
                                           vertical-align:top;
                                         ">
-                                            <span t-esc="int(line.quantity)"/>
+                                       <span t-esc="int(line.product_uom_qty)"/>
                                         </td>
 
                                         <td style="
@@ -639,7 +627,7 @@
                             
                       
 </td></tr>
-<tr t-foreach="o.invoice_line_ids" t-as="line">
+<tr>
 
     <td></td>
     <td colspan="4" style="
@@ -649,12 +637,12 @@
                                                     font-size:11px;
                                         ">
 
-        <t t-if="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
+        <t t-if="line.move_ids and line.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
 
             <span>Serial No:</span>
             
 
-            <t t-foreach="line.sale_line_ids.move_ids.move_line_ids" t-as="ml">
+        <t t-foreach="line.move_ids.move_line_ids" t-as="ml">
 
                 <t t-if="ml.lot_id">
 
@@ -829,9 +817,9 @@
                                 color:#555;
                             ">
 
-                                <t t-if="o.narration">
-                                    <span t-esc="o.narration"/>
-                                </t>
+                               <t t-if="o.note">
+    <span t-field="o.note"/>
+</t>
 
                                 <t t-else="">
                                     Thanks for giving us the opportunity to serve you
@@ -855,7 +843,9 @@
         color:#555;
     ">
 
-        <t t-if="o.company_bank_id">
+      <t t-set="bank" t-value="o.company_id.partner_id.bank_ids[:1]"/>
+
+<t t-if="bank">
 
             <table style="font-size:13px; border-collapse:collapse;">
 
@@ -864,7 +854,7 @@
                         <strong>Account Name:</strong>
                     </td>
                     <td>
-                        <span t-esc="o.company_bank_id.acc_holder_name or o.company_id.name"/>
+                        <span t-esc="bank.acc_holder_name"/>
                     </td>
                 </tr>
 
@@ -873,16 +863,16 @@
                         <strong>A/C Number:</strong>
                     </td>
                     <td>
-                        <span t-esc="o.company_bank_id.acc_number"/>
+                        <span t-esc="bank.acc_number"/>
                     </td>
                 </tr>
 
-              <tr t-if="o.company_bank_id.iban">
+              <tr t-if="bank.iban">
                     <td style="padding-right:10px;">
                         <strong>IBAN Number:</strong>
                     </td>
                     <td>
-                    <span t-esc="o.company_bank_id.iban"/>
+                    <span t-esc="bank.iban"/>
                     </td>
                 </tr>
 
@@ -891,7 +881,7 @@
                         <strong>Bank Name:</strong>
                     </td>
                     <td>
-                        <span t-esc="o.company_bank_id.bank_id.name"/>
+                        <span t-esc="bank.bank_id.name"/>
                     </td>
                 </tr>
 
