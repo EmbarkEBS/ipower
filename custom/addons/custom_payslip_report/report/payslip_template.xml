@@ -652,7 +652,7 @@
 
                     <td style="
                         text-align:left;
-                        padding-bottom:8px;font-size:12px;
+                        padding-bottom:8px;font-size:10px;
                     ">
 
                         <span t-field="o.company_id.street"/>
@@ -666,7 +666,7 @@
                 <!-- CONTACTS -->
                 <tr>
 
-                    <td colspan="2" style="text-align:left;font-size:12px;">
+                    <td colspan="2" style="text-align:left;font-size:10px;">
 
                         <!-- EMAIL -->
                         <span style="
