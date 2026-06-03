@@ -13,7 +13,9 @@
     <field name="margin_right">50</field>
     <field name="header_line">False</field>
     <field name="header_spacing">0</field> <!-- Crucial: Must be 0 if margin_top is 0 -->
+     <field name="disable_shrinking" eval="True"/> 
     <field name="dpi">90</field>
+
 </record>
     <record id="action_custom_payslip_report"
             model="ir.actions.report">
