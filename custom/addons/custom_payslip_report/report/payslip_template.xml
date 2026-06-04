@@ -602,7 +602,7 @@
     <tr>
 
         <!-- LEFT SIDE -->
-        <td style="width:50%; vertical-align:top;">
+        <td style="width:40%; vertical-align:top;">
 
             <div style="font-size:14px;">
                 Notes
@@ -624,7 +624,7 @@
 
         <!-- RIGHT SIDE -->
         <td style="
-            width:50%;
+            width:60%;
             vertical-align:top;
             font-size:12px;
             text-align:left;
@@ -641,7 +641,7 @@
                     <td style="
                         vertical-align:top;
                         padding-right:1px;
-                        padding-bottom:8px;font-size:10px;
+                        padding-bottom:8px;font-size:8px;
                     ">
 
                         <svg width="20" height="20" viewBox="0 0 24 24">
@@ -654,7 +654,7 @@
                         <t t-if="o.company_id.street2">
                           <span style="
                         text-align:left;
-                        padding-bottom:8px;font-size:8px;" t-field="o.company_id.street2"/>
+                        padding-bottom:12px;font-size:8px;" t-field="o.company_id.street2"/>
                         </t>
 
                     </td>
