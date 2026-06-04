@@ -1,121 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<template id="external_layout_payment_receipt">
-<t t-set="company" t-value="o.company_id"/>
-    <!-- HEADER -->
+    <template id="custom_external_layout_boxed"
+              inherit_id="web.external_layout_boxed">
 
-    <div class="header">
+        <!-- HEADER -->
+        <xpath expr="//div[contains(@class,'header')]"
+               position="replace">
 
-        <table style="width:100%;">
+            <div class="header">
 
-            <tr>
+                <table style="width:100%; margin-bottom:20px;">
+                    <tr>
 
-                <td style="width:60%;">
+                        <td style="width:60%; vertical-align:top;">
 
-                 <img t-if="o.company_id.logo"
-     t-att-src="image_data_uri(o.company_id.logo)"/>
+                            <img t-if="company.logo"
+                                 t-att-src="image_data_uri(company.logo)"
+                                 style="max-height:90px;"/>
 
-                </td>
+                        </td>
 
-                <td style="width:40%; text-align:right;">
+                        <td style="width:40%; text-align:right; vertical-align:middle;">
 
-                    <h2 style="margin-top:20px;">
-                        PAYMENT RECEIPT
-                    </h2>
+                            <h2 style="
+                                margin:0;
+                                color:#0d2d52;
+                                font-size:30px;
+                                font-weight:bold;
+                            ">
+                                PAYMENT RECEIPT
+                            </h2>
 
-                </td>
+                        </td>
 
-            </tr>
-
-        </table>
-
-    </div>
-
-    <!-- BODY -->
-
-    <div class="article"
-         t-att-data-oe-model="o and o._name"
-         t-att-data-oe-id="o and o.id">
-
-        <t t-out="0"/>
-
-    </div>
-
-    <!-- FOOTER -->
-
-    <div class="footer">
-
-        <div style="
-            padding:0 40px;
-            font-size:11px;
-            color:#555;
-        ">
-
-            <div style="
-                margin-bottom:5px;
-                color:#888;
-                font-style:italic;
-            ">
-
-                This document is electronically generated and valid
-                without signature or company stamp.
+                    </tr>
+                </table>
 
             </div>
 
-            <div style="
-                border-top:1px solid #1f3b73;
-                padding-top:6px;
-                text-align:center;
-            ">
+        </xpath>
 
-                <span t-esc="o.company_id.city or ''"/>
 
-                -
+        <!-- FOOTER -->
+        <xpath expr="//div[contains(@class,'footer')]"
+               position="replace">
 
-                <span t-esc="o.company_id.country_id.name or ''"/>
+            <div class="footer">
 
-                <br/>
+                <div style="
+                    padding:0 40px;
+                    font-size:11px;
+                    color:#555;
+                ">
 
-                CR No:
+                    <div style="
+                        margin-bottom:5px;
+                        color:#888;
+                        font-style:italic;
+                    ">
+                        This document is electronically generated and valid without signature or company stamp.
+                    </div>
 
-                <span t-esc="o.company_id.company_registry or 'N/A'"/>
+                    <div style="
+                        border-top:1px solid #1f3b73;
+                        padding-top:6px;
+                        text-align:center;
+                    ">
 
-                |
+                        <span t-esc="company.city or ''"/>
 
-                <span t-esc="o.company_id.email or ''"/>
+                        -
 
-                |
+                        <span t-esc="company.country_id.name or ''"/>
 
-                <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
+                        <br/>
+
+                        CR No:
+                        <span t-esc="company.company_registry or 'N/A'"/>
+
+                        |
+
+                        <span t-esc="company.email or ''"/>
+
+                        |
+
+                        <span t-esc="(company.website or '').replace('http://','').replace('https://','')"/>
+
+                    </div>
+
+                </div>
+
+                <div style="
+                    width:100%;
+                    height:25px;
+                    margin-top:5px;
+                ">
+
+                    <svg width="100%"
+                         height="25"
+                         viewBox="0 0 1000 25"
+                         preserveAspectRatio="none">
+
+                        <polygon points="0,0 260,0 240,25 0,25"
+                                 fill="#1f3b73"/>
+
+                        <polygon points="260,0 1000,0 1000,25 240,25"
+                                 fill="#e58b39"/>
+
+                    </svg>
+
+                </div>
 
             </div>
 
-        </div>
+        </xpath>
 
-        <div style="
-            width:100%;
-            height:25px;
-            margin-top:5px;
-        ">
-
-            <svg width="100%"
-                 height="25"
-                 viewBox="0 0 1000 25"
-                 preserveAspectRatio="none">
-
-                <polygon points="0,0 260,0 240,25 0,25"
-                         fill="#1f3b73"/>
-
-                <polygon points="260,0 1000,0 1000,25 240,25"
-                         fill="#e58b39"/>
-
-            </svg>
-
-        </div>
-
-    </div>
-
-</template>
+    </template>
 
 </odoo>
