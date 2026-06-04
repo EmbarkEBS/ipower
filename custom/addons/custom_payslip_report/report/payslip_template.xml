@@ -625,7 +625,7 @@
         <!-- RIGHT SIDE -->
         <td style="
             width:50%;
-            vertical-align:top;
+            vertical-align:middle;
             font-size:12px;
             text-align:left;
         ">
@@ -633,14 +633,14 @@
             <table style="
                 width:auto;
                 margin-left:auto;font-size:12px;
-                border-collapse:collapse;
+                border-collapse:collapse;line-height:22px;
             ">
 
                 <!-- ADDRESS -->
                 <tr>
                     <td style="
                         vertical-align:middle;
-                        padding-bottom:8px;font-size:8px;
+                        font-size:10px;
                     ">
 
                         <svg width="20" height="20" viewBox="0 0 24 24">
@@ -667,14 +667,14 @@
                         <!-- EMAIL -->
                         <span style="
                             display:inline-block;
-                            width:14px;
-                            height:14px;
-                            line-height:14px;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
                             text-align:center;
                             border-radius:48%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:8px;padding-top:2px;
+                            font-size:10px;padding-top:2px;
                         ">✉</span>
 
                         <span t-field="o.company_id.email"/>
@@ -684,14 +684,14 @@
                         <!-- WEBSITE -->
                         <span style="
                             display:inline-block;
-                            width:14px;
-                            height:14px;
-                            line-height:14px;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
                             text-align:center;
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:8px;padding-top:2px;
+                            font-size:10px;padding-top:2px;
                         ">🌐</span>
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
@@ -701,14 +701,14 @@
                         <!-- PHONE -->
                         <span style="
                             display:inline-block;
-                            width:14px;
-                            height:14px;
-                            line-height:14px;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
                             text-align:center;
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:8px;padding-top:2px;
+                            font-size:10px;padding-top:2px;
                         ">☎</span>
 
                         <span t-field="o.company_id.phone"/>
