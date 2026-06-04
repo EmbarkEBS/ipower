@@ -2,7 +2,7 @@
 <odoo>
 
 <template id="external_layout_payment_receipt">
-
+<t t-set="company" t-value="o.company_id"/>
     <!-- HEADER -->
 
     <div class="header">
@@ -13,9 +13,8 @@
 
                 <td style="width:60%;">
 
-                    <img t-if="company.logo"
-                         t-att-src="image_data_uri(company.logo)"
-                         style="max-height:80px;"/>
+                 <img t-if="o.company_id.logo"
+     t-att-src="image_data_uri(o.company_id.logo)"/>
 
                 </td>
 
@@ -70,25 +69,25 @@
                 text-align:center;
             ">
 
-                <span t-esc="company.city or ''"/>
+                <span t-esc="o.company_id.city or ''"/>
 
                 -
 
-                <span t-esc="company.country_id.name or ''"/>
+                <span t-esc="o.company_id.country_id.name or ''"/>
 
                 <br/>
 
                 CR No:
 
-                <span t-esc="company.company_registry or 'N/A'"/>
+                <span t-esc="o.company_id.company_registry or 'N/A'"/>
 
                 |
 
-                <span t-esc="company.email or ''"/>
+                <span t-esc="o.company_id.email or ''"/>
 
                 |
 
-                <span t-esc="(company.website or '').replace('http://','').replace('https://','')"/>
+                <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
 
             </div>
 
