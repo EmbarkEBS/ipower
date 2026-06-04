@@ -604,12 +604,12 @@
         <!-- LEFT SIDE -->
         <td style="width:50%; vertical-align:top;">
 
-            <div style="font-size:16px;">
+            <div style="font-size:14px;">
                 Notes
             </div>
 
             <div style="
-                width:50px;
+                width:45px;
                 height:2px;
                 background:#f58220;
                 margin-top:5px;
@@ -641,7 +641,7 @@
                     <td style="
                         vertical-align:top;
                         padding-right:1px;
-                        padding-bottom:8px;font-size:12px;
+                        padding-bottom:8px;font-size:10px;
                     ">
 
                         <svg width="20" height="20" viewBox="0 0 24 24">
@@ -649,11 +649,12 @@
                                   d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
                         </svg>
 
-                
-
+                   
                        
                         <t t-if="o.company_id.street2">
-                          <span t-field="o.company_id.street2"/>
+                          <span style="
+                        text-align:left;
+                        padding-bottom:8px;font-size:8px;" t-field="o.company_id.street2"/>
                         </t>
 
                     </td>
@@ -667,14 +668,14 @@
                         <!-- EMAIL -->
                         <span style="
                             display:inline-block;
-                            width:16px;
-                            height:16px;
-                            line-height:16px;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
                             text-align:center;
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;padding-top:2px;
+                            font-size:8px;padding-top:2px;
                         ">✉</span>
 
                         <span t-field="o.company_id.email"/>
@@ -684,14 +685,14 @@
                         <!-- WEBSITE -->
                         <span style="
                             display:inline-block;
-                            width:16px;
-                            height:16px;
-                            line-height:16px;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
                             text-align:center;
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;padding-top:2px;
+                            font-size:8px;padding-top:2px;
                         ">🌐</span>
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
@@ -701,14 +702,14 @@
                         <!-- PHONE -->
                         <span style="
                             display:inline-block;
-                            width:16px;
-                            height:16px;
-                            line-height:16px;
+                            width:14px;
+                            height:14px;
+                            line-height:14px;
                             text-align:center;
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;padding-top:2px;
+                            font-size:8px;padding-top:2px;
                         ">☎</span>
 
                         <span t-field="o.company_id.phone"/>
