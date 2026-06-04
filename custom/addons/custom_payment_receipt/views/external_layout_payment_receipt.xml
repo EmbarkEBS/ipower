@@ -3,11 +3,21 @@
 
 <template id="external_layout_payment_receipt">
 <style>
+*
+{
+    font-family: Helvetica, Arial, sans-serif !important;
+}
 .table {
     width:100%;
     border-collapse:collapse;
 }
-
+.fixed-footer {
+                        position: fixed;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 22mm;
+                    }
 .table th,
 .table td {
     border:1px solid #cccccc;
@@ -31,7 +41,7 @@
      t-att-src="image_data_uri(o.company_id.logo)"
      style="max-height:80px; margin-bottom:10px;"/>
 </td><td>
-<div style="font-size:13px; line-height:1.6;">
+<div style="font-size:13px; line-height:1.6;text-align:right;">
 
     <strong style="font-size:16px;">
         <span t-esc="o.company_id.name"/>
@@ -49,7 +59,7 @@
     </t>
 
     <t t-if="o.company_id.country_id">
-        ,
+       
         <span t-esc="o.company_id.country_id.name"/>
     </t>
 
@@ -115,6 +125,8 @@
                     width:100%;
                     height:25px;
                     margin-top:5px;
+                    margin-left:-50px;
+                    margin-right:-50px;
                 ">
 
                     <svg width="100%"
