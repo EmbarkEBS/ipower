@@ -361,7 +361,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Loss Of Pay Days</td>
+                                    <td>Loss of Pay Days</td>
                                     <td>:</td>
                                     <td> <t t-set="lop_days"
            t-value="sum(
@@ -656,9 +656,9 @@
                         padding-bottom:8px;font-size:8px;
                     ">
 
-                        <span t-field="o.company_id.street"/>
+                       
                         <t t-if="o.company_id.street2">
-                            , <span t-field="o.company_id.street2"/>
+                             <span t-field="o.company_id.street2"/>
                         </t>
 
                     </td>
