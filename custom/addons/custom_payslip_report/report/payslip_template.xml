@@ -602,7 +602,7 @@
     <tr>
 
         <!-- LEFT SIDE -->
-        <td style="width:35%; vertical-align:top;">
+        <td style="width:50%; vertical-align:top;">
 
             <div style="font-size:16px;">
                 Notes
@@ -624,7 +624,7 @@
 
         <!-- RIGHT SIDE -->
         <td style="
-            width:65%;
+            width:50%;
             vertical-align:top;
             font-size:12px;
             text-align:left;
@@ -640,7 +640,7 @@
                 <tr>
                     <td style="
                         vertical-align:top;
-                        padding-right:6px;
+                        padding-right:1px;
                         padding-bottom:8px;font-size:12px;
                     ">
 
@@ -658,7 +658,7 @@
 
                        
                         <t t-if="o.company_id.street2">
-                             <span t-field="o.company_id.street2"/>
+                          <span t-field="o.company_id.street2"/>
                         </t>
 
                     </td>
@@ -684,7 +684,7 @@
 
                         <span t-field="o.company_id.email"/>
 
-                        <span style="padding:0 4px;">|</span>
+                        <span style="padding:0 2px;">|</span>
 
                         <!-- WEBSITE -->
                         <span style="
@@ -701,7 +701,7 @@
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
 
-                        <span style="padding:0 4px;">|</span>
+                        <span style="padding:0 2px;">|</span>
 
                         <!-- PHONE -->
                         <span style="
