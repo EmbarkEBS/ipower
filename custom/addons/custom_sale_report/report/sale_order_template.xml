@@ -410,7 +410,7 @@
 
                                                  <td style="padding:4px 0;text-align:left">
     :
-    <span t-field="o.incoterm_id.code"/>
+    <span t-field="o.incoterm.code"/>
 </td>
 
                                             </tr>
