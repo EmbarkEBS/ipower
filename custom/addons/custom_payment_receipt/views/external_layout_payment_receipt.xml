@@ -20,8 +20,8 @@
                         position: fixed;
                         left: 0;
                         right: 0;
-                        bottom: 0;
-                        height: 22mm;
+                        bottom: 20px;
+                        height: auto;
                     }
 .table th,
 .table td {
