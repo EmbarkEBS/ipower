@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
 
-<?xml version="1.0" encoding="utf-8"?>
+    <template id="payment_receipt_custom"
+              inherit_id="account.report_payment_receipt_document">
 
-<odoo>
+        <xpath expr="." position="inside">
+        </xpath>
 
-<template id="payment_receipt_custom"
-          inherit_id="account.report_payment_receipt_document">
-
-</template>
-
-
-</odoo>
-
-
+    </template>
 
 </odoo>
