@@ -4,7 +4,64 @@
     <template id="payment_receipt_custom"
               inherit_id="account.report_payment_receipt_document">
 
-        <xpath expr="." position="inside">
+        <xpath expr="//t[@t-call='web.external_layout']"
+               position="replace">
+
+            <t t-call="custom_payment_receipt.external_layout_payment_receipt">
+
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <t t-set="values" t-value="o._get_payment_receipt_report_values()"/>
+
+                <div class="page">
+
+                    <h3>
+                        <strong>
+                            <span t-field="o.payment_receipt_title"/>
+                            :
+                            <span t-field="o.name"/>
+                        </strong>
+                    </h3>
+
+                    <div class="mb-4 mt-3">
+
+                        <div name="date" class="row">
+                            <div class="col-6" t-if="o.date">
+                                Payment Date:
+                                <span t-field="o.date"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6" t-if="o.partner_type">
+
+                                <t t-if="o.partner_type == 'customer'">
+                                    Customer:
+                                </t>
+
+                                <t t-else="">
+                                    Vendor:
+                                </t>
+
+                                <span t-field="o.partner_id"/>
+                            </div>
+
+                            <div class="col-6"
+                                 t-if="values['display_payment_method'] and o.payment_method_id">
+
+                                Payment Method:
+                                <span t-field="o.payment_method_id.name"/>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <t t-out="0"/>
+
+                </div>
+
+            </t>
+
         </xpath>
 
     </template>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="external_layout_payment_receipt">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <table style="width:100%;">
+
+            <tr>
+
+                <td style="width:60%;">
+
+                    <img t-if="company.logo"
+                         t-att-src="image_data_uri(company.logo)"
+                         style="max-height:80px;"/>
+
+                </td>
+
+                <td style="width:40%; text-align:right;">
+
+                    <h2 style="margin-top:20px;">
+                        PAYMENT RECEIPT
+                    </h2>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- BODY -->
+
+    <div class="article"
+         t-att-data-oe-model="o and o._name"
+         t-att-data-oe-id="o and o.id">
+
+        <t t-out="0"/>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div style="
+            padding:0 40px;
+            font-size:11px;
+            color:#555;
+        ">
+
+            <div style="
+                margin-bottom:5px;
+                color:#888;
+                font-style:italic;
+            ">
+
+                This document is electronically generated and valid
+                without signature or company stamp.
+
+            </div>
+
+            <div style="
+                border-top:1px solid #1f3b73;
+                padding-top:6px;
+                text-align:center;
+            ">
+
+                <span t-esc="company.city or ''"/>
+
+                -
+
+                <span t-esc="company.country_id.name or ''"/>
+
+                <br/>
+
+                CR No:
+
+                <span t-esc="company.company_registry or 'N/A'"/>
+
+                |
+
+                <span t-esc="company.email or ''"/>
+
+                |
+
+                <span t-esc="(company.website or '').replace('http://','').replace('https://','')"/>
+
+            </div>
+
+        </div>
+
+        <div style="
+            width:100%;
+            height:25px;
+            margin-top:5px;
+        ">
+
+            <svg width="100%"
+                 height="25"
+                 viewBox="0 0 1000 25"
+                 preserveAspectRatio="none">
+
+                <polygon points="0,0 260,0 240,25 0,25"
+                         fill="#1f3b73"/>
+
+                <polygon points="260,0 1000,0 1000,25 240,25"
+                         fill="#e58b39"/>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+</template>
+
+</odoo>
