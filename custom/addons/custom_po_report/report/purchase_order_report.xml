@@ -29,15 +29,7 @@
 
     </record>
 
- <!-- Hide standard RFQ report -->
-    <record id="purchase.report_purchasequotation" model="ir.actions.report">
-        <field name="binding_model_id" eval="False"/>
-    </record>
 
-    <!-- Hide standard Purchase Order report -->
-    <record id="purchase.report_purchaseorder" model="ir.actions.report">
-        <field name="binding_model_id" eval="False"/>
-    </record>
     <!-- REPORT -->
 
     <record id="action_report_custom_purchase_order"
