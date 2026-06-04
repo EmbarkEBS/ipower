@@ -14,7 +14,7 @@
    <img t-if="o.company_id.logo"
      t-att-src="image_data_uri(o.company_id.logo)"
      style="max-height:80px; margin-bottom:10px;"/>
-
+</td><td>
 <div style="font-size:13px; line-height:1.6;">
 
     <strong style="font-size:16px;">
@@ -54,13 +54,61 @@
     </div>
 
     <!-- BODY -->
-    <div class="article"
-         t-att-data-oe-model="o and o._name"
-         t-att-data-oe-id="o and o.id">
+ <t t-set="values" t-value="o._get_payment_receipt_report_values()"/>
 
-        <t t-out="0"/>
+<table t-if="values['display_invoices']"
+       class="table table-sm"
+       style="width:100%; margin-top:20px;">
 
-    </div>
+    <thead>
+        <tr>
+            <th>Invoice Date</th>
+            <th>Invoice Number</th>
+            <th>Reference</th>
+            <th class="text-end">Amount</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <t t-foreach="o.reconciled_invoice_ids or o.reconciled_bill_ids"
+           t-as="inv">
+
+            <tr>
+                <td>
+                    <span t-field="inv.invoice_date"/>
+                </td>
+
+                <td>
+                    <span t-field="inv.name"/>
+                </td>
+
+                <td>
+                    <span t-field="inv.ref"/>
+                </td>
+
+                <td class="text-end">
+                    <span t-field="inv.amount_total"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    <strong>Balance Due</strong>
+                </td>
+
+                <td class="text-end">
+                    <strong>
+                        <span t-field="inv.amount_residual"/>
+                    </strong>
+                </td>
+            </tr>
+
+        </t>
+
+    </tbody>
+
+</table>
 
     <!-- FOOTER -->
     <div class="footer">
