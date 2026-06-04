@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     def _onchange_partner_id(self):
         res = super()._onchange_partner_id()
 
-        if self.partner_id.x_studio_incoterm:
-            self.incoterm = self.partner_id.x_studio_incoterm
+        if self.partner_id and self.partner_id.x_studio_incoterm:
+            self.incoterm = self.partner_id.x_studio_incoterm.id
 
         return res
