@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_report_payment_receipt_document"
+              inherit_id="account.report_payment_receipt_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <h1>Custom Payment Receipt Template Placeholder</h1>
+                    <p>Replace with your final branded layout.</p>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
