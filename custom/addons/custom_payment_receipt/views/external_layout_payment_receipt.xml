@@ -2,7 +2,23 @@
 <odoo>
 
 <template id="external_layout_payment_receipt">
+<style>
+.table {
+    width:100%;
+    border-collapse:collapse;
+}
 
+.table th,
+.table td {
+    border:1px solid #cccccc;
+    padding:6px;
+}
+
+.table-borderless th,
+.table-borderless td {
+    border:1px solid #cccccc !important;
+}
+</style>
     <!-- HEADER -->
     <div class="header">
 
@@ -54,14 +70,43 @@
     </div>
 
     <!-- BODY -->
-<!-- BODY -->
-<div class="article o_report_layout_standard"
+   <div class="article o_report_layout_standard"
      t-att-data-oe-model="o and o._name"
-     t-att-data-oe-id="o and o.id"
-     t-att-data-oe-lang="o and o.env.context.get('lang')">
+     t-att-data-oe-id="o and o.id">
 
     <div class="page">
+
+        <div style="margin-bottom:20px;">
+            <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <td style="border:1px solid #ddd; padding:8px;">
+                        <strong>Customer:</strong>
+                        <span t-field="o.partner_id"/>
+                    </td>
+
+                    <td style="border:1px solid #ddd; padding:8px;">
+                        <strong>Receipt No:</strong>
+                        <span t-field="o.name"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="border:1px solid #ddd; padding:8px;">
+                        <strong>Payment Date:</strong>
+                        <span t-field="o.date"/>
+                    </td>
+
+                    <td style="border:1px solid #ddd; padding:8px;">
+                        <strong>Amount:</strong>
+                        <span t-field="o.amount"
+                              t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <t t-out="0"/>
+
     </div>
 
 </div>
