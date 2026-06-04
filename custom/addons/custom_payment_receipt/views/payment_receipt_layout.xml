@@ -6,9 +6,7 @@
     <xpath expr="//t[@t-call='web.external_layout']"
            position="attributes">
 
-        <attribute name="t-call">
-            custom_payment_receipt.external_layout_payment_receipt
-        </attribute>
+        <attribute name="t-call">custom_payment_receipt.external_layout_payment_receipt</attribute>
 
     </xpath>
 
