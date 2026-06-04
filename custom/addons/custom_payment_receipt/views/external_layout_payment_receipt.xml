@@ -9,21 +9,44 @@
         <table style="width:100%; border-collapse:collapse;">
             <tr>
 
-                <td style="width:60%;">
+               <td style="width:60%; vertical-align:top;">
 
-                    <img t-if="o.company_id.logo"
-                         t-att-src="image_data_uri(o.company_id.logo)"
-                         style="max-height:90px;"/>
+    <img t-if="company.logo"
+         t-att-src="image_data_uri(company.logo)"
+         style="max-height:80px; margin-bottom:10px;"/>
 
-                </td>
+    <div style="font-size:13px; line-height:1.6;">
 
-                <td style="width:40%; text-align:right;">
+        <strong style="font-size:16px;">
+            <span t-esc="company.name"/>
+        </strong>
 
-                    <h2 style="margin-top:20px;">
-                        PAYMENT RECEIPT
-                    </h2>
+        <br/>
 
-                </td>
+        <t t-if="company.street">
+            <span t-esc="company.street"/>
+            <br/>
+        </t>
+
+        <t t-if="company.city">
+            <span t-esc="company.city"/>
+        </t>
+
+        <t t-if="company.country_id">
+            ,
+            <span t-esc="company.country_id.name"/>
+        </t>
+
+        <br/>
+
+        <strong>
+            TRN:
+            <span t-esc="company.vat or ''"/>
+        </strong>
+
+    </div>
+
+</td>
 
             </tr>
         </table>
