@@ -16,8 +16,12 @@
     width:100%;
     border-collapse:collapse;
 }
-.fixed-footer {
-                     margin-bottom:-20px;
+.footer{
+                        position: fixed;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 22mm;
                     }
 .table th,
 .table td {
@@ -96,7 +100,7 @@
 
 </div>
     <!-- FOOTER -->
-    <div class="fixed-footer">
+    <div class="footer">
 
         <div style="padding:0 40px;font-size:11px;">
 
