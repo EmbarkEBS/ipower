@@ -35,7 +35,7 @@
     <record id="action_report_custom_sale_order"
             model="ir.actions.report">
 
-        <field name="name">Custom Sales Order</field>
+        <field name="name">Quotation / Sales Order</field>
 
         <field name="model">sale.order</field>
 
