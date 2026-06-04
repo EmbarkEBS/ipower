@@ -17,10 +17,10 @@
     border-collapse:collapse;
 }
 .fixed-footer {
-                        position: fixed;
+                        position: relative;
                         left: 0;
                         right: 0;
-                        bottom: 20px;
+                        bottom: 0;
                         height: auto;
                     }
 .table th,
