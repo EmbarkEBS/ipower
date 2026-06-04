@@ -103,7 +103,7 @@
    <!-- FOOTER -->
 <div class="footer"
      style="position: fixed;
-            bottom: 0;
+            bottom: -20px;
             left: 0;
             right: 0;
             width: 100%;
@@ -149,7 +149,7 @@
             <polygon points="260,0 1000,0 1000,25 240,25" fill="#e58b39"/>
         </svg>
     </div>
-</div>
+
 </div>
 </template>
 
