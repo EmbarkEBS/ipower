@@ -6,11 +6,11 @@
 
         <xpath expr="//header" position="inside">
 
-            <button name="%(action_report_custom_sale_order)d"
-                    string="Print"
-                    type="action"
-                    class="btn-primary"
-                     icon="fa-print"/>
+       <button name="action_report_custom_sale_order"
+        string="Print"
+        type="report"
+        class="btn-primary"
+        icon="fa-print"/>
 
         </xpath>
 
