@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="payment_receipt_custom"
+          inherit_id="account.report_payment_receipt_document">
+
+    <xpath expr="//t[@t-call='web.external_layout']"
+           position="attributes">
+
+        <attribute name="t-call">custom_payment_receipt.external_layout_payment_receipt</attribute>
+
+    </xpath>
+
+</template>
+
+
+
+</odoo>
