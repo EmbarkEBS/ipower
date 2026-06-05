@@ -130,15 +130,20 @@
                                         text-align:center;
                                     ">
 
-                                        <h1 style="
-                                            margin:0;
-                                            font-size:28px;
-                                            font-weight:bold;
-                                            color:#000;
-                                            margin-top:20px;
-                                        ">
-                                            SALES ORDER
-                                        </h1>
+                                      <h1 style="
+    margin:0;
+    font-size:28px;
+    font-weight:bold;
+    color:#000;
+    margin-top:20px;
+">
+    <t t-if="o.state in ['draft', 'sent']">
+        QUOTATION
+    </t>
+    <t t-else="">
+        SALES ORDER
+    </t>
+</h1>
 
                                 <div style="
     width:350px;
