@@ -11,7 +11,7 @@
                 <button
                     name="%(action_custom_payslip_report)d"
                     type="action"
-                    string="Print Custom Payslip"
+                    string="Print"
                     class="btn-primary"/>
             </xpath>
         </field>

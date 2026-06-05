@@ -103,7 +103,7 @@
 
                                             <br/>
 
-                                            <span t-esc="o.company_id.street or ''"/>,
+                                            <span t-esc="o.company_id.street or ''"/>, Dubai,
 
                                           
                                            
@@ -127,18 +127,23 @@
                                     <td style="
                                         width:40%;
                                         vertical-align:top;
-                                        text-align:right;
+                                        text-align:center;
                                     ">
 
-                                        <h1 style="
-                                            margin:0;
-                                            font-size:28px;
-                                            font-weight:bold;
-                                            color:#000;
-                                            margin-top:20px;
-                                        ">
-                                            PURCHASE ORDER
-                                        </h1>
+                                  <h1 style="
+    margin:0;
+    font-size:28px;
+    font-weight:bold;
+    color:#000;
+    margin-top:20px;
+">
+    <t t-if="o.state in ['draft', 'sent']">
+        RFQ
+    </t>
+    <t t-else="">
+        PURCHASE ORDER
+    </t>
+</h1>
 
                                 <div style="
     width:300px;
@@ -408,12 +413,10 @@
                                                Incoterms
                                                 </td>
 
-                                                <td style="padding:4px 0;text-align:left">
-
-                                                    :
-                                                    <span t-field="o.partner_id.x_studio_incoterm.code"/>
-
-                                                </td>
+                                              <td style="padding:4px 0;text-align:left">
+    :
+    <span t-field="o.incoterm_id.code"/>
+</td>
 
                                             </tr>
 

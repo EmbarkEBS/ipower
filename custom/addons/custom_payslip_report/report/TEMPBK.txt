@@ -101,15 +101,16 @@
     padding:10px;
     box-sizing:border-box;
     text-align:center;
+    padding-top:20px;
 }
                     .summary-title{
                         color:#18327e;
                         font-weight:bold;
-                        font-size:12px;
+                        font-size:14px;
                     }
 
                     .summary-value{
-                        font-size:12px;
+                        font-size:14px;
                         font-weight:bold;
                         margin-top:5px;
                     }
@@ -122,7 +123,7 @@
                     }
 
                     .footer-note{
-                        font-size:8px;
+                        font-size:11px;
                     }
 
                 </style>
@@ -185,19 +186,19 @@
 
                             <div style="
                                 color:#1f3a93;
-                                font-size:14px;
+                                font-size:16px;
                                 font-weight:bold;
                             ">
                                 <span t-field="o.company_id.name"/>
                             </div>
 
                             <div style="
-                                font-size:14px;">
-                                <span t-field="o.company_id.street"/> , Dubai,
+                                font-size:16px;">
+                                <span t-field="o.company_id.street"/>
                             </div>
 
                             <div style="
-                                font-size:14px;">
+                                font-size:16px;">
                                 <span t-esc="o.company_id.country_id.name or ''"/>
                             </div>
 
@@ -212,13 +213,13 @@
 
                             <div style="
                                 color:#0b2d8d;
-                                font-size:24px;
+                                font-size:28px;
                                 font-weight:bold;
                             ">
                                 PAYSLIP
                             </div>
 
-                            <div style="font-size:16px;">
+                            <div style="font-size:18px;">
                                 <span t-esc="o.date_to.strftime('%B %Y')"/>
                             </div>
 
@@ -361,7 +362,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Loss of Pay Days</td>
+                                    <td>Loss Of Pay Days</td>
                                     <td>:</td>
                                     <td> <t t-set="lop_days"
            t-value="sum(
@@ -567,14 +568,14 @@
 
         <td style="width:18%;">
             <div class="net-box">
-                <div style="font-size:12px;font-weight:bold;">NET PAY (AED)</div>
-                <div style="font-size:12px;font-weight:bold;">
+                <div style="font-size:14px;font-weight:bold;">NET PAY (AED)</div>
+                <div style="font-size:14px;font-weight:bold;">
                     <span t-esc="'{:,.2f}'.format(o.net_wage)"/>
                 </div>
             </div>
         </td>
 
-        <td style="width:22%;">
+        <td style="width:20%;">
             <div class="summary-box">
                 <div class="summary-title">AMOUNT IN WORDS</div>
                 <div style="margin-top:5px;font-size:10px;">
@@ -583,7 +584,7 @@
             </div>
         </td>
 
-        <td style="width:16%;">
+        <td style="width:18%;">
             <div class="summary-box">
                 <div class="summary-title">PAYMENT MODE</div>
                 <div style="margin-top:5px;font-size:10px;">Bank Transfer</div>
@@ -604,12 +605,12 @@
         <!-- LEFT SIDE -->
         <td style="width:50%; vertical-align:top;">
 
-            <div style="font-size:14px;">
+            <div style="font-size:18px;">
                 Notes
             </div>
 
             <div style="
-                width:45px;
+                width:60px;
                 height:2px;
                 background:#f58220;
                 margin-top:5px;
@@ -625,22 +626,23 @@
         <!-- RIGHT SIDE -->
         <td style="
             width:50%;
-            vertical-align:middle;
+            vertical-align:top;
             font-size:12px;
-            text-align:left;
+            text-align:right;
         ">
 
             <table style="
                 width:auto;
                 margin-left:auto;font-size:12px;
-                border-collapse:collapse;line-height:22px;
+                border-collapse:collapse;
             ">
 
                 <!-- ADDRESS -->
                 <tr>
                     <td style="
-                        vertical-align:middle;
-                        font-size:10px;
+                        vertical-align:top;
+                        padding-right:6px;
+                        padding-bottom:8px;font-size:12px;
                     ">
 
                         <svg width="20" height="20" viewBox="0 0 24 24">
@@ -648,12 +650,16 @@
                                   d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
                         </svg>
 
-                   
-                       
-                        <t t-if="o.company_id.street2">
-                          <span style="
+                    </td>
+
+                    <td style="
                         text-align:left;
-                        margin-top:-12px;font-size:8px;" t-field="o.company_id.street2"/>
+                        padding-bottom:8px;font-size:10px;
+                    ">
+
+                        <span t-field="o.company_id.street"/>
+                        <t t-if="o.company_id.street2">
+                            , <span t-field="o.company_id.street2"/>
                         </t>
 
                     </td>
@@ -662,7 +668,7 @@
                 <!-- CONTACTS -->
                 <tr>
 
-                    <td colspan="2" style="text-align:left;font-size:8px;">
+                    <td colspan="2" style="text-align:left;font-size:10px;">
 
                         <!-- EMAIL -->
                         <span style="
@@ -671,7 +677,7 @@
                             height:16px;
                             line-height:16px;
                             text-align:center;
-                            border-radius:48%;
+                            border-radius:50%;
                             background:#0b2d8d;
                             color:white;
                             font-size:10px;padding-top:2px;
@@ -679,7 +685,7 @@
 
                         <span t-field="o.company_id.email"/>
 
-                        <span style="padding:0 2px;">|</span>
+                        <span style="padding:0 6px;">|</span>
 
                         <!-- WEBSITE -->
                         <span style="
@@ -696,7 +702,7 @@
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
 
-                       <!-- <span style="padding:0 2px;">|</span>--><br/>
+                        <span style="padding:0 6px;">|</span>
 
                         <!-- PHONE -->
                         <span style="

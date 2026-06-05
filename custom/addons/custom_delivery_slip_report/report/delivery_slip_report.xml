@@ -21,7 +21,7 @@
     <record id="action_report_custom_delivery_slip"
             model="ir.actions.report">
 
-        <field name="name">Custom Delivery Slip</field>
+        <field name="name">Delivery Slip</field>
 
         <field name="model">stock.picking</field>
 

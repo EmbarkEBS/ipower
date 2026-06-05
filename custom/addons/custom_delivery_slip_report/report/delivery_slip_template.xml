@@ -102,7 +102,7 @@
 
                                             <br/>
 
-                                            <span t-esc="o.company_id.street or ''"/>,
+                                            <span t-esc="o.company_id.street or ''"/>, Dubai,
 
                                           
                                            
@@ -364,7 +364,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                 Scheduled Date
+                                                 Delivery Date
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -397,7 +397,7 @@
                                             </tr>
 <t t-set="sale_order"
    t-value="o.move_ids and o.move_ids[0].sale_line_id.order_id or False"/>
-<t t-if="sale_order">
+ <t t-if="sale_order.x_studio_customer_po_ref"> 
     <tr>
         <td style="font-weight:bold;color:#1a3a5a;">
             Customer PO Ref
@@ -452,7 +452,7 @@
                                    <th style="
                                         padding:10px;
                                         width:15%;
-                                        text-align:right;
+                                        text-align:center;
                                         border-top-right-radius:10px;
                                         border-bottom-right-radius:10px;
                                     ">
@@ -515,7 +515,7 @@
                                           text-align:center;
                                           vertical-align:top;
                                         ">
-            <span t-esc="line.quantity or 0"/>
+             <span t-esc="int(line.quantity)"/>
         </td>
 
         <td></td>
