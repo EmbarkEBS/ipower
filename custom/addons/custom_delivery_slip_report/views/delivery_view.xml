@@ -1,0 +1,20 @@
+<odoo>
+   <record id="stock_picking_form_custom_print" model="ir.ui.view">
+    <field name="name">stock.picking.form.custom.print</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+
+        <xpath expr="//header" position="inside">
+
+            <button name="action_print_custom_delivery_slip"
+                    type="object"
+                    string="Print Delivery Slip"
+                    class="btn-primary"
+                    icon="fa-print"/>
+
+        </xpath>
+
+    </field>
+</record>
+</odoo>
