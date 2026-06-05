@@ -9,6 +9,7 @@
     "data": [
         "report/purchase_order_report.xml",
         "report/purchase_order_template.xml",
+        'views/purchase_view.xml',
     ],
     "installable": True,
     "application": False,
