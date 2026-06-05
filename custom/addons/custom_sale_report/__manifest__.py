@@ -9,6 +9,7 @@
     "data": [
         "report/sale_order_report.xml",
         "report/sale_order_template.xml",
+        'views/sale_view.xml',
     ],
     "installable": True,
     "application": False,
