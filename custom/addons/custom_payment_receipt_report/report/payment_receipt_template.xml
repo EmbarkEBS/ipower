@@ -74,37 +74,31 @@
 
                     <!-- RECEIPT DETAILS -->
 
-                    <table style="width:100%;margin-bottom:20px;">
+                 <table style="width:100%;margin-bottom:20px;">
+    <tr>
 
-                        <tr>
+        <td width="50%">
+            <strong>Receipt No:</strong>
+            <span t-field="o.name"/>
 
-                            <td width="50%">
+            <br/><br/>
 
-                                <strong>Receipt No:</strong>
-                                <span t-esc="o.name"/>
+            <strong>Date:</strong>
+            <span t-field="o.date"/>
+        </td>
 
-                                <br/><br/>
+        <td width="50%">
+            <strong>Partner:</strong>
+            <span t-field="o.partner_id"/>
 
-                                <strong>Date:</strong>
-                                <span t-esc="o.date"/>
+            <br/><br/>
 
-                            </td>
+            <strong>Reference:</strong>
+            <span t-esc="o.memo or ''"/>
+        </td>
 
-                            <td width="50%">
-
-                                <strong>Partner:</strong>
-                                <span t-esc="o.partner_id.name"/>
-
-                                <br/><br/>
-
-                                <strong>Reference:</strong>
-                                <span t-esc="o.ref or o.memo or ''"/>
-
-                            </td>
-
-                        </tr>
-
-                    </table>
+    </tr>
+</table>
 
                     <!-- PAYMENT TABLE -->
 
