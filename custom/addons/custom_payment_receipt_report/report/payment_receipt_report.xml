@@ -31,7 +31,7 @@
     <record id="action_payment_receipt"
             model="ir.actions.report">
 
-        <field name="name">Payment Receipt/field>
+      <field name="name">Payment Receipt</field>
 
         <field name="model">account.payment</field>
 
@@ -45,11 +45,12 @@
                ref="account.model_account_payment"/>
 
         <field name="binding_type">report</field>
-<field name="paperformat_id"
-       ref="custom_payment_receipt_report.paperformat_payment_receipt"/>
+
         <field name="print_report_name">
             'Receipt - %s' % (object.name)
         </field>
+        <field name="paperformat_id"
+       ref="custom_payment_receipt_report.paperformat_payment_receipt"/>
 
     </record>
 
