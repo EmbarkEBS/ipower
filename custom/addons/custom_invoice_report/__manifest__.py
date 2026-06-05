@@ -9,6 +9,7 @@
     "data": [
         "report/invoice_report.xml",
         "report/invoice_template.xml",
+        'views/invoice_view.xml',
     ],
     "installable": True,
     "application": False,
