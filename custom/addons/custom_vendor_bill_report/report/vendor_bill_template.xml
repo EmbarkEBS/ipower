@@ -425,20 +425,25 @@
 
                                        <tr>
 
-                                            <td style="
-                                                padding:5px 0;
-                                                font-weight:bold;
-                                                color:#1a3a5a;
-                                            ">
-                                                Sales Order Ref
-                                            </td>
-
-                                            <td>
-                                                :
-                                                <span t-esc="o.ref or ''"/>
-                                            </td>
+                                         <td style="padding:5px 0;font-weight:bold;color:#1a3a5a;">
+    Purchase Order Ref
+</td>
+<td>
+    :
+    <span t-esc="o.invoice_origin or ''"/>
+</td>
 
                                         </tr>
+                                        <tr>
+    <td style="padding:5px 0;font-weight:bold;color:#1a3a5a;">
+        Incoterm
+    </td>
+    <td>
+        :
+        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/>
+        <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>
+    </td>
+</tr>
 <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
 
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
