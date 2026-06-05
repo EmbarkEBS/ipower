@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<template id="external_layout_payment_receipt">
-<style>
+    <template id="payment_receipt_template">
+
+        <style>
 *
 {
     font-family: Helvetica, Arial, sans-serif !important;
@@ -164,7 +165,7 @@ padding-bottom:0;
                 </div>
     </div>
   </div>
-</template>
 
+    </template>
 
 </odoo>
