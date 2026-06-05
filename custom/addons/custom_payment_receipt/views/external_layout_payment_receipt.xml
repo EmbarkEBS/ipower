@@ -18,6 +18,7 @@
 }
 .footer{
       margin-bottom:-20px;
+      position:absolute;
                     }
 .table th,
 .table td {

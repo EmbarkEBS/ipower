@@ -18,7 +18,7 @@
 
     <!-- REPORT ACTION -->
     <record id="action_report_proforma_custom" model="ir.actions.report">
-    <field name="name">Custom Proforma Invoice</field>
+    <field name="name">Proforma Invoice</field>
     <field name="model">sale.order</field>
     <field name="report_type">qweb-pdf</field>
     <field name="report_name">custom_proforma_report.proforma_template</field>
