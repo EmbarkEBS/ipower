@@ -7,171 +7,288 @@
 
             <t t-foreach="docs" t-as="o">
 
-        <style>
-*
-{
-    font-family: Helvetica, Arial, sans-serif !important;
-}
+                <div class="page" style="padding:10px 40px;font-family:Helvetica,Arial,sans-serif;">
 
-    .page {
-        margin: 0 !important;
-        padding:10px 40px 0px 40px;
-    }
-.table {
-    width:100%;
-    border-collapse:collapse;
-}
-.footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-                    }
-.table th,
-.table td {
-    border:1px solid #cccccc;
-    padding:6px;
-}
+                    <style>
+                        .table{
+                            width:100%;
+                            border-collapse:collapse;
+                        }
+                        .table th,
+                        .table td{
+                            border:1px solid #cccccc;
+                            padding:6px;
+                        }
+                    </style>
 
-.table-borderless th,
-.table-borderless td {
-    border:1px solid #cccccc !important;
-}
-</style>  <div class="page"
-                     style="position:relative;
-                            color:#333; margin:0;
-                            line-height:1.4;
-                            font-family: Helvetica, Arial, sans-serif !important;">
-    <!-- HEADER -->
-    <div class="header">
+                    <!-- HEADER -->
 
-        <table style="width:100%; border-collapse:collapse;">
-            <tr>
+                    <table style="width:100%;margin-bottom:20px;">
+                        <tr>
 
-               <td style="width:60%; vertical-align:top;">
+                            <td style="width:50%;vertical-align:top;">
 
-   <img t-if="o.company_id.logo"
-     t-att-src="image_data_uri(o.company_id.logo)"
-     style="max-height:80px; margin-bottom:10px;"/>
-</td><td>
-<div style="font-size:13px; line-height:1.6;text-align:right;">
+                                <img t-if="o.company_id.logo"
+                                     t-att-src="image_data_uri(o.company_id.logo)"
+                                     style="max-height:80px;"/>
 
-    <strong style="font-size:16px;">
-        <span t-esc="o.company_id.name"/>
-    </strong>
+                            </td>
 
-    <br/>
+                            <td style="text-align:right;vertical-align:top;">
 
-    <t t-if="o.company_id.street">
-        <span t-esc="o.company_id.street"/>
-        <br/>
-    </t>
+                                <strong style="font-size:18px;">
+                                    <span t-esc="o.company_id.name"/>
+                                </strong>
 
-    <t t-if="o.company_id.city">
-        <span t-esc="o.company_id.city"/>
-    </t>
+                                <br/>
 
-    <t t-if="o.company_id.country_id">
-       
-        <span t-esc="o.company_id.country_id.name"/>
-    </t>
+                                <span t-esc="o.company_id.street or ''"/>
 
-    <br/>
+                                <br/>
 
-    <strong>
-        TRN:
-        <span t-esc="o.company_id.vat or ''"/>
-    </strong>
+                                <span t-esc="o.company_id.city or ''"/>
+                                ,
+                                <span t-esc="o.company_id.country_id.name or ''"/>
 
-</div>
+                                <br/>
 
-</td>
+                                <strong>
+                                    TRN:
+                                    <span t-esc="o.company_id.vat or ''"/>
+                                </strong>
 
-            </tr>
-        </table>
+                            </td>
 
-    </div>
+                        </tr>
+                    </table>
 
-    <!-- BODY -->
- <!-- BODY -->
-<div class="article o_report_layout_boxed o_table_boxed"
-     t-att-data-oe-model="o and o._name"
-     t-att-data-oe-id="o and o.id">
+                    <!-- TITLE -->
 
-    <div class="container">
-        <t t-out="0"/>
-    </div>
+                    <div style="text-align:center;margin-bottom:20px;">
 
-</div>
-    <!-- FOOTER -->
-    <div class="footer">
+                        <h2 style="color:#1f3b73;">
+                            PAYMENT RECEIPT
+                        </h2>
 
-        <div style="padding:0 40px;font-size:11px;">
+                    </div>
 
-            <div style="margin-bottom:5px;color:#888;font-style:italic;">
-                This document is electronically generated and valid without signature or company stamp.
-            </div>
+                    <!-- RECEIPT DETAILS -->
 
-            <div style="border-top:1px solid #1f3b73;padding-top:6px;text-align:center;">
+                    <table style="width:100%;margin-bottom:20px;">
 
-              <t t-if="o.company_id.street2">
-                <span t-esc="o.company_id.street2"/>
-            </t>
+                        <tr>
 
-            
-            <span t-esc="o.company_id.city or ''"/>
-            -
-            <span t-esc="o.company_id.country_id.name or ''"/>
+                            <td width="50%">
 
+                                <strong>Receipt No:</strong>
+                                <span t-esc="o.name"/>
 
-                <br/>
+                                <br/><br/>
 
-                CR No:
-                <span t-esc="o.company_id.company_registry or 'N/A'"/>
+                                <strong>Date:</strong>
+                                <span t-esc="o.date"/>
 
-                |
+                            </td>
 
-                <span t-esc="o.company_id.email or ''"/>
+                            <td width="50%">
 
-                |
+                                <strong>Partner:</strong>
+                                <span t-esc="o.partner_id.name"/>
 
-                <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
+                                <br/><br/>
 
-            </div>
+                                <strong>Reference:</strong>
+                                <span t-esc="o.ref or o.memo or ''"/>
 
-        </div>
-  <div style="
-                   width:auto;
-    height:25px;
-    overflow:hidden;
-    margin-top:5px;
-    margin-left:-40px;
-    margin-right:-50px;
-    margin-bottom:0;
-padding-bottom:0;
-                ">
+                            </td>
 
-                    <svg width="100%"
-                         height="25"
-                         viewBox="0 0 1000 25"
-                         preserveAspectRatio="none">
+                        </tr>
 
-                        <polygon points="0,0 260,0 240,25 0,25"
-                                 fill="#1f3b73"/>
+                    </table>
 
-                        <polygon points="260,0 1000,0 1000,25 240,25"
-                                 fill="#e58b39"/>
+                    <!-- PAYMENT TABLE -->
 
-                    </svg>
+                    <table class="table">
+
+                        <thead>
+
+                            <tr style="background:#1f3b73;color:white;">
+
+                                <th>Description</th>
+                                <th style="text-align:right;">Amount</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>Payment Received</td>
+
+                                <td style="text-align:right;">
+
+                                    <span t-field="o.amount"
+                                          t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <!-- INVOICES -->
+
+                    <t t-if="o.reconciled_invoice_ids">
+
+                        <br/>
+
+                        <h4 style="color:#1f3b73;">
+                            Settled Invoices
+                        </h4>
+
+                        <table class="table">
+
+                            <thead>
+
+                                <tr style="background:#1f3b73;color:white;">
+
+                                    <th>Invoice</th>
+                                    <th>Date</th>
+                                    <th>Reference</th>
+                                    <th style="text-align:right;">Amount</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <t t-foreach="o.reconciled_invoice_ids"
+                                   t-as="inv">
+
+                                    <tr>
+
+                                        <td>
+                                            <span t-esc="inv.name"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="inv.invoice_date"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="inv.ref or ''"/>
+                                        </td>
+
+                                        <td style="text-align:right;">
+
+                                            <span t-field="inv.amount_total"
+                                                  t-options="{'widget':'monetary','display_currency':inv.currency_id}"/>
+
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                            </tbody>
+
+                        </table>
+
+                    </t>
+
+                    <!-- TOTAL -->
+
+                    <table style="width:35%;margin-top:20px;margin-left:auto;">
+
+                        <tr>
+
+                            <td style="
+                                background:#1f3b73;
+                                color:white;
+                                padding:8px;
+                                font-weight:bold;
+                            ">
+                                Total Received
+                            </td>
+
+                            <td style="
+                                text-align:right;
+                                border:1px solid #cccccc;
+                                padding:8px;
+                            ">
+
+                                <span t-field="o.amount"
+                                      t-options="{'widget':'monetary','display_currency':o.currency_id}"/>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <!-- FOOTER -->
+
+                    <div style="margin-top:60px;font-size:11px;">
+
+                        <div style="color:#888;font-style:italic;">
+                            This document is electronically generated and valid without signature or company stamp.
+                        </div>
+
+                        <div style="
+                            border-top:1px solid #1f3b73;
+                            padding-top:6px;
+                            text-align:center;
+                            margin-top:10px;
+                        ">
+
+                            <span t-esc="o.company_id.city or ''"/>
+                            -
+                            <span t-esc="o.company_id.country_id.name or ''"/>
+
+                            <br/>
+
+                            CR No:
+                            <span t-esc="o.company_id.company_registry or 'N/A'"/>
+
+                            |
+
+                            <span t-esc="o.company_id.email or ''"/>
+
+                            |
+
+                            <span t-esc="o.company_id.website or ''"/>
+
+                        </div>
+
+                        <div style="margin-top:5px;">
+
+                            <svg width="100%"
+                                 height="25"
+                                 viewBox="0 0 1000 25"
+                                 preserveAspectRatio="none">
+
+                                <polygon points="0,0 260,0 240,25 0,25"
+                                         fill="#1f3b73"/>
+
+                                <polygon points="260,0 1000,0 1000,25 240,25"
+                                         fill="#e58b39"/>
+
+                            </svg>
+
+                        </div>
+
+                    </div>
 
                 </div>
-    </div>
-  </div>
-        </t>
 
-    </t>
+            </t>
+
+        </t>
 
     </template>
 
