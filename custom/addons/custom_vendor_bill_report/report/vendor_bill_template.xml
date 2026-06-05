@@ -463,26 +463,7 @@
 
                                         </tr></t>
 
-                                        <tr>
-    <td style="
-        padding:4px 0;
-        font-weight:bold;
-        color:#1a3a5a;
-    ">
-        Delivery Note No
-    </td>
-
-    <td style="padding:4px 0;">
-        :
-        <t t-set="pickings"
-           t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
-
-        <t t-set="pickings"
-   t-value="o.invoice_line_ids.sale_line_ids.order_id.picking_ids.filtered(lambda p: p.state == 'done')"/>
-
-<span t-esc="', '.join(pickings.mapped('name'))"/>
-    </td>
-</tr>
+                                      
                                     </table>
 
                                 </td>
