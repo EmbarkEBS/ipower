@@ -652,8 +652,8 @@
                        
                         <t t-if="o.company_id.street2">
                           <span style="
-                        text-align:left;
-                        margin-top:-12px;font-size:8px;" t-field="o.company_id.street2"/>
+                        text-align:left;vertical-align:middle;
+                        font-size:8px;" t-field="o.company_id.street2"/>
                         </t>
 
                     </td>
