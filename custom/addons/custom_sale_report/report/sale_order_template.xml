@@ -338,7 +338,7 @@
             <span t-esc="o.partner_id.x_studio_salutation"/>
         </t>
 
-        <span t-esc="o.x_studio_attention.name"/>
+           <span t-esc="o.x_studio_attention.name or ''"/>
 
     </p>
 </t>
