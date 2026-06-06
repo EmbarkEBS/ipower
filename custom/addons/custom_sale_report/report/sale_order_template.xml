@@ -329,7 +329,7 @@
 </t>
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
-<t t-if="o.x_studio_attention">t 
+<t t-if="o.x_studio_attention">
     <p style="margin-top:5px">
 
         <strong>Attn</strong>
