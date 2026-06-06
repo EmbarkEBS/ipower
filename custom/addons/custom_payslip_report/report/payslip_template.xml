@@ -671,7 +671,7 @@
                             height:16px;
                             line-height:16px;
                             text-align:center;
-                            border-radius:48%;
+                            border-radius:50%;
                             background:#0b2d8d;
                             color:white;
                             font-size:10px;padding-top:2px;
