@@ -10,16 +10,19 @@
 
     .page {
         margin: 0 !important;
-        padding: 0px 40px 0px 40px !important;
+        padding:10px 40px 0px 40px;
     }
 .table {
     width:100%;
     border-collapse:collapse;
 }
 .footer{
-      margin-bottom:-20px;
-      position:absolute;
-      bottom:0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
                     }
 .table th,
 .table td {
@@ -32,7 +35,7 @@
     border:1px solid #cccccc !important;
 }
 </style>  <div class="page"
-                     style="padding:10px 40px 40px 40px;position:relative;
+                     style="position:relative;
                             color:#333; margin:0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
@@ -57,7 +60,7 @@
     <br/>
 
     <t t-if="o.company_id.street">
-        <span t-esc="o.company_id.street"/>
+        <span t-esc="o.company_id.street"/>, Dubai,
         <br/>
     </t>
 
@@ -141,6 +144,8 @@
     margin-top:5px;
     margin-left:-40px;
     margin-right:-50px;
+    margin-bottom:-20px;
+padding-bottom:0;
                 ">
 
                     <svg width="100%"
