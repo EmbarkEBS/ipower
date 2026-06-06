@@ -334,8 +334,8 @@
 
         <strong>Attn</strong>
 
-        <t t-if="o.partner_id.x_studio_salutation">
-            <span t-esc="o.partner_id.x_studio_salutation"/>
+        <t t-if="o.x_studio_attention.x_studio_salutation">
+            <span t-esc="o.x_studio_attention.x_studio_salutation"/>
         </t>
 
            <span t-esc="o.x_studio_attention.name or ''"/>
