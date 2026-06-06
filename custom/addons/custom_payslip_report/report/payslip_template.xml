@@ -629,7 +629,7 @@
 
             <table style="
                  width:auto;
-    margin-left:auto;
+   
     font-size:12px;
     border-collapse:collapse;
     line-height:22px;
@@ -638,44 +638,82 @@
 
                 <!-- ADDRESS -->
                 <tr>
-                   <td style="width:50%; vertical-align:middle; font-size:10px;">
+                    <td style="
+                        vertical-align:middle;
+                        font-size:10px;
+                    ">
 
-    <div style="display:flex; flex-direction:column; justify-content:center; gap:6px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#f58220"
+                                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+                        </svg>
 
-        <!-- ADDRESS -->
-        <div style="display:flex; align-items:center; gap:6px;">
+                   
+                       
+                        <t t-if="o.company_id.street2">
+                          <span style="
+                        text-align:left;vertical-align:top;
+                        font-size:8px;" t-field="o.company_id.street2"/>
+                        </t>
 
-            <svg width="16" height="16" viewBox="0 0 24 24">
-                <path fill="#f58220"
-                      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
-            </svg>
+                    </td>
+                </tr>
 
-            <span t-field="o.company_id.street2" style="font-size:9px;"/>
-        </div>
+                <!-- CONTACTS -->
+                <tr>
 
-        <!-- EMAIL + WEBSITE -->
-        <div style="display:flex; align-items:center; gap:6px; font-size:9px;">
+                    <td colspan="2" style="text-align:left;font-size:8px;">
 
-            <span>✉</span>
-            <span t-field="o.company_id.email"/>
+                        <!-- EMAIL -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:48%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;padding-top:2px;
+                        ">✉</span>
 
-            <span>|</span>
+                        <span t-field="o.company_id.email"/>
 
-            <span>🌐</span>
-            <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
-        </div>
+                        <span style="padding:0 2px;">|</span>
 
-        <!-- PHONE -->
-        <div style="display:flex; align-items:center; gap:6px; font-size:9px;">
+                        <!-- WEBSITE -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;padding-top:2px;
+                        ">🌐</span>
 
-            <span>☎</span>
-            <span t-field="o.company_id.phone"/>
+                        <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
 
-        </div>
+                       <!-- <span style="padding:0 2px;">|</span>--><br/>
 
-    </div>
+                        <!-- PHONE -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;padding-top:2px;
+                        ">☎</span>
 
-</td>
+                        <span t-field="o.company_id.phone"/>
+
+                    </td>
 
                 </tr>
 
