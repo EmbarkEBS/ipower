@@ -17,7 +17,7 @@
     border-collapse:collapse;
 }
 .footer{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -60,7 +60,7 @@
     <br/>
 
     <t t-if="o.company_id.street">
-        <span t-esc="o.company_id.street"/>
+        <span t-esc="o.company_id.street"/>, Dubai,
         <br/>
     </t>
 
