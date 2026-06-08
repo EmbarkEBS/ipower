@@ -26,7 +26,7 @@ class SaleOrderLine(models.Model):
             self._update_expected_delivery()
         return res
                 # Warranty
-    line.x_studio_warranty = (
+        line.x_studio_warranty = (
                 line.product_id.product_tmpl_id.x_studio_warranty or False
             )
 
