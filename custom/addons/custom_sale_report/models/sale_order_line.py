@@ -25,18 +25,4 @@ class SaleOrderLine(models.Model):
         if 'customer_lead' in vals or 'product_id' in vals:
             self._update_expected_delivery()
         return res
-                # Warranty
-        line.x_studio_warranty = (
-                line.product_id.product_tmpl_id.x_studio_warranty or False
-            )
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        lines = super().create(vals_list)
-        lines._update_line_values()
-        return lines
-
-    def write(self, vals):
-        res = super().write(vals)
-        self._update_line_values()
-        return res
+    
