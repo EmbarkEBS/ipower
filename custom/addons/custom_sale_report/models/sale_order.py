@@ -16,8 +16,15 @@ class SaleOrder(models.Model):
     def action_preview_custom_sale_order(self):
         self.ensure_one()
 
+        report = self.env.ref(
+            "custom_sale_report.action_report_custom_sale_order"
+        )
+
         return {
             "type": "ir.actions.act_url",
-            "url": "/report/html/custom_sale_order_report.action_custom_sale_order_report/%s" % self.id,
+            "url": "/report/pdf/%s/%s" % (
+                report.report_name,
+                self.id,
+            ),
             "target": "new",
         }
