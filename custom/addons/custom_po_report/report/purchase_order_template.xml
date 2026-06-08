@@ -103,7 +103,7 @@
 
                                             <br/>
 
-                                            <span t-esc="o.company_id.street or ''"/>, Dubai,
+                                            <span t-esc="o.company_id.street or ''"/>, Dubai
 
                                           
                                            
