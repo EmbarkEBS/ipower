@@ -7,7 +7,7 @@ class AccountMove(models.Model):
         return self.env.ref(
             "custom_invoice_report.action_report_invoice_custom"
         ).report_action(self)
-     def action_preview_custom_invoice(self):
+    def action_preview_custom_invoice(self):
         self.ensure_one()
 
         report = self.env.ref(
