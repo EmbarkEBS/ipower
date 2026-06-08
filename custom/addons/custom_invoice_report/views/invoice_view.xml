@@ -6,6 +6,12 @@
     <field name="arch" type="xml">
 
         <xpath expr="//header" position="inside">
+         <button name="action_preview_custom_invoice"
+                        type="object"
+                        string="Preview"
+                        class="btn-secondary"
+                        icon="fa-eye"
+                        invisible="move_type not in ('out_invoice','in_invoice')"/>
 
             <button name="action_print_custom_invoice"
                     type="object"

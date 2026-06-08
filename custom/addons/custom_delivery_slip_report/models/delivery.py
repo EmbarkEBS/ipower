@@ -16,7 +16,7 @@ class StockPicking(models.Model):
 
         return {
             "type": "ir.actions.act_url",
-            "url": "/report/html/%s/%s" % (
+            "url": "/report/pdf/%s/%s" % (
                 report.report_name,
                 self.id,
             ),
