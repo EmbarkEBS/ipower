@@ -7,7 +7,7 @@ class AccountMove(models.Model):
         self.ensure_one()
 
         report = self.env.ref(
-            "custom_vendor_bill_report.action_custom_vendor_bill_report"
+            "custom_vendor_bill_report.action_vendor_bill_report"
         )
 
         return {
