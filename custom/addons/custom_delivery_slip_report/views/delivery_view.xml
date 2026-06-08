@@ -6,7 +6,11 @@
     <field name="arch" type="xml">
 
         <xpath expr="//header" position="inside">
-
+  <button name="action_preview_custom_delivery_slip"
+                        type="object"
+                        string="Preview"
+                        class="btn-secondary"
+                        icon="fa-eye"/>
             <button name="action_print_custom_delivery_slip"
                     type="object"
                     string="Print Delivery Slip"
