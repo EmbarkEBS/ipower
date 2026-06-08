@@ -608,7 +608,7 @@
                                         ">                                
                 <div style="margin-top:8px;"> 
                 
-                <t t-if="line.product_id.detailed_type != 'service' and line.x_studio_related_field_8b0_1jmkth7qs">
+              <t t-if="line.product_id.type != 'service' and line.x_studio_related_field_8b0_1jmkth7qs">
    <span style=" font-weight:bold;">Ordering Code: </span> 
         <span style=" font-weight:bold;" t-field="line.x_studio_related_field_8b0_1jmkth7qs"/>
         </t>
