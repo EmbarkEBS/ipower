@@ -64,10 +64,10 @@
         <br/>
     </t>
 
-    <t t-if="o.company_id.city">
+    <!--<t t-if="o.company_id.city">
         <span t-esc="o.company_id.city"/>
     </t>
-
+-->
     <t t-if="o.company_id.country_id">
        
         <span t-esc="o.company_id.country_id.name"/>

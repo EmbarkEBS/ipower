@@ -106,9 +106,9 @@
 
                                           
                                            
-                                            <t t-if="o.company_id.state_id">
+                                         <!--   <t t-if="o.company_id.state_id">
                                                  <span t-esc="o.company_id.state_id.name"/>
-                                            </t>
+                                            </t>-->
 
                                             <br/>
 
