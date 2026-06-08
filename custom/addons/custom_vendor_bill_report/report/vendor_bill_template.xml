@@ -441,7 +441,7 @@
     <td>
         :
         <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/>
-        <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>
+       <!-- <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>-->
     </td>
 </tr>
 <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
