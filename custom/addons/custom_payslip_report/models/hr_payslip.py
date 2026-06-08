@@ -13,6 +13,6 @@ class HrPayslip(models.Model):
 
         return {
             "type": "ir.actions.act_url",
-            "url": "/report/html/custom_payslip_report.custom_payslip_template/%s" % self.id,
+            "url": "/report/pdf/custom_payslip_report.custom_payslip_template/%s" % self.id,
             "target": "new",
         }
