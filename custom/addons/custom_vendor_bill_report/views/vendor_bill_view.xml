@@ -11,7 +11,12 @@
         <field name="arch" type="xml">
 
             <xpath expr="//header" position="inside">
-
+<button name="action_preview_custom_vendor_bill"
+                    type="object"
+                    string="Preview"
+                    class="btn-secondary"
+                    icon="fa-eye"
+                    invisible="move_type != 'in_invoice'"/>
                 <button name="action_print_custom_vendor_bill"
                         type="object"
                         string="Print Vendor Bill"
