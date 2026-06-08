@@ -136,7 +136,8 @@
 
                             <img t-if="o.company_id.logo"
                                  t-att-src="image_data_uri(o.company_id.logo)"
-                                 style="max-height:90px;"/>
+                                style="
+                                                max-height:80px;"/>
 
                         </td>
 
