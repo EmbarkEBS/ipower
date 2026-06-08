@@ -395,10 +395,18 @@
                                                 </td>
 
                                             </tr>
-<t t-if="sale_order">
-    <t t-if="sale_order.x_studio_customer_po_ref">
-        <span t-field="sale_order.x_studio_customer_po_ref"/>
-    </t>
+  <t t-set="sale_order" t-value="o.sale_id"/>                                     
+<t t-if="sale_order and sale_order.x_studio_customer_po_ref">
+    <tr>
+        <td style="font-weight:bold;color:#1a3a5a;">
+            Customer PO Ref
+        </td>
+        <td>
+            :
+            <span t-field="sale_order.x_studio_customer_po_ref"/>
+        </td>
+    </tr>
+</t>
 </t>
                             </table>
 </td>
