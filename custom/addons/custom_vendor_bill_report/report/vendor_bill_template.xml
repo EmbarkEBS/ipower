@@ -308,10 +308,10 @@
 
                                                 <span t-esc="o.partner_id.city or ''"/>
 
-                                                <t t-if="o.partner_id.state_id">
+                                               <!-- <t t-if="o.partner_id.state_id">
                                                     ,
                                                     <span t-esc="o.partner_id.state_id.name"/>
-                                                </t>
+                                                </t>-->
 
                                                 -
 
