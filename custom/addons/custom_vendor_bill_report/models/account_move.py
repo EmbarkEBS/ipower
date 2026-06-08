@@ -8,6 +8,6 @@ class AccountMove(models.Model):
 
         return {
             "type": "ir.actions.act_url",
-            "url": "/report/html/custom_vendor_bill_report.vendor_bill_template/%s" % self.id,
+            "url": "/report/pdf/custom_vendor_bill_report.vendor_bill_template/%s" % self.id,
             "target": "new",
         }
