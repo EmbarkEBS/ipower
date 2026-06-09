@@ -112,11 +112,11 @@
 </odoo>
 <!-- Version 2 -->
 
-<!-- <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<!-- <!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo> -->
 
     <!-- LIST VIEW -->
-    <record id="crm_category_line_tree_view" model="ir.ui.view">
+    <!-- <record id="crm_category_line_tree_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.tree</field>
         <field name="model">crm.lead.category.line</field>
         <field name="arch" type="xml">
@@ -133,10 +133,10 @@
 
             </list>
         </field>
-    </record>
+    </record> -->
 
     <!-- SEARCH VIEW -->
-    <record id="crm_category_line_search_view" model="ir.ui.view">
+    <!-- <record id="crm_category_line_search_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.search</field>
         <field name="model">crm.lead.category.line</field>
         <field name="arch" type="xml">
@@ -164,10 +164,10 @@
 
             </search>
         </field>
-    </record>
+    </record> -->
 
     <!-- PIVOT VIEW -->
-    <record id="crm_category_line_pivot_view" model="ir.ui.view">
+    <!-- <record id="crm_category_line_pivot_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.pivot</field>
         <field name="model">crm.lead.category.line</field>
         <field name="arch" type="xml">
@@ -182,10 +182,10 @@
 
             </pivot>
         </field>
-    </record>
+    </record> -->
 
     <!-- GRAPH VIEW -->
-    <record id="crm_category_line_graph_view" model="ir.ui.view">
+    <!-- <record id="crm_category_line_graph_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.graph</field>
         <field name="model">crm.lead.category.line</field>
         <field name="arch" type="xml">
@@ -196,25 +196,25 @@
 
             </graph>
         </field>
-    </record>
+    </record> -->
 
     <!-- ACTION -->
-    <record id="action_crm_category_analysis" model="ir.actions.act_window">
+    <!-- <record id="action_crm_category_analysis" model="ir.actions.act_window">
         <field name="name">Category Revenue Analysis</field>
         <field name="res_model">crm.lead.category.line</field>
         <field name="view_mode">list,pivot,graph,form</field>
         <field name="search_view_id" ref="crm_category_line_search_view"/>
-    </record>
+    </record> -->
 
     <!-- MENU -->
-    <menuitem
+    <!-- <menuitem
         id="menu_crm_category_analysis"
         name="Category Revenue Analysis"
         parent="crm.crm_menu_report"
         action="action_crm_category_analysis"
         sequence="50"/>
 
-</odoo> -->
+</odoo> --> 
 
 <!-- Version 1 -->
 <!-- <?xml version="1.0" encoding="utf-8"?>
