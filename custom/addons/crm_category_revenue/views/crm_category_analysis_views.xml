@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- LIST VIEW -->
     <record id="crm_category_line_tree_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.tree</field>
         <field name="model">crm.lead.category.line</field>
@@ -17,13 +16,11 @@
         </field>
     </record>
 
-    <!-- SEARCH VIEW -->
     <record id="crm_category_line_search_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.search</field>
         <field name="model">crm.lead.category.line</field>
         <field name="arch" type="xml">
             <search>
-
                 <field name="lead_id"/>
                 <field name="customer_id"/>
                 <field name="vendor_ids"/>
@@ -41,30 +38,23 @@
                 <filter string="Lost"
                         name="lost"
                         domain="[('status','=','lost')]"/>
-
             </search>
         </field>
     </record>
 
-    <!-- PIVOT VIEW -->
     <record id="crm_category_line_pivot_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.pivot</field>
         <field name="model">crm.lead.category.line</field>
         <field name="arch" type="xml">
             <pivot string="Opportunity Revenue Dashboard">
-
                 <field name="customer_id" type="row"/>
                 <field name="category_id" type="row"/>
-
                 <field name="status" type="col"/>
-
                 <field name="amount" type="measure"/>
-
             </pivot>
         </field>
     </record>
 
-    <!-- GRAPH VIEW -->
     <record id="crm_category_line_graph_view" model="ir.ui.view">
         <field name="name">crm.lead.category.line.graph</field>
         <field name="model">crm.lead.category.line</field>
@@ -76,32 +66,14 @@
         </field>
     </record>
 
-    <!-- ACTION -->
-    <record id="action_crm_category_analysis"
-            model="ir.actions.act_window">
-
-        <field name="name">
-            Opportunity Revenue Analysis
-        </field>
-
-        <field name="res_model">
-            crm.lead.category.line
-        </field>
-
-        <field name="view_mode">
-            list,pivot,graph,form
-        </field>
-
-        <field name="domain">
-            [('lead_id.type','=','opportunity')]
-        </field>
-
-        <field name="search_view_id"
-               ref="crm_category_line_search_view"/>
-
+    <record id="action_crm_category_analysis" model="ir.actions.act_window">
+        <field name="name">Opportunity Revenue Analysis</field>
+        <field name="res_model">crm.lead.category.line</field>
+        <field name="view_mode">list,pivot,graph,form</field>
+        <field name="domain">[('lead_id.type','=','opportunity')]</field>
+        <field name="search_view_id" ref="crm_category_line_search_view"/>
     </record>
 
-    <!-- MENU -->
     <menuitem
         id="menu_crm_category_analysis"
         name="Opportunity Revenue Analysis"
