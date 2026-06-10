@@ -740,16 +740,13 @@
                                      <t t-foreach="o.order_line" t-as="line">
 
             <t t-foreach="line.tax_ids" t-as="tax">
-<tr>
+\
               <td>  
-                    <span t-esc="tax.name"/>
+                  VAT <span t-esc="tax.name"/>
                     on
-                    <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                     VAT <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
                     </td> 
-                    <td>
-                    <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
-                </td>
-</tr>
+                    
             </t>
 
         </t>
