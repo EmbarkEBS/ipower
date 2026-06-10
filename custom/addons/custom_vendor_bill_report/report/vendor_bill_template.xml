@@ -440,7 +440,7 @@
     </td>
     <td>
         :
-        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/> - <span t-field="o.incoterm_location"/>
+        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
        <!-- <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>-->
     </td>
 </tr>

@@ -329,17 +329,15 @@
 </t>
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
-<t t-if="o.x_studio_attention">
-    <p style="margin-top:5px">
+<t t-if="o.contact_person_id">
+    <p>
+        <strong>Attn:</strong>
 
-        <strong>Attn</strong>
-
-        <t t-if="o.x_studio_attention.x_studio_salutation">
-            <span t-esc="o.x_studio_attention.x_studio_salutation"/>
+        <t t-if="o.contact_person_id.x_studio_salutation">
+            <span t-esc="o.contact_person_id.x_studio_salutation"/>
         </t>
 
-           <span t-esc="o.x_studio_attention.name or ''"/>
-
+        <span t-esc="o.contact_person_id.name"/>
     </p>
 </t>
                                                 </td>
@@ -420,7 +418,7 @@
 
                                                  <td style="padding:4px 0;text-align:left">
     :
-    <span t-field="o.incoterm.code"/> - <span t-field="o.incoterm_location"/>
+    <span t-field="o.incoterm.code"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
 </td>
 
                                             </tr>
