@@ -759,16 +759,22 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                  <t t-foreach="doc.amount_by_group" t-as="tax">
-    <tr>
-        <td style="font-weight:bold;">
-            <span t-esc="tax[0]"/>
-        </td>
-        <td style="text-align:right;">
-            <span t-esc="doc.currency_id.symbol"/>
-            <span t-esc="'{:,.2f}'.format(tax[1])"/>
-        </td>
-    </tr>
+                                                  <t t-foreach="o.order_line" t-as="line">
+    <t t-foreach="line.tax_ids" t-as="tax">
+        <tr>
+            <td style="padding:5px;font-weight:bold;">
+                VAT <span t-esc="int(tax.amount)"/>%
+                on
+                <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                <span t-esc="o.currency_id.symbol"/>
+            </td>
+
+            <td style="padding:5px;text-align:right;">
+                <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+                <span t-esc="o.currency_id.symbol"/>
+            </td>
+        </tr>
+    </t>
 </t>
                                                 </td>
 
