@@ -27,3 +27,22 @@ class PurchaseOrder(models.Model):
             ),
             "target": "new",
         }
+    @api.onchange('partner_id')
+    def _onchange_partner_id_contact(self):
+        self.x_studio_contact_person = False
+
+        if not self.partner_id:
+            return {
+                'domain': {
+                    'x_studio_contact_person': [('id', '=', 0)]
+                }
+            }
+
+        return {
+            'domain': {
+                'x_studio_contact_person': [
+                    ('parent_id', '=', self.partner_id.id),
+                    ('is_company', '=', False),
+                ]
+            }
+        }
