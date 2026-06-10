@@ -774,7 +774,7 @@
                                                 padding:5px;
                                                 font-weight:bold;
                                             ">
-                                              <t t-foreach="o.order_line" t-as="line">
+                                              <t t-foreach="o.invoice_line_ids" t-as="line">
     <t t-foreach="line.tax_ids" t-as="tax">
         <tr>
             <td style="padding:5px;font-weight:bold;">
@@ -785,8 +785,8 @@
             </td>
 
             <td style="padding:5px;text-align:right;">
-                <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
-               
+               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+                
             </td>
         </tr>
     </t>
