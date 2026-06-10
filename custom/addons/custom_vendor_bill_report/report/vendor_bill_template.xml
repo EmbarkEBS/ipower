@@ -765,7 +765,7 @@
             </td>
 
             <td style="padding:5px;text-align:right;">
-                  <span t-esc="o.currency_id.symbol"/><span t-esc="'%.2f' % (line.price_subtotal * tax.amount / 100)"/>
+                  <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % (line.price_subtotal * tax.amount / 100)"/>
            
             </td>
         </tr>
