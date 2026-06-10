@@ -115,10 +115,10 @@
 
                                         <span t-esc="o.company_id.street or ''"/>, Dubai
 
-                                        <t t-if="o.company_id.state_id">
+                                      <!--  <t t-if="o.company_id.state_id">
                                             ,
                                             <span t-esc="o.company_id.state_id.name"/>
-                                        </t>
+                                        </t>-->
 
                                         <br/>
 
@@ -308,10 +308,10 @@
 
                                                 <span t-esc="o.partner_id.city or ''"/>
 
-                                                <t t-if="o.partner_id.state_id">
+                                               <!-- <t t-if="o.partner_id.state_id">
                                                     ,
                                                     <span t-esc="o.partner_id.state_id.name"/>
-                                                </t>
+                                                </t>-->
 
                                                 -
 
@@ -440,8 +440,8 @@
     </td>
     <td>
         :
-        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/>
-        <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>
+        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
+       <!-- <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>-->
     </td>
 </tr>
 <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>

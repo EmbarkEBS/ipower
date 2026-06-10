@@ -102,13 +102,13 @@
 
                                             <br/>
 
-                                            <span t-esc="o.company_id.street or ''"/>, Dubai,
+                                            <span t-esc="o.company_id.street or ''"/>, Dubai
 
                                           
                                            
-                                            <t t-if="o.company_id.state_id">
+                                         <!--   <t t-if="o.company_id.state_id">
                                                  <span t-esc="o.company_id.state_id.name"/>
-                                            </t>
+                                            </t>-->
 
                                             <br/>
 
@@ -307,9 +307,9 @@
 
                                                     <span t-esc="o.partner_id.city or ''"/>
 
-                                                    <t t-if="o.partner_id.state_id">
+                                                   <!-- <t t-if="o.partner_id.state_id">
                                                          <span t-esc="o.partner_id.state_id.name"/>
-                                                    </t>
+                                                    </t>-->
 
                                                     -
 
@@ -384,7 +384,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                     Sales Order Ref
+                                                     Our Ref
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -395,19 +395,19 @@
                                                 </td>
 
                                             </tr>
-<t t-set="sale_order"
-   t-value="o.move_ids and o.move_ids[0].sale_line_id.order_id or False"/>
- <t t-if="sale_order.x_studio_customer_po_ref"> 
+  <t t-set="sale_order" t-value="o.sale_id"/>                                     
+<t t-if="sale_order and sale_order.x_studio_customer_po_ref">
     <tr>
         <td style="font-weight:bold;color:#1a3a5a;">
             Customer PO Ref
         </td>
         <td>
             :
-            <span t-esc="sale_order.x_studio_customer_po_ref or ''"/>
+            <span t-field="sale_order.x_studio_customer_po_ref"/>
         </td>
     </tr>
 </t>
+
                             </table>
 </td>
 </tr>

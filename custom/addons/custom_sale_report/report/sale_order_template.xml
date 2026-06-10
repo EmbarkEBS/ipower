@@ -103,13 +103,13 @@
 
                                             <br/>
 
-                                            <span t-esc="o.company_id.street or ''"/>, Dubai,
+                                            <span t-esc="o.company_id.street or ''"/>, Dubai
 
                                           
                                            
-                                            <t t-if="o.company_id.state_id">
+                                            <!--<t t-if="o.company_id.state_id">
                                                  <span t-esc="o.company_id.state_id.name"/>
-                                            </t>
+                                            </t>-->
 
                                             <br/>
 
@@ -314,9 +314,9 @@
 
                                                     <span t-esc="o.partner_id.city or ''"/>
 
-                                                    <t t-if="o.partner_id.state_id">
+                                                  <!-- <t t-if="o.partner_id.state_id">
                                                          <span t-esc="o.partner_id.state_id.name"/>
-                                                    </t>
+                                                    </t>--> 
 
                                                     -
 
@@ -329,17 +329,15 @@
 </t>
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
-<t t-if="o.x_studio_attention">
-    <p style="margin-top:5px">
+<t t-if="o.contact_person_id">
+    <p>
+        <strong>Attn:</strong>
 
-        <strong>Attn</strong>
-
-        <t t-if="o.x_studio_attention.x_studio_salutation">
-            <span t-esc="o.x_studio_attention.x_studio_salutation"/>
+        <t t-if="o.contact_person_id.x_studio_salutation">
+            <span t-esc="o.contact_person_id.x_studio_salutation"/>
         </t>
 
-           <span t-esc="o.x_studio_attention.name or ''"/>
-
+        <span t-esc="o.contact_person_id.name"/>
     </p>
 </t>
                                                 </td>
@@ -371,7 +369,12 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                    Order Date
+                                                   <t t-if="o.state in ['draft', 'sent']">
+       <span> Quote</span>
+    </t>
+    <t t-else="">
+      <span>Order</span>
+    </t> <span>Date</span>
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -415,7 +418,7 @@
 
                                                  <td style="padding:4px 0;text-align:left">
     :
-    <span t-field="o.incoterm.code"/>
+    <span t-field="o.incoterm.code"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
 </td>
 
                                             </tr>
@@ -438,7 +441,24 @@
                                                 </td>
 
                                             </tr></t>
- 
+   <t t-if="o.x_studio_customer_po_ref">     <tr>
+
+                                                <td style="
+                                                    padding:4px 0;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                   Customer PO Ref
+                                                </td>
+
+                                                <td style="padding:4px 0;">
+
+                                                    :
+                                                    <span t-esc="o.x_studio_customer_po_ref or ''"/>
+
+                                                </td>
+
+                                            </tr></t>
                                         </table>
 
                                     </td>
@@ -589,11 +609,22 @@
                                                                                    font-size:13px;
                                                     margin-bottom:6px;
                                         ">                                
-                <div style="margin-top:8px;">    <span style=" font-weight:bold;">Ordering Code: </span>      <span style=" font-weight:bold;" t-field="line.x_studio_related_field_8b0_1jmkth7qs"/></div>
+                <div style="margin-top:8px;"> 
+                
+              <t t-if="line.product_id.type != 'service' and line.x_studio_related_field_8b0_1jmkth7qs">
+   <span style=" font-weight:bold;">Ordering Code: </span> 
+        <span style=" font-weight:bold;" t-field="line.x_studio_related_field_8b0_1jmkth7qs"/>
+        </t>
+        </div>
          <div style="margin-top:8px;">     <t t-if="line.x_studio_expected_delivery_2">
    <span>Expected Delivery Date: </span>    <span t-esc="line.x_studio_expected_delivery_2"/>
 </t></div>
-              <div style="margin-top:8px;">   <t t-if="line.product_id.product_tmpl_id.x_studio_warranty">   <span>Warranty: </span> <span t-esc="line.product_id.product_tmpl_id.x_studio_warranty or ''"/></t></div>
+              <div style="margin-top:8px;">  
+               <t t-if="line.x_studio_p_warranty">
+                  <span>Warranty: </span>
+                   <span t-esc="line.x_studio_p_warranty or ''"/>
+             </t>
+            </div>
                       
 </td></tr>
 <tr style="border-bottom:1px solid #d9d9d9;">

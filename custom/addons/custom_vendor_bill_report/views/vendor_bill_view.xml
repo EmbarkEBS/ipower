@@ -1,20 +1,33 @@
 <odoo>
+
     <record id="invoice_form_custom_print" model="ir.ui.view">
-    <field name="name">account.move.form.custom.print</field>
-    <field name="model">account.move</field>
-    <field name="inherit_id" ref="account.view_move_form"/>
-    <field name="arch" type="xml">
 
-        <xpath expr="//header" position="inside">
+        <field name="name">account.move.form.custom.print</field>
 
-            <button name="action_print_custom_vendor_bill"
+        <field name="model">account.move</field>
+
+        <field name="inherit_id" ref="account.view_move_form"/>
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+<button name="action_preview_custom_vendor_bill"
                     type="object"
-                    string="Print Vendor Bill"
-                    class="btn-primary"
-                    icon="fa-print"/>
+                    string="Preview"
+                    class="btn-secondary"
+                    icon="fa-eye"
+                    invisible="move_type != 'in_invoice'"/>
+                <button name="action_print_custom_vendor_bill"
+                        type="object"
+                        string="Print Vendor Bill"
+                        class="btn-primary"
+                        icon="fa-print"
+                        invisible="move_type != 'in_invoice'"/>
 
-        </xpath>
+            </xpath>
 
-    </field>
-</record>
+        </field>
+
+    </record>
+
 </odoo>
