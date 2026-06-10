@@ -17,6 +17,9 @@
                         class="btn-primary"
                         icon="fa-print"/>
             </xpath>
+        <xpath expr="//field[@name='x_studio_contact_person']" position="attributes">
+    <attribute name="domain">[('id','in',contact_ids_domain)]</attribute>
+</xpath>
 
         </field>
 
