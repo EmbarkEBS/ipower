@@ -329,7 +329,7 @@
 </t>
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
-<t t-if="o.contact_person_id">
+<t t-if="o.contact_person_id.name">
     <p style="margin-top:5px">
 
         <strong>Attn</strong>
@@ -338,7 +338,7 @@
             <span t-esc="o.partner_id.x_studio_salutation"/>
         </t>
 
-           <span t-esc="o.contact_person_id"/>
+           <span t-esc="o.contact_person_id.name"/>
 
     </p>
 </t>
