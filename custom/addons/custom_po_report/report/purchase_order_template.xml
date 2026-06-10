@@ -744,7 +744,7 @@
                 VAT (<span t-esc="int(tax.amount)"/>%)
             </td>
             <td style="text-align:right;">
-                <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+                <span t-field="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
             </td>
         </tr>
     </t>
