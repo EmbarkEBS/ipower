@@ -25,22 +25,30 @@ class SaleOrderLine(models.Model):
         if 'customer_lead' in vals or 'product_id' in vals:
             self._update_expected_delivery()
         return res
-     # Warranty from Product
-        line.x_studio_p_warranty = (
-                line.product_id.product_tmpl_id.x_studio_warranty or ''
-            )
+    
+    def _update_warranty(self):
+        for line in self:
+            if line.product_id:
+                line.x_studio_p_warranty = (
+                    line.product_id.product_tmpl_id.x_studio_warranty or ''
+                )
 
     @api.model_create_multi
     def create(self, vals_list):
         lines = super().create(vals_list)
+
         lines._update_expected_delivery()
+        lines._update_warranty()
+
         return lines
 
     def write(self, vals):
         res = super().write(vals)
 
-        # Only refresh when product or lead time changes
         if 'customer_lead' in vals or 'product_id' in vals:
             self._update_expected_delivery()
+
+        if 'product_id' in vals:
+            self._update_warranty()
 
         return res
