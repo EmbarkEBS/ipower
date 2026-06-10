@@ -740,7 +740,7 @@
                                      <t t-foreach="o.order_line" t-as="line">
 
             <t t-foreach="line.tax_ids" t-as="tax">
-\
+
               <td>  
                   VAT <span t-esc="tax.name"/>
                     on
@@ -749,12 +749,12 @@
                     
             </t>
 
-        </t>
+       
                                                 </td>
 
                                                 <td style="padding:5px;">
                     <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
-                  </td>
+                  </td> </t>
 
                                             </tr>
 
