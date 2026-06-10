@@ -732,23 +732,23 @@
                                             </tr>
 
                                             <tr>
-    <td style="padding:5px;font-weight:bold;">
+    
 
         <t t-foreach="o.order_line" t-as="line">
 
             <t t-foreach="line.tax_ids" t-as="tax">
-
+<td style="padding:5px;font-weight:bold;">
                 <div>
                     VAT <span t-esc="tax.name"/>
                     on
                     <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                </div>
-<span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+                </div></td><td style="padding:5px;">
+<span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/></td>
             </t>
 
         </t>
 
-    </td>
+    
 
    <!--<td style="padding:5px;">
         <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
