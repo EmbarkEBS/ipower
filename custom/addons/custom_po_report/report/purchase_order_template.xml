@@ -741,11 +741,11 @@
 
             <t t-foreach="line.tax_ids" t-as="tax">
 
-              <td>  
+             
                   VAT <span t-esc="tax.name"/>
                     on
-                     VAT <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                    </td> 
+                     <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                    
                     
             </t>
 
