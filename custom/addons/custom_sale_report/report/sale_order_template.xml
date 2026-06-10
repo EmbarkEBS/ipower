@@ -759,7 +759,17 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                    VAT (5%)
+                                                  <t t-foreach="doc.amount_by_group" t-as="tax">
+    <tr>
+        <td style="font-weight:bold;">
+            <span t-esc="tax[0]"/>
+        </td>
+        <td style="text-align:right;">
+            <span t-esc="doc.currency_id.symbol"/>
+            <span t-esc="'{:,.2f}'.format(tax[1])"/>
+        </td>
+    </tr>
+</t>
                                                 </td>
 
                                                 <td style="padding:5px;">
