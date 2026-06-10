@@ -743,16 +743,16 @@
                     on
                     <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
                 </div>
-
+<span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
             </t>
 
         </t>
 
     </td>
 
-    <td style="padding:5px;">
+   <!--<td style="padding:5px;">
         <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
-    </td>
+    </td>-->
 </tr>
 
                                             <tr style="
