@@ -27,20 +27,27 @@ class PurchaseOrder(models.Model):
             ),
             "target": "new",
         }
-    contact_ids_domain = fields.Many2many(
-    'res.partner',
-    compute='_compute_contact_ids_domain',
-    store=False,
-)
-    @api.depends('partner_id')
-    def _compute_contact_ids_domain(self):
-        Partner = self.env['res.partner']
+    contact_person_id = fields.Many2one(
+        "res.partner",
+        string="Attention"
+    )
 
-        for rec in self:
-            if rec.partner_id:
-                rec.contact_ids_domain = Partner.search([
-                ('parent_id', '=', rec.partner_id.id),
-                ('is_company', '=', False),
-            ])
-            else:
-                rec.contact_ids_domain = Partner.browse()
+    @api.onchange("partner_id")
+    def _onchange_partner_id_contact(self):
+        self.contact_person_id = False
+
+        if not self.partner_id:
+            return {
+                "domain": {
+                    "contact_person_id": [("id", "=", 0)]
+                }
+            }
+
+        return {
+            "domain": {
+                "contact_person_id": [
+                    ("parent_id", "=", self.partner_id.id),
+                    ("is_company", "=", False),
+                ]
+            }
+        }
