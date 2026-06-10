@@ -737,7 +737,7 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
+                                     <span t-esc="', '.join(tax.tax_label for tax in line.tax_ids if tax.tax_label)"/>
                                                 </td>
 
                                                 <td style="padding:5px;">
