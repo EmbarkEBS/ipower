@@ -737,7 +737,7 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                    VAT (5%)
+                                                 <span t-esc="', '.join([str(int(t.amount)) + '%' for t in line.taxes_id])"/>
                                                 </td>
 
                                                 <td style="padding:5px;">
