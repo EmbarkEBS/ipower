@@ -745,12 +745,13 @@
                     <span t-esc="tax.name"/>
                     on
                     <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                    </td> <td>
+                    </td> 
+                    <td>
                     <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
                 </td>
-
-            </t>
 </tr>
+            </t>
+
         </t>
                                                 </td>
 
