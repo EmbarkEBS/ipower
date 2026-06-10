@@ -737,7 +737,7 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                 <span t-esc="', '.join([str(int(t.amount)) + '%' for t in line.taxes_ids])"/>
+                                                <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
                                                 </td>
 
                                                 <td style="padding:5px;">
