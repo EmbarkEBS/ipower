@@ -334,8 +334,8 @@
 
         <strong>Attn</strong>
 
-        <t t-if="o.partner_id.x_studio_salutation">
-            <span t-esc="o.partner_id.x_studio_salutation"/>
+        <t t-if="o.contact_person_id">
+            <span t-esc="o.contact_person_id.x_studio_salutation"/>
         </t>
 
            <span t-esc="o.contact_person_id.name"/>
