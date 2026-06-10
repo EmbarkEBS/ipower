@@ -218,7 +218,7 @@
 
                             <table style="
                                 width:100%;
-                                font-size:13px;
+                                font-size:15px;
                                 border-collapse:collapse;
                                 margin-top:35px;
                                 margin-bottom:35px;
@@ -228,12 +228,12 @@
 
                                     <!-- ADDRESS -->
                                     <td style="
-                                        width:55%;font-size:13px;
+                                        width:55%;font-size:15px;
                                         vertical-align:top;
                                     ">
 
                                         <table style="
-                                            width:100%;font-size:13px;
+                                            width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
   <strong style="color:#1a3a5a;">
@@ -290,7 +290,7 @@
                                                 <!-- ADDRESS CONTENT -->
                                                 <td style="
                                                     vertical-align:top;
-                                                    font-size:13px;
+                                                    font-size:15px;
                                                     line-height:1.7;
                                                 ">
 
@@ -352,14 +352,13 @@
 
                                     <!-- META -->
                                     <td style="
-                                        width:45%; font-size:13px;
+                                        width:45%; font-size:15px;
                                         vertical-align:top;
-                                        font-size:13px;
                                         padding-left:40px;
                                     ">
 
                                         <table style="
-                                            width:100%;font-size:13px;
+                                            width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
 
@@ -367,7 +366,7 @@
 
                                                 <td style="
                                                     padding:4px 0;
-                                                    width:45%;font-size:13px;
+                                                    width:45%;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -387,7 +386,7 @@
                                             <tr>
 
                                                 <td style="
-                                                    padding:4px 0;
+                                                    padding:4px 0;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -407,7 +406,7 @@
 
                                                 <td style="
                                                     padding:4px 0;
-                                                    font-weight:bold;
+                                                    font-weight:bold;font-size:15px;
                                                     color:#1a3a5a;
                                                 ">
                                                Incoterms
@@ -423,7 +422,7 @@
                                          <t t-if="o.origin">   <tr>
 
                                                 <td style="
-                                                    padding:4px 0;
+                                                    padding:4px 0;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -440,7 +439,7 @@
                                             </tr></t>
 <t t-if="o.x_studio_your_ref">
     <tr>
-        <td style="  padding:4px 0;
+        <td style="  padding:4px 0;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;">
             Your Ref
