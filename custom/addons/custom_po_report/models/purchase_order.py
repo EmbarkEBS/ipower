@@ -25,9 +25,10 @@ class PurchaseOrder(models.Model):
             "target": "new",
         }
     contact_person_id = fields.Many2one(
-        'res.partner',
-        string='Attention'
-    )
+    'res.partner',
+    string='Attention',
+    domain="[('parent_id', '=', partner_id)]"
+)
 
     def action_print_custom_po(self):
         return self.env.ref(

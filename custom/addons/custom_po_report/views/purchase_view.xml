@@ -18,7 +18,8 @@
                         icon="fa-print"/>
             </xpath>
 <xpath expr="//field[@name='partner_id']" position="after">
-    <field name="contact_person_id"/>
+    <field name="contact_person_id"
+           domain="[('parent_id', '=', partner_id)]"/>
 </xpath>
         </field>
 
