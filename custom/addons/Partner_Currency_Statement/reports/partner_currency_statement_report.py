@@ -2,7 +2,7 @@ from odoo import models
 
 
 class ReportPartnerCurrencyStatement(models.AbstractModel):
-    _name = "report.Partner_Currency_Statement.statement_report"
+    _name = "report.partner_currency_statement.statement_report"
     _description = "Partner Currency Statement Report"
 
     def _get_report_values(self, docids, data=None):
