@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="partner_currency_statement_wizard_form"
+            model="ir.ui.view">
+
+        <field name="name">
+            partner.currency.statement.wizard.form
+        </field>
+
+        <field name="model">
+            partner.currency.statement.wizard
+        </field>
+
+        <field name="arch"
+               type="xml">
+
+            <form>
+
+                <group>
+
+                    <field name="partner_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+
+                </group>
+
+                <footer>
+
+                    <button
+                        string="Print PDF"
+                        name="action_print_pdf"
+                        type="object"
+                        class="btn-primary"/>
+
+                    <button
+                        string="Cancel"
+                        special="cancel"/>
+
+                </footer>
+
+            </form>
+
+        </field>
+
+    </record>
+
+</odoo>
