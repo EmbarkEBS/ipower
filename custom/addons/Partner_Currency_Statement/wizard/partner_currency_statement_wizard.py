@@ -20,7 +20,7 @@ class PartnerCurrencyStatementWizard(models.TransientModel):
         self.ensure_one()
 
         return self.env.ref(
-            "partner_currency_statement.action_partner_currency_statement"
+            "Partner_Currency_Statement.action_partner_currency_statement"
         ).report_action(self)
 
     def _get_report_data(self):

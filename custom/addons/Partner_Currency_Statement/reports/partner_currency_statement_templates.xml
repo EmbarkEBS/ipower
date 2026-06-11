@@ -45,17 +45,18 @@
 
                         <tbody>
 
-                            <t t-foreach="summary.items()"
-                               t-as="item">
+                            <t t-foreach="currency_summary.values()" t-as="currency_data">
 
-                                <tr>
-                                    <td>
-                                        <span t-esc="item[0]"/>
-                                    </td>
 
-                                    <td class="text-end">
-                                        <span t-esc="item[1]"/>
-                                    </td>
+                                <tr>                                   
+                                    
+                                   <td>
+                                      <span t-esc="currency_data['currency'].name"/>
+                                   </td>
+
+                                   <td class="text-end">
+                                      <span t-esc="currency_data['total']"/>
+                                   </td>
 
                                 </tr>
 
