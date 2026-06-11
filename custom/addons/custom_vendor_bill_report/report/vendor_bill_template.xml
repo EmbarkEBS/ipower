@@ -211,7 +211,18 @@
                                 </td>
 
                             </tr>
+<tr>
 
+                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+ Balance Due
+</td>
+<td>
+    :
+  <span t-esc="o.currency_id.symbol"/>
+<span t-esc="' %.2f' % o.amount_residual"/>
+</td>
+
+                                        </tr>
                         </table>
 
                         <!-- ADDRESS + META -->
@@ -445,17 +456,7 @@
 </td>
 
                                         </tr></t>
-                                         <tr>
-
-                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
- Balance Due
-</td>
-<td>
-    :
-    <span t-esc="o.amount_residual or ''"/>
-</td>
-
-                                        </tr>
+                                         
                                         <tr>
     <td style="padding:5px 0;font-weight:bold; font-size:15px; font-size:15px;color:#1a3a5a;">
         Incoterm
