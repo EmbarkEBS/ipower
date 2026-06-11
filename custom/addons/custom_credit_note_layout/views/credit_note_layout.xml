@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="credit_note_custom_layout"
+              inherit_id="account.report_invoice_document">
+
+        <xpath expr="//t[@t-call='web.external_layout']"
+               position="replace">
+            <t t-if="o.move_type in ('out_refund', 'in_refund')"
+               t-call="custom_payment_receipt.external_layout_payment_receipt"/>
+            <t t-else=""
+               t-call="web.external_layout"/>
+        </xpath>
+
+    </template>
+</odoo>
