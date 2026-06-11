@@ -3,6 +3,7 @@
 
     <record id="view_partner_form_currency_statement"
             model="ir.ui.view">
+
         <field name="name">
             res.partner.form.currency.statement
         </field>
@@ -15,17 +16,24 @@
         <field name="arch"
                type="xml">
 
-            <header position="inside">
+            <xpath expr="//sheet"
+                   position="before">
 
-                <button
-                    name="action_print_currency_statement"
-                    string="Currency Statement"
-                    type="object"
-                    class="btn-primary"/>
+                <div class="oe_button_box"
+                     name="button_box">
 
-            </header>
+                    <button
+                        name="action_print_currency_statement"
+                        type="object"
+                        string="Currency Statement"
+                        class="oe_stat_button btn-primary"/>
+
+                </div>
+
+            </xpath>
 
         </field>
+
     </record>
 
 </odoo>
