@@ -207,17 +207,23 @@
                                         # <span t-field="o.name"/>
 
                                     </div>
+ <div style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+ Balance Due
 
+    :
+  <span t-esc="o.currency_id.symbol"/>
+<span t-esc="' %.2f' % o.amount_residual"/>
+</div>
                                 </td>
 
                             </tr>
 
                         </table>
 
-                        <!-- ADDRESS + META -->
+                                             <!-- ADDRESS + META -->
                         <table style="
                             width:100%;
-                            font-size:13px;
+                            font-size:15px;
                             border-collapse:collapse;
                             margin-top:35px;
                             margin-bottom:35px;
@@ -227,12 +233,12 @@
 
                                 <!-- BILL TO -->
                                 <td style="
-                                    width:55%;
+                                    width:55%; font-size:15px;
                                     vertical-align:top;
                                 ">
 
                                     <table style="
-                                        width:100%;
+                                        width:100%; font-size:15px;
                                         border-collapse:collapse;
                                     ">
 
@@ -286,7 +292,7 @@
 
                                             <td style="
                                                 vertical-align:top;
-                                                font-size:13px;
+                                                font-size:15px;
                                                 line-height:1.7;
                                             ">
 
@@ -355,13 +361,13 @@
 
                                 <!-- META -->
                                 <td style="
-                                    width:45%;
+                                    width:45%; font-size:15px;
                                     vertical-align:top;
                                     padding-left:40px;
                                 ">
 
                                     <table style="
-                                        width:100%;
+                                        width:100%; font-size:15px;
                                         border-collapse:collapse;
                                     ">
 
@@ -370,7 +376,7 @@
                                             <td style="
                                                 padding:4px 0;
                                                 width:45%;
-                                                font-weight:bold;
+                                                font-weight:bold; font-size:15px;
                                                 color:#1a3a5a;
                                             ">
                                                 Invoice Date
@@ -388,7 +394,7 @@
                                         <tr>
 
                                             <td style="
-                                                padding:4px 0;
+                                                padding:4px 0; font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -406,7 +412,7 @@
 
                                         <tr>
 
-                                            <td style="
+                                            <td style=" font-size:15px;
                                                 padding:4px 0;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
@@ -425,8 +431,8 @@
 
                                        <tr>
 
-                                         <td style="padding:5px 0;font-weight:bold;color:#1a3a5a;">
-    Purchase Order Ref
+                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+   Our PO Number
 </td>
 <td>
     :
@@ -434,22 +440,34 @@
 </td>
 
                                         </tr>
-                                        <tr>
-    <td style="padding:5px 0;font-weight:bold;color:#1a3a5a;">
+                                      <t t-if="o.ref">   <tr>
+
+                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+  Customer Bill Number
+</td>
+<td>
+    :
+    <span t-esc="o.ref or ''"/>
+</td>
+
+                                        </tr></t>
+                                         
+                                     <t t-if="o.invoice_incoterm_id.code">   <tr>
+    <td style="padding:5px 0;font-weight:bold; font-size:15px; font-size:15px;color:#1a3a5a;">
         Incoterm
     </td>
     <td>
         :
-        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/> - <span t-field="o.incoterm_location"/>
+        <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
        <!-- <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>-->
     </td>
-</tr>
+</tr></t>
 <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
 
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:5px 0; font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
