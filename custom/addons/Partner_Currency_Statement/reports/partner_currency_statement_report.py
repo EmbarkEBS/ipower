@@ -1,12 +1,11 @@
 from odoo import models
 
 
-class PartnerCurrencyStatementReport(models.AbstractModel):
-    _name = "report.partner_currency_statement.report_partner_currency_statement"
-    _description = "Partner Currency Statement"
+class ReportPartnerCurrencyStatement(models.AbstractModel):
+    _name = "report.partner_currency_statement.statement_report"
+    _description = "Partner Currency Statement Report"
 
     def _get_report_values(self, docids, data=None):
-
         wizard = self.env[
             "partner.currency.statement.wizard"
         ].browse(docids)
