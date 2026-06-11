@@ -459,6 +459,24 @@
                                                 </td>
 
                                             </tr></t>
+                                              <t t-if="o.validity_date">     <tr>
+
+                                                <td style="
+                                                    padding:4px 0; font-size:15px;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                    Validity
+                                                </td>
+
+                                                <td style="padding:4px 0;">
+
+                                                    :
+                                                    <span t-esc="o.validity_date or ''"/>
+
+                                                </td>
+
+                                            </tr></t>
                                         </table>
 
                                     </td>
