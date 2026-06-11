@@ -12,7 +12,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/partner_views.xml",
-        # "views/wizard_views.xml",
+        "views/wizard_views.xml",
         "reports/report_action.xml",
         "reports/partner_currency_statement_templates.xml",
     ],
