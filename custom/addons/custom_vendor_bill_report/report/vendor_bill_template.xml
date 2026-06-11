@@ -207,20 +207,16 @@
                                         # <span t-field="o.name"/>
 
                                     </div>
-
-                                </td>
-<tr>
-
-                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+ <div style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
  Balance Due
-</td>
-<td>
+
     :
   <span t-esc="o.currency_id.symbol"/>
 <span t-esc="' %.2f' % o.amount_residual"/>
-</td>
+</div>
 
-                                        </tr>
+                                </td>
+
                             </tr>
 
                         </table>
