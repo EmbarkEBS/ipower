@@ -739,24 +739,26 @@
 
                                 </td>
 
-                                <td style="width:45%;position:relative;right:10px;">
+                                <td style="width:45%;">
 
                                     <table style="
-                                        width:100%;
-                                        border-collapse:collapse;
-                                        text-align:right;
+                                         width:100%;
+        border-collapse:collapse;
+        table-layout:fixed;
                                     ">
 
                                         <tr>
 
                                             <td style="
-                                                padding:5px;
+                                                padding:5px 10px 5px 5px;
+    text-align:right;
                                                 font-weight:bold;
                                             ">
                                                 Sub Total
                                             </td>
 
-                                            <td style="padding:5px;">
+                                            <td style=" padding:5px 10px 5px 5px;
+    text-align:right;">
                                                 <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
                                             </td>
 
@@ -765,14 +767,16 @@
                                           <t t-foreach="o.invoice_line_ids" t-as="line">
     <t t-foreach="line.tax_ids" t-as="tax">
         <tr>
-            <td style="padding:5px;font-weight:bold;">
+            <td style=" padding:5px 10px 5px 5px;
+    text-align:right;font-weight:bold;">
                 VAT <span t-esc="int(tax.amount)"/>%
                 on
                  <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % line.price_subtotal"/>
            
             </td>
 
-            <td style="padding:5px;text-align:right;">
+            <td style=" padding:5px 10px 5px 5px;
+    text-align:right;">
                   <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % (line.price_subtotal * tax.amount / 100)"/>
            
             </td>
@@ -785,14 +789,16 @@
                                         ">
 
                                             <td style="
-                                                padding:10px 5px;
+                                                padding:5px 10px 5px 5px;
+    text-align:right;
                                                 font-weight:bold;
                                             ">
                                                 Total
                                             </td>
 
                                             <td style="
-                                                padding:10px 5px;
+                                                 padding:5px 10px 5px 5px;
+    text-align:right;
                                                 font-weight:bold;
                                             ">
                                                 <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
