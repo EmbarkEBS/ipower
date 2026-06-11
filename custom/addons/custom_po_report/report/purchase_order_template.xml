@@ -369,8 +369,12 @@
                                                     width:45%;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
-                                                ">
-                                                    Order Date
+                                                "> <t t-if="o.state in ['draft', 'sent']">
+       <span> Quote</span>
+    </t>
+    <t t-else="">
+      <span>Order</span>
+    </t> <span>Date</span>
                                                 </td>
 
                                                 <td style="padding:4px 0;">
