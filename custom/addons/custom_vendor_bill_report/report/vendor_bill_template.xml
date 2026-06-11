@@ -744,7 +744,7 @@
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
-                                        text-align:right;padding-right: 10px;
+                                        text-align:right;position:relative;right:10px;
                                     ">
 
                                         <tr>
