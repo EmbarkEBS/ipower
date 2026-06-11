@@ -453,7 +453,7 @@
 
                                         </tr></t>
                                          
-                                        <tr>
+                                     <t t-if="o.invoice_incoterm_id.code">   <tr>
     <td style="padding:5px 0;font-weight:bold; font-size:15px; font-size:15px;color:#1a3a5a;">
         Incoterm
     </td>
@@ -462,7 +462,7 @@
         <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
        <!-- <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>-->
     </td>
-</tr>
+</tr></t>
 <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
 
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
@@ -750,12 +750,12 @@
 
                                 </td>
 
-                                <td style="width:45%;">
+                                <td style="width:45%;margin-right:20px;">
 
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
-                                        text-align:right;padding-right:20px;
+                                        text-align:right;
                                     ">
 
                                         <tr>
