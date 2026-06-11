@@ -20,7 +20,7 @@
                         <tr>
                             <td><strong>Partner</strong></td>
                             <td>
-                                <span t-esc="partner.name"/>
+                                <span t-esc="docs.partner_id.name"/>
                             </td>
                         </tr>
 
