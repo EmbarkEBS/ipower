@@ -755,6 +755,7 @@
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
+                                        text-align:right;
                                     ">
 
                                         <tr>
