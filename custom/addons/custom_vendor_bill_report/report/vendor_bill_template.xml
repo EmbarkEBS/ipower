@@ -426,11 +426,33 @@
                                        <tr>
 
                                          <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
-    Purchase Order Ref
+   Our PO Number
 </td>
 <td>
     :
     <span t-esc="o.invoice_origin or ''"/>
+</td>
+
+                                        </tr>
+                                      <t t-if="o.ref">   <tr>
+
+                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+  Customer Bill Number
+</td>
+<td>
+    :
+    <span t-esc="o.ref or ''"/>
+</td>
+
+                                        </tr></t>
+                                         <tr>
+
+                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+ Balance Due
+</td>
+<td>
+    :
+    <span t-esc="o.amount_residual or ''"/>
 </td>
 
                                         </tr>
