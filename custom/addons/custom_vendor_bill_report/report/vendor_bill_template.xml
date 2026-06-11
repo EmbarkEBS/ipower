@@ -750,12 +750,11 @@
 
                                 </td>
 
-                                <td style="width:45%;">
+                                <td style="width:45%;padding-right:20px;">
 
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
-                                        text-align:right;margin-right:20px;
                                     ">
 
                                         <tr>
