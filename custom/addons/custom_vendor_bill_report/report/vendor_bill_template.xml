@@ -739,12 +739,12 @@
 
                                 </td>
 
-                                <td style="width:45%;">
+                                <td style="width:45%;position:relative;right:10px;">
 
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
-                                        text-align:right;position:relative;right:10px;
+                                        text-align:right;
                                     ">
 
                                         <tr>
