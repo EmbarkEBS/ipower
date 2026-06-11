@@ -204,7 +204,7 @@
                                         margin-top:10px;
                                     ">
 
-                                        # <span t-field="o.name"/>
+                                        # <!--<span t-field="o.name"/>-->  <span t-esc="o.ref or ''"/>
 
                                     </div>
  <div style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
@@ -440,9 +440,9 @@
 </td>
 
                                         </tr>
-                                      <t t-if="o.ref">   <tr>
+                                       <!--<t t-if="o.ref">   <tr>
 
-                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+                                       <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
   Customer Bill Number
 </td>
 <td>
@@ -450,7 +450,7 @@
     <span t-esc="o.ref or ''"/>
 </td>
 
-                                        </tr></t>
+                                        </tr></t> -->
                                          
                                      <t t-if="o.invoice_incoterm_id.code">   <tr>
     <td style="padding:5px 0;font-weight:bold; font-size:15px; font-size:15px;color:#1a3a5a;">
@@ -692,23 +692,13 @@
 
                                     </tr>-->
 
-                                    <tr style="border-bottom:1px solid #d9d9d9;width:100%;">
-
-                                        <td></td>
-
-                                        <td colspan="4" style="
-                                            font-size:12px;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">
-
-                                            <span t-esc="line.product_id.description or ''"/>
-
-                                        </td>
-
-                                    </tr>
+                                 <tr>
+    <td style="border-bottom:1px solid #d9d9d9;"></td>
+    <td style="border-bottom:1px solid #d9d9d9;" colspan="4">
+        <span t-esc="line.product_id.description or ''"/>
+    </td>
+    <td style="border-bottom:1px solid #d9d9d9;"></td>
+</tr>
 
                                     <t t-set="sn" t-value="sn + 1"/>
 
