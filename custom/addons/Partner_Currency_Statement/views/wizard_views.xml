@@ -4,43 +4,29 @@
     <record id="partner_currency_statement_wizard_form"
             model="ir.ui.view">
 
-        <field name="name">
-            partner.currency.statement.wizard.form
-        </field>
+        <field name="name">partner.currency.statement.wizard.form</field>
+        <field name="model">partner.currency.statement.wizard</field>
 
-        <field name="model">
-            partner.currency.statement.wizard
-        </field>
-
-        <field name="arch"
-               type="xml">
-
-            <form>
+        <field name="arch" type="xml">
+            <form string="Partner Currency Statement">
 
                 <group>
-
                     <field name="partner_id"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
-
                 </group>
 
                 <footer>
+                    <button name="action_print_pdf"
+                            string="Print PDF"
+                            type="object"
+                            class="btn-primary"/>
 
-                    <button
-                        string="Print PDF"
-                        name="action_print_pdf"
-                        type="object"
-                        class="btn-primary"/>
-
-                    <button
-                        string="Cancel"
-                        special="cancel"/>
-
+                    <button string="Cancel"
+                            special="cancel"/>
                 </footer>
 
             </form>
-
         </field>
 
     </record>
