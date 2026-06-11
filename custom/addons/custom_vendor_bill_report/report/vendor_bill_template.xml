@@ -204,7 +204,7 @@
                                         margin-top:10px;
                                     ">
 
-                                        # <!--<span t-field="o.name"/>-->  <span t-esc="o.ref or ''"/>
+                                        # <!--<span t-field="o.name"/>--> <span t-esc="o.ref or ''"/>
 
                                     </div>
  <div style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
