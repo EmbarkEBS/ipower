@@ -753,7 +753,7 @@
                                 <td style="width:45%;">
 
                                     <table style="
-                                        width:95%;
+                                        width:100%;
                                         border-collapse:collapse;
                                         text-align:right;
                                     ">
@@ -767,7 +767,7 @@
                                                 Sub Total
                                             </td>
 
-                                            <td style="padding:5px;">
+                                            <td style="padding:5px;padding-right:20px">
                                                 <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
                                             </td>
 
