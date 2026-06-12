@@ -666,8 +666,6 @@
     </td>
 
 </tr>
-                               
-
                                  <tr>
     <td style="border-bottom:1px solid #d9d9d9;"></td>
     <td style="border-bottom:1px solid #d9d9d9;font-size:12px;
@@ -675,7 +673,7 @@
                                             line-height:1.7;
                                             white-space:normal;
                                             word-break:break-word;" colspan="4">
-       <span t-field="line.name"/>
+        <span t-esc="line.product_id.description or ''"/>
     </td>
     <td style="border-bottom:1px solid #d9d9d9;"></td>
 </tr>
