@@ -559,7 +559,7 @@
                     style="
                         padding:10px;
                         font-size:15px;
-                        font-weight:bold;
+                        font-weight:bold;padding-left:15px;
                         background:#f7f7f7;
                         color:#1a3a5a;
                         border-bottom:1px solid #d9d9d9;

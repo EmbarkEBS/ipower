@@ -395,7 +395,7 @@
                                                 </td>
 
                                             </tr>
-                                             <t t-if="o.x_studio_project_reference">     <tr>
+                                             <t t-if="o.sale_id and o.sale_id.x_studio_project_reference">     <tr>
 
                                                 <td style="
                                                     padding:4px 0; font-size:15px;
@@ -408,7 +408,7 @@
                                                 <td style="padding:4px 0;">
 
                                                     :
-                                                    <span t-esc="o.x_studio_project_reference or ''"/>
+                                                    <span t-esc="o.sale_id and o.sale_id.x_studio_project_reference or ''"/>
 
                                                 </td>
 
