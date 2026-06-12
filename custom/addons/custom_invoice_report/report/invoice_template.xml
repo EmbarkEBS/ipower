@@ -701,15 +701,13 @@
 
                     <t t-if="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
 
-                      <t t-set="serials"
+                        <t t-set="serials"
    t-value="', '.join(line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
 
 <t t-if="serials">
-    <span>Serial No:</span>
+    <span><strong>Serial No:</strong></span>
     <span t-esc="serials"/>
 </t>
-
-                        </t>
 
                     </t>
 
