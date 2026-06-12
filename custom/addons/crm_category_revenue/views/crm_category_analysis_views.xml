@@ -8,7 +8,7 @@
             <list>
                 <field name="lead_id"/>
                 <field name="customer_id"/>
-                <field name="vendor_ids" widget="many2many_tags"/>
+                <field name="vendor_id" widget="many2one_tags"/>
                 <field name="category_id"/>
                 <field name="status"/>
                 <field name="amount" sum="Total Category Amount"/>
@@ -23,7 +23,7 @@
             <search>
                 <field name="lead_id"/>
                 <field name="customer_id"/>
-                <field name="vendor_ids"/>
+                <field name="vendor_id"/>
                 <field name="category_id"/>
                 <field name="status"/>
 
