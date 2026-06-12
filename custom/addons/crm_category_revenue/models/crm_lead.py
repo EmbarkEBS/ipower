@@ -174,7 +174,7 @@
 #                 lead.category_line_ids.mapped("category_id.name")
 #             )
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -220,23 +220,41 @@ class CrmLead(models.Model):
     def _compute_category_names(self):
         for lead in self:
             lead.category_names = ", ".join(
-                lead.category_line_ids.mapped(
-                    "category_id.name"
-                )
+                lead.category_line_ids.mapped("category_id.name")
             )
 
-    def action_set_won_rainbowman(self):
+    def _check_category_status_before_close(self):
+        """
+        Prevent opportunity from being moved to a Won/Closed stage
+        when at least one category is still Active.
+        """
         for lead in self:
-
             active_lines = lead.category_line_ids.filtered(
-                lambda line: line.status == "active"
+                lambda l: l.status == "active"
             )
 
             if active_lines:
                 raise ValidationError(
-                    "Project cannot be closed. "
-                    "All product categories must first be "
-                    "updated to Won or Lost."
+                    _(
+                        "Project cannot be closed.\n\n"
+                        "All product categories must first be updated to Won or Lost."
+                    )
                 )
 
+    def write(self, vals):
+        if vals.get("stage_id"):
+            stage = self.env["crm.stage"].browse(vals["stage_id"])
+
+            # Custom Closed stage has Is Won checked
+            if stage.exists() and stage.is_won:
+                self._check_category_status_before_close()
+
+        return super().write(vals)
+
+    def action_set_won(self):
+        self._check_category_status_before_close()
+        return super().action_set_won()
+
+    def action_set_won_rainbowman(self):
+        self._check_category_status_before_close()
         return super().action_set_won_rainbowman()
