@@ -168,7 +168,7 @@ class CrmLeadCategoryLine(models.Model):
         required=True
     )
 
-    vendor_ids = fields.Many2many(
+    vendor_id = fields.Many2one(
         "res.partner",
         "crm_category_vendor_rel",
         "line_id",
