@@ -144,15 +144,12 @@
                                     text-align:center;
                                 ">
 
-                                    <h1 style="
-                                        margin:0;
-                                        font-size:28px;
-                                        font-weight:bold;
-                                        color:#000;
-                                        margin-top:20px;
-                                    ">
-                                        TAX INVOICE
-                                    </h1>
+                                 <t t-if="o.state == 'draft'">
+        DRAFT INVOICE
+    </t>
+    <t t-else="">
+        TAX INVOICE
+    </t>
 
                                     <div style="
                                         width:350px;
@@ -204,7 +201,9 @@
                                         margin-top:10px;
                                     ">
 
-                                        # <span t-field="o.name"/>
+                                    <t t-if="o.state != 'draft'">
+        # <span t-field="o.name"/>
+    </t>
 
                                     </div>
 
@@ -625,7 +624,12 @@
                         line-height:1.5;
                         width:100%;
                     ">
-                        <span t-field="line.product_id.name"/>
+                       <t t-if="line.product_id">
+    <span t-field="line.product_id.name"/>
+</t>
+<t t-else="">
+    <span t-field="line.name"/>
+</t>
                     </div>
                 </td>
 
@@ -666,7 +670,7 @@
                 </td>
 
             </tr>
-
+<t t-if="line.product_id and not line.display_type">
             <!-- ORDERING CODE -->
             <tr>
                 <td></td>
@@ -697,17 +701,13 @@
 
                     <t t-if="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
 
-                        <span>Serial No:</span>
+                      <t t-set="serials"
+   t-value="', '.join(line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
 
-                        <t t-foreach="line.sale_line_ids.move_ids.move_line_ids" t-as="ml">
-
-                            <t t-if="ml.lot_id">
-
-                                <small>
-                                    <span t-esc="ml.lot_id.name"/>
-                                </small>
-
-                            </t>
+<t t-if="serials">
+    <span>Serial No:</span>
+    <span t-esc="serials"/>
+</t>
 
                         </t>
 
@@ -716,7 +716,7 @@
                 </td>
 
             </tr>
-
+</t>
             <!-- DESCRIPTION -->
             <tr style="border-bottom:1px solid #d9d9d9;">
 
