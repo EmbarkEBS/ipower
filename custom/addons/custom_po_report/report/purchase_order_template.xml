@@ -218,7 +218,7 @@
 
                             <table style="
                                 width:100%;
-                                font-size:13px;
+                                font-size:15px;
                                 border-collapse:collapse;
                                 margin-top:35px;
                                 margin-bottom:35px;
@@ -228,12 +228,12 @@
 
                                     <!-- ADDRESS -->
                                     <td style="
-                                        width:55%;font-size:13px;
+                                        width:55%;font-size:15px;
                                         vertical-align:top;
                                     ">
 
                                         <table style="
-                                            width:100%;font-size:13px;
+                                            width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
   <strong style="color:#1a3a5a;">
@@ -290,7 +290,7 @@
                                                 <!-- ADDRESS CONTENT -->
                                                 <td style="
                                                     vertical-align:top;
-                                                    font-size:13px;
+                                                    font-size:15px;
                                                     line-height:1.7;
                                                 ">
 
@@ -352,14 +352,13 @@
 
                                     <!-- META -->
                                     <td style="
-                                        width:45%; font-size:13px;
+                                        width:45%; font-size:15px;
                                         vertical-align:top;
-                                        font-size:13px;
                                         padding-left:40px;
                                     ">
 
                                         <table style="
-                                            width:100%;font-size:13px;
+                                            width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
 
@@ -367,11 +366,15 @@
 
                                                 <td style="
                                                     padding:4px 0;
-                                                    width:45%;font-size:13px;
+                                                    width:45%;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
-                                                ">
-                                                    Order Date
+                                                "> <t t-if="o.state in ['draft', 'sent']">
+       <span> Quote</span>
+    </t>
+    <t t-else="">
+      <span>Order</span>
+    </t> <span>Date</span>
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -384,10 +387,10 @@
 
                                             </tr>
 
-                                            <tr>
+                                        <t t-if="o.payment_term_id.name">    <tr>
 
                                                 <td style="
-                                                    padding:4px 0;
+                                                    padding:4px 0;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -401,13 +404,13 @@
 
                                                 </td>
                                                 </tr>
-                                            
+                                            </t>
 
-                                            <tr>
+                                          <t t-if="o.incoterm_id.code">  <tr>
 
                                                 <td style="
                                                     padding:4px 0;
-                                                    font-weight:bold;
+                                                    font-weight:bold;font-size:15px;
                                                     color:#1a3a5a;
                                                 ">
                                                Incoterms
@@ -418,12 +421,12 @@
     <span t-field="o.incoterm_id.code"/><t t-if="o.incoterm_location">  - <span t-field="o.incoterm_location"/></t>
 </td>
 
-                                            </tr>
+                                            </tr></t>
 
                                          <t t-if="o.origin">   <tr>
 
                                                 <td style="
-                                                    padding:4px 0;
+                                                    padding:4px 0;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -440,7 +443,7 @@
                                             </tr></t>
 <t t-if="o.x_studio_your_ref">
     <tr>
-        <td style="  padding:4px 0;
+        <td style="  padding:4px 0;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;">
             Your Ref
@@ -603,7 +606,10 @@
                                                     margin-bottom:6px;
                                                     
                                         ">                                
-                    <span>Ordering Code: </span>      <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                             <t t-if="line.product_id.type != 'service' and line.x_studio_related_field_2fu_1jmn8bvrv">
+                                <span>Ordering Code: </span>  
+                                    <span t-field="line.x_studio_related_field_2fu_1jmn8bvrv"/>
+                                    </t>
                       
 </td></tr>
 <tr style="border-bottom:1px solid #d9d9d9;">
@@ -716,7 +722,7 @@
          <table style="
                                             width:100%;
                                             border-collapse:collapse;
-                                            text-align:right;
+                                            text-align:right;padding-right:20px;
                                         ">
 
                                             <tr>
@@ -738,12 +744,21 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                    VAT (5%)
+                                    <t t-foreach="o.order_line" t-as="line">
+    <t t-foreach="line.tax_ids" t-as="tax">
+        <tr>
+            <td style="text-align:right;font-weight:bold;">
+                VAT (<span t-esc="int(tax.amount)"/>%)
+            </td>
+            <td style="text-align:right;">
+                <span t-field="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+            </td>
+        </tr>
+    </t>
+</t>
                                                 </td>
 
-                                                <td style="padding:5px;">
-                    <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
-                  </td>
+                                               
 
                                             </tr>
 

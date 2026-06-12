@@ -217,7 +217,7 @@
                         <!-- ADDRESS + META -->
                         <table style="
                             width:100%;
-                            font-size:13px;
+                            font-size:15px;
                             border-collapse:collapse;
                             margin-top:35px;
                             margin-bottom:35px;
@@ -232,7 +232,7 @@
                                 ">
 
                                     <table style="
-                                        width:100%;
+                                        width:100%;font-size:15px;
                                         border-collapse:collapse;
                                     ">
 
@@ -286,7 +286,7 @@
 
                                             <td style="
                                                 vertical-align:top;
-                                                font-size:13px;
+                                                font-size:15px;
                                                 line-height:1.7;
                                             ">
 
@@ -355,13 +355,13 @@
 
                                 <!-- META -->
                                 <td style="
-                                    width:45%;
+                                    width:45%;font-size:15px;
                                     vertical-align:top;
                                     padding-left:40px;
                                 ">
 
                                     <table style="
-                                        width:100%;
+                                        width:100%;font-size:15px;
                                         border-collapse:collapse;
                                     ">
 
@@ -369,7 +369,7 @@
 
                                             <td style="
                                                 padding:4px 0;
-                                                width:45%;
+                                                width:45%;font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -388,7 +388,7 @@
                                         <tr>
 
                                             <td style="
-                                                padding:4px 0;
+                                                padding:4px 0;font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -426,7 +426,7 @@
                                        <tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:5px 0;font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -444,7 +444,7 @@
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:5px 0;font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -460,7 +460,7 @@
 
                                         <tr>
     <td style="
-        padding:4px 0;
+        padding:4px 0;font-size:15px;
         font-weight:bold;
         color:#1a3a5a;
     ">
@@ -750,7 +750,7 @@
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
-                                        text-align:right;
+                                        text-align:right;padding-right:20px;
                                     ">
 
                                         <tr>
@@ -774,12 +774,26 @@
                                                 padding:5px;
                                                 font-weight:bold;
                                             ">
-                                                VAT
+                                              <t t-foreach="o.invoice_line_ids" t-as="line">
+    <t t-foreach="line.tax_ids" t-as="tax">
+        <tr>
+            <td style="padding:5px;font-weight:bold;">
+                VAT <span t-esc="int(tax.amount)"/>%
+                on
+               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                
+            </td>
+
+            <td style="padding:5px;text-align:right;">
+               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+                
+            </td>
+        </tr>
+    </t>
+</t>
                                             </td>
 
-                                            <td style="padding:5px;">
-                                                <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
-                                            </td>
+                                         
 
                                         </tr>
 

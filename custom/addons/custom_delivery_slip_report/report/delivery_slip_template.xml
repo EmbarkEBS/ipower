@@ -50,7 +50,7 @@
                             <!-- WATERMARK -->
 <div style="
     position:absolute;
-    top:65%;
+    top:72%;
     left:25%;
     opacity:0.10;
     transform:translate(-50%, -50%) rotate(-25deg);
@@ -211,7 +211,7 @@
 
                             <table style="
                                 width:100%;
-                                font-size:13px;
+                                font-size:15px;
                                 border-collapse:collapse;
                                 margin-top:35px;
                                 margin-bottom:35px;
@@ -221,12 +221,12 @@
 
                                     <!-- ADDRESS -->
                                     <td style="
-                                        width:55%;font-size:13px;
+                                        width:55%;font-size:15px;
                                         vertical-align:top;
                                     ">
 
                                         <table style="
-                                            width:100%;font-size:13px;
+                                            width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
   <strong style="color:#1a3a5a;">
@@ -283,7 +283,7 @@
                                                 <!-- ADDRESS CONTENT -->
                                                 <td style="
                                                     vertical-align:top;
-                                                    font-size:13px;
+                                                    font-size:15px;
                                                     line-height:1.7;
                                                 ">
 
@@ -345,14 +345,14 @@
 
                                     <!-- META -->
                                     <td style="
-                                        width:45%; font-size:13px;
+                                        width:45%; font-size:15px;
                                         vertical-align:top;
                                         font-size:13px;
                                         padding-left:40px;
                                     ">
 
                                         <table style="
-                                            width:100%;font-size:13px;
+                                            width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
 
@@ -360,7 +360,7 @@
 
                                                 <td style="
                                                     padding:4px 0;
-                                                    width:45%;font-size:13px;
+                                                    width:45%;font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -380,7 +380,7 @@
                                                   <tr>
 
                                                 <td style="
-                                                    padding:4px 0;
+                                                    padding:4px 0; font-size:15px;
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
@@ -398,7 +398,7 @@
   <t t-set="sale_order" t-value="o.sale_id"/>                                     
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref">
     <tr>
-        <td style="font-weight:bold;color:#1a3a5a;">
+        <td style="font-weight:bold; font-size:15px;color:#1a3a5a;">
             Customer PO Ref
         </td>
         <td>

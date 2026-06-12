@@ -11,13 +11,14 @@
                         string="Preview"
                         class="btn-secondary"
                         icon="fa-eye"
-                        invisible="move_type not in ('out_invoice','in_invoice')"/>
+                         invisible="move_type != 'out_invoice'"/>
 
             <button name="action_print_custom_invoice"
                     type="object"
                     string="Print Invoice"
                     class="btn-primary"
-                    icon="fa-print"/>
+                    icon="fa-print" 
+                    invisible="move_type != 'out_invoice'"/>
 
         </xpath>
 

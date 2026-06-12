@@ -204,20 +204,26 @@
                                         margin-top:10px;
                                     ">
 
-                                        # <span t-field="o.name"/>
+                                        # <!--<span t-field="o.name"/>--> <span t-esc="o.ref or ''"/>
 
                                     </div>
+ <div style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+ Balance Due
 
+    :
+  <span t-esc="o.currency_id.symbol"/>
+<span t-esc="' %.2f' % o.amount_residual"/>
+</div>
                                 </td>
 
                             </tr>
 
                         </table>
 
-                        <!-- ADDRESS + META -->
+                                             <!-- ADDRESS + META -->
                         <table style="
                             width:100%;
-                            font-size:13px;
+                            font-size:15px;
                             border-collapse:collapse;
                             margin-top:35px;
                             margin-bottom:35px;
@@ -227,17 +233,17 @@
 
                                 <!-- BILL TO -->
                                 <td style="
-                                    width:55%;
+                                    width:55%; font-size:15px;
                                     vertical-align:top;
                                 ">
 
                                     <table style="
-                                        width:100%;
+                                        width:100%; font-size:15px;
                                         border-collapse:collapse;
                                     ">
 
                                         <strong style="color:#1a3a5a;">
-                                            Vendor
+                                           Bill From
                                         </strong>
 
                                         <tr>
@@ -286,7 +292,7 @@
 
                                             <td style="
                                                 vertical-align:top;
-                                                font-size:13px;
+                                                font-size:15px;
                                                 line-height:1.7;
                                             ">
 
@@ -355,13 +361,13 @@
 
                                 <!-- META -->
                                 <td style="
-                                    width:45%;
+                                    width:45%; font-size:15px;
                                     vertical-align:top;
                                     padding-left:40px;
                                 ">
 
                                     <table style="
-                                        width:100%;
+                                        width:100%; font-size:15px;
                                         border-collapse:collapse;
                                     ">
 
@@ -370,7 +376,7 @@
                                             <td style="
                                                 padding:4px 0;
                                                 width:45%;
-                                                font-weight:bold;
+                                                font-weight:bold; font-size:15px;
                                                 color:#1a3a5a;
                                             ">
                                                 Invoice Date
@@ -388,7 +394,7 @@
                                         <tr>
 
                                             <td style="
-                                                padding:4px 0;
+                                                padding:4px 0; font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -404,9 +410,9 @@
 
                                         </tr>
 
-                                        <tr>
+                                      <!--  <tr>
 
-                                            <td style="
+                                            <td style=" font-size:15px;
                                                 padding:4px 0;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
@@ -421,12 +427,12 @@
 
                                             </td>
 
-                                        </tr>
+                                        </tr>-->
 
                                        <tr>
 
-                                         <td style="padding:5px 0;font-weight:bold;color:#1a3a5a;">
-    Purchase Order Ref
+                                         <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+   Our PO Number
 </td>
 <td>
     :
@@ -434,8 +440,20 @@
 </td>
 
                                         </tr>
-                                        <tr>
-    <td style="padding:5px 0;font-weight:bold;color:#1a3a5a;">
+                                       <!--<t t-if="o.ref">   <tr>
+
+                                       <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
+  Customer Bill Number
+</td>
+<td>
+    :
+    <span t-esc="o.ref or ''"/>
+</td>
+
+                                        </tr></t> -->
+                                         
+                                     <t t-if="o.invoice_incoterm_id.code">   <tr>
+    <td style="padding:5px 0;font-weight:bold; font-size:15px; font-size:15px;color:#1a3a5a;">
         Incoterm
     </td>
     <td>
@@ -443,13 +461,13 @@
         <span t-esc="o.invoice_incoterm_id.code if o.invoice_incoterm_id else ''"/><t t-if="o.incoterm_location"> - <span t-field="o.incoterm_location"/></t>
        <!-- <span t-esc="o.invoice_incoterm_id.name if o.invoice_incoterm_id else ''"/>-->
     </td>
-</tr>
+</tr></t>
 <t t-set="sale_order" t-value="o.line_ids.sale_line_ids.order_id[:1]"/>
 
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref"><tr>
 
                                             <td style="
-                                                padding:5px 0;
+                                                padding:5px 0; font-size:15px;
                                                 font-weight:bold;
                                                 color:#1a3a5a;
                                             ">
@@ -674,23 +692,13 @@
 
                                     </tr>-->
 
-                                    <tr style="border-bottom:1px solid #d9d9d9;">
-
-                                        <td></td>
-
-                                        <td colspan="4" style="
-                                            font-size:12px;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">
-
-                                            <span t-esc="line.product_id.description or ''"/>
-
-                                        </td>
-
-                                    </tr>
+                                 <tr>
+    <td style="border-bottom:1px solid #d9d9d9;"></td>
+    <td style="border-bottom:1px solid #d9d9d9;" colspan="4">
+        <span t-esc="line.product_id.description or ''"/>
+    </td>
+    <td style="border-bottom:1px solid #d9d9d9;"></td>
+</tr>
 
                                     <t t-set="sn" t-value="sn + 1"/>
 
@@ -731,8 +739,7 @@
 
                                 </td>
 
-                                <td style="width:45%;">
-
+                                <td style="width:45%; padding-right:30px;!important">
                                     <table style="
                                         width:100%;
                                         border-collapse:collapse;
@@ -754,21 +761,23 @@
 
                                         </tr>
 
-                                        <tr>
+                                          <t t-foreach="o.invoice_line_ids" t-as="line">
+    <t t-foreach="line.tax_ids" t-as="tax">
+        <tr>
+            <td style="padding:5px;font-weight:bold;">
+                VAT <span t-esc="int(tax.amount)"/>%
+                on
+                 <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % line.price_subtotal"/>
+           
+            </td>
 
-                                            <td style="
-                                                padding:5px;
-                                                font-weight:bold;
-                                            ">
-                                                VAT
-                                            </td>
-
-                                            <td style="padding:5px;">
-                                                <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_tax)"/>
-                                            </td>
-
-                                        </tr>
-
+            <td style="padding:5px;text-align:right;">
+                  <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % (line.price_subtotal * tax.amount / 100)"/>
+           
+            </td>
+        </tr>
+    </t>
+</t>
                                         <tr style="
                                             font-size:16px;
                                             color:#1a3a5a;
