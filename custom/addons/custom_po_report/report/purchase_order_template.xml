@@ -441,7 +441,7 @@
                                                 </td>
 
                                             </tr></t>
-<t t-if="o.x_studio_your_ref">
+<t t-if="o.partner_ref">
     <tr>
         <td style="  padding:4px 0;font-size:15px;
                                                     font-weight:bold;
@@ -450,7 +450,7 @@
         </td>
         <td style="padding:4px 0;">
             :
-            <span t-esc="o.x_studio_your_ref"/>
+            <span t-esc="o.partner_ref"/>
         </td>
     </tr>
 </t>

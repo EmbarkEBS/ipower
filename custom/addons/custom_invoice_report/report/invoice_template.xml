@@ -144,12 +144,18 @@
                                     text-align:center;
                                 ">
 
-                                 <t t-if="o.state == 'draft'">
+                               <h1 style="
+    margin:0;
+    font-size:28px;
+    font-weight:bold;
+    color:#000;
+    margin-top:20px;
+">   <t t-if="o.state == 'draft'">
         DRAFT INVOICE
     </t>
     <t t-else="">
         TAX INVOICE
-    </t>
+    </t></h1>
 
                                     <div style="
                                         width:350px;
@@ -364,7 +370,7 @@
                                         border-collapse:collapse;
                                     ">
 
-                                        <tr>
+                                      <t t-if="o.invoice_date">  <tr>
 
                                             <td style="
                                                 padding:4px 0;
@@ -382,7 +388,7 @@
 
                                             </td>
 
-                                        </tr>
+                                        </tr></t>
 
                                         <tr>
 
@@ -706,7 +712,7 @@
 
 <t t-if="serials">
     <span><strong>Serial No:</strong></span>
-    <span t-esc="serials"/>
+    <small> <span t-esc="serials"/> </small>
 </t>
 
                     </t>

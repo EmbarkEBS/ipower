@@ -395,6 +395,24 @@
                                                 </td>
 
                                             </tr>
+                                             <t t-if="o.x_studio_project_reference">     <tr>
+
+                                                <td style="
+                                                    padding:4px 0; font-size:15px;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                    Your Ref
+                                                </td>
+
+                                                <td style="padding:4px 0;">
+
+                                                    :
+                                                    <span t-esc="o.x_studio_project_reference or ''"/>
+
+                                                </td>
+
+                                            </tr></t>
   <t t-set="sale_order" t-value="o.sale_id"/>                                     
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref">
     <tr>
