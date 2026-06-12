@@ -177,6 +177,12 @@ class CrmLeadCategoryLine(models.Model):
         domain="[('supplier_rank', '>', 0)]"
     )
 
+    vendor_id = fields.Many2one(
+        "res.partner",
+        string="Vendor",
+        domain="[('supplier_rank', '>', 0)]"
+    )
+
     status = fields.Selection(
         [
             ("active", "Active"),
