@@ -50,7 +50,7 @@
                             <!-- WATERMARK -->
 <div style="
     position:absolute;
-    top:70%;
+    top:72%;
     left:25%;
     opacity:0.10;
     transform:translate(-50%, -50%) rotate(-25deg);
