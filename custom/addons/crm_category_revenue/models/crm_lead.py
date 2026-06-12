@@ -176,50 +176,50 @@
     #             lead.category_line_ids.mapped("category_id.name")
     #         )
 
-from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+# from odoo import models, fields, api
+# from odoo.exceptions import ValidationError
 
 
-class CrmLead(models.Model):
-    _inherit = "crm.lead"
+# class CrmLead(models.Model):
+#     _inherit = "crm.lead"
 
-    category_line_ids = fields.One2many(
-        "crm.lead.category.line",
-        "lead_id",
-        string="Category Details"
-    )
+#     category_line_ids = fields.One2many(
+#         "crm.lead.category.line",
+#         "lead_id",
+#         string="Category Details"
+#     )
 
-    total_category_amount = fields.Float(
-        string="Total Amount",
-        compute="_compute_total_amount",
-        store=True,
-    )
+#     total_category_amount = fields.Float(
+#         string="Total Amount",
+#         compute="_compute_total_amount",
+#         store=True,
+#     )
 
-    @api.depends("category_line_ids.amount",
-                 "category_line_ids.status")
-    def _compute_total_amount(self):
-        for lead in self:
+#     @api.depends("category_line_ids.amount",
+#                  "category_line_ids.status")
+#     def _compute_total_amount(self):
+#         for lead in self:
 
-            won_total = sum(
-                lead.category_line_ids.filtered(
-                    lambda l: l.status == "won"
-                ).mapped("amount")
-            )
+#             won_total = sum(
+#                 lead.category_line_ids.filtered(
+#                     lambda l: l.status == "won"
+#                 ).mapped("amount")
+#             )
 
-            lead.total_category_amount = won_total
-            lead.expected_revenue = won_total
+#             lead.total_category_amount = won_total
+#             lead.expected_revenue = won_total
 
-    def action_set_won_rainbowman(self):
-        for lead in self:
-            active_lines = lead.category_line_ids.filtered(
-                lambda l: l.status == "active"
-            )
+#     def action_set_won_rainbowman(self):
+#         for lead in self:
+#             active_lines = lead.category_line_ids.filtered(
+#                 lambda l: l.status == "active"
+#             )
 
-            if active_lines:
-                raise ValidationError(
-                    "Project cannot be closed. "
-                    "All product categories must first be "
-                    "updated to Won or Lost."
-                )
+#             if active_lines:
+#                 raise ValidationError(
+#                     "Project cannot be closed. "
+#                     "All product categories must first be "
+#                     "updated to Won or Lost."
+#                 )
 
-        return super().action_set_won_rainbowman()
+#         return super().action_set_won_rainbowman()
