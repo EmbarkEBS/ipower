@@ -430,7 +430,7 @@
                                                     font-weight:bold;
                                                     color:#1a3a5a;
                                                 ">
-                                                    Your Ref
+                                                   Project Ref
                                                 </td>
 
                                                 <td style="padding:4px 0;">
@@ -459,7 +459,7 @@
                                                 </td>
 
                                             </tr></t>
-                                              <t t-if="o.validity_date">     <tr>
+                                               <t t-if="o.state in ['draft', 'sent']">    <tr>
 
                                                 <td style="
                                                     padding:4px 0; font-size:15px;
@@ -553,115 +553,190 @@
 
                                     <t t-set="sn" t-value="1"/>
 
-                                    <t t-foreach="o.order_line" t-as="line">
+                                  <t t-foreach="o.order_line" t-as="line">
 
-                                        <tr>
+    <!-- SECTION -->
+    <t t-if="line.display_type == 'line_section'">
 
-                                            <!-- SN -->
-                                            <td style="font-size:15px;
-                                               padding-top:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="sn"/>
-                                            </td>
+        <tr>
+            <td colspan="5"
+                style="
+                    padding-top:15px;
+                    padding-bottom:10px;padding-left:15px;
+                    font-size:15px;
+                    font-weight:bold;
+                    color:#1a3a5a;
+                    border-bottom:1px solid #d9d9d9;
+                    background:#f7f7f7;
+                ">
+                <span t-field="line.name"/>
+            </td>
+        </tr>
 
-                                            <!-- DESCRIPTION -->
-                                            <td style="
-                                                padding-top:15px;
-                                                vertical-align:top;
-                                                width:55%;
-                                                white-space:normal;
-                                                word-break:break-word;
-                                            ">
+    </t>
 
-                                                <div style="
-                                                    font-weight:bold;
-                                                    margin-bottom:6px;
-                                                    font-size:15px;
-                                                    line-height:1.5;
-                                                    width:100%;
-                                                ">
-                                                    <!--<span t-field="line.product_id.display_name"/>-->
-                                                 
-                                                 <span t-field="line.product_id.name"/>
-                                                  </div>
+    <!-- NOTE -->
+    <t t-elif="line.display_type == 'line_note'">
 
-                                            
-                                            </td>
+        <tr>
+            <td></td>
+            <td colspan="4"
+                style="
+                    padding:10px 0;
+                    font-style:italic;
+                    color:#666;
+                ">
+                <span t-field="line.name"/>
+            </td>
+        </tr>
 
-                                            <!-- QTY -->
-                                            <td style="
-                                              padding-top:15px;
-                                              font-size:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="int(line.product_uom_qty)"/>
-                                            </td>
+    </t>
 
-                                            <!-- UNIT PRICE -->
-                                            <td style="
-                                                padding-top:15px;
-                                                font-size:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
-                                            </td>
+    <!-- NORMAL PRODUCT / DOWN PAYMENT PRODUCT -->
+    <t t-else="">
 
-                                            <!-- TOTAL -->
-                                            <td style="
-                                              padding-top:15px;
-                                              font-size:15px;
-                                                text-align:center;
-                                                vertical-align:top;
-                                            ">
-                                                <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                                            </td>
+        <tr>
 
-                                        </tr>
-                                        <tr >
-                                        <td></td>
-                                        <td  colspan="4" style="
-                                                                                   font-size:13px;
-                                                    margin-bottom:6px;
-                                        ">                                
-                <div style="margin-top:8px;"> 
-                
-              <t t-if="line.product_id.type != 'service' and line.x_studio_related_field_8b0_1jmkth7qs">
-   <span style=" font-weight:bold;">Ordering Code: </span> 
-        <span style=" font-weight:bold;" t-field="line.x_studio_related_field_8b0_1jmkth7qs"/>
+            <!-- SN -->
+            <td style="font-size:15px;
+                       padding-top:15px;
+                       text-align:center;
+                       vertical-align:top;">
+                <span t-esc="sn"/>
+            </td>
+
+            <!-- DESCRIPTION -->
+            <td style="
+                padding-top:15px;
+                vertical-align:top;
+                width:55%;
+                white-space:normal;
+                word-break:break-word;
+            ">
+                <div style="
+                    font-weight:bold;
+                    margin-bottom:6px;
+                    font-size:15px;
+                    line-height:1.5;
+                    width:100%;
+                ">
+
+                    <!-- For down payment use line.name -->
+                    <t t-if="line.is_downpayment">
+                        <span t-field="line.name"/>
+                    </t>
+                    <t t-else="">
+                        <span t-field="line.product_id.name"/>
+                    </t>
+
+                </div>
+            </td>
+
+            <!-- QTY -->
+            <td style="
+                padding-top:15px;
+                font-size:15px;
+                text-align:center;
+                vertical-align:top;
+            ">
+                <span t-esc="int(line.product_uom_qty)"/>
+            </td>
+
+            <!-- UNIT PRICE -->
+            <td style="
+                padding-top:15px;
+                font-size:15px;
+                text-align:center;
+                vertical-align:top;
+            ">
+                <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
+            </td>
+
+            <!-- TOTAL -->
+            <td style="
+                padding-top:15px;
+                font-size:15px;
+                text-align:center;
+                vertical-align:top;
+            ">
+                <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+            </td>
+
+        </tr>
+
+        <!-- EXTRA DETAILS ONLY FOR REAL PRODUCTS -->
+        <t t-if="not line.is_downpayment">
+
+            <tr>
+                <td></td>
+                <td colspan="4" style="font-size:13px;">
+
+                    <div style="margin-top:8px;">
+
+                        <t t-if="line.product_id.type != 'service' and line.x_studio_related_field_8b0_1jmkth7qs">
+
+                            <span style="font-weight:bold;">
+                                Ordering Code:
+                            </span>
+
+                            <span style="font-weight:bold;"
+                                  t-field="line.x_studio_related_field_8b0_1jmkth7qs"/>
+
+                        </t>
+
+                    </div>
+
+                    <div style="margin-top:8px;">
+
+                        <t t-if="line.x_studio_expected_delivery_2">
+
+                            <span>Expected Delivery Date: </span>
+                            <span t-esc="line.x_studio_expected_delivery_2"/>
+
+                        </t>
+
+                    </div>
+
+                    <div style="margin-top:8px;">
+
+                        <t t-if="line.x_studio_p_warranty">
+
+                            <span>Warranty: </span>
+                            <span t-esc="line.x_studio_p_warranty"/>
+
+                        </t>
+
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr style="border-bottom:1px solid #d9d9d9;">
+
+                <td></td>
+
+                <td colspan="4"
+                    style="
+                        padding-bottom:15px;
+                        font-size:12px;
+                        color:#666;
+                        line-height:1.7;
+                        white-space:normal;
+                        word-break:break-word;
+                    ">
+
+                    <span t-esc="line.product_id.description or ''"/>
+
+                </td>
+
+            </tr>
+
         </t>
-        </div>
-         <div style="margin-top:8px;">     <t t-if="line.x_studio_expected_delivery_2">
-   <span>Expected Delivery Date: </span>    <span t-esc="line.x_studio_expected_delivery_2"/>
-</t></div>
-              <div style="margin-top:8px;">  
-               <t t-if="line.x_studio_p_warranty">
-                  <span>Warranty: </span>
-                   <span t-esc="line.x_studio_p_warranty or ''"/>
-             </t>
-            </div>
-                      
-</td></tr>
-<tr style="border-bottom:1px solid #d9d9d9;">
-                                        <td></td>
-                                        <td  colspan="4" style="
-                                           padding-botton:15px;
-                                            font-size:12px;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">                               
 
-                                                    <span t-esc="line.product_id.description or ''"/>
+        <t t-set="sn" t-value="sn + 1"/>
 
-                                 
-                                  
-                                                </td></tr>
-                                        <t t-set="sn" t-value="sn + 1"/>
+    </t>
+
 
                                     </t>
 

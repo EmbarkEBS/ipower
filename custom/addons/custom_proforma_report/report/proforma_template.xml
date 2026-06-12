@@ -542,163 +542,204 @@
 
                             </thead>
 
-                            <tbody>
+                           <tbody>
 
-                                <t t-set="sn" t-value="1"/>
+    <t t-set="sn" t-value="1"/>
 
-                               <t t-foreach="o.order_line.filtered(lambda l: not l.display_type)" t-as="line">
+    <t t-foreach="o.order_line" t-as="line">
 
-                                    <tr>
+        <!-- SKIP DOWN PAYMENT -->
+        <t t-if="line.is_downpayment"/>
 
-                                        <td style="
-                                           font-size:15px;
-                                           padding-top:15px;
-                                           text-align:center;
-                                           vertical-align:top;
-                                        ">
-                                            <span t-esc="sn"/>
-                                        </td>
+        <!-- SECTION -->
+        <t t-elif="line.display_type == 'line_section'">
 
-                                        <td style="
-                                            padding-top:15px;
-                                            vertical-align:top;
-                                            width:45%;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">
-
-                                            <div style="
-                                                font-weight:bold;
-                                                margin-bottom:6px;
-                                                font-size:15px;
-                                                line-height:1.5;
-                                                width:100%;
-                                            ">
-
-                                                <span t-esc="line.product_id.name"/>
-
-                                            </div>
-
-                                        </td>
-    <td style="
-                                          padding-top:15px;
-                                          font-size:15px;
-                                          text-align:center;
-                                          vertical-align:top;
-                                        ">
-                                            <span t-esc="line.product_id.product_tmpl_id.hs_code"/>
-                                        </td>
-                                        <td style="
-                                          padding-top:15px;
-                                          font-size:15px;
-                                          text-align:center;
-                                          vertical-align:top;
-                                        ">
-                                       <span t-esc="int(line.product_uom_qty)"/>
-                                        </td>
-
-                                        <td style="
-                                            padding-top:15px;
-                                            font-size:15px;
-                                            text-align:center;
-                                            vertical-align:top;
-                                        ">
-                                            <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
-                                        </td>
-
-                                        <td style="
-                                          padding-top:15px;
-                                          font-size:15px;
-                                          text-align:center;
-                                          vertical-align:top;
-                                        ">
-                                            <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                                        </td>
-
-                                    </tr>
-                       <tr >
-                                        <td></td>
-                                        <td  colspan="4" style="
-                                          font-weight:bold;
-                                          font-size:13px;
-                                                    margin-bottom:6px;
-                                        ">                                
-                    <span>Ordering Code: </span>     <span t-esc="line.product_id.product_tmpl_id.x_studio_sku_code or ''"/><br/>
-                            
-                      
-</td></tr>
-<tr>
-
-    <td></td>
-    <td colspan="4" style="
-                                          font-weight:bold;
-                                          font-size:14px;
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">
-
-        <t t-if="line.move_ids and line.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
-
-            <span>Serial No:</span>
-            
-
-        <t t-foreach="line.move_ids.move_line_ids" t-as="ml">
-
-                <t t-if="ml.lot_id">
-
-                    <small>
-                        <span t-esc="ml.lot_id.name"/>
-                    </small>
-
-                </t>
-
-            </t>
+            <tr>
+                <td colspan="6"
+                    style="
+                        padding:10px;
+                        font-size:15px;
+                        font-weight:bold;padding-left:15px;
+                        background:#f7f7f7;
+                        color:#1a3a5a;
+                        border-bottom:1px solid #d9d9d9;
+                    ">
+                    <span t-field="line.name"/>
+                </td>
+            </tr>
 
         </t>
 
-    </td>
+        <!-- NOTE -->
+        <t t-elif="line.display_type == 'line_note'">
 
-</tr>
-                                 <!--   <tr>
+            <tr>
+                <td></td>
+                <td colspan="5"
+                    style="
+                        padding:8px 0;
+                        font-style:italic;
+                        color:#666;
+                    ">
+                    <span t-field="line.name"/>
+                </td>
+            </tr>
 
-                                        <td></td>
+        </t>
 
-                                        <td colspan="4" style="
-                                            font-weight:bold;
-                                            font-size:11px;
-                                        ">
+        <!-- PRODUCT LINE -->
+        <t t-else="">
 
-                                            <span>Taxes: </span>
+            <tr>
 
-                                            <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
+                <!-- SN -->
+                <td style="
+                    font-size:15px;
+                    padding-top:15px;
+                    text-align:center;
+                    vertical-align:top;
+                ">
+                    <span t-esc="sn"/>
+                </td>
 
-                                        </td>
+                <!-- PRODUCT -->
+                <td style="
+                    padding-top:15px;
+                    vertical-align:top;
+                    width:45%;
+                    white-space:normal;
+                    word-break:break-word;
+                ">
 
-                                    </tr>-->
+                    <div style="
+                        font-weight:bold;
+                        margin-bottom:6px;
+                        font-size:15px;
+                        line-height:1.5;
+                    ">
+                        <span t-esc="line.product_id.name"/>
+                    </div>
 
-                                    <tr style="border-bottom:1px solid #d9d9d9;">
+                </td>
 
-                                        <td></td>
+                <!-- HS CODE -->
+                <td style="
+                    padding-top:15px;
+                    font-size:15px;
+                    text-align:center;
+                    vertical-align:top;
+                ">
+                    <span t-esc="line.product_id.product_tmpl_id.hs_code"/>
+                </td>
 
-                                        <td colspan="4" style="
-                                            font-size:12px;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">
+                <!-- QTY -->
+                <td style="
+                    padding-top:15px;
+                    font-size:15px;
+                    text-align:center;
+                    vertical-align:top;
+                ">
+                    <span t-esc="int(line.product_uom_qty)"/>
+                </td>
 
-                                            <span t-esc="line.product_id.description or ''"/>
+                <!-- UNIT PRICE -->
+                <td style="
+                    padding-top:15px;
+                    font-size:15px;
+                    text-align:center;
+                    vertical-align:top;
+                ">
+                    <span t-esc="'{:,.2f}'.format(line.price_unit)"/>
+                </td>
 
-                                        </td>
+                <!-- TOTAL -->
+                <td style="
+                    padding-top:15px;
+                    font-size:15px;
+                    text-align:center;
+                    vertical-align:top;
+                ">
+                    <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                </td>
 
-                                    </tr>
+            </tr>
 
-                                    <t t-set="sn" t-value="sn + 1"/>
+            <!-- ORDERING CODE -->
+            <tr>
 
-                                </t>
+                <td></td>
 
-                            </tbody>
+                <td colspan="5"
+                    style="
+                        font-weight:bold;
+                        font-size:13px;
+                    ">
+
+                    <t t-if="line.product_id.product_tmpl_id.x_studio_sku_code">
+
+                        <span>Ordering Code: </span>
+
+                        <span t-esc="line.product_id.product_tmpl_id.x_studio_sku_code"/>
+
+                    </t>
+
+                </td>
+
+            </tr>
+
+            <!-- SERIAL NUMBERS -->
+            <tr>
+
+                <td></td>
+
+                <td colspan="5"
+                    style="
+                        font-weight:bold;
+                        font-size:11px;
+                    ">
+
+                    <t t-set="serials"
+                       t-value="', '.join(line.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
+
+                    <t t-if="serials">
+
+                        <span>Serial No:</span>
+                       <small> <span t-esc="serials"/></small>
+
+                    </t>
+
+                </td>
+
+            </tr>
+
+            <!-- DESCRIPTION -->
+            <tr style="border-bottom:1px solid #d9d9d9;">
+
+                <td></td>
+
+                <td colspan="5"
+                    style="
+                        padding-bottom:15px;
+                        font-size:12px;
+                        color:#666;
+                        line-height:1.7;
+                        white-space:normal;
+                        word-break:break-word;
+                    ">
+
+                    <span t-esc="line.product_id.description or ''"/>
+
+                </td>
+
+            </tr>
+
+            <t t-set="sn" t-value="sn + 1"/>
+
+        </t>
+
+    </t>
+
+</tbody>
 
                         </table>
 

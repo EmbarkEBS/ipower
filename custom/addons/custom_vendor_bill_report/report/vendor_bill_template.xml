@@ -643,58 +643,36 @@
                             
                       
 </td></tr>
-<tr t-foreach="o.invoice_line_ids" t-as="line">
+<tr>
 
     <td></td>
-    <td colspan="4" style="
-                                          font-weight:bold;
-                                          font-size:14px;
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">
+
+    <td colspan="4"
+        style="
+            font-weight:bold;
+            font-size:11px;
+        ">
 
         <t t-if="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)">
 
-            <span>Serial No:</span>
-            
+            <t t-set="serials"
+               t-value="', '.join(line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
 
-            <t t-foreach="line.sale_line_ids.move_ids.move_line_ids" t-as="ml">
-
-                <t t-if="ml.lot_id">
-
-                    <small>
-                        <span t-esc="ml.lot_id.name"/>
-                    </small>
-
-                </t>
-
-            </t>
+            <span><strong>Serial No:</strong></span>
+            <small><span t-esc="serials"/></small>
 
         </t>
 
     </td>
 
 </tr>
-                                 <!--   <tr>
-
-                                        <td></td>
-
-                                        <td colspan="4" style="
-                                            font-weight:bold;
-                                            font-size:11px;
-                                        ">
-
-                                            <span>Taxes: </span>
-
-                                            <span t-esc="', '.join(line.tax_ids.mapped('name'))"/>
-
-                                        </td>
-
-                                    </tr>-->
-
                                  <tr>
     <td style="border-bottom:1px solid #d9d9d9;"></td>
-    <td style="border-bottom:1px solid #d9d9d9;" colspan="4">
+    <td style="border-bottom:1px solid #d9d9d9;font-size:12px;
+                                            color:#666;
+                                            line-height:1.7;
+                                            white-space:normal;
+                                            word-break:break-word;" colspan="4">
         <span t-esc="line.product_id.description or ''"/>
     </td>
     <td style="border-bottom:1px solid #d9d9d9;"></td>
