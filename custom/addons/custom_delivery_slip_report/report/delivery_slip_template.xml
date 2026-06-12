@@ -395,24 +395,40 @@
                                                 </td>
 
                                             </tr>
-                                             <t t-if="o.sale_id and o.sale_id.x_studio_project_reference">     <tr>
+                                            <!-- Your Ref -->
+<t t-if="o.sale_id and o.sale_id.x_studio_project_reference">
+    <tr>
+        <td style="
+            padding:4px 0;
+            font-size:15px;
+            font-weight:bold;
+            color:#1a3a5a;
+        ">
+            Your Ref
+        </td>
+        <td style="padding:4px 0;">
+            :
+            <span t-field="o.sale_id.x_studio_project_reference"/>
+        </td>
+    </tr>
+</t>
 
-                                                <td style="
-                                                    padding:4px 0; font-size:15px;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">
-                                                    Your Ref
-                                                </td>
-
-                                                <td style="padding:4px 0;">
-
-                                                    :
-                                                    <span t-esc="o.sale_id and o.sale_id.x_studio_project_reference or ''"/>
-
-                                                </td>
-
-                                            </tr></t>
+<t t-elif="o.purchase_id and o.purchase_id.partner_ref">
+    <tr>
+        <td style="
+            padding:4px 0;
+            font-size:15px;
+            font-weight:bold;
+            color:#1a3a5a;
+        ">
+            Your Ref
+        </td>
+        <td style="padding:4px 0;">
+            :
+            <span t-field="o.purchase_id.partner_ref"/>
+        </td>
+    </tr>
+</t>
   <t t-set="sale_order" t-value="o.sale_id"/>                                     
 <t t-if="sale_order and sale_order.x_studio_customer_po_ref">
     <tr>
