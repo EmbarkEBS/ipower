@@ -396,7 +396,7 @@
 
                                             </tr>
                                             <!-- Your Ref -->
-<t t-if="o.sale_id and o.sale_id.x_studio_project_reference">
+<!--<t t-if="o.sale_id and o.sale_id.x_studio_project_reference">
     <tr>
         <td style="
             padding:4px 0;
@@ -404,16 +404,16 @@
             font-weight:bold;
             color:#1a3a5a;
         ">
-            Your Ref
+           Project Ref
         </td>
         <td style="padding:4px 0;">
             :
             <span t-field="o.sale_id.x_studio_project_reference"/>
         </td>
     </tr>
-</t>
+</t>-->
 
-<t t-elif="o.purchase_id and o.purchase_id.partner_ref">
+<t t-if="o.purchase_id and o.purchase_id.partner_ref">
     <tr>
         <td style="
             padding:4px 0;
