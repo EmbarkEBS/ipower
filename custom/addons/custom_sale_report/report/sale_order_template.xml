@@ -873,61 +873,41 @@
 
                                                
                                             </tr>-->
-    <t t-set="tax_summary" t-value="{}"/>
+ 
+<!-- VAT BREAKDOWN -->
+<t t-if="o.tax_totals and o.tax_totals.get('groups_by_subtotal')">
 
-<t t-foreach="o.order_line" t-as="line">
-    <t t-foreach="line.tax_ids" t-as="tax">
+    <t t-foreach="o.tax_totals['groups_by_subtotal'].values()" t-as="groups">
 
-        <t t-set="base_amt"
-           t-value="tax_summary.get(tax.amount, {}).get('base', 0.0) + line.price_subtotal"/>
+        <t t-foreach="groups" t-as="tax_group">
 
-        <t t-set="tax_amt"
-           t-value="tax_summary.get(tax.amount, {}).get('tax', 0.0) + (line.price_subtotal * tax.amount / 100)"/>
+            <tr>
 
-        <t t-set="tax_summary"
-           t-value="dict(
-               tax_summary,
-               **{
-                   tax.amount:{
-                       'base': base_amt,
-                       'tax': tax_amt
-                   }
-               }
-           )"/>
+                <td style="
+                    padding:5px;
+                    font-weight:bold;
+                ">
+                    <span t-esc="tax_group['group_name']"/>
+                    on
+                    <span t-raw="cur_symbol"/>
+                    <span t-esc="'{:,.2f}'.format(tax_group['tax_group_base_amount'])"/>
+                </td>
+
+                <td style="
+                    padding:5px;
+                    text-align:right;
+                ">
+                    <span t-raw="cur_symbol"/>
+                    <span t-esc="'{:,.2f}'.format(tax_group['tax_group_amount'])"/>
+                </td>
+
+            </tr>
+
+        </t>
 
     </t>
-</t>
-
-<!-- VAT LINES -->
-<t t-foreach="sorted(tax_summary.items())" t-as="tax_line">
-
-    <tr>
-
-        <td style="padding:5px;font-weight:bold;">
-            VAT <span t-esc="int(tax_line[0])"/>%
-            on
-            <span t-raw="cur_symbol"/>
-            <span t-esc="'{:,.2f}'.format(tax_line[1]['base'])"/>
-        </td>
-
-        <td style="padding:5px;text-align:right;">
-            <span t-raw="cur_symbol"/>
-            <span t-esc="'{:,.2f}'.format(tax_line[1]['tax'])"/>
-        </td>
-
-    </tr>
 
 </t>
-
-<tr style="font-size:16px;color:#1a3a5a;">
-    <td style="padding:10px 5px;font-weight:bold;">
-        Total
-    </td>
-
-    <td style="padding:10px 5px;font-weight:bold;">
-        <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
-    </td>
-</tr>
 
                                             <tr style="
                                                 font-size:16px;
