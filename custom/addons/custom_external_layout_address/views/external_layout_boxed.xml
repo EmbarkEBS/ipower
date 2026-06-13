@@ -56,11 +56,13 @@
             </div>
 
             <div style="
-                  width:calc(100% + 80px);
-    margin-left:-40px;
-    height:25px;
+                   height:25px;
     overflow:hidden;
     margin-top:5px;
+    margin-left:-40px !important;
+    margin-right:-50px !important;
+    margin-bottom:-20px !important;
+    padding-bottom:0;
             ">
 
                 <svg width="100%"
