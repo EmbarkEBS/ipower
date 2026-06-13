@@ -806,34 +806,38 @@
 
                                         </tr>
 
-                                        <tr>
+                                    <t t-if="o.tax_totals and o.tax_totals.get('subtotals')">
 
-                                            <td style="
-                                                padding:5px;
-                                                font-weight:bold;
-                                            ">
-                                              <t t-foreach="o.invoice_line_ids" t-as="line">
-    <t t-foreach="line.tax_ids" t-as="tax">
-        <tr>
-            <td style="padding:5px;font-weight:bold;">
-                VAT <span t-esc="int(tax.amount)"/>%
-                on
-               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                
-            </td>
+    <t t-foreach="o.tax_totals['subtotals']" t-as="subtotal">
 
-            <td style="padding:5px;text-align:right;">
-               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
-                
-            </td>
-        </tr>
+        <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+
+            <tr>
+
+                <td style="padding:5px;font-weight:bold;">
+                    VAT (
+                    <span t-esc="
+                        int(
+                            tax_group.get('involved_tax_ids')
+                            and env['account.tax'].browse(
+                                tax_group['involved_tax_ids'][0]
+                            ).amount
+                            or 0
+                        )
+                    "/>%)
+                </td>
+
+                <td style="padding:5px;text-align:right;">
+                    <span t-esc="o.currency_id.symbol"/>
+                    <span t-esc="'{:,.2f}'.format(tax_group['tax_amount_currency'])"/>
+                </td>
+
+            </tr>
+
+        </t>
+
     </t>
-</t>
-                                            </td>
 
-                                         
-
-                                        </tr>
 
                                         <tr style="
                                             font-size:16px;
