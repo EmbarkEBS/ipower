@@ -9,8 +9,8 @@
     ],
     "data": [
         "views/product_views.xml",
-        # "views/stock_picking_views.xml",
-        # "views/stock_landed_cost_views.xml",
+        "views/stock_picking_views.xml",
+        "views/stock_landed_cost_views.xml",
     ],
     "installable": True,
     "application": False,
