@@ -1,16 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="sale_order_form_approval"
-            model="ir.ui.view">
-
+    <record id="sale_order_form_approval" model="ir.ui.view">
         <field name="name">sale.order.form.approval</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
 
         <field name="arch" type="xml">
-
-            <!-- Approve Button -->
 
             <xpath expr="//header" position="inside">
 
@@ -19,42 +14,12 @@
                     string="Approve"
                     type="object"
                     class="btn-primary"
-                    invisible="
-                        not approval_required
-                        or approval_approved
-                        or not can_approve
-                    "
+                    invisible="not approval_required or approval_approved"
                 />
 
             </xpath>
 
-            <!-- Approval Information -->
-
-            <xpath expr="//sheet" position="inside">
-
-                <group string="Approval">
-
-                    <field
-                        name="approval_required"
-                        readonly="1"
-                    />
-
-                    <field
-                        name="approval_approved"
-                        readonly="1"
-                    />
-
-                    <field
-                        name="approval_reason"
-                        readonly="1"
-                    />
-
-                </group>
-
-            </xpath>
-
         </field>
-
     </record>
 
 </odoo>
