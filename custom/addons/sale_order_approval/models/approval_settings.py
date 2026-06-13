@@ -1,22 +1,26 @@
-from odoo import api, models
+from odoo import fields, models
 
 
-class SaleOrderLine(models.Model):
-    _inherit = "sale.order.line"
+class SaleApprovalSettings(models.Model):
+    _name = "sale.approval.settings"
+    _description = "Sale Approval Settings"
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        lines = super().create(vals_list)
-        lines.mapped("order_id")._evaluate_approval()
-        return lines
+    name = fields.Char(
+        default="Default Settings",
+        required=True,
+    )
 
-    def write(self, vals):
-        res = super().write(vals)
-        self.mapped("order_id")._evaluate_approval()
-        return res
+    approval_manager_id = fields.Many2one(
+        "res.users",
+        required=True,
+    )
 
-    def unlink(self):
-        orders = self.mapped("order_id")
-        res = super().unlink()
-        orders._evaluate_approval()
-        return res
+    min_markup = fields.Float(
+        default=20.0,
+        required=True,
+    )
+
+    max_order_value = fields.Float(
+        default=10000.0,
+        required=True,
+    )
