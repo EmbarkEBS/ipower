@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="external_layout_boxed_custom"
+              inherit_id="web.external_layout_boxed">
+
+        <!-- Replace Street2 with Dubai -->
+        <xpath expr="//span[@t-field='company.partner_id.street2']"
+               position="replace">
+            <span>Dubai</span>
+        </xpath>
+
+    </template>
+
+</odoo>
