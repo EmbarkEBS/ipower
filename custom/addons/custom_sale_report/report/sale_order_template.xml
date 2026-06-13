@@ -846,114 +846,88 @@
 
                                             </tr>
 
-                                            <tr>
+                                         <!--  <tr>
 
                                                 <td style="
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                <!-- TAX SUMMARY VARIABLES -->
-
-<t t-set="vat5_base" t-value="0"/>
-<t t-set="vat0_base" t-value="0"/>
-
-<t t-foreach="o.order_line" t-as="line">
-
+                                                  <t t-foreach="o.order_line" t-as="line">
     <t t-foreach="line.tax_ids" t-as="tax">
+        <tr>
+            <td style="padding:5px;font-weight:bold;">
+                VAT <span t-esc="int(tax.amount)"/>%
+                on
+               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
+                
+            </td>
 
-        <t t-if="tax.amount == 5">
-            <t t-set="vat5_base"
-               t-value="vat5_base + line.price_subtotal"/>
-        </t>
-
-        <t t-if="tax.amount == 0">
-            <t t-set="vat0_base"
-               t-value="vat0_base + line.price_subtotal"/>
-        </t>
-
+            <td style="padding:5px;text-align:right;">
+                <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
+               
+            </td>
+        </tr>
     </t>
-
 </t>
-
-<table style="
-    width:100%;
-    border-collapse:collapse;
-    text-align:right;
-">
-
-    <!-- SUBTOTAL -->
-
-    <tr>
-        <td style="padding:5px;font-weight:bold;">
-            Sub Total
-        </td>
-
-        <td style="padding:5px;">
-            <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
-        </td>
-    </tr>
-
-    <!-- VAT 5% -->
-
-    <t t-if="vat5_base">
-
-        <tr>
-            <td style="padding:5px;font-weight:bold;">
-                VAT 5% on
-                <span t-esc="'{:,.2f}'.format(vat5_base)"/>
-            </td>
-
-            <td style="padding:5px;">
-                <span t-raw="cur_symbol"/>
-                <span t-esc="'{:,.2f}'.format(vat5_base * 5 / 100)"/>
-            </td>
-        </tr>
-
-    </t>
-
-    <!-- VAT 0% -->
-
-    <t t-if="vat0_base">
-
-        <tr>
-            <td style="padding:5px;font-weight:bold;">
-                VAT 0% on
-                <span t-esc="'{:,.2f}'.format(vat0_base)"/>
-            </td>
-
-            <td style="padding:5px;">
-                <span t-raw="cur_symbol"/> 0.00
-            </td>
-        </tr>
-
-    </t>
-
-    <!-- TOTAL -->
-
-    <tr style="
-        font-size:16px;
-        color:#1a3a5a;
-    ">
-        <td style="
-            padding:10px 5px;
-            font-weight:bold;
-        ">
-            Total
-        </td>
-
-        <td style="
-            padding:10px 5px;
-            font-weight:bold;
-        ">
-            <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
-        </td>
-    </tr>
-
-</table>
                                                 </td>
 
                                                
-                                            </tr>
+                                            </tr>-->
+    <t t-set="tax_summary" t-value="{}"/>
+
+<t t-foreach="o.order_line" t-as="line">
+    <t t-foreach="line.tax_ids" t-as="tax">
+
+        <t t-set="base_amt"
+           t-value="tax_summary.get(tax.amount, {}).get('base', 0.0) + line.price_subtotal"/>
+
+        <t t-set="tax_amt"
+           t-value="tax_summary.get(tax.amount, {}).get('tax', 0.0) + (line.price_subtotal * tax.amount / 100)"/>
+
+        <t t-set="tax_summary"
+           t-value="dict(
+               tax_summary,
+               **{
+                   tax.amount:{
+                       'base': base_amt,
+                       'tax': tax_amt
+                   }
+               }
+           )"/>
+
+    </t>
+</t>
+
+<!-- VAT LINES -->
+<t t-foreach="sorted(tax_summary.items())" t-as="tax_line">
+
+    <tr>
+
+        <td style="padding:5px;font-weight:bold;">
+            VAT <span t-esc="int(tax_line[0])"/>%
+            on
+            <span t-raw="cur_symbol"/>
+            <span t-esc="'{:,.2f}'.format(tax_line[1]['base'])"/>
+        </td>
+
+        <td style="padding:5px;text-align:right;">
+            <span t-raw="cur_symbol"/>
+            <span t-esc="'{:,.2f}'.format(tax_line[1]['tax'])"/>
+        </td>
+
+    </tr>
+
+</t>
+
+<tr style="font-size:16px;color:#1a3a5a;">
+    <td style="padding:10px 5px;font-weight:bold;">
+        Total
+    </td>
+
+    <td style="padding:10px 5px;font-weight:bold;">
+        <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+    </td>
+</tr>
 
                                             <tr style="
                                                 font-size:16px;
