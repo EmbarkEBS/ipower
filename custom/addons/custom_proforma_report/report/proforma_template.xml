@@ -441,7 +441,10 @@
                                         </tr>
 <t t-if="o.x_studio_customer_po_ref">
     <tr>
-        <td>Customer PO Ref</td>
+        <td style="
+                                                padding:5px 0;
+                                                font-weight:bold; font-size:15px;
+                                                color:#1a3a5a;" >Customer PO Ref</td>
         <td>
             :
             <span t-field="o.x_studio_customer_po_ref"/>
