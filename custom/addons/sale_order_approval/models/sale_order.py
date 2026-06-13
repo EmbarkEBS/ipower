@@ -23,22 +23,48 @@ class SaleOrder(models.Model):
     )
 
     can_approve = fields.Boolean(
-        string="Can Approve",
         compute="_compute_can_approve",
     )
 
     def _compute_can_approve(self):
+        settings = self.env["sale.approval.settings"].search([], limit=1)
+
+        manager = settings.approval_manager_id if settings else False
+
         for order in self:
-            order.can_approve = True
+            order.can_approve = (
+                self.env.user == manager
+            )
 
     def action_approve_quotation(self):
         self.ensure_one()
-        self.approval_approved = True
+
+        settings = self.env[
+            "sale.approval.settings"
+        ].search([], limit=1)
+
+        if (
+            not settings
+            or self.env.user != settings.approval_manager_id
+        ):
+            raise UserError(
+                "Only Approval Manager can approve."
+            )
+
+        self.write({
+            "approval_approved": True,
+        })
+
         return True
 
     def action_confirm(self):
+
         for order in self:
-            if order.approval_required and not order.approval_approved:
+
+            if (
+                order.approval_required
+                and not order.approval_approved
+            ):
                 raise UserError(
                     "Manager approval is required before confirmation."
                 )
