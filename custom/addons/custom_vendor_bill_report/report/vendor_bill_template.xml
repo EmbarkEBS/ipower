@@ -739,31 +739,22 @@
 
                                         </tr>
 
-                                        <t t-if="o.tax_totals">
+                                          <t t-foreach="o.invoice_line_ids" t-as="line">
+    <t t-foreach="line.tax_ids" t-as="tax">
+        <tr>
+            <td style="padding:5px;font-weight:bold;">
+                VAT <span t-esc="int(tax.amount)"/>%
+                on
+                 <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % line.price_subtotal"/>
+           
+            </td>
 
-    <t t-foreach="o.tax_totals.get('groups_by_subtotal', {}).values()" t-as="groups">
-
-        <t t-foreach="groups" t-as="tax_group">
-
-            <tr>
-
-                <td style="padding:5px;font-weight:bold;">
-                    VAT (
-                    <span t-esc="int(env['account.tax'].browse(tax_group['tax_group_id']).amount or 0)"/>
-                    %)
-                </td>
-
-                <td style="padding:5px;text-align:right;">
-                    <span t-esc="o.currency_id.symbol"/>
-                    <span t-esc="'%.2f' % tax_group['tax_group_amount']"/>
-                </td>
-
-            </tr>
-
-        </t>
-
+            <td style="padding:5px;text-align:right;">
+                  <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % (line.price_subtotal * tax.amount / 100)"/>
+           
+            </td>
+        </tr>
     </t>
-
 </t>
                                         <tr style="
                                             font-size:16px;
