@@ -9,7 +9,7 @@ class StockValuationAdjustmentLines(models.Model):
             ('0', '0%'),
             ('5', '5%'),
         ],
-        string="Exemption Rate",
+        string="Exemption",
         related="move_id.exemption_rate",
         store=True,
         readonly=True,
