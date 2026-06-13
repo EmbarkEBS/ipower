@@ -9,7 +9,7 @@ class StockMove(models.Model):
             ('0', '0%'),
             ('5', '5%'),
         ],
-        string="Exemption Rate",
+        string="Exemption",
         copy=True,
     )
 
