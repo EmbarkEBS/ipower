@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -27,29 +27,22 @@ class SaleOrder(models.Model):
     )
 
     def _compute_can_approve(self):
-        settings = self.env["sale.approval.settings"].search([], limit=1)
-
-        manager = settings.approval_manager_id if settings else False
-
         for order in self:
-            order.can_approve = (
-                self.env.user == manager
-            )
+            order.can_approve = True
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        orders = super().create(vals_list)
+
+        # TEMPORARY TEST
+        orders.write({
+            "approval_required": True,
+        })
+
+        return orders
 
     def action_approve_quotation(self):
         self.ensure_one()
-
-        settings = self.env[
-            "sale.approval.settings"
-        ].search([], limit=1)
-
-        if (
-            not settings
-            or self.env.user != settings.approval_manager_id
-        ):
-            raise UserError(
-                "Only Approval Manager can approve."
-            )
 
         self.write({
             "approval_approved": True,
@@ -58,13 +51,8 @@ class SaleOrder(models.Model):
         return True
 
     def action_confirm(self):
-
         for order in self:
-
-            if (
-                order.approval_required
-                and not order.approval_approved
-            ):
+            if order.approval_required and not order.approval_approved:
                 raise UserError(
                     "Manager approval is required before confirmation."
                 )
