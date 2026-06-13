@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_header_footer_boxed"
+              inherit_id="web.external_layout_boxed">
+
+        <xpath expr="//div[contains(@class,'header')]"
+               position="replace">
+            <div class="header">
+                <table style="width:100%; border-collapse:collapse;">
+                    <tr>
+                        <td style="width:60%; vertical-align:top;">
+                            <img t-if="company.logo"
+                                 t-att-src="image_data_uri(company.logo)"
+                                 style="max-height:80px; margin-bottom:10px;"/>
+                        </td>
+                        <td>
+                            <div style="font-size:13px; line-height:1.6; text-align:right;">
+                                <strong style="font-size:16px;">
+                                    <span t-esc="company.name"/>
+                                </strong>
+                                <br/>
+                                <t t-if="company.street">
+                                    <span t-esc="company.street"/>, Dubai
+                                    <br/>
+                                </t>
+                                <t t-if="company.country_id">
+                                    <span t-esc="company.country_id.name"/>
+                                </t>
+                                <br/>
+                                <strong>
+                                    TRN:
+                                    <span t-esc="company.vat or ''"/>
+                                </strong>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[contains(@class,'footer')]"
+               position="replace">
+            <div class="footer">
+                <div style="padding:0 40px;font-size:11px;">
+                    <div style="margin-bottom:5px;color:#888;font-style:italic;">
+                        This document is electronically generated and valid without signature or company stamp.
+                    </div>
+                    <div style="border-top:1px solid #1f3b73;padding-top:6px;text-align:center;">
+                        <t t-if="company.street2">
+                            <span t-esc="company.street2"/>
+                        </t>
+                        <span t-esc="company.city or ''"/>
+                        -
+                        <span t-esc="company.country_id.name or ''"/>
+                        <br/>
+                        CR No:
+                        <span t-esc="company.company_registry or 'N/A'"/>
+                        |
+                        <span t-esc="company.email or ''"/>
+                        |
+                        <span t-esc="(company.website or '').replace('http://','').replace('https://','')"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
