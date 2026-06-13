@@ -739,22 +739,27 @@
 
                                         </tr>
 
-                                          <t t-foreach="o.invoice_line_ids" t-as="line">
-    <t t-foreach="line.tax_ids" t-as="tax">
+                                        <t t-if="o.amount_by_group">
+
+    <t t-foreach="o.amount_by_group" t-as="group">
+
         <tr>
+
             <td style="padding:5px;font-weight:bold;">
-                VAT <span t-esc="int(tax.amount)"/>%
-                on
-                 <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % line.price_subtotal"/>
-           
+                VAT (
+                <span t-esc="group[0].split('%')[0].split(' ')[-1]"/>
+                )
             </td>
 
             <td style="padding:5px;text-align:right;">
-                  <span t-esc="o.currency_id.symbol"/> <span t-esc="'%.2f' % (line.price_subtotal * tax.amount / 100)"/>
-           
+                <span t-esc="o.currency_id.symbol"/>
+                <span t-esc="'{:,.2f}'.format(group[1])"/>
             </td>
+
         </tr>
+
     </t>
+
 </t>
                                         <tr style="
                                             font-size:16px;
