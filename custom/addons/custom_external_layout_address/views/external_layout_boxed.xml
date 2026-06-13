@@ -4,10 +4,16 @@
     <template id="external_layout_boxed_custom"
               inherit_id="web.external_layout_boxed">
 
-        <!-- Replace Street2 with Dubai -->
-        <xpath expr="//span[@t-field='company.partner_id.street2']"
+        <xpath expr="//span[@t-field='company.company_details']"
                position="replace">
-            <span>Dubai</span>
+
+            <div>
+                <strong>iPOWER ELECTRIKA TRADING L.L.C</strong><br/>
+                PO Box 451269, Dubai<br/>
+                United Arab Emirates<br/>
+                TRN: 100504732700003
+            </div>
+
         </xpath>
 
     </template>
