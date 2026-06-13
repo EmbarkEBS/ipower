@@ -9,117 +9,183 @@ class SaleOrder(models.Model):
     approval_approved = fields.Boolean(copy=False, default=False)
     approval_reason = fields.Text(copy=False)
 
-    can_approve = fields.Boolean(compute="_compute_can_approve")
+    can_approve = fields.Boolean(
+        compute="_compute_can_approve"
+    )
 
     def _get_settings(self):
         return self.env["sale.approval.settings"].search([], limit=1)
 
-    # -------------------------
-    # CAN APPROVE FIELD
-    # -------------------------
+    # --------------------------------------------------
+    # CAN APPROVE
+    # --------------------------------------------------
     def _compute_can_approve(self):
         settings = self._get_settings()
         manager = settings.approval_manager_id if settings else False
 
         for order in self:
-            order.can_approve = (self.env.user == manager)
+            order.can_approve = self.env.user == manager
 
-    # -------------------------
-    # MAIN ENGINE (SAFE)
-    # -------------------------
+    # --------------------------------------------------
+    # APPROVAL ENGINE
+    # --------------------------------------------------
     def _evaluate_approval(self):
         settings = self._get_settings()
+
         if not settings:
             return
 
-        company_currency = self.company_id.currency_id
-
         for order in self:
+
+            company_currency = order.company_id.currency_id
 
             approval_required = False
             reasons = []
 
-            total_cost = 0.0
-            total_sales = 0.0
+            total_cost_aed = 0.0
+            total_sales_aed = 0.0
+
             below_cost_products = []
 
             for line in order.order_line:
+
                 if line.display_type:
                     continue
 
-                cost = line.product_id.standard_price * line.product_uom_qty
-                price = line.price_subtotal
+                # -----------------------------------
+                # COST (AED)
+                # -----------------------------------
+                cost_price_aed = line.product_id.standard_price
+
+                cost_total_aed = (
+                    cost_price_aed * line.product_uom_qty
+                )
+
+                total_cost_aed += cost_total_aed
+
+                # -----------------------------------
+                # SALES TOTAL -> AED
+                # -----------------------------------
+                sales_total_aed = line.price_subtotal
 
                 if order.currency_id != company_currency:
-                    price = order.currency_id._convert(
-                        price,
+                    sales_total_aed = order.currency_id._convert(
+                        sales_total_aed,
                         company_currency,
                         order.company_id,
                         fields.Date.context_today(order),
                     )
 
-                total_cost += cost
-                total_sales += price
+                total_sales_aed += sales_total_aed
 
-                if line.price_unit < line.product_id.standard_price:
-                    below_cost_products.append(line.product_id.display_name)
+                # -----------------------------------
+                # UNIT PRICE -> AED
+                # -----------------------------------
+                unit_price_aed = line.price_unit
 
-            # MARKUP
-            if total_cost > 0:
-                markup = ((total_sales - total_cost) / total_cost) * 100
+                if order.currency_id != company_currency:
+                    unit_price_aed = order.currency_id._convert(
+                        line.price_unit,
+                        company_currency,
+                        order.company_id,
+                        fields.Date.context_today(order),
+                    )
+
+                # -----------------------------------
+                # BELOW COST CHECK
+                # -----------------------------------
+                if unit_price_aed < cost_price_aed:
+                    below_cost_products.append(
+                        line.product_id.display_name
+                    )
+
+            # -----------------------------------
+            # MARKUP CHECK
+            # -----------------------------------
+            if total_cost_aed > 0:
+
+                markup = (
+                    (total_sales_aed - total_cost_aed)
+                    / total_cost_aed
+                ) * 100
+
                 if markup < settings.min_markup:
                     approval_required = True
-                    reasons.append(f"Markup {markup:.2f}% < {settings.min_markup}%")
+                    reasons.append(
+                        f"Markup {markup:.2f}% < {settings.min_markup:.2f}%"
+                    )
 
-            # ORDER VALUE
-            order_value = order.amount_total
+            # -----------------------------------
+            # ORDER VALUE CHECK
+            # -----------------------------------
+            order_value_aed = order.amount_total
 
             if order.currency_id != company_currency:
-                order_value = order.currency_id._convert(
+                order_value_aed = order.currency_id._convert(
                     order.amount_total,
                     company_currency,
                     order.company_id,
                     fields.Date.context_today(order),
                 )
 
-            if order_value > settings.max_order_value:
+            if order_value_aed > settings.max_order_value:
                 approval_required = True
                 reasons.append(
-                    f"Order Value {order_value:.2f} > {settings.max_order_value}"
+                    f"Order Value {order_value_aed:.2f} AED > "
+                    f"{settings.max_order_value:.2f} AED"
                 )
 
-            # BELOW COST
+            # -----------------------------------
+            # BELOW COST CHECK
+            # -----------------------------------
             if below_cost_products:
                 approval_required = True
                 reasons.append(
-                    "Below Cost Products:\n" + "\n".join(below_cost_products)
+                    "Below Cost Products:\n%s"
+                    % "\n".join(below_cost_products)
                 )
 
-            # SAFE WRITE (avoid recursion loop)
-            super(SaleOrder, order).write({
+            # -----------------------------------
+            # UPDATE VALUES
+            # -----------------------------------
+            values = {
                 "approval_required": approval_required,
-                "approval_reason": "\n".join(reasons),
-                "approval_approved": False if approval_required else order.approval_approved,
-            })
+                "approval_reason": "\n\n".join(reasons),
+            }
 
+            if approval_required:
+                values["approval_approved"] = False
+
+            super(SaleOrder, order).write(values)
+
+            # -----------------------------------
+            # ACTIVITY
+            # -----------------------------------
             if approval_required:
                 order._create_activity()
 
-    # -------------------------
+    # --------------------------------------------------
     # ACTIVITY
-    # -------------------------
+    # --------------------------------------------------
     def _create_activity(self):
         self.ensure_one()
 
         settings = self._get_settings()
-        if not settings or not settings.approval_manager_id:
+
+        if not settings:
             return
 
-        existing = self.env["mail.activity"].search([
-            ("res_model", "=", "sale.order"),
-            ("res_id", "=", self.id),
-            ("summary", "=", "Quotation Approval"),
-        ], limit=1)
+        if not settings.approval_manager_id:
+            return
+
+        existing = self.env["mail.activity"].search(
+            [
+                ("res_model", "=", "sale.order"),
+                ("res_id", "=", self.id),
+                ("summary", "=", "Quotation Approval"),
+            ],
+            limit=1,
+        )
 
         if existing:
             return
@@ -131,18 +197,18 @@ class SaleOrder(models.Model):
             note=self.approval_reason or "",
         )
 
-    # -------------------------
+    # --------------------------------------------------
     # CREATE
-    # -------------------------
+    # --------------------------------------------------
     @api.model_create_multi
     def create(self, vals_list):
         orders = super().create(vals_list)
         orders._evaluate_approval()
         return orders
 
-    # -------------------------
-    # WRITE (SAFE TRIGGER ONLY)
-    # -------------------------
+    # --------------------------------------------------
+    # WRITE
+    # --------------------------------------------------
     def write(self, vals):
         res = super().write(vals)
 
@@ -158,34 +224,51 @@ class SaleOrder(models.Model):
 
         return res
 
-    # -------------------------
+    # --------------------------------------------------
     # APPROVE
-    # -------------------------
+    # --------------------------------------------------
     def action_approve_quotation(self):
         self.ensure_one()
 
         settings = self._get_settings()
 
-        if self.env.user != settings.approval_manager_id:
-            raise UserError("Only Approval Manager can approve.")
+        if (
+            not settings
+            or self.env.user != settings.approval_manager_id
+        ):
+            raise UserError(
+                "Only Approval Manager can approve."
+            )
 
-        self.write({"approval_approved": True})
+        self.write({
+            "approval_approved": True,
+        })
 
         activities = self.env["mail.activity"].search([
             ("res_model", "=", "sale.order"),
             ("res_id", "=", self.id),
             ("summary", "=", "Quotation Approval"),
         ])
-        activities.action_feedback(feedback="Approved")
+
+        activities.action_feedback(
+            feedback="Approved"
+        )
 
         return True
 
-    # -------------------------
+    # --------------------------------------------------
     # CONFIRM
-    # -------------------------
+    # --------------------------------------------------
     def action_confirm(self):
+
         for order in self:
-            if order.approval_required and not order.approval_approved:
-                raise UserError("Approval required before confirming quotation.")
+
+            if (
+                order.approval_required
+                and not order.approval_approved
+            ):
+                raise UserError(
+                    "Approval required before confirming quotation."
+                )
 
         return super().action_confirm()
