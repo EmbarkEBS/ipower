@@ -10,15 +10,44 @@
 
         <field name="arch" type="xml">
 
+            <!-- Approve Button -->
+
+            <xpath expr="//header" position="inside">
+
+                <button
+                    name="action_approve_quotation"
+                    string="Approve"
+                    type="object"
+                    class="btn-primary"
+                    invisible="
+                        not approval_required
+                        or approval_approved
+                        or not can_approve
+                    "
+                />
+
+            </xpath>
+
+            <!-- Approval Information -->
+
             <xpath expr="//sheet" position="inside">
 
                 <group string="Approval">
 
-                    <field name="approval_required"/>
+                    <field
+                        name="approval_required"
+                        readonly="1"
+                    />
 
-                    <field name="approval_approved"/>
+                    <field
+                        name="approval_approved"
+                        readonly="1"
+                    />
 
-                    <field name="approval_reason"/>
+                    <field
+                        name="approval_reason"
+                        readonly="1"
+                    />
 
                 </group>
 
