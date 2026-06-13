@@ -859,11 +859,9 @@
         <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
 
             <tr>
-                <td style="padding:5px;font-weight:bold;">
-
-                     VAT (<span t-esc="int(float(group['group_name'].replace('%','')))"/>%)
-
-                </td>
+               <td style="padding:5px;font-weight:bold;">
+    VAT (<span t-esc="group['group_name']"/>)
+</td>
 
                 <td style="padding:5px;text-align:right;">
 
