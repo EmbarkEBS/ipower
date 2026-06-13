@@ -61,7 +61,7 @@
                         <!-- WATERMARK -->
                         <div style="
                             position:absolute;
-                            top:50%;
+                            top:55%;
                             left:25%;
                             opacity:0.10;
                             transform:translate(-50%, -50%) rotate(-25deg);
