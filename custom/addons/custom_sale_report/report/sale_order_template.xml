@@ -859,9 +859,13 @@
         <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
 
             <tr>
-               <td style="padding:5px;font-weight:bold;">
-    VAT (<span t-esc="group['group_name']"/>)
-</td>
+                <td style="padding:5px;font-weight:bold;">
+
+                    VAT
+                   <span>(</span><span t-esc="int(tax_group.get('involved_tax_ids') and env['account.tax'].browse(tax_group['involved_tax_ids'][0]).amount or 0)"/>%<span>)</span>
+                  
+
+                </td>
 
                 <td style="padding:5px;text-align:right;">
 
