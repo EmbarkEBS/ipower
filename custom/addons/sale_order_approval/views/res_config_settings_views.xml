@@ -1,0 +1,44 @@
+<odoo>
+
+    <record id="res_config_settings_view_form_sale_approval"
+            model="ir.ui.view">
+
+        <field name="name">
+            res.config.settings.sale.approval
+        </field>
+
+        <field name="model">
+            res.config.settings
+        </field>
+
+        <field name="inherit_id"
+               ref="sale.res_config_settings_view_form"/>
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//app[@name='sale']"
+                   position="inside">
+
+                <block title="Quotation Approval">
+
+                    <setting string="Approval Manager">
+                        <field name="approval_manager_id"/>
+                    </setting>
+
+                    <setting string="Minimum Markup %">
+                        <field name="min_markup"/>
+                    </setting>
+
+                    <setting string="Maximum Order Value">
+                        <field name="max_order_value"/>
+                    </setting>
+
+                </block>
+
+            </xpath>
+
+        </field>
+
+    </record>
+
+</odoo>
