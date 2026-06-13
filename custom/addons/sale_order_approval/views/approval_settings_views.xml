@@ -38,7 +38,7 @@
     <menuitem
         id="menu_sale_approval_settings"
         name="Approval Settings"
-        parent="sale.sale_menu_sale_config"
+        parent="sale.menu_sale_config"
         action="sale_approval_settings_action"
         sequence="99"/>
 
