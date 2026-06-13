@@ -1,20 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="external_layout_boxed_custom"
+    <!-- Header replacement -->
+    <template id="external_layout_boxed_custom_header"
               inherit_id="web.external_layout_boxed">
 
-        <xpath expr="//span[@t-field='company.company_details']"
+        <xpath expr="//div[@name='company_address']"
                position="replace">
 
-            <div>
+            <div name="company_address" class="mb4">
                 <strong>iPOWER ELECTRIKA TRADING L.L.C</strong><br/>
                 PO Box 451269, Dubai<br/>
                 United Arab Emirates<br/>
-             
+              
             </div>
 
         </xpath>
+
+    </template>
+
+    <!-- Footer replacement -->
+    <template id="external_layout_boxed_custom_footer"
+              inherit_id="web.external_layout_boxed">
+
+       <xpath expr="//div[contains(@class,'footer')]"
+       position="replace">
+
+    <div class="footer">
+
+        <div style="padding:0 40px;font-size:10px;">
+
+            <div style="margin-bottom:5px;color:#888;font-style:italic;">
+                This document is electronically generated and valid without signature or company stamp.
+            </div>
+
+            <div style="
+                border-top:1px solid #1f3b73;
+                padding-top:6px;
+                text-align:center;
+                line-height:1.4;
+                font-size:10px;
+            ">
+
+                Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates
+
+                <br/>
+
+                CR No: 1024983 |
+                info@ipowerelectrika.com |
+                www.ipowerelectrika.com
+
+            </div>
+
+        </div>
+
+        <div style="
+            width:auto;
+            height:25px;
+            overflow:hidden;
+            margin-top:5px;
+            margin-left:-40px;
+            margin-right:-50px;
+            margin-bottom:-20px;
+            padding-bottom:0;
+        ">
+
+            <svg width="100%"
+                 height="25"
+                 viewBox="0 0 1000 25"
+                 preserveAspectRatio="none">
+
+                <polygon points="0,0 260,0 240,25 0,25"
+                         fill="#1f3b73"/>
+
+                <polygon points="260,0 1000,0 1000,25 240,25"
+                         fill="#e58b39"/>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+</xpath>
 
     </template>
 
