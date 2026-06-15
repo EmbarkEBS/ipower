@@ -474,8 +474,8 @@
         font-family:Arial,sans-serif;
         line-height:1.4;
     ">
-        :
-        <div style="display:inline-block; margin-left:5px;">
+        : <span>
+        
             <strong t-field="shipping_partner.name"/><br/>
 
             <t t-if="shipping_partner.street">
@@ -503,7 +503,7 @@
             <t t-if="shipping_partner.country_id">
                 <span t-field="shipping_partner.country_id.name"/>
             </t>
-        </div>
+        </span>
     </td>
 </tr>
                                         </table>
