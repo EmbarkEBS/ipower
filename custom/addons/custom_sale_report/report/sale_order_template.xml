@@ -49,28 +49,7 @@
     }
                 </style>
 <main>
-                <div class="page"
-                     style="padding:10px 0 0 0;position:relative;
-                            color:#333; margin:0;
-                            line-height:1.4;
-                            font-family: Helvetica, Arial, sans-serif !important;">
-                            <!-- WATERMARK -->
-<div style="
-    position:absolute;
-    top:55%;
-    left:25%;
-    opacity:0.10;
-    transform:translate(-50%, -50%) rotate(-25deg);
-    z-index:0;
-    width:420px;
-    text-align:center;
-">
-
-    <img t-if="o.company_id.logo"
-         t-att-src="image_data_uri(o.company_id.logo)"
-         style="width:100%;"/>
-
-</div>
+               
 
                  <!-- HEADER -->
     <table style="
@@ -217,7 +196,28 @@
                             </table>
 
   
+ <div class="page"
+                     style="padding:10px 0 0 0;position:relative;
+                            color:#333; margin:0;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
+                            <!-- WATERMARK -->
+<div style="
+    position:absolute;
+    top:55%;
+    left:25%;
+    opacity:0.10;
+    transform:translate(-50%, -50%) rotate(-25deg);
+    z-index:0;
+    width:420px;
+    text-align:center;
+">
 
+    <img t-if="o.company_id.logo"
+         t-att-src="image_data_uri(o.company_id.logo)"
+         style="width:100%;"/>
+
+</div>
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
                             <!-- ===================================================== -->
