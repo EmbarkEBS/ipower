@@ -40,14 +40,14 @@
 
     .page {
         margin: 0 !important;
-        padding: 90px 40px 0px 40px !important;
+        padding: 10px 40px 0px 40px !important;
     }
 
   
                 </style>
 
                 <div class="page"
-                     style="padding-top:100px;position:relative;
+                     style="padding:10px 0 0 0;position:relative;
                             color:#333; margin:0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">

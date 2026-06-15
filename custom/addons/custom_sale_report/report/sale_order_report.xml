@@ -12,16 +12,16 @@
     <field name="orientation">Portrait</field>
 
     <!-- reserve space for header -->
-    <field name="margin_top">30</field>
+    <field name="margin_top">10</field>
 
     <!-- reserve space for footer -->
     <field name="margin_bottom">35</field>
 
-    <field name="margin_left">10</field>
-    <field name="margin_right">10</field>
+    <field name="margin_left">5</field>
+    <field name="margin_right">5</field>
 
     <field name="header_line" eval="False"/>
-    <field name="header_spacing">10</field>
+    <field name="header_spacing">0</field>
 
     <field name="dpi">90</field>
 
