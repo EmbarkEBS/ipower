@@ -801,7 +801,8 @@
                                             </td>
 
                                             <td style="padding:5px;">
-                                                <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
+                                              
+                                                 <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_untaxed)"/>
                                             </td>
 
                                         </tr>
@@ -855,7 +856,8 @@
                                                 padding:10px 5px;
                                                 font-weight:bold;
                                             ">
-                                                <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+                                               
+                                                <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_total)"/>
                                             </td>
 
                                         </tr>

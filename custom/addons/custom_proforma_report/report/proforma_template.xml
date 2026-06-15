@@ -795,8 +795,8 @@
                                             </td>
 
                                             <td style="padding:5px;">
-                                                <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_untaxed)"/>
-                                            </td>
+                                           
+                                              <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_untaxed)"/> </td>
 
                                         </tr>
 
@@ -850,7 +850,9 @@
                                                 padding:10px 5px;
                                                 font-weight:bold;
                                             ">
-                                                <span t-raw="cur_symbol + ' ' + ('%.2f' % o.amount_total)"/>
+                                              
+                                                
+                      <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_total)"/>
                                             </td>
 
                                         </tr>
@@ -892,13 +894,7 @@
 
                         </div> <div style="margin-top:60px;padding-left:20px;">
 
-    <strong style="
-        font-size:14px;
-        border-bottom:1px solid #e58b39;
-        padding-bottom:2px;
-    ">
-        Our Bank Info:
-    </strong>
+   
 
     <div style="
         margin-top:10px;
@@ -909,7 +905,13 @@
       <t t-set="bank" t-value="o.company_id.partner_id.bank_ids[:1]"/>
 
 <t t-if="bank">
-
+ <strong style="
+        font-size:14px;
+        border-bottom:1px solid #e58b39;
+        padding-bottom:2px;
+    ">
+        Our Bank Info:
+    </strong>
             <table style="font-size:13px; border-collapse:collapse;">
 
                 <tr>
