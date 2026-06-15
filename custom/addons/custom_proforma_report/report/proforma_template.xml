@@ -892,13 +892,7 @@
 
                         </div> <div style="margin-top:60px;padding-left:20px;">
 
-    <strong style="
-        font-size:14px;
-        border-bottom:1px solid #e58b39;
-        padding-bottom:2px;
-    ">
-        Our Bank Info:
-    </strong>
+   
 
     <div style="
         margin-top:10px;
@@ -909,7 +903,13 @@
       <t t-set="bank" t-value="o.company_id.partner_id.bank_ids[:1]"/>
 
 <t t-if="bank">
-
+ <strong style="
+        font-size:14px;
+        border-bottom:1px solid #e58b39;
+        padding-bottom:2px;
+    ">
+        Our Bank Info:
+    </strong>
             <table style="font-size:13px; border-collapse:collapse;">
 
                 <tr>
