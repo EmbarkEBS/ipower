@@ -454,30 +454,37 @@
         </td>
     </tr>
 </t>
-<t t-if="o.dest_address_id">
-    <tr>
-        <td style="
-            padding:4px 0;
-            font-size:15px;
-            font-weight:bold;
-            color:#1a3a5a;
-            vertical-align:top;
-        ">
-            Shipping Address
-        </td>
+<tr>
+    <td style="
+        padding:4px 0;
+        font-size:15px;
+        font-weight:bold;
+        color:#1a3a5a;
+        vertical-align:top;
+    ">
+        Shipping Address
+    </td>
 
-        <td style="padding:4px 0;">
-            :
+    <td style="padding:4px 0;">
+        :
+        <t t-if="o.dest_address_id">
             <div t-field="o.dest_address_id"
                  t-options='{
                     "widget": "contact",
                     "fields": ["name", "address", "phone"],
-                    "no_marker": true,
-                    "phone_icons": true
+                    "no_marker": true
                  }'/>
-        </td>
-    </tr>
-</t>
+        </t>
+        <t t-else="">
+            <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                 t-options='{
+                    "widget": "contact",
+                    "fields": ["name", "address", "phone"],
+                    "no_marker": true
+                 }'/>
+        </t>
+    </td>
+</tr>
                                         </table>
 
                                     </td>
