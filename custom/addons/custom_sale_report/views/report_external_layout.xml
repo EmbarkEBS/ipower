@@ -72,7 +72,7 @@
     font-size:28px;
     font-weight:bold;
     color:#000;
-    margin-top:30px;
+    margin-top:20px !important;
 ">
     <t t-if="o.state in ['draft', 'sent']">
         QUOTATION
