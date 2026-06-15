@@ -88,13 +88,39 @@
     text-align:center;
 ">
 
-<svg width="200" height="10">
-    <line x1="0"
-          y1="5"
-          x2="200"
-          y2="5"
+<svg width="200" height="10" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Solid part -->
+    <line x1="0" y1="5" x2="150" y2="5"
           stroke="#f39223"
           stroke-width="2"/>
+
+    <!-- Fade -->
+    <line x1="150" y1="5" x2="160" y2="5"
+          stroke="#f39223"
+          stroke-width="2"
+          stroke-opacity="0.8"/>
+
+    <line x1="160" y1="5" x2="170" y2="5"
+          stroke="#f39223"
+          stroke-width="2"
+          stroke-opacity="0.6"/>
+
+    <line x1="170" y1="5" x2="180" y2="5"
+          stroke="#f39223"
+          stroke-width="2"
+          stroke-opacity="0.4"/>
+
+    <line x1="180" y1="5" x2="190" y2="5"
+          stroke="#f39223"
+          stroke-width="2"
+          stroke-opacity="0.2"/>
+
+    <line x1="190" y1="5" x2="200" y2="5"
+          stroke="#f39223"
+          stroke-width="2"
+          stroke-opacity="0.05"/>
+
 </svg>
 
 </div>
