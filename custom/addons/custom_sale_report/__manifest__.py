@@ -10,6 +10,7 @@
         "report/sale_order_report.xml",
         "report/sale_order_template.xml",
         'views/sale_view.xml',
+        'views/report_external_layout.xml',
     ],
     "installable": True,
     "application": False,
