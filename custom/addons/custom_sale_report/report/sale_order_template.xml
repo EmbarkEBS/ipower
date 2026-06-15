@@ -10,7 +10,7 @@
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
                     .fixed-footer {
-                        position: fixed;
+                        position: relative;
                         left: 0;
                         right: 0;
                         bottom: 0;
@@ -18,9 +18,15 @@
                     }
 
              @page {
-        margin: 0px 40px 0px 40px !important;
+     
         padding: 0 !important;
     }
+    @page {
+    margin-top: 10mm;
+    margin-right: 10mm;
+    margin-bottom: 30mm;
+    margin-left: 10mm;
+}
 
     html, body {
         margin: 0 !important;
@@ -44,7 +50,7 @@
                 </style>
 <main>
                 <div class="page"
-                     style="padding:10px 40px 40px 40px;position:relative;
+                     style="padding:10px 0 0 0;position:relative;
                             color:#333; margin:0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
@@ -944,7 +950,7 @@
                                 </div>
 
                             </div>
- 
+ </div>
                    <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
 <div class="fixed-footer">
@@ -1027,7 +1033,7 @@
 </div>
  </div>
 
-                </div>
+                
 </main>
             </t>
 
