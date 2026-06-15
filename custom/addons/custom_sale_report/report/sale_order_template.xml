@@ -32,7 +32,13 @@
   
                 </style>
 
-               <div style="
+                <div class="page"
+                     style="position:relative;
+                            color:#333; padding:100px 0 0 0;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
+                            <!-- WATERMARK -->
+ <div style="
                             position:absolute;
                             top:55%;
                             left:25%;
