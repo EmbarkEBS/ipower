@@ -10,7 +10,7 @@
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
                     .fixed-footer {
-                        position: relative;
+                        position: fixed;
                         left: 0;
                         right: 0;
                         bottom: 0;
@@ -38,11 +38,10 @@
         padding: 0 !important;
     }
 
-    .page {
-        margin: 0 !important;
-        padding: 0px 40px 0px 40px !important;
-    }
-
+   .page {
+    margin: 0 !important;
+    padding: 0 40px 100px 40px !important;
+}
     header,
     footer {
         display: none !important;
