@@ -631,7 +631,7 @@
                                                 ">
                                                     Sub Total
                                                 </td> <td style="padding:5px;">
-                    <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_untaxed))"/>
+                    <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_untaxed)"/>
                 </td>
 
                                             </tr>
