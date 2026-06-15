@@ -14,11 +14,27 @@
 <!-- ✅ SAFE CURRENCY SYMBOL -->
 <t t-set="cur_symbol"
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
+                <style>
+                   
 
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .article {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+.page {
+    padding: 0 40px !important;
+}
+  
+                </style>
 
                 <div class="page"
                      style="position:relative;
-                            color:#333; margin:0;
+                            color:#333; padding:100px 0 0 0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
                             <!-- WATERMARK -->
