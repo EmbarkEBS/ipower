@@ -60,7 +60,7 @@
                                 width:100%;
                                 font-size:15px;
                                 border-collapse:collapse;
-                                margin-top:135px;
+                                margin-top:135px !important;
                                 margin-bottom:35px;
                             ">
 
