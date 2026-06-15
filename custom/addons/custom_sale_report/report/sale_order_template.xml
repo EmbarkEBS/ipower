@@ -39,7 +39,7 @@
                             font-family: Helvetica, Arial, sans-serif !important;">
                             <!-- WATERMARK -->
 <div style="
-    position:absolute;
+    position:fixed;
     top:55%;
     left:25%;
     opacity:0.10;
