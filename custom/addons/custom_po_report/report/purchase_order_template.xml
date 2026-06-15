@@ -454,6 +454,9 @@
         </td>
     </tr>
 </t>
+<t t-set="shipping_partner"
+   t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
+
 <tr>
     <td style="
         padding:4px 0;
@@ -465,24 +468,42 @@
         Shipping Address
     </td>
 
-    <td style="padding:4px 0;">
+    <td style="
+        padding:4px 0;
+        font-size:15px;
+        font-family:Arial,sans-serif;
+        line-height:1.4;
+    ">
         :
-        <t t-if="o.dest_address_id">
-            <div t-field="o.dest_address_id"
-                 t-options='{
-                    "widget": "contact",
-                    "fields": ["name", "address", "phone"],
-                    "no_marker": true
-                 }'/>
-        </t>
-        <t t-else="">
-            <div t-field="o.picking_type_id.warehouse_id.partner_id"
-                 t-options='{
-                    "widget": "contact",
-                    "fields": ["name", "address", "phone"],
-                    "no_marker": true
-                 }'/>
-        </t>
+        <div style="display:inline-block; margin-left:5px;">
+            <strong t-field="shipping_partner.name"/><br/>
+
+            <t t-if="shipping_partner.street">
+                <span t-field="shipping_partner.street"/><br/>
+            </t>
+
+            <t t-if="shipping_partner.street2">
+                <span t-field="shipping_partner.street2"/><br/>
+            </t>
+
+            <t t-if="shipping_partner.city">
+                <span t-field="shipping_partner.city"/>
+            </t>
+
+            <t t-if="shipping_partner.state_id">
+                , <span t-field="shipping_partner.state_id.name"/>
+            </t>
+
+            <t t-if="shipping_partner.zip">
+                - <span t-field="shipping_partner.zip"/>
+            </t>
+
+            <br t-if="shipping_partner.country_id"/>
+
+            <t t-if="shipping_partner.country_id">
+                <span t-field="shipping_partner.country_id.name"/>
+            </t>
+        </div>
     </td>
 </tr>
                                         </table>
