@@ -51,7 +51,7 @@
                             <!-- WATERMARK -->
 <div style="
     position:absolute;
-    top:60%;
+    top:55%;
     left:25%;
     opacity:0.10;
     transform:translate(-50%, -50%) rotate(-25deg);
@@ -688,7 +688,7 @@
 
                     <div style="margin-top:8px;">
 
-                        <t t-if="line.x_studio_expected_delivery_2">
+                        <t t-if="line.product_id.type != 'service' and line.x_studio_expected_delivery_2">
 
                             <span>Expected Delivery Date: </span>
                             <span t-esc="line.x_studio_expected_delivery_2"/>
@@ -852,24 +852,34 @@
                                                     padding:5px;
                                                     font-weight:bold;
                                                 ">
-                                                  <t t-foreach="o.order_line" t-as="line">
-    <t t-foreach="line.tax_ids" t-as="tax">
-        <tr>
-            <td style="padding:5px;font-weight:bold;">
-                VAT <span t-esc="int(tax.amount)"/>%
-                on
-               <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal)"/>
-                
-            </td>
+                                                  <t t-if="o.tax_totals and o.tax_totals.get('subtotals')">
 
-            <td style="padding:5px;text-align:right;">
-                <span t-esc="o.currency_id.symbol"/> <span t-esc="'{:,.2f}'.format(line.price_subtotal * tax.amount / 100)"/>
-               
-            </td>
-        </tr>
+    <t t-foreach="o.tax_totals['subtotals']" t-as="subtotal">
+
+        <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+
+            <tr>
+                <td style="padding:5px;font-weight:bold;">
+
+                    VAT
+                   <span>(</span><span t-esc="int(tax_group.get('involved_tax_ids') and env['account.tax'].browse(tax_group['involved_tax_ids'][0]).amount or 0)"/>%<span>)</span>
+                  
+
+                </td>
+
+                <td style="padding:5px;text-align:right;">
+
+                    <span t-raw="cur_symbol"/>
+                    <span t-esc="'{:,.2f}'.format(tax_group['tax_amount_currency'])"/>
+
+                </td>
+            </tr>
+
+        </t>
+
     </t>
-</t>
-                                                </td>
+
+</t>    </td>
 
                                                
                                             </tr>
