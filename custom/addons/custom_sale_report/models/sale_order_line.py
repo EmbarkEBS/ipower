@@ -26,7 +26,7 @@ class SaleOrderLine(models.Model):
             self._update_expected_delivery()
         return res
     
-     def _update_warranty(self):
+    def _update_warranty(self):
         for line in self:
             if line.product_id:
                 line.x_studio_warranty = (
