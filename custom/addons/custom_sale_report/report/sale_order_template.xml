@@ -16,7 +16,9 @@
                         bottom: 0;
                         height: 22mm;
                     }
-
+.footer-block{
+    margin-top:20px;
+}
              @page {
      
         padding: 0 !important;
@@ -949,10 +951,10 @@
                                 </div>
 
                             </div>
-
+ </div>
                    <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
-<div class="fixed-footer">
+<div class="fixed-footer footer-block">
 
     <!-- FOOTER TEXT -->
     <div style="
@@ -1032,7 +1034,7 @@
 </div>
  </div>
 
-    </div>             
+                
 </main>
             </t>
 
