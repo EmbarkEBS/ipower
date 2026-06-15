@@ -3,7 +3,7 @@
     <template id="external_layout_ipower">
 
         <!-- HEADER -->"
-        <div class="header" style="padding: 0 25px !important;">
+        <div class="header" style="padding: 0 25px !important;font-family: Helvetica, Arial, sans-serif !important;">
   <!-- HEADER -->
     <table style="
                                 width:100%;
@@ -87,7 +87,7 @@
 ">
 <div style="text-align:center; margin:5px 0;">
 
-    <svg width="120" height="10"
+    <svg width="120" height="15"
          xmlns="http://www.w3.org/2000/svg">
 
         <line x1="0" y1="5" x2="80" y2="5" stroke="#f39223" stroke-width="2"/>
@@ -123,13 +123,13 @@
         </div>
 
         <!-- BODY -->
-        <div class="article o_report_layout_standard">
+        <div class="article o_report_layout_standard" style="font-family: Helvetica, Arial, sans-serif !important;" >
         
             <t t-out="0"/>
         </div>
 
         <!-- FOOTER -->
-        <div class="footer">
+        <div class="footer"   style="font-family: Helvetica, Arial, sans-serif !important;">
 
             <!-- FOOTER TEXT -->
     <div style="
