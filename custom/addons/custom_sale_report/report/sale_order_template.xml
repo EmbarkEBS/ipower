@@ -10,7 +10,22 @@
         <t t-set="company" t-value="o.company_id"/>
 
         <t t-call="custom_sale_report.external_layout_ipower">
+<div style="
+    position:fixed;
+    top:55%;
+    left:25%;
+    opacity:0.10;
+    transform:translate(-50%, -50%) rotate(-25deg);
+    z-index:0;
+    width:420px;
+    text-align:center;
+">
 
+    <img t-if="o.company_id.logo"
+         t-att-src="image_data_uri(o.company_id.logo)"
+         style="width:100%;"/>
+
+</div>
 <!-- ✅ SAFE CURRENCY SYMBOL -->
 <t t-set="cur_symbol"
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
@@ -38,22 +53,7 @@
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
                             <!-- WATERMARK -->
-<div style="
-    position:absolute;
-    top:55%;
-    left:25%;
-    opacity:0.10;
-    transform:translate(-50%, -50%) rotate(-25deg);
-    z-index:0;
-    width:420px;
-    text-align:center;
-">
 
-    <img t-if="o.company_id.logo"
-         t-att-src="image_data_uri(o.company_id.logo)"
-         style="width:100%;"/>
-
-</div>
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
                             <!-- ===================================================== -->
