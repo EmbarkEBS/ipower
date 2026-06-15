@@ -237,7 +237,7 @@
                                             border-collapse:collapse;
                                         ">
   <strong style="color:#1a3a5a;">
-                                                        To
+                                                        Vendor
                                                     </strong>
 
                                                    
@@ -451,6 +451,30 @@
         <td style="padding:4px 0;">
             :
             <span t-esc="o.partner_ref"/>
+        </td>
+    </tr>
+</t>
+<t t-if="o.dest_address_id">
+    <tr>
+        <td style="
+            padding:4px 0;
+            font-size:15px;
+            font-weight:bold;
+            color:#1a3a5a;
+            vertical-align:top;
+        ">
+            Shipping Address
+        </td>
+
+        <td style="padding:4px 0;">
+            :
+            <div t-field="o.dest_address_id"
+                 t-options='{
+                    "widget": "contact",
+                    "fields": ["name", "address", "phone"],
+                    "no_marker": true,
+                    "phone_icons": true
+                 }'/>
         </td>
     </tr>
 </t>
