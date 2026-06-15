@@ -26,12 +26,14 @@ class SaleOrderLine(models.Model):
             self._update_expected_delivery()
         return res
     
-    def _update_warranty(self):
+     def _update_warranty(self):
         for line in self:
             if line.product_id:
-                line.x_studio_p_warranty = line.product_id.product_tmpl_id.x_studio_warranty or ''
+                line.x_studio_warranty = (
+                    line.product_id.product_tmpl_id.x_studio_warranty or ''
+                )
             else:
-                line.x_studio_p_warranty = ''
+                line.x_studio_warranty = ''
 
     @api.model_create_multi
     def create(self, vals_list):
