@@ -39,20 +39,16 @@
                             font-family: Helvetica, Arial, sans-serif !important;">
                             <!-- WATERMARK -->
 <div style="
-    position:absolute;
-    top:55%;
-    left:25%;
-    opacity:0.10;
-    transform:translate(-50%, -50%) rotate(-25deg);
-    z-index:0;
-    width:420px;
-    text-align:center;
+    position:fixed;
+    top:35%;
+    left:20%;
+    width:400px;
+    opacity:0.08;
+    z-index:-1;
 ">
-
     <img t-if="o.company_id.logo"
          t-att-src="image_data_uri(o.company_id.logo)"
          style="width:100%;"/>
-
 </div>
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
