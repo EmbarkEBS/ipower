@@ -9,22 +9,14 @@
 <t t-set="cur_symbol"
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
-                .report-wrapper {
-    width: 100%;
-    border-collapse: collapse;
-}
+                    .fixed-footer {
+                        position: fixed;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 22mm;
+                    }
 
-.report-header {
-    display: table-header-group;
-}
-
-.report-footer {
-    display: table-footer-group;
-}
-
-.report-body {
-    display: table-row-group;
-}
              @page {
      
         padding: 0 !important;
@@ -46,22 +38,39 @@
         padding: 0 !important;
     }
 
-   .page {
-    margin: 0 !important;
-    padding: 0 40px 100px 40px !important;
-}
+    .page {
+        margin: 0 !important;
+        padding: 0px 40px 0px 40px !important;
+    }
+
     header,
     footer {
         display: none !important;
     }
                 </style>
 <main>
-<table class="report-wrapper">
+                <div class="page"
+                     style="padding:10px 0 0 0;position:relative;
+                            color:#333; margin:0;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
+                            <!-- WATERMARK -->
+<div style="
+    position:absolute;
+    top:55%;
+    left:25%;
+    opacity:0.10;
+    transform:translate(-50%, -50%) rotate(-25deg);
+    z-index:0;
+    width:420px;
+    text-align:center;
+">
 
-    <thead class="report-header">
-        <tr>
-            <td>
-               
+    <img t-if="o.company_id.logo"
+         t-att-src="image_data_uri(o.company_id.logo)"
+         style="width:100%;"/>
+
+</div>
 
                  <!-- HEADER -->
     <table style="
@@ -207,35 +216,8 @@
 
                             </table>
 
-  </td>
-        </tr>
-    </thead>
+  
 
-    <tbody class="report-body">
-        <tr>
-            <td>
- <div class="page"
-                     style="padding:10px 0 0 0;position:relative;
-                            color:#333; margin:0;
-                            line-height:1.4;
-                            font-family: Helvetica, Arial, sans-serif !important;">
-                            <!-- WATERMARK -->
-<div style="
-    position:absolute;
-    top:55%;
-    left:25%;
-    opacity:0.10;
-    transform:translate(-50%, -50%) rotate(-25deg);
-    z-index:0;
-    width:420px;
-    text-align:center;
-">
-
-    <img t-if="o.company_id.logo"
-         t-att-src="image_data_uri(o.company_id.logo)"
-         style="width:100%;"/>
-
-</div>
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
                             <!-- ===================================================== -->
@@ -767,9 +749,65 @@
                                 </tbody>
 
                             </table>
+<!-- SHIPPING DETAILS (ONLY FOR FREIGHT FORWARDER) -->
+<t t-if="o.partner_id.category_id.filtered(lambda c: c.name == 'Freight Forwarders')">
 
+    <div style="margin-top:20px;">
+        <strong style="font-size:14px;">Shipping Details</strong>
+
+        <table style="width:100%; margin-top:8px; border:1px solid #000; border-collapse:collapse;">
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px; width:40%;">
+                    <strong>Weight (kg)</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_weightkg_1 or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Dimensions</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_dimensions_1 or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Pickup Address</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_pickup_address or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Delivery Location</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_delivery_location or ''"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #000; padding:6px;">
+                    <strong>Instructions</strong>
+                </td>
+                <td style="border:1px solid #000; padding:6px;">
+                    <span t-esc="o.x_studio_special_instructions or ''"/>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</t>
      <!-- TOTAL -->
-    <table style="width:100%; margin-top:20px; border-collapse:collapse;">
+    <table style="width:100%; margin-top:20px border-collapse:collapse;">
     <tr>
 
         <!-- LEFT: AMOUNT IN WORDS -->
@@ -828,21 +866,18 @@
 
             <tr>
                 <td style="padding:5px;font-weight:bold;">
+
                     VAT
-                    (<span t-esc="int(
-                        tax_group.get('involved_tax_ids')
-                        and env['account.tax'].browse(
-                            tax_group['involved_tax_ids'][0]
-                        ).amount
-                        or 0
-                    )"/>%)
+                   <span>(</span><span t-esc="int(tax_group.get('involved_tax_ids') and env['account.tax'].browse(tax_group['involved_tax_ids'][0]).amount or 0)"/>%<span>)</span>
+                  
+
                 </td>
 
                 <td style="padding:5px;text-align:right;">
+
                     <span t-raw="cur_symbol"/>
-                    <span t-esc="'{:,.2f}'.format(
-                        tax_group['tax_amount_currency']
-                    )"/>
+                    <span t-esc="'{:,.2f}'.format(tax_group['tax_amount_currency'])"/>
+
                 </td>
             </tr>
 
@@ -850,7 +885,7 @@
 
     </t>
 
-</t>   </td>
+</t>    </td>
 
                                                
                                             </tr>
@@ -914,18 +949,11 @@
 
                                 </div>
 
-</div> <!-- page -->
-
-        </td>
-    </tr>
-</tbody>
-
-<tfoot class="report-footer">
-        <tr>
-            <td>
+                            </div>
+ </div>
                    <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
-
+<div class="fixed-footer">
 
     <!-- FOOTER TEXT -->
     <div style="
@@ -992,24 +1020,21 @@
          preserveAspectRatio="none"
          xmlns="http://www.w3.org/2000/svg">
 
+        <!-- BLUE 25% -->
         <polygon points="0,0 260,0 240,25 0,25"
                  fill="#1f3b73"/>
 
+        <!-- ORANGE 75% -->
         <polygon points="260,0 1000,0 1000,25 240,25"
                  fill="#e58b39"/>
 
     </svg>
 
 </div>
-        </td>
-    </tr>
-</tfoot>
+ </div>
 
-</table>
-
+                
 </main>
-             
-
             </t>
 
         </t>
