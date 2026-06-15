@@ -15,13 +15,13 @@
     <field name="margin_top">60</field>
 
     <!-- Footer space -->
-    <field name="margin_bottom">35</field>
+    <field name="margin_bottom">18</field>
 
-    <field name="margin_left">5</field>
-    <field name="margin_right">5</field>
+    <field name="margin_left">0</field>
+    <field name="margin_right">0</field>
 
     <field name="header_line" eval="False"/>
-    <field name="header_spacing">5</field>
+    <field name="header_spacing">50</field>
 
     <field name="dpi">90</field>
 

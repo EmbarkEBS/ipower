@@ -2,8 +2,8 @@
 
     <template id="external_layout_ipower">
 
-        <!-- HEADER -->
-        <div class="header">
+        <!-- HEADER -->"
+        <div class="header" style="padding: 0 40px !important;">
   <!-- HEADER -->
     <table style="
                                 width:100%;
