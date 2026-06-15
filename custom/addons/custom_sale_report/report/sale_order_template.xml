@@ -32,40 +32,32 @@
   
                 </style>
 
-               <div class="page"
-     style="
-        position:relative;
-        padding:100px 0 0 0;
-        font-family: Helvetica, Arial, sans-serif;
-        color:#333;
-     ">
-
-    <!-- WATERMARK -->
-    <div style="
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        z-index:0;
-        pointer-events:none;
-    ">
-
-        <img t-if="o.company_id.logo"
-             t-att-src="image_data_uri(o.company_id.logo)"
-             style="
-                position:absolute;
-                top:50%;
-                left:50%;
-                transform:translate(-50%, -50%) rotate(-25deg);
-                opacity:0.08;
-                width:400px;
-            "/>
-
-    </div>
-
-    <!-- REAL CONTENT -->
-    <div style="position:relative; z-index:1;">
+                <div class="page"
+                     style="position:relative;
+                            color:#333; padding:100px 0 0 0;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
+                            <!-- WATERMARK -->
+<div style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+">
+    <img t-if="company.logo"
+         t-att-src="image_data_uri(company.logo)"
+         style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            opacity: 0.10;
+         "/>
+</div>
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
                             <!-- ===================================================== -->
@@ -799,7 +791,7 @@
 
                             </div>
  
-                  </div>
+                 
 
                 </div>
 
