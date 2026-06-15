@@ -1,7 +1,7 @@
 <odoo>
     <template id="sale_order_template">
 
-        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
 <meta charset="UTF-8"/>
             <t t-foreach="docs" t-as="o">
 
@@ -9,14 +9,27 @@
 <t t-set="cur_symbol"
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
-                    .fixed-footer {
-                        position: fixed;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        height: 22mm;
-                    }
+                   
+.header-c {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40mm;
+}
 
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 22mm;
+}
+
+.page {
+    padding-top: 45mm;
+    padding-bottom: 30mm;
+}
              @page {
      
         padding: 0 !important;
@@ -38,10 +51,10 @@
         padding: 0 !important;
     }
 
-    .page {
+    <!-- .page {
         margin: 0 !important;
         padding: 0px 40px 0px 40px !important;
-    }
+    } -->
 
     header,
     footer {
@@ -49,35 +62,13 @@
     }
                 </style>
 <main>
-                <div class="page"
-                     style="padding:10px 0 0 0;position:relative;
-                            color:#333; margin:0;
-                            line-height:1.4;
-                            font-family: Helvetica, Arial, sans-serif !important;">
-                            <!-- WATERMARK -->
-<div style="
-    position:absolute;
-    top:55%;
-    left:25%;
-    opacity:0.10;
-    transform:translate(-50%, -50%) rotate(-25deg);
-    z-index:0;
-    width:420px;
-    text-align:center;
-">
-
-    <img t-if="o.company_id.logo"
-         t-att-src="image_data_uri(o.company_id.logo)"
-         style="width:100%;"/>
-
-</div>
 
                  <!-- HEADER -->
     <table style="
                                 width:100%;
                                 border-collapse:collapse;
                                 margin-bottom:20px;
-                            ">
+                            " class="header-c">
 
                                 <tr>
 
@@ -215,6 +206,29 @@
                                 </tr>
 
                             </table>
+
+                <div class="page"
+                     style="padding:10px 0 0 0;position:relative;
+                            color:#333; margin:0;
+                            line-height:1.4;
+                            font-family: Helvetica, Arial, sans-serif !important;">
+                            <!-- WATERMARK -->
+<div style="
+    position:absolute;
+    top:55%;
+    left:25%;
+    opacity:0.10;
+    transform:translate(-50%, -50%) rotate(-25deg);
+    z-index:0;
+    width:420px;
+    text-align:center;
+">
+
+    <img t-if="o.company_id.logo"
+         t-att-src="image_data_uri(o.company_id.logo)"
+         style="width:100%;"/>
+
+</div>
 
   
 
