@@ -3,7 +3,7 @@
     <template id="external_layout_ipower">
 
         <!-- HEADER -->
-        <div class="header" style="height:180px;margin-bottom:20%">
+        <div class="header">
   <!-- HEADER -->
     <table style="
                                 width:100%;
