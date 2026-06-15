@@ -9,13 +9,12 @@
 <t t-set="cur_symbol"
    t-value="'&#8364;' if o.currency_id.name == 'EUR' else o.currency_id.symbol"/>
                 <style>
-                    .fixed-footer {
-                        position: fixed;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        height: 22mm;
-                    }
+                 .fixed-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 .footer-block{
     margin-top:20px;
 }
@@ -951,7 +950,7 @@
                                 </div>
 
                             </div>
- </div>
+ 
                    <!-- FOOTER CONTENT -->
                           <!-- FOOTER -->
 <div class="fixed-footer footer-block">
@@ -1034,7 +1033,7 @@
 </div>
  </div>
 
-                
+   </div>             
 </main>
             </t>
 
