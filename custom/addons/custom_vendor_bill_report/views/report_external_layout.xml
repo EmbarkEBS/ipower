@@ -113,7 +113,7 @@
 
     :
   <span t-esc="o.currency_id.symbol"/>
-<span t-esc="' %.2f' % o.amount_residual"/>
+  <span t-esc="cur_symbol + ' {:,.2f}'.format(o.amount_residual)"/>
 </div>
                                     </td>
 
