@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_report_search_shipping" model="ir.ui.view">
+        <field name="name">purchase.report.search.shipping</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_report_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="x_studio_delivery_location"/>
+                <filter string="Delivery Location"
+                        name="group_delivery_location"
+                        context="{'group_by':'x_studio_delivery_location'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
