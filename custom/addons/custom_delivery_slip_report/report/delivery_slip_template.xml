@@ -481,7 +481,7 @@
         line-height:1.4;
     ">
             :
-<div style="margin-left:4px">
+<span style="margin-left:4px">
             <strong>
                 <span t-esc="o.purchase_id.dest_address_id.name"/>
             </strong>
@@ -502,7 +502,7 @@
             <t t-if="o.purchase_id.dest_address_id.country_id">
             
                 <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
-            </t></div>
+            </t></span>
         </td>
     </tr>
 
