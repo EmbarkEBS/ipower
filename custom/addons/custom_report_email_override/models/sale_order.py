@@ -6,7 +6,7 @@ class SaleOrder(models.Model):
     def action_quotation_send(self):
         action = super().action_quotation_send()
         report = self.env.ref(
-            "your_module.action_report_saleorder_custom",
+            "custom_sale_report.action_report_saleorder_custom",
             raise_if_not_found=False,
         )
         if report:
