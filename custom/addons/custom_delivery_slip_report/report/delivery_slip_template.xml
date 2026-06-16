@@ -136,21 +136,21 @@
                                             color:#000;
                                             margin-top:20px;
                                         ">
-                                            <t t-if="o.picking_type_id.code == 'outgoing'">
-        <span>Delivery Note</span>
-    </t>
-
-    <t t-elif="o.picking_type_id.code == 'incoming'">
-        <span>Receipt Note</span>
-    </t>
-
-    <t t-elif="o.picking_type_id.code == 'internal'">
-        <span>Internal Transfer</span>
-    </t>
-
-    <t t-else="">
-        <span t-out="o.picking_type_id._get_code_report_name()"/>
-    </t>
+                                           <t t-if="'Dropship' in (o.picking_type_id.name or '')">
+    <span>Delivery Note</span>
+</t>
+<t t-elif="o.picking_type_id.code == 'outgoing'">
+    <span>Delivery Note</span>
+</t>
+<t t-elif="o.picking_type_id.code == 'incoming'">
+    <span>Receipt Note</span>
+</t>
+<t t-elif="o.picking_type_id.code == 'internal'">
+    <span>Internal Transfer</span>
+</t>
+<t t-else="">
+    <span t-esc="o.picking_type_id.name"/>
+</t>
 
     
                                         </h1>
@@ -457,7 +457,7 @@
         </td>
     </tr>
 </t>
-<t t-if="o.picking_type_id.code == 'outgoing' and o.partner_id">
+
     <tr>
         <td style="font-weight:bold;font-size:15px;color:#1a3a5a;">
             Delivery Address
@@ -470,7 +470,7 @@
             <span t-esc="o.partner_id.country_id.name or ''"/>
         </td>
     </tr>
-</t>
+
                             </table>
 </td>
 </tr>
