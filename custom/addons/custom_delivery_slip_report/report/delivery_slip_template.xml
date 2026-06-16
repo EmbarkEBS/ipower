@@ -462,54 +462,37 @@
    t-value="(o.move_ids and o.move_ids[0].partner_id) or o.partner_id"/>
    
        <!-- Dropship -->
-<t t-if="'Dropship' in (o.picking_type_id.name or '')">
+<t t-if="'Dropship' in (o.picking_type_id.name or '') and o.purchase_id and o.purchase_id.dest_address_id">
 
     <tr>
-        <td style="
-            font-weight:bold;
-            color:#1a3a5a;
-            vertical-align:top;">
+        <td style="font-weight:bold;color:#1a3a5a;vertical-align:top;">
             Delivery Address
         </td>
 
         <td style="vertical-align:top;">
             :
 
-            <t t-set="customer_address"
-               t-value="o.sale_id.partner_shipping_id if o.sale_id and o.sale_id.partner_shipping_id else o.partner_id"/>
-
             <strong>
-                <span t-esc="customer_address.name"/>
+                <span t-esc="o.purchase_id.dest_address_id.name"/>
             </strong>
 
-            <t t-if="customer_address.street">
+            <t t-if="o.purchase_id.dest_address_id.street">
                 <br/>
-                <span t-esc="customer_address.street"/>
+                <span t-esc="o.purchase_id.dest_address_id.street"/>
             </t>
 
-            <t t-if="customer_address.street2">
+            <t t-if="o.purchase_id.dest_address_id.street2">
                 <br/>
-                <span t-esc="customer_address.street2"/>
+                <span t-esc="o.purchase_id.dest_address_id.street2"/>
             </t>
 
             <br/>
-            <span t-esc="customer_address.city or ''"/>
+            <span t-esc="o.purchase_id.dest_address_id.city or ''"/>
 
-            <t t-if="customer_address.state_id">
+            <t t-if="o.purchase_id.dest_address_id.country_id">
                 ,
-                <span t-esc="customer_address.state_id.name"/>
+                <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
             </t>
-
-            <t t-if="customer_address.country_id">
-                ,
-                <span t-esc="customer_address.country_id.name"/>
-            </t>
-
-            <t t-if="customer_address.phone">
-                <br/>
-                <span t-esc="customer_address.phone"/>
-            </t>
-
         </td>
     </tr>
 
