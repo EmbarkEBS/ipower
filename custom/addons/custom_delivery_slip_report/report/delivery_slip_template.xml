@@ -465,22 +465,55 @@
 <t t-if="'Dropship' in (o.picking_type_id.name or '')">
 
     <tr>
-        <td style="font-weight:bold;color:#1a3a5a;">
+        <td style="
+            font-weight:bold;
+            color:#1a3a5a;
+            vertical-align:top;">
             Delivery Address
         </td>
 
-        <td>
+        <td style="vertical-align:top;">
             :
 
-            <span t-esc="o.sale_id.partner_shipping_id.name
-                         if o.sale_id and o.sale_id.partner_shipping_id
-                         else o.partner_id.name"/>
-        </td>
+            <t t-set="customer_address"
+               t-value="o.sale_id.partner_shipping_id if o.sale_id and o.sale_id.partner_shipping_id else o.partner_id"/>
 
+            <strong>
+                <span t-esc="customer_address.name"/>
+            </strong>
+
+            <t t-if="customer_address.street">
+                <br/>
+                <span t-esc="customer_address.street"/>
+            </t>
+
+            <t t-if="customer_address.street2">
+                <br/>
+                <span t-esc="customer_address.street2"/>
+            </t>
+
+            <br/>
+            <span t-esc="customer_address.city or ''"/>
+
+            <t t-if="customer_address.state_id">
+                ,
+                <span t-esc="customer_address.state_id.name"/>
+            </t>
+
+            <t t-if="customer_address.country_id">
+                ,
+                <span t-esc="customer_address.country_id.name"/>
+            </t>
+
+            <t t-if="customer_address.phone">
+                <br/>
+                <span t-esc="customer_address.phone"/>
+            </t>
+
+        </td>
     </tr>
 
 </t>
-
 <!-- Purchase Receipt -->
 <t t-elif="o.picking_type_id.code == 'incoming'">
 
