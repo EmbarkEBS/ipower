@@ -343,7 +343,7 @@
                 - <span t-field="shipping_partner.zip"/>
             </t>
 
-            <br t-if="shipping_partner.country_id"/>
+            <!--<br t-if="shipping_partner.country_id"/>-->
 
             <t t-if="shipping_partner.country_id">
                 <span t-field="shipping_partner.country_id.name"/>
