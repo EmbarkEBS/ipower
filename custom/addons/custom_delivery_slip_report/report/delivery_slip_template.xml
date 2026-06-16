@@ -478,7 +478,7 @@
         padding:4px 0;
         font-size:15px;
         font-family:Arial,sans-serif;
-        line-height:1.4;
+        line-height:1.4;width:15px;
     ">
             :
 
@@ -599,7 +599,7 @@
 </t>
 
 <t t-if="o.partner_id.phone">
-    <br/>
+    
     <span t-esc="o.partner_id.phone"/>
 </t>
         </td>
