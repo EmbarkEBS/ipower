@@ -473,15 +473,15 @@
         vertical-align:top;">
             Delivery Address
         </td>
- <td style="">:</td>
+
         <td style="
         padding:4px 0;
         font-size:15px;
         font-family:Arial,sans-serif;
-        line-height:1.4;margin-left:4px;
+        line-height:1.4;
     ">
-           
-
+            :
+ <div style="margin-top:-20px;margin-left:4px"> 
             <strong>
                 <span t-esc="o.purchase_id.dest_address_id.name"/>
             </strong>
@@ -502,7 +502,7 @@
             <t t-if="o.purchase_id.dest_address_id.country_id">
             
                 <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
-            </t>
+            </t></div>
         </td>
     </tr>
 
@@ -519,14 +519,14 @@
         vertical-align:top;">
             Warehouse Address
         </td>
-         <td style="">:</td>
         <td style="
         padding:4px 0;
         font-size:15px;
         font-family:Arial,sans-serif;
-        line-height:1.4;margin-left:4px;
+        line-height:1.4;
     ">
-            <strong>
+            :
+         <div style="margin-top:-20px;margin-left:4px">   <strong>
     <span t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
 </strong>
 
@@ -551,7 +551,7 @@
 <t t-if="o.picking_type_id.warehouse_id.partner_id.phone">
     <br/>
     <span t-esc="o.picking_type_id.warehouse_id.partner_id.phone"/>
-</t>
+</t></div>
         </td>
     </tr>
 
@@ -569,13 +569,13 @@
         vertical-align:top;">
             Delivery Address
         </td>
-       <td style="">:</td>
         <td style="
         padding:4px 0;
         font-size:15px;
         font-family:Arial,sans-serif;
-        line-height:1.4;margin-left:4px;
+        line-height:1.4;
     ">
+            : <div style="margin-top:-20px;margin-left:4px"> 
            <strong>
     <span t-esc="o.partner_id.name"/>
 </strong>
@@ -601,7 +601,7 @@
 <t t-if="o.partner_id.phone">
     <br/>
     <span t-esc="o.partner_id.phone"/>
-</t>
+</t></div>
         </td>
     </tr>
 
