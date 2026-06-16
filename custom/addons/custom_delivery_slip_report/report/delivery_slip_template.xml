@@ -460,8 +460,7 @@
 
     <tr><t t-set="delivery_partner"
    t-value="(o.move_ids and o.move_ids[0].partner_id) or o.partner_id"/>
-   <t t-set="shipping_partner"
-   t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
+   
        <!-- Dropship -->
 <t t-if="'Dropship' in (o.picking_type_id.name or '')">
 
@@ -469,10 +468,15 @@
         <td style="font-weight:bold;color:#1a3a5a;">
             Delivery Address
         </td>
+
         <td>
             :
-           <strong t-field="shipping_partner.name"/>
+
+            <span t-esc="o.sale_id.partner_shipping_id.name
+                         if o.sale_id and o.sale_id.partner_shipping_id
+                         else o.partner_id.name"/>
         </td>
+
     </tr>
 
 </t>
