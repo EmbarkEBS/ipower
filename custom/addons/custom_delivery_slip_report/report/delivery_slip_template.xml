@@ -136,7 +136,23 @@
                                             color:#000;
                                             margin-top:20px;
                                         ">
-                                            Delivery Note
+                                            <t t-if="o.picking_type_id.code == 'outgoing'">
+        <span>Delivery Note</span>
+    </t>
+
+    <t t-elif="o.picking_type_id.code == 'incoming'">
+        <span>Receipt Note</span>
+    </t>
+
+    <t t-elif="o.picking_type_id.code == 'internal'">
+        <span>Internal Transfer</span>
+    </t>
+
+    <t t-else="">
+        <span t-out="o.picking_type_id._get_code_report_name()"/>
+    </t>
+
+    
                                         </h1>
 
                                 <div style="
@@ -441,7 +457,20 @@
         </td>
     </tr>
 </t>
-
+<t t-if="o.picking_type_id.code == 'outgoing' and o.partner_id">
+    <tr>
+        <td style="font-weight:bold;font-size:15px;color:#1a3a5a;">
+            Delivery Address
+        </td>
+        <td>
+            :
+            <span t-esc="o.partner_id.name"/>,
+            <span t-esc="o.partner_id.street or ''"/>,
+            <span t-esc="o.partner_id.city or ''"/>,
+            <span t-esc="o.partner_id.country_id.name or ''"/>
+        </td>
+    </tr>
+</t>
                             </table>
 </td>
 </tr>
