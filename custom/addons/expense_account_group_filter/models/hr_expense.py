@@ -28,8 +28,7 @@ class HrExpense(models.Model):
             start = rec.account_group_id.code_prefix_start or ""
             end = rec.account_group_id.code_prefix_end or ""
 
-            accounts = Account.search([
-                ("deprecated", "=", False),
+            accounts = Account.search([                
                 ("code", ">=", start),
                 ("code", "<=", end),
             ])
