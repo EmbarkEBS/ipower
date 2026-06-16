@@ -481,7 +481,7 @@
         line-height:1.4;
     ">
             :
- <div style="margin-top:-20px;margin-left:4px"> 
+ <div style="margin-top:-20px;margin-left:6px"> 
             <strong>
                 <span t-esc="o.purchase_id.dest_address_id.name"/>
             </strong>
@@ -526,7 +526,7 @@
         line-height:1.4;
     ">
             :
-         <div style="margin-top:-20px;margin-left:4px">   <strong>
+         <div style="margin-top:-20px;margin-left:6px">   <strong>
     <span t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
 </strong>
 
@@ -542,7 +542,7 @@
 
 <br/>
 <span t-esc="o.picking_type_id.warehouse_id.partner_id.city or ''"/>
-<br/>
+
 <t t-if="o.picking_type_id.warehouse_id.partner_id.country_id">
     
     <span t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/>
@@ -575,7 +575,7 @@
         font-family:Arial,sans-serif;
         line-height:1.4;
     ">
-            : <div style="margin-top:-20px;margin-left:4px"> 
+            : <div style="margin-top:-20px;margin-left:6px"> 
            <strong>
     <span t-esc="o.partner_id.name"/>
 </strong>
