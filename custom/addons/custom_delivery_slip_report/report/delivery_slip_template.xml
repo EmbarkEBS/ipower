@@ -11,7 +11,7 @@
 
         <t t-set="company" t-value="o.company_id"/>
 
-        <t t-call="delivery_slip_template.external_layout_ipower2">
+        <t t-call="custom_delivery_slip_report.external_layout_ipower2">
 
 <!-- ✅ SAFE CURRENCY SYMBOL -->
 <t t-set="cur_symbol"
