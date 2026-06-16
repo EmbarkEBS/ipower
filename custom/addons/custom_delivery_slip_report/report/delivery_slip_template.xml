@@ -481,28 +481,28 @@
         line-height:1.4;
     ">
             :
-<span style="margin-left:4px">
+
             <strong>
-                <span t-esc="o.purchase_id.dest_address_id.name"/>
+                <span style="margin-left:4px" t-esc="o.purchase_id.dest_address_id.name"/>
             </strong>
 
             <t t-if="o.purchase_id.dest_address_id.street">
                 <br/>
-                <span t-esc="o.purchase_id.dest_address_id.street"/>
+                <span style="margin-left:4px" t-esc="o.purchase_id.dest_address_id.street"/>
             </t>
 
             <t t-if="o.purchase_id.dest_address_id.street2">
                 <br/>
-                <span t-esc="o.purchase_id.dest_address_id.street2"/>
+                <span style="margin-left:4px" t-esc="o.purchase_id.dest_address_id.street2"/>
             </t>
 
             <br/>
-            <span t-esc="o.purchase_id.dest_address_id.city or ''"/>
+            <span style="margin-left:4px" t-esc="o.purchase_id.dest_address_id.city or ''"/>
 <br/>
             <t t-if="o.purchase_id.dest_address_id.country_id">
             
-                <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
-            </t></span>
+                <span style="margin-left:4px" t-esc="o.purchase_id.dest_address_id.country_id.name"/>
+            </t>
         </td>
     </tr>
 
@@ -527,30 +527,30 @@
     ">
             :
             <strong>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
+    <span style="margin-left:4px" t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
 </strong>
 
 <t t-if="o.picking_type_id.warehouse_id.partner_id.street">
     <br/>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.street"/>
+    <span style="margin-left:4px" t-esc="o.picking_type_id.warehouse_id.partner_id.street"/>
 </t>
 
 <t t-if="o.picking_type_id.warehouse_id.partner_id.street2">
     <br/>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.street2"/>
+    <span style="margin-left:4px" t-esc="o.picking_type_id.warehouse_id.partner_id.street2"/>
 </t>
 
 <br/>
-<span t-esc="o.picking_type_id.warehouse_id.partner_id.city or ''"/>
+<span style="margin-left:4px" t-esc="o.picking_type_id.warehouse_id.partner_id.city or ''"/>
 <br/>
 <t t-if="o.picking_type_id.warehouse_id.partner_id.country_id">
     
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/>
+    <span style="margin-left:4px" t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/>
 </t>
 
 <t t-if="o.picking_type_id.warehouse_id.partner_id.phone">
     <br/>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.phone"/>
+    <span style="margin-left:4px" t-esc="o.picking_type_id.warehouse_id.partner_id.phone"/>
 </t>
         </td>
     </tr>
@@ -577,30 +577,30 @@
     ">
             :
            <strong>
-    <span t-esc="o.partner_id.name"/>
+    <span style="margin-left:4px" t-esc="o.partner_id.name"/>
 </strong>
 
 <t t-if="o.partner_id.street">
     <br/>
-    <span t-esc="o.partner_id.street"/>
+    <span style="margin-left:4px" t-esc="o.partner_id.street"/>
 </t>
 
 <t t-if="o.partner_id.street2">
     <br/>
-    <span t-esc="o.partner_id.street2"/>
+    <span style="margin-left:4px" t-esc="o.partner_id.street2"/>
 </t>
 
 <br/>
-<span t-esc="o.partner_id.city or ''"/>
+<span style="margin-left:4px" t-esc="o.partner_id.city or ''"/>
 <br/>
 <t t-if="o.partner_id.country_id">
    
-    <span t-esc="o.partner_id.country_id.name"/>
+    <span style="margin-left:4px" t-esc="o.partner_id.country_id.name"/>
 </t>
 
 <t t-if="o.partner_id.phone">
     
-    <span t-esc="o.partner_id.phone"/>
+    <span style="margin-left:4px" t-esc="o.partner_id.phone"/>
 </t>
         </td>
     </tr>
