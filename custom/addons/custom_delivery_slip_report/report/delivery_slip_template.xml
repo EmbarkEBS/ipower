@@ -460,38 +460,50 @@
 
     <tr><t t-set="delivery_partner"
    t-value="(o.move_ids and o.move_ids[0].partner_id) or o.partner_id"/>
-        <td style="font-weight:bold;font-size:15px;color:#1a3a5a;">
+       <!-- Dropship -->
+<t t-if="'Dropship' in (o.picking_type_id.name or '')">
+
+    <tr>
+        <td style="font-weight:bold;color:#1a3a5a;">
             Delivery Address
         </td>
         <td>
             :
-           <strong>
-                <span t-esc="delivery_partner.name"/>
-            </strong>
-
-            <t t-if="delivery_partner.street">
-                <br/>
-                <span t-esc="delivery_partner.street"/>
-            </t>
-
-            <t t-if="delivery_partner.street2">
-                <br/>
-                <span t-esc="delivery_partner.street2"/>
-            </t>
-
-            <br/>
-            <span t-esc="delivery_partner.city or ''"/>
-
-            <t t-if="delivery_partner.country_id">
-                ,
-                <span t-esc="delivery_partner.country_id.name"/>
-            </t>
-
-            <t t-if="delivery_partner.phone">
-                <br/>
-                <span t-esc="delivery_partner.phone"/>
-            </t>
+            <span t-esc="o.partner_id.name"/>
         </td>
+    </tr>
+
+</t>
+
+<!-- Purchase Receipt -->
+<t t-elif="o.picking_type_id.code == 'incoming'">
+
+    <tr>
+        <td style="font-weight:bold;color:#1a3a5a;">
+            Warehouse Address
+        </td>
+        <td>
+            :
+            <span t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
+        </td>
+    </tr>
+
+</t>
+
+<!-- Sales Delivery -->
+<t t-elif="o.picking_type_id.code == 'outgoing'">
+
+    <tr>
+        <td style="font-weight:bold;color:#1a3a5a;">
+            Delivery Address
+        </td>
+        <td>
+            :
+            <span t-esc="o.partner_id.name"/>
+        </td>
+    </tr>
+
+</t>
     </tr>
 
                             </table>
