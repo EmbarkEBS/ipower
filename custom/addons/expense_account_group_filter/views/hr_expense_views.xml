@@ -18,15 +18,6 @@
 
             </xpath>
 
-            <xpath expr="//field[@name='account_id']"
-                   position="attributes">
-
-                <attribute name="domain">
-                    [('group_id', '=', account_group_id)]
-                </attribute>
-
-            </xpath>
-
         </field>
 
     </record>
