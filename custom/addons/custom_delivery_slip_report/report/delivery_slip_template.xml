@@ -473,14 +473,14 @@
         vertical-align:top;">
             Delivery Address
         </td>
-
+ <td style="width:15px;vertical-align:top;">:</td>
         <td style="
         padding:4px 0;
         font-size:15px;
         font-family:Arial,sans-serif;
-        line-height:1.4;width:15px;
+        line-height:1.4;vertical-align:top;
     ">
-            :
+            
 
             <strong>
                 <span t-esc="o.purchase_id.dest_address_id.name"/>

@@ -1,0 +1,1 @@
+{'name':'RFQ Price Comparison','version':'19.0.1.0','depends':['purchase','product','stock'],'installable':True}
