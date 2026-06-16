@@ -136,7 +136,23 @@
                                             color:#000;
                                             margin-top:20px;
                                         ">
-                                            Delivery Note
+                                           <t t-if="'Dropship' in (o.picking_type_id.name or '')">
+    <span>Delivery Note</span>
+</t>
+<t t-elif="o.picking_type_id.code == 'outgoing'">
+    <span>Delivery Note</span>
+</t>
+<t t-elif="o.picking_type_id.code == 'incoming'">
+    <span>Receipt Note</span>
+</t>
+<t t-elif="o.picking_type_id.code == 'internal'">
+    <span>Internal Transfer</span>
+</t>
+<t t-else="">
+    <span t-esc="o.picking_type_id.name"/>
+</t>
+
+    
                                         </h1>
 
                                 <div style="
@@ -441,6 +457,156 @@
         </td>
     </tr>
 </t>
+
+    <tr><t t-set="delivery_partner"
+   t-value="(o.move_ids and o.move_ids[0].partner_id) or o.partner_id"/>
+   
+       <!-- Dropship -->
+<t t-if="'Dropship' in (o.picking_type_id.name or '') and o.purchase_id and o.purchase_id.dest_address_id">
+
+    <tr>
+        <td  style="
+        padding:4px 0;
+        font-size:15px;
+        font-weight:bold;
+        color:#1a3a5a;
+        vertical-align:top;">
+            Delivery Address
+        </td>
+
+        <td style="
+        padding:4px 0;
+        font-size:15px;
+        font-family:Arial,sans-serif;
+        line-height:1.4;
+    ">
+            :
+ <div style="margin-top:-20px;margin-left:6px"> 
+            <strong>
+                <span t-esc="o.purchase_id.dest_address_id.name"/>
+            </strong>
+
+            <t t-if="o.purchase_id.dest_address_id.street">
+                <br/>
+                <span t-esc="o.purchase_id.dest_address_id.street"/>
+            </t>
+
+            <t t-if="o.purchase_id.dest_address_id.street2">
+                <br/>
+                <span t-esc="o.purchase_id.dest_address_id.street2"/>
+            </t>
+
+            <br/>
+            <span t-esc="o.purchase_id.dest_address_id.city or ''"/>
+<br/>
+            <t t-if="o.purchase_id.dest_address_id.country_id">
+            
+                <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
+            </t></div>
+        </td>
+    </tr>
+
+</t>
+<!-- Purchase Receipt -->
+<t t-elif="o.picking_type_id.code == 'incoming'">
+
+    <tr>
+        <td  style="
+        padding:4px 0;
+        font-size:15px;
+        font-weight:bold;
+        color:#1a3a5a;
+        vertical-align:top;">
+            Warehouse Address
+        </td>
+        <td style="
+        padding:4px 0;
+        font-size:15px;
+        font-family:Arial,sans-serif;
+        line-height:1.4;
+    ">
+            :
+         <div style="margin-top:-20px;margin-left:6px">   <strong>
+    <span t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
+</strong>
+
+<t t-if="o.picking_type_id.warehouse_id.partner_id.street">
+    <br/>
+    <span t-esc="o.picking_type_id.warehouse_id.partner_id.street"/>
+</t>
+
+<t t-if="o.picking_type_id.warehouse_id.partner_id.street2">
+    <br/>
+    <span t-esc="o.picking_type_id.warehouse_id.partner_id.street2"/>
+</t>
+
+<br/>
+<span t-esc="o.picking_type_id.warehouse_id.partner_id.city or ''"/>
+
+<t t-if="o.picking_type_id.warehouse_id.partner_id.country_id">
+    
+    <span t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/>
+</t>
+
+<t t-if="o.picking_type_id.warehouse_id.partner_id.phone">
+    <br/>
+    <span t-esc="o.picking_type_id.warehouse_id.partner_id.phone"/>
+</t></div>
+        </td>
+    </tr>
+
+</t>
+
+<!-- Sales Delivery -->
+<t t-elif="o.picking_type_id.code == 'outgoing'">
+
+    <tr>
+        <td  style="
+        padding:4px 0;
+        font-size:15px;
+        font-weight:bold;
+        color:#1a3a5a;
+        vertical-align:top;">
+            Delivery Address
+        </td>
+        <td style="
+        padding:4px 0;
+        font-size:15px;
+        font-family:Arial,sans-serif;
+        line-height:1.4;
+    ">
+            : <div style="margin-top:-20px;margin-left:6px"> 
+           <strong>
+    <span t-esc="o.partner_id.name"/>
+</strong>
+
+<t t-if="o.partner_id.street">
+    <br/>
+    <span t-esc="o.partner_id.street"/>
+</t>
+
+<t t-if="o.partner_id.street2">
+    <br/>
+    <span t-esc="o.partner_id.street2"/>
+</t>
+
+<br/>
+<span t-esc="o.partner_id.city or ''"/>
+<br/>
+<t t-if="o.partner_id.country_id">
+   
+    <span t-esc="o.partner_id.country_id.name"/>
+</t>
+
+<t t-if="o.partner_id.phone">
+    <br/>
+    <span t-esc="o.partner_id.phone"/>
+</t></div>
+        </td>
+    </tr>
+
+</t>
+    </tr>
 
                             </table>
 </td>
