@@ -123,25 +123,11 @@
         </div>
 
         <!-- BODY -->
-       
-<div class="article o_report_layout_standard"
-     style="position:relative;font-family: Helvetica, Arial, sans-serif !important;">
-     
-    <div style="
-        position:fixed;
-        top:35%;
-        left:25%;
-        width:500px;
-        opacity:0.08;
-        z-index:-1;
-    ">
-        <img t-if="company.logo"
-             t-att-src="image_data_uri(company.logo)"
-             style="width:100%;"/>
-    </div>
+        <div class="article o_report_layout_standard" style="font-family: Helvetica, Arial, sans-serif !important;position:relative; z-index:1;" >
+        
+            <t t-out="0"/>
+        </div>
 
-    <t t-out="0"/>
-</div>
         <!-- FOOTER -->
         <div class="footer"   style="font-family: Helvetica, Arial, sans-serif !important;">
 
