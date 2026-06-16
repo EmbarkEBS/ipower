@@ -29,21 +29,16 @@
 .page {
     padding: 0 40px !important;
 }
-  .watermark-page {
-    background-image:url('/custom_po_report/static/src/img/watermark.png');
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-size:450px;
-}
+  
                 </style>
 
-                <div class="page watermark-page"
+                <div class="page"
                      style="position:relative;
                             color:#333; padding:100px 0 0 0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
                             <!-- WATERMARK -->
-<!-- <div style="
+ <div style="
                             position:absolute;
                             top:55%;
                             left:25%;
@@ -58,7 +53,7 @@
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                  style="width:100%;"/>
 
-                        </div>-->
+                        </div>
 
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
