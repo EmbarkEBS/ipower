@@ -9,23 +9,32 @@ class HrExpense(models.Model):
         string="Account Group"
     )
 
-    @api.onchange("account_group_id")
-    def _onchange_account_group_id(self):
-        self.account_id = False
+    allowed_account_ids = fields.Many2many(
+        "account.account",
+        compute="_compute_allowed_account_ids",
+        string="Allowed Accounts",
+    )
 
-        if not self.account_group_id:
-            return {}
+    @api.depends("account_group_id")
+    def _compute_allowed_account_ids(self):
+        Account = self.env["account.account"]
 
-        start = self.account_group_id.code_prefix_start
-        end = self.account_group_id.code_prefix_end
+        for rec in self:
+            rec.allowed_account_ids = False
 
-        accounts = self.env["account.account"].search([
-            ("code", ">=", start),
-            ("code", "<=", end),
-        ])
+            if not rec.account_group_id:
+                continue
 
-        return {
-            "domain": {
-                "account_id": [("id", "in", accounts.ids)]
-            }
-        }
+            start = rec.account_group_id.code_prefix_start or ""
+            end = rec.account_group_id.code_prefix_end or ""
+
+            accounts = Account.search([
+                ("deprecated", "=", False),
+                ("code", ">=", start),
+                ("code", "<=", end),
+            ])
+
+            rec.allowed_account_ids = accounts
+
+            if rec.account_id and rec.account_id not in accounts:
+                rec.account_id = False
