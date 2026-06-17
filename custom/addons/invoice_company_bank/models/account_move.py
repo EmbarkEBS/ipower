@@ -55,7 +55,6 @@ class AccountMove(models.Model):
     company_bank_id = fields.Many2one(
         "res.partner.bank",
         string="Company Bank Account",
-        domain="[('partner_id', '=', company_id.partner_id)]",
         copy=False,
     )
 
@@ -63,6 +62,18 @@ class AccountMove(models.Model):
         string="Bank Details",
         compute="_compute_bank_display_details",
     )
+
+    @api.onchange("company_id")
+    def _onchange_company_id_bank(self):
+        company_partner = self.company_id.partner_id
+
+        return {
+            "domain": {
+                "company_bank_id": [
+                    ("partner_id", "=", company_partner.id)
+                ]
+            }
+        }
 
     @api.depends("company_bank_id")
     def _compute_bank_display_details(self):
