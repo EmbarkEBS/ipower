@@ -294,7 +294,7 @@
     </tr>
 </t>
 
-    <tr><!-- Dropship -->
+ <!-- Dropship -->
 <t t-if="'Dropship' in (o.picking_type_id.name or '') and
          o.purchase_id and
          o.purchase_id.dest_address_id">
@@ -378,11 +378,7 @@
     </tr>
 
 </t>
-    </tr>
-
-</t>
-    </tr>
-
+    
                             </table>
 </td>
 </tr>
