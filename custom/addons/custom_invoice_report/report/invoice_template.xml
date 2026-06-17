@@ -40,7 +40,7 @@
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
 
-                        <!-- WATERMARK -->
+                        <!-- WATERMARK 
                         <div style="
                             position:absolute;
                             top:55%;
@@ -56,7 +56,7 @@
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                  style="width:100%;"/>
 
-                        </div>
+                        </div>-->
 
                         <!-- ADDRESS + META -->
                         <table style="
