@@ -106,7 +106,9 @@
                                             text-align:center;
                                         ">
 
-                                            # <span t-field="o.name"/>
+                                           <t t-if="o.state != 'draft'">
+        # <span t-field="o.name"/>
+    </t>
                                           <!---  <span t-esc="'IP/SO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>-->
                                           
 
