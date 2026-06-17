@@ -64,7 +64,7 @@
                                 font-size:15px;
                                 border-collapse:collapse;
                                 margin-top:35px;
-                                margin-bottom:35px;
+                                margin-bottom:35px; border:none !important;
                             ">
 
                                 <tr>
@@ -72,12 +72,12 @@
                                     <!-- ADDRESS -->
                                     <td style="
                                         width:55%;font-size:15px;
-                                        vertical-align:top;
+                                        vertical-align:top; border:none !important;
                                     ">
 
                                         <table style="
                                             width:100%;font-size:15px;
-                                            border-collapse:collapse;
+                                            border-collapse:collapse; border:none !important;
                                         ">
   <strong style="color:#1a3a5a;">
                                                         To
@@ -201,7 +201,7 @@
 
                                         <table style="
                                             width:100%;font-size:15px;
-                                            border-collapse:collapse;
+                                            border-collapse:collapse; border:none !important;
                                         ">
 
                                             <tr>
@@ -588,7 +588,7 @@
                             </table>
 
      <!-- TOTAL -->
-    <table style="width:100%; margin-top:20px border-collapse:collapse;">
+    <table style="width:100%; margin-top:20px border-collapse:collapse; border:none !important;">
     <tr>
 
         <!-- LEFT: AMOUNT IN WORDS -->
@@ -617,7 +617,7 @@
          <table style="
                                             width:100%;
                                             border-collapse:collapse;
-                                            text-align:right;padding-right:20px;
+                                            text-align:right;padding-right:20px; border:none !important;
                                         ">
 
                                             <tr>
