@@ -215,11 +215,9 @@
 
         <strong>Attn:</strong>
 
-        <t t-if="o.partner_id.x_studio_salutation">
-            <span t-esc="o.partner_id.x_studio_salutation"/>
-        </t>
+       
+        <span t-esc="o.partner_id.child_ids[0].name"/>
 
-        <span t-esc="o.partner_id.name"/>
 
     </p>
 
