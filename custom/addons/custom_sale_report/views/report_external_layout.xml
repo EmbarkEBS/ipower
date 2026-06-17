@@ -19,7 +19,12 @@ td, th {
 }
 </style>
         <!-- HEADER -->"
-        <div class="header" style="padding: 0 25px !important;font-family: Helvetica, Arial, sans-serif !important;">
+        <div class="header" style="
+        border:none !important;
+        outline:none !important;
+        box-shadow:none !important;
+        padding:0 25px !important;
+        font-family:Helvetica, Arial, sans-serif !important;">
   <!-- HEADER -->
     <table style="
                                 width:100%;
