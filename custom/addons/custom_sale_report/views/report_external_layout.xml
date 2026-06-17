@@ -23,7 +23,7 @@ td, th {
   <!-- HEADER -->
     <table style="
                                 width:100%;
-                                border-collapse:collapse; border:none !important; outline: 0 !important;
+                              
                             ">
 
                                 <tr>
