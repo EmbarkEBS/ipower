@@ -181,21 +181,7 @@
         -
         <span t-esc="o.sale_id.partner_invoice_id.country_id.name"/>
     </t>
-<t t-if="o.sale_id and o.sale_id.contact_person_id">
 
-    <p style="margin-top:5px">
-
-        <strong>Attn</strong>
-
-        <t t-if="o.sale_id.contact_person_id.x_studio_salutation">
-            <span t-esc="o.sale_id.contact_person_id.x_studio_salutation"/>
-        </t>
-
-        <span t-esc="o.sale_id.contact_person_id.name"/>
-
-    </p>
-
-</t>
 </t>
 
 <!-- PO Receipt / Dropship -->
@@ -219,24 +205,43 @@
     <span t-esc="o.partner_id.city or ''"/>
     -
     <span t-esc="o.partner_id.country_id.name or ''"/>
-<t t-if="o.contact_person_id">
+
+</t>
+   
+<!-- ATTN ONLY IF CONTACT PERSON -->
+<!-- SO Delivery -->
+<t t-if="o.sale_id and o.sale_id.contact_person_id">
 
     <p style="margin-top:5px">
 
         <strong>Attn</strong>
 
-        <t t-if="o.contact_person_id.x_studio_salutation">
-            <span t-esc="o.contact_person_id.x_studio_salutation"/>
+        <t t-if="o.sale_id.contact_person_id.x_studio_salutation">
+            <span t-esc="o.sale_id.contact_person_id.x_studio_salutation"/>
         </t>
 
-        <span t-esc="o.contact_person_id.name"/>
+        <span t-esc="o.sale_id.contact_person_id.name"/>
 
     </p>
 
 </t>
-</t>
-   
 
+<!-- PO Receipt / Dropship -->
+<t t-elif="o.purchase_id and o.purchase_id.contact_person_id">
+
+    <p style="margin-top:5px">
+
+        <strong>Attn</strong>
+
+        <t t-if="o.purchase_id.contact_person_id.x_studio_salutation">
+            <span t-esc="o.purchase_id.contact_person_id.x_studio_salutation"/>
+        </t>
+
+        <span t-esc="o.purchase_id.contact_person_id.name"/>
+
+    </p>
+
+</t>
                                                 </td>
 
                                             </tr>

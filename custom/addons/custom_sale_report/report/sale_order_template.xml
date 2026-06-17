@@ -339,9 +339,13 @@ td, th {
          and o.partner_shipping_id != o.partner_invoice_id">
 
     <tr>
-        <td>Delivery Address</td>
+        <td style="
+                                                    padding:4px 0; font-size:15px;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">Delivery Address</td>
 
-        <td>
+        <td style="padding:4px 0;">
             <strong>
                 <span t-esc="o.partner_shipping_id.name"/>
             </strong>
