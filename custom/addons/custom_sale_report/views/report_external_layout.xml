@@ -1,7 +1,14 @@
 <odoo>
 
     <template id="external_layout_ipower">
-
+ <style>
+ table,
+tr,
+td,
+th {
+    border: none ;
+}
+</style>
         <!-- HEADER -->"
         <div class="header" style="padding: 0 25px !important;font-family: Helvetica, Arial, sans-serif !important;">
   <!-- HEADER -->

@@ -33,7 +33,7 @@
 tr,
 td,
 th {
-    border: none !important;
+    border: none ;
 }
                 </style>
 
