@@ -73,7 +73,7 @@
 
                                     <!-- ADDRESS -->
                                     <td style="
-                                        width:55%;font-size:15px;
+                                        width:45%;font-size:15px;
                                         vertical-align:top;
                                     ">
 
@@ -209,10 +209,11 @@
 </t>
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
-<t t-if="o.partner_id.parent_id">
+<t t-if="o.partner_id">
+
     <p style="margin-top:5px">
 
-        <strong>Attn</strong>
+        <strong>Attn:</strong>
 
         <t t-if="o.partner_id.x_studio_salutation">
             <span t-esc="o.partner_id.x_studio_salutation"/>
@@ -221,6 +222,7 @@
         <span t-esc="o.partner_id.name"/>
 
     </p>
+
 </t>
                                                 </td>
 
@@ -232,7 +234,7 @@
 
                                     <!-- META -->
                                     <td style="
-                                        width:45%; font-size:15px;
+                                        width:55%; font-size:15px;
                                         vertical-align:top;
                                         font-size:13px;
                                         padding-left:40px;
