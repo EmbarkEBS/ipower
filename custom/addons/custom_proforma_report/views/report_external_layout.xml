@@ -147,14 +147,21 @@
             text-align:center;
         ">
 
-            <t t-if="company.street2">
-                <span t-esc="company.street2"/>
+         <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span>
+           <!-- <t t-if="company.street2">
+                <span t-esc="company.street2"/>,
             </t>
 
             
-            <span t-esc="company.city or ''"/>
+            <span t-esc="company.city or ''"/>,
+
+            <t t-if="company.state_id">
+    ,
+    <span t-esc="company.state_id.name"/>
+</t>
+
             -
-            <span t-esc="company.country_id.name or ''"/>
+            <span t-esc="company.country_id.name or ''"/>-->
 
             <br/>
 
