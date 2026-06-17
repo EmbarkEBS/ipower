@@ -334,87 +334,35 @@ td, th {
                                                 </td>
 
                                             </tr></t>
-                                            <t t-if="o.picking_type_id.code == 'outgoing'
-           and o.sale_id
-           and o.sale_id.partner_shipping_id
-           and o.sale_id.partner_invoice_id
-           and o.sale_id.partner_shipping_id.id != o.sale_id.partner_invoice_id.id">
-
-    <tr>
-        <td style="padding:4px 0;font-size:15px;font-weight:bold;color:#1a3a5a;vertical-align:top;">
-            Delivery Address
-        </td>
-
-        <td style="padding:4px 0;font-size:15px;font-family:Arial,sans-serif;line-height:1.4;">
-            :
-            <div style="margin-top:-20px;margin-left:6px">
-                <strong>
-                    <span t-esc="o.sale_id.partner_shipping_id.name"/>
-                </strong>
-
-                <t t-if="o.sale_id.partner_shipping_id.street">
-                    <br/>
-                    <span t-esc="o.sale_id.partner_shipping_id.street"/>
-                </t>
-
-                <t t-if="o.sale_id.partner_shipping_id.street2">
-                    <br/>
-                    <span t-esc="o.sale_id.partner_shipping_id.street2"/>
-                </t>
-
-                <br/>
-                <span t-esc="o.sale_id.partner_shipping_id.city or ''"/>
-
-                <t t-if="o.sale_id.partner_shipping_id.country_id">
-                    <br/>
-                    <span t-esc="o.sale_id.partner_shipping_id.country_id.name"/>
-                </t>
-
-                <t t-if="o.sale_id.partner_shipping_id.phone">
-                    <br/>
-                    <span t-esc="o.sale_id.partner_shipping_id.phone"/>
-                </t>
-            </div>
-        </td>
-    </tr>
-
-</t>
-                <t t-if="o.partner_shipping_id
+                                           <t t-if="o.partner_shipping_id
          and o.partner_invoice_id
-         and o.partner_shipping_id.id != o.partner_invoice_id.id">
+         and o.partner_shipping_id != o.partner_invoice_id">
 
     <tr>
-        <td style="padding:4px 0;font-size:15px;font-weight:bold;color:#1a3a5a;vertical-align:top;">
-            Delivery Address
-        </td>
+        <td>Delivery Address</td>
 
-        <td style="padding:4px 0;font-size:15px;font-family:Arial,sans-serif;line-height:1.4;">
-            :
-            <div style="margin-top:-20px;margin-left:6px">
+        <td>
+            <strong>
+                <span t-esc="o.partner_shipping_id.name"/>
+            </strong>
 
-                <strong>
-                    <span t-esc="o.partner_shipping_id.name"/>
-                </strong>
-
-                <t t-if="o.partner_shipping_id.street">
-                    <br/>
-                    <span t-esc="o.partner_shipping_id.street"/>
-                </t>
-
-                <t t-if="o.partner_shipping_id.street2">
-                    <br/>
-                    <span t-esc="o.partner_shipping_id.street2"/>
-                </t>
-
+            <t t-if="o.partner_shipping_id.street">
                 <br/>
-                <span t-esc="o.partner_shipping_id.city or ''"/>
+                <span t-esc="o.partner_shipping_id.street"/>
+            </t>
 
-                <t t-if="o.partner_shipping_id.country_id">
-                    <br/>
-                    <span t-esc="o.partner_shipping_id.country_id.name"/>
-                </t>
+            <t t-if="o.partner_shipping_id.street2">
+                <br/>
+                <span t-esc="o.partner_shipping_id.street2"/>
+            </t>
 
-            </div>
+            <br/>
+            <span t-esc="o.partner_shipping_id.city or ''"/>
+
+            <t t-if="o.partner_shipping_id.country_id">
+                <br/>
+                <span t-esc="o.partner_shipping_id.country_id.name"/>
+            </t>
         </td>
     </tr>
 
