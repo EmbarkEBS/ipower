@@ -579,21 +579,19 @@
                                                     font-size:11px;
                                         ">
 
-    <t t-if="line.move_line_ids.filtered(lambda ml: ml.lot_id)">
+      <t t-set="move_lines"
+   t-value="line.sale_line_ids.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id) +
+            line.purchase_line_id.move_ids.move_line_ids.filtered(lambda ml: ml.lot_id)"/>
 
-        <span>Serial No:</span>
+<t t-if="move_lines">
+    <t t-set="serials"
+       t-value="', '.join(move_lines.mapped('lot_id.name'))"/>
 
-        <t t-foreach="line.move_line_ids" t-as="ml">
-
-            <t t-if="ml.lot_id">
-                <small>
-                    <span t-esc="ml.lot_id.name"/>
-                </small>
-            </t>
-
-        </t>
-
+    <t t-if="serials">
+        <span><strong>Serial No:</strong></span>
+        <small><span t-esc="serials"/></small>
     </t>
+</t>
 
 </td>
     </tr>
