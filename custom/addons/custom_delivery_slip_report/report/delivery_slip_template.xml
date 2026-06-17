@@ -557,7 +557,10 @@
         <td></td>
 
     </tr>
+ <t t-set="ordering_code"
+   t-value="line.product_id.product_tmpl_id.x_studio_sku_code"/>
 
+<t t-if="ordering_code">
     <tr>
         <td></td>
            <td  colspan="4" style="
@@ -569,7 +572,7 @@
             <span t-esc="line.product_id.product_tmpl_id.x_studio_sku_code or ''"/>
         </td>
     </tr>
-
+</t>
     <tr>
         <td></td>
        <td colspan="4" style="
