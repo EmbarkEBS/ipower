@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, api
 
 
 class HrExpense(models.Model):
@@ -10,7 +10,7 @@ class HrExpense(models.Model):
 
         if not res.get("product_id"):
             product = self.env["product.product"].search(
-                [("name", "=", "Miscellaneous")],
+                [('can_be_expensed', '=', True)],
                 limit=1
             )
             if product:
