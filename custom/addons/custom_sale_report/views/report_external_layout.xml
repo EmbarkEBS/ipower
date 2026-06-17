@@ -8,6 +8,15 @@ td,
 th {
     border: none ;
 }
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+td, th {
+    border: 0 ;
+    outline: 0 !important;
+}
 </style>
         <!-- HEADER -->"
         <div class="header" style="padding: 0 25px !important;font-family: Helvetica, Arial, sans-serif !important;">
