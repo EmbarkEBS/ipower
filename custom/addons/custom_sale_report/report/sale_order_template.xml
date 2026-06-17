@@ -423,7 +423,7 @@ td, th {
                     font-size:15px;
                     font-weight:bold;
                     color:#1a3a5a;
-                    border-bottom:1px solid #d9d9d9;
+                    border-bottom:1px solid #d9d9d9 !important;
                     background:#f7f7f7;
                 ">
                 <span t-field="line.name"/>
@@ -568,7 +568,7 @@ td, th {
                 </td>
             </tr>
 
-            <tr style="border-bottom:1px solid #d9d9d9;">
+            <tr style="border-bottom:1px solid #d9d9d9 !important;">
 
                 <td></td>
 
@@ -722,7 +722,7 @@ td, th {
 
                                 <strong style="
                                     font-size:14px;
-                                    border-bottom:1px solid #e58b39;
+                                    border-bottom:1px solid #e58b39 !important;
                                     padding-bottom:2px;
                                 ">
                                     Notes
