@@ -15,5 +15,6 @@ class HrExpense(models.Model):
             )
             if product:
                 res["product_id"] = product.id
+                res['name'] = ''
 
         return res
