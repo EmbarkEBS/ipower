@@ -68,15 +68,15 @@
                                     ">
 
                                     
-                                  <h1 style="
+                               
+   <t t-if="o.state in ['draft', 'sent']">
+      <h1 style="
     margin:0;
     font-size:28px;
     font-weight:bold;
     color:#000;
     margin-top:20px;
-">
-   <t t-if="o.state in ['draft', 'sent']">
-    <h1>RFQ</h1>
+"> RFQ </h1>
 
     <div style="display:inline-block;">
         <div style="text-align:center; margin:5px 0;">
@@ -93,7 +93,13 @@
 </t>
 
 <t t-else="">
-    <h1>PURCHASE ORDER</h1>
+     <h1 style="
+    margin:0;
+    font-size:28px;
+    font-weight:bold;
+    color:#000;
+    margin-top:20px;
+"> PURCHASE ORDER </h1>
 
     <div style="display:inline-block;">
         <div style="text-align:center; margin:5px 0;">
