@@ -10,6 +10,7 @@
         "report/vendor_bill_report.xml",
         "report/vendor_bill_template.xml",
         'views/vendor_bill_view.xml',
+        'views/report_external_layout.xml',
     ],
     "installable": True,
     "application": False,

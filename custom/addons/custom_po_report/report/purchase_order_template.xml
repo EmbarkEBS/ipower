@@ -38,7 +38,7 @@
                             color:#333; padding:100px 0 0 0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
-                            <!-- WATERMARK -->
+                            <!-- WATERMARK 
 <div style="
     position:absolute;
     top:55%;
@@ -54,7 +54,7 @@
          t-att-src="image_data_uri(o.company_id.logo)"
          style="width:100%;"/>
 
-</div>
+</div>-->
 
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
@@ -318,7 +318,8 @@
         font-family:Arial,sans-serif;
         line-height:1.4;
     ">
-        : <span>
+        :  <div style="margin-top:-20px;margin-left:6px"> 
+        <span>
         
             <strong t-field="shipping_partner.name"/><br/>
 
@@ -342,12 +343,13 @@
                 - <span t-field="shipping_partner.zip"/>
             </t>
 
-            <br t-if="shipping_partner.country_id"/>
+            <!--<br t-if="shipping_partner.country_id"/>-->
 
             <t t-if="shipping_partner.country_id">
                 <span t-field="shipping_partner.country_id.name"/>
             </t>
         </span>
+        </div>
     </td>
 </tr>
                                         </table>
@@ -783,7 +785,7 @@
 
 
                 </div>
-
+ </t>
             </t>
 
         </t>

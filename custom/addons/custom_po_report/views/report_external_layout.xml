@@ -68,41 +68,52 @@
                                     ">
 
                                     
-                                  <h1 style="
+                               
+   <t t-if="o.state in ['draft', 'sent']">
+      <h1 style="
     margin:0;
     font-size:28px;
     font-weight:bold;
     color:#000;
     margin-top:20px;
-">
-    <t t-if="o.state in ['draft', 'sent']">
-        RFQ
-    </t>
-    <t t-else="">
-        PURCHASE ORDER
-    </t>
-</h1>
+"> RFQ </h1>
 
-                                <div style="
-    display:inline-block;
-">
-<div style="text-align:center; margin:5px 0;">
+    <div style="display:inline-block;">
+        <div style="text-align:center; margin:5px 0;">
+            <!-- Short SVG for RFQ -->
+            <svg width="120" height="15" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="5" x2="80" y2="5" stroke="#f39223" stroke-width="2"/>
+                <line x1="80" y1="5" x2="90" y2="5" stroke="#f59f3e" stroke-width="2"/>
+                <line x1="90" y1="5" x2="100" y2="5" stroke="#f7ac59" stroke-width="2"/>
+                <line x1="100" y1="5" x2="110" y2="5" stroke="#fbc68f" stroke-width="2"/>
+                <line x1="110" y1="5" x2="120" y2="5" stroke="#fff8f2" stroke-width="2"/>
+            </svg>
+        </div>
+    </div>
+</t>
 
-    <svg width="120" height="15"
-         xmlns="http://www.w3.org/2000/svg">
+<t t-else="">
+     <h1 style="
+    margin:0;
+    font-size:28px;
+    font-weight:bold;
+    color:#000;
+    margin-top:20px;
+"> PURCHASE ORDER </h1>
 
-        <line x1="0" y1="5" x2="80" y2="5" stroke="#f39223" stroke-width="2"/>
-
-        <line x1="80" y1="5" x2="90" y2="5" stroke="#f59f3e" stroke-width="2"/>
-        <line x1="90" y1="5" x2="100" y2="5" stroke="#f7ac59" stroke-width="2"/>
-        <line x1="100" y1="5" x2="110" y2="5" stroke="#fbc68f" stroke-width="2"/>
-        <line x1="110" y1="5" x2="120" y2="5" stroke="#fff8f2" stroke-width="2"/>
-
-    </svg>
-
-</div>
-
-</div>
+    <div style="display:inline-block;">
+        <div style="text-align:center; margin:5px 0;">
+            <!-- Existing SVG for Purchase Order -->
+            <svg width="200" height="15" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="5" x2="140" y2="5" stroke="#f39223" stroke-width="2"/>
+                <line x1="140" y1="5" x2="155" y2="5" stroke="#f59f3e" stroke-width="2"/>
+                <line x1="155" y1="5" x2="170" y2="5" stroke="#f7ac59" stroke-width="2"/>
+                <line x1="170" y1="5" x2="185" y2="5" stroke="#fbc68f" stroke-width="2"/>
+                <line x1="185" y1="5" x2="200" y2="5" stroke="#fff8f2" stroke-width="2"/>
+            </svg>
+        </div>
+    </div>
+</t>
                                         <div style="
                                             font-size:16px;
                                             text-align:center;
@@ -153,14 +164,21 @@
             text-align:center;
         ">
 
-            <t t-if="company.street2">
-                <span t-esc="company.street2"/>
+           <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span>
+           <!-- <t t-if="company.street2">
+                <span t-esc="company.street2"/>,
             </t>
 
             
-            <span t-esc="company.city or ''"/>
+            <span t-esc="company.city or ''"/>,
+
+            <t t-if="company.state_id">
+    ,
+    <span t-esc="company.state_id.name"/>
+</t>
+
             -
-            <span t-esc="company.country_id.name or ''"/>
+            <span t-esc="company.country_id.name or ''"/>-->
 
             <br/>
 

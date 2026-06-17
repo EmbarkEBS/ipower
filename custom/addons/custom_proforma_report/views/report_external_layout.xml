@@ -1,6 +1,6 @@
 <odoo>
 
-    <template id="external_layout_ipower">
+    <template id="external_layout_ipower5">
 
         <!-- HEADER -->"
         <div class="header" style="padding: 0 25px !important;font-family: Helvetica, Arial, sans-serif !important;">
@@ -68,19 +68,14 @@
                                     ">
 
                                       <h1 style="
-    margin:0;
-    font-size:28px;
-    font-weight:bold;
-    color:#000;
-    margin-top:20px !important;
-">
-    <t t-if="o.state in ['draft', 'sent']">
-        QUOTATION
-    </t>
-    <t t-else="">
-        SALES ORDER
-    </t>
-</h1>
+                                        margin:0;
+                                        font-size:28px;
+                                        font-weight:bold;
+                                        color:#000;
+                                        margin-top:20px;
+                                    ">
+                                        Pro-Forma Invoice 
+                                    </h1>
 
                                 <div style="
     display:inline-block;
@@ -152,14 +147,21 @@
             text-align:center;
         ">
 
-            <t t-if="company.street2">
-                <span t-esc="company.street2"/>
+         <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span>
+           <!-- <t t-if="company.street2">
+                <span t-esc="company.street2"/>,
             </t>
 
             
-            <span t-esc="company.city or ''"/>
+            <span t-esc="company.city or ''"/>,
+
+            <t t-if="company.state_id">
+    ,
+    <span t-esc="company.state_id.name"/>
+</t>
+
             -
-            <span t-esc="company.country_id.name or ''"/>
+            <span t-esc="company.country_id.name or ''"/>-->
 
             <br/>
 

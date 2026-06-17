@@ -10,6 +10,7 @@
         "report/purchase_order_report.xml",
         "report/purchase_order_template.xml",
         'views/purchase_view.xml',
+        'views/report_external_layout.xml',
     ],
     "installable": True,
     "application": False,

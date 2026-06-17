@@ -9,6 +9,7 @@
     "data": [
         "report/invoice_report.xml",
         "report/proforma_template.xml",
+        'views/report_external_layout.xml',
     ],
     "installable": True,
     "application": False,

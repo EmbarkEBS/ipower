@@ -46,7 +46,7 @@
 
     <field name="binding_type">report</field>
 
-    <field name="print_report_name">'Sales Order - %s' % (object.name)</field>
+  <field name="print_report_name">'Quotation - %s' % object.name if object.state in ('draft', 'sent') else 'Sales Order - %s' % object.name</field>
 
         <field name="paperformat_id"
                ref="custom_sale_report.paperformat_custom_so"/>

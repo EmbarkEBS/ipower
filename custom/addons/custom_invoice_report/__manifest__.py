@@ -10,6 +10,7 @@
         "report/invoice_report.xml",
         "report/invoice_template.xml",
         'views/invoice_view.xml',
+        'views/report_external_layout.xml',
     ],
     "installable": True,
     "application": False,

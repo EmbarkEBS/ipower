@@ -9,7 +9,8 @@
     "data": [
         "report/delivery_slip_report.xml",
         "report/delivery_slip_template.xml",
-        'views/delivery_view.xml',
+        'views/delivery_view.xml',        
+        'views/report_external_layout.xml',
     ],
     "installable": True,
     "application": False,
