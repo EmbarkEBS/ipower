@@ -583,7 +583,7 @@
    t-value="', '.join(line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
 
 <t t-if="serials">
-    <span><strong>Serial No:</strong></span>
+    <span>Serial No:</span>
     <small><span t-esc="serials"/></small>
 </t>
 
