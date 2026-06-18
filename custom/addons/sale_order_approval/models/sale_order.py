@@ -330,6 +330,16 @@ class SaleOrder(models.Model):
                 # -----------------------------------
                 sales_total_aed = line.price_subtotal
 
+                reasons.append(
+                    f"{line.product_id.display_name} | Qty={line.product_uom_qty}"
+                )
+                reasons.append(
+                    f"Price Unit={line.price_unit}"
+                )
+                reasons.append(
+                    f"Subtotal={line.price_subtotal}"
+                )
+
                 if order.currency_id != company_currency:
                     sales_total_aed = order.currency_id._convert(
                         sales_total_aed,
