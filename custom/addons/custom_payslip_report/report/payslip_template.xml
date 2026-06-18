@@ -422,6 +422,13 @@
                                     </tr>
 
                                 </t>
+                                <tr t-if="o.x_studio_expenses_reimbursement">
+    <td>Expenses Reimbursement</td>
+    <td style="text-align:right;">-</td>
+    <td style="text-align:right;">
+        <span t-esc="'{:,.2f}'.format(o.x_studio_expenses_reimbursement or 0.0)"/>
+    </td>
+</tr>
                                                           <!-- Top Line -->
 <tr>
     <td colspan="3" style="padding:0;">
