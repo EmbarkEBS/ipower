@@ -31,7 +31,21 @@
 .page {
     padding: 0 40px !important;
 }
-  
+  table,
+tr,
+td,
+th {
+    border: none ;
+}
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+td, th {
+    border: 0 ;
+    outline: 0 !important;
+}
                 </style>
 
                 <div class="page"
