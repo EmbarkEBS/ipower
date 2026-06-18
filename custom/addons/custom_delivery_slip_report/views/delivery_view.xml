@@ -19,6 +19,9 @@
 
         </xpath>
  <!-- Scheduled Date -->
+ <xpath expr="//label[@for='scheduled_date']" position="attributes">
+    <attribute name="style">color:red;font-weight:bold;</attribute>
+</xpath>
 <xpath expr="//field[@name='scheduled_date']" position="attributes">
     <attribute name="class">scheduled_date_red</attribute>
 </xpath>
