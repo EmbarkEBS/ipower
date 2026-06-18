@@ -50,7 +50,7 @@ td, th {
         background-image:url('{{ image_data_uri(company.logo) }}');
         background-repeat:repeat-y;
         background-position:center center;
-        background-size:300px;
+        background-size:300px;"
                      style="position:relative;
                             color:#333; padding:100px 0 0 0;
                             line-height:1.4;
