@@ -19,7 +19,7 @@ td, th {
 }
 </style>
         <!-- HEADER -->"
-        <div class="header" style="border-collapse: separate !important;
+        <div class="header" style="
         border:none !important;
         outline:none !important;
         box-shadow:none !important;
@@ -28,15 +28,23 @@ td, th {
   <!-- HEADER -->
     <table style="
                                 width:100%;
-                              
+                               border:none !important;
+    outline:none !important;
+    box-shadow:none !important;
+    border-collapse:separate !important;
+    border-spacing:0 !important;
                             ">
 
-                                <tr>
+                                <tr style="
+    border:none !important;
+    outline:none !important;">
 
                                     <!-- COMPANY -->
                                     <td style="
                                         width:60%;
-                                        vertical-align:top;border:none !important;
+                                        vertical-align:top;border:none !important; 
+                                        border:none !important;
+    outline:none !important;
                                     ">
 
                                         <img t-if="company.logo"
@@ -85,7 +93,8 @@ td, th {
                                     <td style="
                                         width:40%;
                                         vertical-align:top;
-                                        text-align:center;border:none !important;
+                                        text-align:center; border:none !important;
+    outline:none !important;
                                     ">
 
                                       <h1 style="
