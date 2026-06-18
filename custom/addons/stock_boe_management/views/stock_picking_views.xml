@@ -5,16 +5,24 @@
         <field name="name">stock.picking.form.boe</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
-
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='origin']" position="after">
 
-                <field name="boe_number"/>
+                <!-- Helper fields -->
+                <field name="is_normal_receipt" invisible="1"/>
+                <field name="is_delivery_return" invisible="1"/>
 
-                <field name="boe_date"/>
+                <!-- BOE Fields -->
+                <field name="boe_number"
+                       invisible="not is_normal_receipt"/>
 
-                <field name="delivery_note"/>
+                <field name="boe_date"
+                       invisible="not is_normal_receipt"/>
+
+                <!-- Delivery Return Field -->
+                <field name="delivery_note"
+                       invisible="not is_delivery_return"/>
 
             </xpath>
 
