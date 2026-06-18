@@ -19,7 +19,7 @@ td, th {
 }
 </style>
         <!-- HEADER -->"
-        <div class="header" style="
+        <div class="header" style="border-collapse: separate !important;
         border:none !important;
         outline:none !important;
         box-shadow:none !important;
