@@ -29,146 +29,140 @@ class SaleOrder(models.Model):
     # --------------------------------------------------
     # APPROVAL ENGINE
     # --------------------------------------------------
+    def _evaluate_approval(self):
+        settings = self._get_settings()
 
+        if not settings:
+            return
 
-def _evaluate_approval(self):
-    settings = self._get_settings()
+        for order in self:
 
-    if not settings:
-        return
+            company_currency = order.company_id.currency_id
 
-    for order in self:
+            approval_required = False
+            reasons = []
 
-        company_currency = order.company_id.currency_id
+            total_cost_aed = 0.0
+            total_sales_aed = 0.0
 
-        approval_required = False
-        reasons = []
+            # -----------------------------------
+            # CALCULATE TOTALS
+            # -----------------------------------
+            for line in order.order_line:
 
-        total_cost_aed = 0.0
-        total_sales_aed = 0.0
+                if line.display_type:
+                    continue
 
-        # -----------------------------------
-        # CALCULATE TOTALS
-        # -----------------------------------
-        for line in order.order_line:
+                # Cost in AED
+                cost_total_aed = (
+                        line.product_id.standard_price
+                        * line.product_uom_qty
+                )
 
-            if line.display_type:
-                continue
+                total_cost_aed += cost_total_aed
 
-            # Cost in AED
-            cost_total_aed = (
-                    line.product_id.standard_price
-                    * line.product_uom_qty
-            )
+                # Sales value from unit price × qty
+                sales_total = (
+                        line.price_unit
+                        * line.product_uom_qty
+                        * (1 - (line.discount or 0.0) / 100.0)
+                )
 
-            total_cost_aed += cost_total_aed
+                if order.currency_id != company_currency:
+                    sales_total_aed = order.currency_id._convert(
+                        sales_total,
+                        company_currency,
+                        order.company_id,
+                        order.date_order
+                        or fields.Date.context_today(order),
+                    )
+                else:
+                    sales_total_aed = sales_total
 
-            # Sales value from unit price × qty
-            sales_total = (
-                    line.price_unit
-                    * line.product_uom_qty
-                    * (1 - (line.discount or 0.0) / 100.0)
-            )
+                total_sales_aed += sales_total_aed
+
+            # -----------------------------------
+            # MARKUP CHECK
+            # -----------------------------------
+            markup = 0.0
+
+            if total_cost_aed > 0:
+                markup = (
+                                 (total_sales_aed - total_cost_aed)
+                                 / total_cost_aed
+                         ) * 100
+
+            if markup < settings.min_markup:
+                approval_required = True
+                reasons.append(
+                    f"Markup {markup:.2f}% < "
+                    f"{settings.min_markup:.2f}%"
+                )
+
+            # -----------------------------------
+            # ORDER VALUE CHECK
+            # -----------------------------------
+            order_value_aed = order.amount_total
 
             if order.currency_id != company_currency:
-                sales_total_aed = order.currency_id._convert(
-                    sales_total,
+                order_value_aed = order.currency_id._convert(
+                    order.amount_total,
                     company_currency,
                     order.company_id,
                     order.date_order
                     or fields.Date.context_today(order),
                 )
-            else:
-                sales_total_aed = sales_total
 
-            total_sales_aed += sales_total_aed
+            if order_value_aed > settings.max_order_value:
+                approval_required = True
+                reasons.append(
+                    f"Order Value {order_value_aed:.2f} AED > "
+                    f"{settings.max_order_value:.2f} AED"
+                )
 
-        # -----------------------------------
-        # MARKUP CHECK
-        # -----------------------------------
-        markup = 0.0
+            # -----------------------------------
+            # UPDATE VALUES
+            # -----------------------------------
+            values = {
+                "approval_required": approval_required,
+                "approval_reason": "\n\n".join(reasons),
+            }
 
-        if total_cost_aed > 0:
-            markup = (
-                             (total_sales_aed - total_cost_aed)
-                             / total_cost_aed
-                     ) * 100
+            if approval_required:
+                values["approval_approved"] = False
 
-        if markup < settings.min_markup:
-            approval_required = True
-            reasons.append(
-                f"Markup {markup:.2f}% < "
-                f"{settings.min_markup:.2f}%"
-            )
+            super(SaleOrder, order).write(values)
 
-        # -----------------------------------
-        # ORDER VALUE CHECK
-        # -----------------------------------
-        order_value_aed = order.amount_total
+            # -----------------------------------
+            # ACTIVITY
+            # -----------------------------------
+            if approval_required:
+                order._create_activity()
 
-        if order.currency_id != company_currency:
-            order_value_aed = order.currency_id._convert(
-                order.amount_total,
-                company_currency,
-                order.company_id,
-                order.date_order
-                or fields.Date.context_today(order),
-            )
-
-        if order_value_aed > settings.max_order_value:
-            approval_required = True
-            reasons.append(
-                f"Order Value {order_value_aed:.2f} AED > "
-                f"{settings.max_order_value:.2f} AED"
-            )
-
-        # -----------------------------------
-        # UPDATE VALUES
-        # -----------------------------------
-        values = {
-            "approval_required": approval_required,
-            "approval_reason": "\n\n".join(reasons),
-        }
-
-        if approval_required:
-            values["approval_approved"] = False
-
-        super(SaleOrder, order).write(values)
-
-        # -----------------------------------
-        # ACTIVITY
-        # -----------------------------------
-        if approval_required:
-            order._create_activity()
-
-    # --------------------------------------------------
-    # ACTIVITY
-    # --------------------------------------------------
     def _create_activity(self):
-
         self.ensure_one()
 
-    settings = self._get_settings()
+        settings = self._get_settings()
 
-    if not settings or not settings.approval_manager_id:
-        return
+        if not settings or not settings.approval_manager_id:
+            return
 
-    existing = self.env["mail.activity"].search([
-        ("res_model", "=", "sale.order"),
-        ("res_id", "=", self.id),
-        ("summary", "=", "Quotation Approval"),
-    ], limit=1)
+        existing = self.env["mail.activity"].search([
+            ("res_model", "=", "sale.order"),
+            ("res_id", "=", self.id),
+            ("summary", "=", "Quotation Approval"),
+        ], limit=1)
 
-    if existing:
-        existing.note = self.approval_reason or ""
-        return
+        if existing:
+            existing.note = self.approval_reason or ""
+            return
 
-    self.activity_schedule(
-        "mail.mail_activity_data_todo",
-        user_id=settings.approval_manager_id.id,
-        summary="Quotation Approval",
-        note=self.approval_reason or "",
-    )
+        self.activity_schedule(
+            "mail.mail_activity_data_todo",
+            user_id=settings.approval_manager_id.id,
+            summary="Quotation Approval",
+            note=self.approval_reason or "",
+        )
 
     # --------------------------------------------------
     # CREATE
@@ -233,7 +227,6 @@ def _evaluate_approval(self):
     # CONFIRM
     # --------------------------------------------------
     def action_confirm(self):
-
         for order in self:
 
             if (
