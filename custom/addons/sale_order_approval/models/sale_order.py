@@ -62,24 +62,34 @@ class SaleOrder(models.Model):
                 total_cost_aed += cost_total_aed
 
                 # Sales value from unit price × qty
-                sales_total = (
-                        line.price_unit
-                        * line.product_uom_qty
-                        * (1 - (line.discount or 0.0) / 100.0)
-                )
+                sales_total_aed = line.price_subtotal
 
                 if order.currency_id != company_currency:
                     sales_total_aed = order.currency_id._convert(
-                        sales_total,
+                        sales_total_aed,
                         company_currency,
                         order.company_id,
                         order.date_order
                         or fields.Date.context_today(order),
                     )
-                else:
-                    sales_total_aed = sales_total
 
                 total_sales_aed += sales_total_aed
+
+                unit_price_aed = line.price_unit
+
+                if order.currency_id != company_currency:
+                    unit_price_aed = order.currency_id._convert(
+                        unit_price_aed,
+                        company_currency,
+                        order.company_id,
+                        order.date_order
+                        or fields.Date.context_today(order),
+                    )
+
+                if unit_price_aed < line.product_id.standard_price:
+                    below_cost_products.append(
+                        line.product_id.display_name
+                    )
 
             # -----------------------------------
             # MARKUP CHECK
@@ -97,6 +107,13 @@ class SaleOrder(models.Model):
                 reasons.append(
                     f"Markup {markup:.2f}% < "
                     f"{settings.min_markup:.2f}%"
+                )
+
+            if below_cost_products:
+                approval_required = True
+                reasons.append(
+                    "Below Cost Products:\n%s"
+                    % "\n".join(below_cost_products)
                 )
 
             # -----------------------------------
@@ -238,6 +255,7 @@ class SaleOrder(models.Model):
                 )
 
         return super().action_confirm()
+
 
 
 # from odoo import api, fields, models
