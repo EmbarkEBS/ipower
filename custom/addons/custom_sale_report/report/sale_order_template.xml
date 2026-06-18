@@ -61,9 +61,10 @@ td, th {
          padding:100px 0 0 0;
          line-height:1.4;
          background-image:url(%s);
-         background-position:center center;
-         background-repeat:repeat-y;
-         background-size:320px;'
+background-position:center center;
+background-repeat:no-repeat;
+background-size:320px;
+opacity:0.10;
          % logo_uri">
                             <!-- WATERMARK 
  <div style="
