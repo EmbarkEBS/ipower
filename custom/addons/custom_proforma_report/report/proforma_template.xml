@@ -772,7 +772,7 @@ td, th {
     ">
         Our Bank Info:
     </strong>
-            <table style="font-size:13px; border-collapse:collapse;">
+            <table style="font-size:13px; border-collapse:collapse;margin-top:10px;">
 
                 <tr>
                     <td style="padding-right:10px;">
