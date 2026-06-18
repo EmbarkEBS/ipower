@@ -14,7 +14,7 @@
     ],
     'assets': {
     'web.assets_backend': [
-        'your_module/static/src/css/custom.css',
+        'custom_delivery_slip_report/static/src/css/custom.css',
     ],
 },
 
