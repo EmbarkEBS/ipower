@@ -651,9 +651,9 @@ class SaleOrder(models.Model):
                                  (total_sales_aed - total_cost_aed)
                                  / total_cost_aed
                          ) * 100
-                reasons.append(f"Cost={total_cost_aed}")
-                reasons.append(f"Sales={total_sales_aed}")
-                reasons.append(f"Markup={markup}")
+                # reasons.append(f"Cost={total_cost_aed}")
+                # reasons.append(f"Sales={total_sales_aed}")
+                # reasons.append(f"Markup={markup}")
 
                 if round(markup, 2) < round(settings.min_markup, 2):
                     approval_required = True
