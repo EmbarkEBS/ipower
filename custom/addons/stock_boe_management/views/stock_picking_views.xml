@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_form_boe" model="ir.ui.view">
+        <field name="name">stock.picking.form.boe</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet/group" position="inside">
+
+                <field name="is_delivery_return" invisible="1"/>
+
+                <field name="boe_number"
+                       invisible="picking_type_id.code != 'incoming' or is_delivery_return"/>
+
+                <field name="boe_date"
+                       invisible="picking_type_id.code != 'incoming' or is_delivery_return"/>
+
+                <field name="delivery_note"
+                       invisible="not is_delivery_return"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
