@@ -73,7 +73,7 @@
 
                                     <!-- ADDRESS -->
                                     <td style="
-                                        width:55%;font-size:15px;
+                                        width:50%;font-size:15px;
                                         vertical-align:top;
                                     ">
 
@@ -81,9 +81,25 @@
                                             width:100%;font-size:15px;
                                             border-collapse:collapse;
                                         ">
-  <strong style="color:#1a3a5a;">
-                                                        To
-                                                    </strong>
+<strong style="color:#1a3a5a;">
+
+    <t t-if="'Dropship' in (o.picking_type_id.name or '')">
+       Vendor
+    </t>
+
+    <t t-elif="o.picking_type_id.code == 'incoming'">
+        Vendor
+    </t>
+
+    <t t-elif="o.picking_type_id.code == 'outgoing'">
+        Invoice Address
+    </t>
+
+    <t t-else="">
+        To
+    </t>
+
+</strong>
 
                                                    
                                             <tr>
@@ -139,53 +155,92 @@
                                                     line-height:1.7;
                                                 ">
 
-                                                  
+                                                  <!-- SO Delivery -->
+<t t-if="o.picking_type_id.code == 'outgoing'
+         and o.sale_id
+         and o.sale_id.partner_invoice_id">
 
-                                                    <strong>
-                                                      <span t-esc="o.partner_id.parent_id.name if o.partner_id.parent_id else o.partner_id.name"/>
-   
-                                                    </strong>
+    <strong>
+        <span t-esc="o.sale_id.partner_invoice_id.name"/>
+    </strong>
 
-                                                    <br/>
+    <t t-if="o.sale_id.partner_invoice_id.street">
+        <br/>
+        <span t-esc="o.sale_id.partner_invoice_id.street"/>
+    </t>
 
-                                                    <span t-esc="o.partner_id.street or ''"/>
+    <t t-if="o.sale_id.partner_invoice_id.street2">
+        <br/>
+        <span t-esc="o.sale_id.partner_invoice_id.street2"/>
+    </t>
 
-                                                    <t t-if="o.partner_id.street2">
-                                                        <br/>
-                                                        <span t-esc="o.partner_id.street2"/>
-                                                    </t>
+    <br/>
+    <span t-esc="o.sale_id.partner_invoice_id.city or ''"/>
 
-                                                    <br/>
+    <t t-if="o.sale_id.partner_invoice_id.country_id">
+        -
+        <span t-esc="o.sale_id.partner_invoice_id.country_id.name"/>
+    </t>
 
-                                                    <span t-esc="o.partner_id.city or ''"/>
+</t>
 
-                                                   <!-- <t t-if="o.partner_id.state_id">
-                                                         <span t-esc="o.partner_id.state_id.name"/>
-                                                    </t>-->
+<!-- PO Receipt / Dropship -->
+<t t-else="">
 
-                                                    -
+    <strong>
+        <span t-esc="o.partner_id.parent_id.name if o.partner_id.parent_id else o.partner_id.name"/>
+    </strong>
 
-                                                    <span t-esc="o.partner_id.country_id.name or ''"/>
+    <br/>
 
-                                                    <br/>
+    <span t-esc="o.partner_id.street or ''"/>
 
-                                                  <t t-if="o.partner_id.vat">
-<p  style="margin-top:15px"><strong >    TRN <span t-esc="o.partner_id.vat"/></strong></p>
+    <t t-if="o.partner_id.street2">
+        <br/>
+        <span t-esc="o.partner_id.street2"/>
+    </t>
+
+    <br/>
+
+    <span t-esc="o.partner_id.city or ''"/>
+    -
+    <span t-esc="o.partner_id.country_id.name or ''"/>
+
 </t>
    
 <!-- ATTN ONLY IF CONTACT PERSON -->
-<t t-if="o.partner_id.parent_id">
+<!-- SO Delivery -->
+<t t-if="o.sale_id and o.sale_id.contact_person_id">
+
     <p style="margin-top:5px">
 
         <strong>Attn</strong>
 
-        <t t-if="o.partner_id.x_studio_salutation">
-            <span t-esc="o.partner_id.x_studio_salutation"/>
+        <t t-if="o.sale_id.contact_person_id.x_studio_salutation">
+            <span t-esc="o.sale_id.contact_person_id.x_studio_salutation"/>
         </t>
 
-        <span t-esc="o.partner_id.name"/>
+        <span t-esc="o.sale_id.contact_person_id.name"/>
 
     </p>
+
+</t>
+
+<!-- PO Receipt / Dropship -->
+<t t-elif="o.purchase_id and o.purchase_id.contact_person_id">
+
+    <p style="margin-top:5px">
+
+        <strong>Attn</strong>
+
+        <t t-if="o.purchase_id.contact_person_id.x_studio_salutation">
+            <span t-esc="o.purchase_id.contact_person_id.x_studio_salutation"/>
+        </t>
+
+        <span t-esc="o.purchase_id.contact_person_id.name"/>
+
+    </p>
+
 </t>
                                                 </td>
 
@@ -197,7 +252,7 @@
 
                                     <!-- META -->
                                     <td style="
-                                        width:45%; font-size:15px;
+                                        width:50%; font-size:15px;
                                         vertical-align:top;
                                         font-size:13px;
                                         padding-left:40px;
@@ -294,156 +349,91 @@
     </tr>
 </t>
 
-    <tr><t t-set="delivery_partner"
-   t-value="(o.move_ids and o.move_ids[0].partner_id) or o.partner_id"/>
-   
-       <!-- Dropship -->
-<t t-if="'Dropship' in (o.picking_type_id.name or '') and o.purchase_id and o.purchase_id.dest_address_id">
+ <!-- Dropship -->
+<t t-if="'Dropship' in (o.picking_type_id.name or '') and
+         o.purchase_id and
+         o.purchase_id.dest_address_id">
 
     <tr>
-        <td  style="
-        padding:4px 0;
-        font-size:15px;
-        font-weight:bold;
-        color:#1a3a5a;
-        vertical-align:top;">
+        <td style="padding:4px 0;font-size:15px;font-weight:bold;color:#1a3a5a;vertical-align:top;">
             Delivery Address
         </td>
 
-        <td style="
-        padding:4px 0;
-        font-size:15px;
-        font-family:Arial,sans-serif;
-        line-height:1.4;
-    ">
+        <td style="padding:4px 0;font-size:15px;font-family:Arial,sans-serif;line-height:1.4;">
             :
- <div style="margin-top:-20px;margin-left:6px"> 
-            <strong>
-                <span t-esc="o.purchase_id.dest_address_id.name"/>
-            </strong>
+            <div style="margin-top:-20px;margin-left:6px">
+                <strong>
+                    <span t-esc="o.purchase_id.dest_address_id.name"/>
+                </strong>
 
-            <t t-if="o.purchase_id.dest_address_id.street">
+                <t t-if="o.purchase_id.dest_address_id.street">
+                    <br/><span t-esc="o.purchase_id.dest_address_id.street"/>
+                </t>
+
+                <t t-if="o.purchase_id.dest_address_id.street2">
+                    <br/><span t-esc="o.purchase_id.dest_address_id.street2"/>
+                </t>
+
                 <br/>
-                <span t-esc="o.purchase_id.dest_address_id.street"/>
-            </t>
+                <span t-esc="o.purchase_id.dest_address_id.city or ''"/>
 
-            <t t-if="o.purchase_id.dest_address_id.street2">
-                <br/>
-                <span t-esc="o.purchase_id.dest_address_id.street2"/>
-            </t>
-
-            <br/>
-            <span t-esc="o.purchase_id.dest_address_id.city or ''"/>
-<br/>
-            <t t-if="o.purchase_id.dest_address_id.country_id">
-            
-                <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
-            </t></div>
+                <t t-if="o.purchase_id.dest_address_id.country_id">
+                    <br/>
+                    <span t-esc="o.purchase_id.dest_address_id.country_id.name"/>
+                </t>
+            </div>
         </td>
     </tr>
 
 </t>
-<!-- Purchase Receipt -->
-<t t-elif="o.picking_type_id.code == 'incoming'">
+
+<!-- Sales Delivery - show only when delivery address differs from invoice address -->
+<t t-elif="o.picking_type_id.code == 'outgoing'
+           and o.sale_id
+           and o.sale_id.partner_shipping_id
+           and o.sale_id.partner_invoice_id
+           and o.sale_id.partner_shipping_id.id != o.sale_id.partner_invoice_id.id">
 
     <tr>
-        <td  style="
-        padding:4px 0;
-        font-size:15px;
-        font-weight:bold;
-        color:#1a3a5a;
-        vertical-align:top;">
-            Warehouse Address
+        <td style="padding:4px 0;font-size:15px;font-weight:bold;color:#1a3a5a;vertical-align:top;">
+            Delivery Address
         </td>
-        <td style="
-        padding:4px 0;
-        font-size:15px;
-        font-family:Arial,sans-serif;
-        line-height:1.4;
-    ">
+
+        <td style="padding:4px 0;font-size:15px;font-family:Arial,sans-serif;line-height:1.4;">
             :
-         <div style="margin-top:-20px;margin-left:6px">   <strong>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.name"/>
-</strong>
+            <div style="margin-top:-20px;margin-left:6px">
+                <strong>
+                    <span t-esc="o.sale_id.partner_shipping_id.name"/>
+                </strong>
 
-<t t-if="o.picking_type_id.warehouse_id.partner_id.street">
-    <br/>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.street"/>
+                <t t-if="o.sale_id.partner_shipping_id.street">
+                    <br/>
+                    <span t-esc="o.sale_id.partner_shipping_id.street"/>
+                </t>
+
+                <t t-if="o.sale_id.partner_shipping_id.street2">
+                    <br/>
+                    <span t-esc="o.sale_id.partner_shipping_id.street2"/>
+                </t>
+
+                <br/>
+                <span t-esc="o.sale_id.partner_shipping_id.city or ''"/>
+
+                <t t-if="o.sale_id.partner_shipping_id.country_id">
+                    <br/>
+                    <span t-esc="o.sale_id.partner_shipping_id.country_id.name"/>
+                </t>
+
+                <t t-if="o.sale_id.partner_shipping_id.phone">
+                    <br/>
+                    <span t-esc="o.sale_id.partner_shipping_id.phone"/>
+                </t>
+            </div>
+        </td>
+    </tr>
+
 </t>
-
-<t t-if="o.picking_type_id.warehouse_id.partner_id.street2">
-    <br/>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.street2"/>
-</t>
-
-<br/>
-<span t-esc="o.picking_type_id.warehouse_id.partner_id.city or ''"/>
-
-<t t-if="o.picking_type_id.warehouse_id.partner_id.country_id">
     
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.country_id.name"/>
-</t>
-
-<t t-if="o.picking_type_id.warehouse_id.partner_id.phone">
-    <br/>
-    <span t-esc="o.picking_type_id.warehouse_id.partner_id.phone"/>
-</t></div>
-        </td>
-    </tr>
-
-</t>
-
-<!-- Sales Delivery -->
-<t t-elif="o.picking_type_id.code == 'outgoing'">
-
-    <tr>
-        <td  style="
-        padding:4px 0;
-        font-size:15px;
-        font-weight:bold;
-        color:#1a3a5a;
-        vertical-align:top;">
-            Delivery Address
-        </td>
-        <td style="
-        padding:4px 0;
-        font-size:15px;
-        font-family:Arial,sans-serif;
-        line-height:1.4;
-    ">
-            : <div style="margin-top:-20px;margin-left:6px"> 
-           <strong>
-    <span t-esc="o.partner_id.name"/>
-</strong>
-
-<t t-if="o.partner_id.street">
-    <br/>
-    <span t-esc="o.partner_id.street"/>
-</t>
-
-<t t-if="o.partner_id.street2">
-    <br/>
-    <span t-esc="o.partner_id.street2"/>
-</t>
-
-<br/>
-<span t-esc="o.partner_id.city or ''"/>
-<br/>
-<t t-if="o.partner_id.country_id">
-   
-    <span t-esc="o.partner_id.country_id.name"/>
-</t>
-
-<t t-if="o.partner_id.phone">
-    <br/>
-    <span t-esc="o.partner_id.phone"/>
-</t></div>
-        </td>
-    </tr>
-
-</t>
-    </tr>
-
                             </table>
 </td>
 </tr>
