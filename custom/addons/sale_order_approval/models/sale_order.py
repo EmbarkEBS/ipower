@@ -45,6 +45,8 @@ class SaleOrder(models.Model):
             total_cost_aed = 0.0
             total_sales_aed = 0.0
 
+            below_cost_products = []
+
             # -----------------------------------
             # CALCULATE TOTALS
             # -----------------------------------
