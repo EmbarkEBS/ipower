@@ -31,7 +31,21 @@
 .page {
     padding: 0 40px !important;
 }
-  
+    table,
+tr,
+td,
+th {
+    border: none ;
+}
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+td, th {
+    border: 0 ;
+    outline: 0 !important;
+}
                 </style>
 
                 <div class="page"
@@ -544,9 +558,9 @@
             <!-- DESCRIPTION -->
             <t t-if="line.product_id.description">
 
-                <tr style="border-bottom:1px solid #d9d9d9;">
+                <tr>
 
-                    <td></td>
+                    <td  style="border-bottom:1px solid #d9d9d9;"></td>
 
                     <td colspan="5"
                         style="
@@ -556,6 +570,7 @@
                             line-height:1.7;
                             white-space:normal;
                             word-break:break-word;
+                            border-bottom:1px solid #d9d9d9 !important;
                         ">
 
                         <span t-esc="line.product_id.description"/>
