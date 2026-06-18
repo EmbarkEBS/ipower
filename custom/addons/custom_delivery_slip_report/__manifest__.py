@@ -12,6 +12,12 @@
         'views/delivery_view.xml',        
         'views/report_external_layout.xml',
     ],
+    'assets': {
+    'web.assets_backend': [
+        'custom_delivery_slip_report/static/src/css/custom.css',
+    ],
+},
+
     "installable": True,
     "application": False,
 }

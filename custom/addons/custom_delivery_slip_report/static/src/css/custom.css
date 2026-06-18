@@ -1,0 +1,10 @@
+.scheduled_date_red input,
+.scheduled_date_red span,
+.scheduled_date_red {
+    color: red !important;
+    font-weight: bold;
+}
+label[for="scheduled_date"] {
+    color: red !important;
+    font-weight: bold;
+}

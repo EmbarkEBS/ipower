@@ -18,7 +18,11 @@
                     icon="fa-print"/>
 
         </xpath>
-
+ <!-- Scheduled Date -->
+ 
+<xpath expr="//field[@name='scheduled_date']" position="attributes">
+    <attribute name="class">scheduled_date_red</attribute>
+</xpath>
     </field>
 </record>
 </odoo>

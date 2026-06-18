@@ -53,23 +53,23 @@ td, th {
                             color:#333; padding:100px 0 0 0;
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
-                            <!-- WATERMARK 
-<div style="
+                            <!-- WATERMARK -->
+                            <div style="
     position:absolute;
-    top:50%;
+    top:350px;
     left:25%;
-    opacity:0.10;
-    transform:translate(-50%, -50%) rotate(-25deg);
-    z-index:0;
-    width:420px;
+    transform:translateX(-50%) rotate(-25deg);
+    width:350px;
+    opacity:0.06;
     text-align:center;
+    z-index:0;
 ">
 
     <img t-if="o.company_id.logo"
          t-att-src="image_data_uri(o.company_id.logo)"
          style="width:100%;"/>
 
-</div>-->
+</div>
 
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
