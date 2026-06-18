@@ -42,7 +42,9 @@ td, th {
                                     <!-- COMPANY -->
                                     <td style="
                                         width:60%;
-                                        vertical-align:top;
+                                        vertical-align:top;  border:none !important;
+    outline:none !important;
+                                    
                                     ">
 
                                         <img t-if="company.logo"
@@ -91,8 +93,9 @@ td, th {
                                     <td style="
                                         width:40%;
                                         vertical-align:top;
-                                        text-align:center;
-                                    ">
+                                        text-align:center;  border:none !important;
+    outline:none !important;
+                                    " >
 
                                     
                                
