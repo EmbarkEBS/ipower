@@ -177,6 +177,7 @@ td, th {
     <t t-out="0"/>
 </div>
 
+
         <!-- FOOTER -->
         <div class="footer"   style="font-family: Helvetica, Arial, sans-serif !important;">
 
