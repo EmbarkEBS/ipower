@@ -378,6 +378,13 @@
                         </td>
 
                     </tr>
+                                                <tr t-if="o.x_studio_expenses_reimbursement">
+    <td>Expenses Reimbursement</td>
+    <td style="text-align:right;">-</td>
+    <td style="text-align:right;">
+        <span t-esc="o.x_studio_expenses_reimbursement"/>
+    </td>
+</tr>
                 </table>
 
                 <br/>
@@ -422,13 +429,7 @@
                                     </tr>
 
                                 </t>
-                                <tr t-if="o.x_studio_expenses_reimbursement">
-    <td>Expenses Reimbursement</td>
-    <td style="text-align:right;">-</td>
-    <td style="text-align:right;">
-        <span t-esc="o.x_studio_expenses_reimbursement"/>
-    </td>
-</tr>
+    
                                                           <!-- Top Line -->
 <tr>
     <td colspan="3" style="padding:0;">
