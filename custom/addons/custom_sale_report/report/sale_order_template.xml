@@ -43,36 +43,16 @@ table {
 td, th {
     border: 0 ;
     outline: 0 !important;
-}<style>
-.page {
-    position: relative;
 }
-
-.page:before {
-    content: "";
-    position: fixed;
-    top: 35%;
-    left: 25%;
-    width: 350px;
-    height: 150px;
-    opacity: 0.08;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
-</style>
                 </style>
 
-                <!--<div class="page"
+                <div class="page"
                      style="position:relative;
                             color:#333; padding:100px 0 0 0;
                             line-height:1.4;
-                            font-family: Helvetica, Arial, sans-serif !important;">-->
-<t t-set="logo_uri" t-value="image_data_uri(o.company_id.logo)"/>
-
-<div class="page"
-     t-att-style="'position:relative; color:#333; font-family:Helvetica, Arial, sans-serif; padding:100px 0 0 0; line-height:1.4; background-image:url(%s); background-position:center center; background-repeat:no-repeat; background-size:320px; opacity:0.10;' % logo_uri">
-                            <!-- WATERMARK 
+                            font-family: Helvetica, Arial, sans-serif !important;">
+                            
+                            <!-- WATERMARK -->
  <div style="
                             position:absolute;
                             top:55%;
@@ -88,7 +68,7 @@ td, th {
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                  style="width:100%;"/>
 
-                        </div>-->
+                        </div>
 
      <!-- ===================================================== -->
                             <!-- ADDRESS + META -->
