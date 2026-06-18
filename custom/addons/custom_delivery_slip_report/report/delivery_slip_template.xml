@@ -596,8 +596,8 @@ td, th {
 </td>
     </tr>
 
-    <tr style="border-bottom:1px solid #d9d9d9;">
-        <td></td>
+    <tr>
+       <td style="border-bottom:1px solid #d9d9d9;"></td>
        
                                         <td colspan="4" style="
                                             font-size:12px;
