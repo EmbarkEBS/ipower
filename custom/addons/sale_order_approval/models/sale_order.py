@@ -621,10 +621,10 @@ class SaleOrder(models.Model):
                 qty = line.product_uom_qty or 0.0
                 discount = line.discount or 0.0
 
-                reasons.append(
-                    f"{line.product_id.display_name} | "
-                    f"Qty={qty} Cost={cost_price} Sale={sale_price}"
-                )
+                # reasons.append(
+                #     f"{line.product_id.display_name} | "
+                #     f"Qty={qty} Cost={cost_price} Sale={sale_price}"
+                # )
 
                 # COST TOTAL
                 cost_total = cost_price * qty
