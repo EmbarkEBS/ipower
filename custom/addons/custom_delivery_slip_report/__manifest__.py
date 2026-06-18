@@ -12,6 +12,12 @@
         'views/delivery_view.xml',        
         'views/report_external_layout.xml',
     ],
+    'assets': {
+    'web.assets_backend': [
+        'your_module/static/src/css/custom.css',
+    ],
+},
+
     "installable": True,
     "application": False,
 }
