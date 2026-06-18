@@ -55,24 +55,23 @@ td, th {
                             line-height:1.4;
                             font-family: Helvetica, Arial, sans-serif !important;">
 
-                        <!-- WATERMARK 
-                        <div style="
-                            position:absolute;
-                            top:55%;
-                            left:25%;
-                            opacity:0.10;
-                            transform:translate(-50%, -50%) rotate(-25deg);
-                            z-index:0;
-                            width:420px;
-                            text-align:center;
-                        ">
+                              <!-- WATERMARK -->
+                            <div style="
+    position:absolute;
+    top:350px;
+    left:25%;
+    transform:translateX(-50%) rotate(-25deg);
+    width:350px;
+    opacity:0.06;
+    text-align:center;
+    z-index:0;
+">
 
-                            <img t-if="o.company_id.logo"
-                                 t-att-src="image_data_uri(o.company_id.logo)"
-                                 style="width:100%;"/>
+    <img t-if="o.company_id.logo"
+         t-att-src="image_data_uri(o.company_id.logo)"
+         style="width:100%;"/>
 
-                        </div>-->
-
+</div>
                        
                         <!-- ADDRESS + META -->
                         <table style="
