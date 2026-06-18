@@ -7,7 +7,7 @@ class StockPicking(models.Model):
 
     boe_number = fields.Char(string="BOE Number")
     boe_date = fields.Date(string="BOE Date")
-    delivery_note = fields.Text(string="Delivery Note")
+    delivery_note = fields.Char(string="Delivery Note")
 
     is_delivery_return = fields.Boolean(
         compute="_compute_flags"
