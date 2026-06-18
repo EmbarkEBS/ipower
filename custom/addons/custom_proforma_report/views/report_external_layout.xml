@@ -1,21 +1,49 @@
 <odoo>
 
     <template id="external_layout_ipower5">
+<style>
+ table,
+tr,
+td,
+th {
+    border: none ;
+}
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
 
+td, th {
+    border: 0 ;
+    outline: 0 !important;
+}
+</style>
         <!-- HEADER -->"
-        <div class="header" style="padding: 0 25px !important;font-family: Helvetica, Arial, sans-serif !important;">
+        <div class="header" style="
+        border:none !important;
+        outline:none !important;
+        box-shadow:none !important;
+        padding:0 25px !important;
+        font-family:Helvetica, Arial, sans-serif !important;">
   <!-- HEADER -->
     <table style="
                                 width:100%;
-                                border-collapse:collapse;
+                               border:none !important;
+    outline:none !important;
+    box-shadow:none !important;
+    border-collapse:separate !important;
+    border-spacing:0 !important;
                             ">
 
-                                <tr>
+                                <tr style="
+    border:none !important;
+    outline:none !important;">
 
                                     <!-- COMPANY -->
                                     <td style="
                                         width:60%;
-                                        vertical-align:top;
+                                        vertical-align:top;  border:none !important;
+    outline:none !important;
                                     ">
 
                                         <img t-if="company.logo"
@@ -64,7 +92,8 @@
                                     <td style="
                                         width:40%;
                                         vertical-align:top;
-                                        text-align:center;
+                                        text-align:center;  border:none !important;
+    outline:none !important;
                                     ">
 
                                       <h1 style="
