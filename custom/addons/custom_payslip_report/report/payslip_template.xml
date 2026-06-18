@@ -228,19 +228,19 @@
                             <table style="font-size:11px;">
                                 <tr>
                                     <td>Payslip No</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><span t-field="o.name"/></td>
                                 </tr>
 
                                 <tr>
                                     <td>Payment Date</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><span t-field="o.date_to"/></td>
                                 </tr>
 
                                 <tr>
                                     <td>Currency</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><span t-field="o.currency_id.name"/></td>
                                 </tr>
                             </table>
@@ -267,25 +267,25 @@
 
                                 <tr>
                                     <td>Employee Name</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><span t-field="o.employee_id.legal_name"/></td>
                                 </tr>
 
                                 <tr>
                                     <td>Employee Mail</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><span t-field="o.employee_id.work_email"/></td>
                                 </tr>
 
                                 <tr>
                                     <td>Designation</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><span t-field="o.version_id.job_id"/></td>
                                 </tr>
 
                                 <tr>
                                     <td>Date of Joining</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td>
                                         <span t-out="o.version_id.employee_id.with_context(before_date=o.date_to)._get_first_contract_date()"/>
                                     </td>
@@ -293,7 +293,7 @@
 
                                 <tr>
                                     <td>Bank Name</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td>
                                         <span t-esc="o.employee_id.bank_account_ids[:1].bank_id.name if o.employee_id.bank_account_ids else ''"/>
                                     </td>
@@ -301,7 +301,7 @@
 
                                 <tr>
                                     <td>IBAN</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td>
                                         <span t-esc="o.employee_id.bank_account_ids[:1].acc_number if o.employee_id.bank_account_ids else ''"/>
                                     </td>
@@ -323,7 +323,7 @@
 
                                 <tr>
                                     <td>Pay Period</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td>
                                         <span t-field="o.date_from"/>
                                         -
@@ -333,7 +333,7 @@
 
                                 <tr>
                                     <td>Working Days</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td>
                                                <span t-esc="round(working_days)"/>
 
@@ -342,7 +342,7 @@
 
                                 <tr>
                                     <td>Paid Days</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td>
                                        <span t-esc="round(working_days)"/>
 
@@ -351,7 +351,7 @@
 
                                 <tr>
                                     <td>Leave Days</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td><t t-set="leave_days"
            t-value="sum(
                o.worked_days_line_ids.filtered(
@@ -363,7 +363,7 @@
 
                                 <tr>
                                     <td>Loss of Pay Days</td>
-                                    <td>:</td>
+                                    <td style="padding-left:5px">:</td>
                                     <td> <t t-set="lop_days"
            t-value="sum(
                o.worked_days_line_ids.filtered(
@@ -374,7 +374,7 @@
                                 </tr>
                         <tr t-if="o.x_studio_expenses_reimbursement">
     <td>Expenses Reimbursement</td>
-    <td >:</td>
+    <td style="padding-left:5px" >:</td>
     <td >
         <span t-esc="o.x_studio_expenses_reimbursement"/>
     </td>
