@@ -314,6 +314,19 @@ class SaleOrder(models.Model):
                 if line.display_type:
                     continue
 
+                reasons.append(
+                    f"Qty={line.product_uom_qty}"
+                )
+                reasons.append(
+                    f"PriceUnit={line.price_unit}"
+                )
+                reasons.append(
+                    f"Discount={line.discount}"
+                )
+                reasons.append(
+                    f"Subtotal={line.price_subtotal}"
+                )
+
                 # -----------------------------------
                 # COST (AED)
                 # -----------------------------------
