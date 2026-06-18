@@ -46,15 +46,25 @@ td, th {
 }
                 </style>
 
-                <div class="page" t-attf-style="
-        background-image:url('{{ image_data_uri(company.logo) }}');
-        background-repeat:repeat-y;
-        background-position:center center;
-        background-size:300px;" 
+                <!--<div class="page"
                      style="position:relative;
                             color:#333; padding:100px 0 0 0;
                             line-height:1.4;
-                            font-family: Helvetica, Arial, sans-serif !important;">
+                            font-family: Helvetica, Arial, sans-serif !important;">-->
+                            <t t-set="logo_uri" t-value="image_data_uri(o.company_id.logo)"/>
+
+<div class="page"
+     t-att-style="
+        'position:relative;
+         color:#333;
+         font-family: Helvetica, Arial, sans-serif !important;
+         padding:100px 0 0 0;
+         line-height:1.4;
+         background-image:url(%s);
+         background-position:center center;
+         background-repeat:repeat-y;
+         background-size:320px;'
+         % logo_uri">
                             <!-- WATERMARK 
  <div style="
                             position:absolute;
