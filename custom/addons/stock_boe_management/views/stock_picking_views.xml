@@ -8,18 +8,13 @@
 
         <field name="arch" type="xml">
 
-            <xpath expr="//sheet/group" position="inside">
+            <xpath expr="//field[@name='origin']" position="after">
 
-                <field name="is_delivery_return" invisible="1"/>
+                <field name="boe_number"/>
 
-                <field name="boe_number"
-                       invisible="picking_type_id.code != 'incoming' or is_delivery_return"/>
+                <field name="boe_date"/>
 
-                <field name="boe_date"
-                       invisible="picking_type_id.code != 'incoming' or is_delivery_return"/>
-
-                <field name="delivery_note"
-                       invisible="not is_delivery_return"/>
+                <field name="delivery_note"/>
 
             </xpath>
 
