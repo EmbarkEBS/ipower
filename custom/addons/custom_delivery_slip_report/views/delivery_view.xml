@@ -1,4 +1,12 @@
 <odoo>
+<style>
+.scheduled_date_red,
+.scheduled_date_red input,
+.scheduled_date_red span {
+    color: red !important;
+    font-weight: bold !important;
+}
+</style>
    <record id="stock_picking_form_custom_print" model="ir.ui.view">
     <field name="name">stock.picking.form.custom.print</field>
     <field name="model">stock.picking</field>
@@ -19,9 +27,9 @@
 
         </xpath>
  <!-- Scheduled Date -->
-            <xpath expr="//field[@name='scheduled_date']" position="attributes">
-                <attribute name="class">text-danger</attribute>
-            </xpath>
+           <xpath expr="//field[@name='scheduled_date']" position="attributes">
+    <attribute name="class">scheduled_date_red</attribute>
+</xpath>
     </field>
 </record>
 </odoo>
