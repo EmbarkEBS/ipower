@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="internal_layout_add_logo"
-              inherit_id="web.internal_layout">
+    <!-- Follow-up Report -->
+    <template id="followup_report_logo"
+              inherit_id="account_followup.report_followup_print_all">
 
-        <xpath expr="//div[contains(@class, 'header')]" position="inside">
+        <xpath expr="//div[@class='page']" position="before">
 
-            <div class="text-center mb-3">
+            <div class="text-center mb-4">
                 <img t-if="company.logo"
                      t-att-src="image_data_uri(company.logo)"
+                     style="max-height:80px;"/>
+            </div>
+
+        </xpath>
+
+    </template>
+
+    <!-- Statement Report -->
+    <template id="statement_report_logo"
+              inherit_id="account.report_statement">
+
+        <xpath expr="//div[@class='page']" position="inside">
+
+            <div class="text-center mb-4">
+                <img t-if="o.company_id.logo"
+                     t-att-src="image_data_uri(o.company_id.logo)"
                      style="max-height:80px;"/>
             </div>
 
