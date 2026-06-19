@@ -6,11 +6,13 @@ class AccountMove(models.Model):
 
     boe_number = fields.Char(
         string="BOE Number",
+        readonly=True,
         copy=False,
     )
 
     boe_date = fields.Date(
         string="BOE Date",
+        readonly=True,
         copy=False,
     )
 
@@ -31,7 +33,9 @@ class AccountMove(models.Model):
             ], limit=1)
 
             if picking:
-                move.boe_number = picking.boe_number
-                move.boe_date = picking.boe_date
+                move.sudo().write({
+                    "boe_number": picking.boe_number,
+                    "boe_date": picking.boe_date,
+                })
 
         return moves
