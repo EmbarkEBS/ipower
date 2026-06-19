@@ -350,15 +350,15 @@ td, th {
         </td>
     </tr>
 </t>
-  <t t-set="sale_order" t-value="o.sale_id"/>                                     
-<t t-if="sale_order and sale_order.Client_order_ref">
+                                     
+<t t-if="o.client_order_ref">
     <tr>
         <td style="font-weight:bold; font-size:15px;color:#1a3a5a;">
             Customer PO Ref
         </td>
         <td>
             :
-            <span t-field="sale_order.Client_order_ref"/>
+            <span t-field="o.client_order_ref"/>
         </td>
     </tr>
 </t>
