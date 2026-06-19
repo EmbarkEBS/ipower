@@ -1,10 +1,11 @@
+.scheduled_date_red,
 .scheduled_date_red input,
-.scheduled_date_red span,
-.scheduled_date_red {
+.scheduled_date_red span {
     color: red !important;
-    font-weight: bold;
+    font-weight: bold !important;
 }
+
 label[for="scheduled_date"] {
     color: red !important;
-    font-weight: bold;
+    font-weight: bold !important;
 }
