@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Customer Follow-up Report -->
+    <template id="followup_report_logo"
+              inherit_id="account_followup.report_followup_print_all">
+
+        <xpath expr="//div[hasclass('page')]" position="inside">
+
+            <div class="text-center mb-4">
+                <img t-if="res_company.logo"
+                     t-att-src="image_data_uri(res_company.logo)"
+                     style="max-height:80px; max-width:250px;"/>
+            </div>
+
+        </xpath>
+
+    </template>
+
+
+    <!-- Customer Statement Report -->
+    <template id="statement_report_logo"
+              inherit_id="account.report_statement">
+
+        <xpath expr="//div[hasclass('page')]" position="inside">
+
+            <div class="text-center mb-4">
+                <img t-if="res_company.logo"
+                     t-att-src="image_data_uri(res_company.logo)"
+                     style="max-height:80px; max-width:250px;"/>
+            </div>
+
+        </xpath>
+
+    </template>
+
+</odoo>
