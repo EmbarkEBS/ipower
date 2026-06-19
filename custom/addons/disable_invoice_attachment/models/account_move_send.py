@@ -1,16 +1,9 @@
-from odoo import models, api
+from odoo import models
 
+class AccountMoveSend(models.AbstractModel):
+ _inherit = "account.move.send"
 
-class AccountMoveSendWizard(models.TransientModel):
-    _inherit = "account.move.send.wizard"
+def _get_default_pdf_report_id(self, move):
+    # Disable default invoice PDF generation
+    return False
 
-    @api.model
-    def _get_default_mail_attachments_widget(self, moves, *args, **kwargs):
-        attachments = super()._get_default_mail_attachments_widget(
-            moves, *args, **kwargs
-        )
-
-        return [
-            att for att in attachments
-            if att.get("dynamic_report")
-        ]
