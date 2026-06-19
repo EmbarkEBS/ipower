@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="followup_report_test"
-              inherit_id="account_followup.report_followup_print_all">
+    <template id="test_error"
+          inherit_id="account_followup.report_followup_print_all">
 
-        <xpath expr="//div[@class='page']" position="inside">
-
-            <div style="font-size:30px;color:red;text-align:center;">
-                FOLLOWUP TEST
-            </div>
-
+        <xpath expr="//THIS_NODE_DOES_NOT_EXIST" position="inside">
+            <div>TEST</div>
         </xpath>
 
     </template>
