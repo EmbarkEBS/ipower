@@ -4,9 +4,10 @@
     <template id="followup_test"
               inherit_id="account_followup.report_followup_print_all">
 
-        <xpath expr="." position="inside">
+        <xpath expr="//t[@t-call='web.external_layout']"
+               position="before">
 
-            <div style="font-size:30px;color:red;">
+            <div style="font-size:40px;color:red;">
                 FOLLOWUP TEST
             </div>
 
