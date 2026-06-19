@@ -19,12 +19,12 @@
 
         </xpath>
  <!-- Scheduled Date -->
- <xpath expr="//label[@for='scheduled_date']" position="replace">
-    <label for="scheduled_date" string="Scheduled Date"
-           style="color:red;font-weight:bold;"/>
-</xpath>
 <xpath expr="//field[@name='scheduled_date']" position="attributes">
     <attribute name="class">scheduled_date_red</attribute>
+</xpath>
+
+<xpath expr="//label[@for='scheduled_date']" position="attributes">
+    <attribute name="class">scheduled_date_label_red</attribute>
 </xpath>
     </field>
 </record>

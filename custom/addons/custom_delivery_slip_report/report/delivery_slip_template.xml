@@ -57,7 +57,7 @@ td, th {
                             <div style="
     position:absolute;
     top:350px;
-    left:25%;
+    left:27%;
     transform:translateX(-50%) rotate(-25deg);
     width:350px;
     opacity:0.06;

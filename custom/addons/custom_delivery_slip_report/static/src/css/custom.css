@@ -1,5 +1,10 @@
-.scheduled_date_red,
+.scheduled_date_label_red {
+    color: red !important;
+    font-weight: bold !important;
+}
+
 .scheduled_date_red input,
+.scheduled_date_red .o_input,
 .scheduled_date_red span {
     color: red !important;
     font-weight: bold !important;
