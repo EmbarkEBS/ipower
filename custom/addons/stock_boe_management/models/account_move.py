@@ -6,25 +6,28 @@ class AccountMove(models.Model):
 
     boe_number = fields.Char(
         string="BOE Number",
-        compute="_compute_boe_fields",
+        compute="_compute_boe_details",
+        store=False,
         readonly=True,
-        store=True,
     )
 
     boe_date = fields.Date(
         string="BOE Date",
-        compute="_compute_boe_fields",
+        compute="_compute_boe_details",
+        store=False,
         readonly=True,
-        store=True,
     )
 
     @api.depends(
         "invoice_line_ids.purchase_line_id.order_id"
     )
-    def _compute_boe_fields(self):
+    def _compute_boe_details(self):
         for move in self:
             move.boe_number = False
             move.boe_date = False
+
+            if move.move_type != "in_invoice":
+                continue
 
             purchase_orders = move.invoice_line_ids.mapped(
                 "purchase_line_id.order_id"
@@ -36,7 +39,6 @@ class AccountMove(models.Model):
             receipt = self.env["stock.picking"].search([
                 ("purchase_id", "in", purchase_orders.ids),
                 ("picking_type_id.code", "=", "incoming"),
-                ("state", "=", "done"),
             ], order="id desc", limit=1)
 
             if receipt:
