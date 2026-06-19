@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="followup_test"
-              inherit_id="account_followup.report_followup_print_all">
+    <template id="followup_logo_header"
+              inherit_id="web.external_layout">
 
-        <xpath expr="//t[@t-call='web.external_layout']"
-               position="before">
+        <xpath expr="//div[contains(@t-attf-class, 'header o_company_')]" position="inside">
 
-            <div style="font-size:40px;color:red;">
-                FOLLOWUP TEST
-            </div>
+            <t t-if="docs and docs._name == 'res.partner'">
+                <div style="text-align:center; margin-top:10px; margin-bottom:15px;">
+                    <div style="font-size:30px; color:red;">
+                        FOLLOWUP TEST
+                    </div>
+                </div>
+            </t>
 
         </xpath>
 
