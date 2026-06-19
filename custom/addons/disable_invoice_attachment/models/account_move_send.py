@@ -4,25 +4,21 @@ class AccountMoveSendWizard(models.TransientModel):
     _inherit = 'account.move.send.wizard'
 
 
-@api.model
-def _get_default_mail_attachments_widget(self, moves, *args, **kwargs):
-    attachments = super()._get_default_mail_attachments_widget(
-        moves, *args, **kwargs
-    )
+    @api.model
+    def _get_default_mail_attachments_widget(self, moves, *args, **kwargs):
+        attachments = super()._get_default_mail_attachments_widget(
+            moves, *args, **kwargs
+        )
 
-    if not attachments:
-        return attachments
+        filtered_attachments = []
 
-    cleaned_attachments = []
+        for attachment in attachments:
+            name = attachment.get("name", "")
 
-    for attachment in attachments:
-        attachment_id = attachment.get("id")
-        placeholder = attachment.get("placeholder", False)
+            # Remove standard invoice PDF
+            if name.endswith(".pdf") and not name.startswith("Invoice-"):
+                continue
 
-        # Remove ONLY Odoo's default invoice PDF attachment
-        if attachment_id == "pdf_report" and placeholder:
-            continue
+            filtered_attachments.append(attachment)
 
-        cleaned_attachments.append(attachment)
-
-    return cleaned_attachments
+        return filtered_attachments
