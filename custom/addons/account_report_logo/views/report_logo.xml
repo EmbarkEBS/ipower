@@ -2,15 +2,13 @@
 <odoo>
 
     <template id="followup_test"
-              inherit_id="account_followup.report_followup_print_all">
+              t-inherit="account_followup.report_followup_print_all"
+              t-inherit-mode="extension">
 
-        <xpath expr="//span[@t-out='doc.get_followup_html(options)']"
-               position="before">
-
-            <div style="font-size:30px; color:red;">
+        <xpath expr="//div[@class='page']" position="inside">
+            <div style="font-size:30px;color:red;">
                 FOLLOWUP TEST
             </div>
-
         </xpath>
 
     </template>
