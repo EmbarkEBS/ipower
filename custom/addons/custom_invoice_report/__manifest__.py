@@ -11,6 +11,7 @@
         "report/invoice_template.xml",
         'views/invoice_view.xml',
         'views/report_external_layout.xml',
+        'data/replace_invoice_report.xml',
     ],
     "installable": True,
     "application": False,
