@@ -298,7 +298,7 @@ td, th {
                                                 </td>
 
                                             </tr></t>
-   <t t-if="o.x_studio_customer_po_ref">     <tr>
+   <t t-if="o.client_order_ref">     <tr>
 
                                                 <td style="
                                                     padding:4px 0; font-size:15px;
@@ -311,7 +311,7 @@ td, th {
                                                 <td style="padding:4px 0;">
 
                                                     :
-                                                    <span t-esc="o.x_studio_customer_po_ref or ''"/>
+                                                    <span t-esc="o.client_order_ref or ''"/>
 
                                                 </td>
 

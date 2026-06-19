@@ -298,7 +298,7 @@ td, th {
                                             </td>
 
                                         </tr>
-<t t-if="o.x_studio_customer_po_ref">
+<t t-if="o.client_order_ref">
     <tr>
         <td style="
                                                 padding:5px 0;
@@ -306,7 +306,7 @@ td, th {
                                                 color:#1a3a5a;" >Customer PO Ref</td>
         <td>
             :
-            <span t-field="o.x_studio_customer_po_ref"/>
+            <span t-field="o.client_order_ref"/>
         </td>
     </tr>
 </t>
