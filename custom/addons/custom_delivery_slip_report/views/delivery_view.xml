@@ -19,9 +19,12 @@
 
         </xpath>
  <!-- Scheduled Date -->
- 
 <xpath expr="//field[@name='scheduled_date']" position="attributes">
     <attribute name="class">scheduled_date_red</attribute>
+</xpath>
+
+<xpath expr="//label[@for='scheduled_date']" position="attributes">
+    <attribute name="class">scheduled_date_label_red</attribute>
 </xpath>
     </field>
 </record>

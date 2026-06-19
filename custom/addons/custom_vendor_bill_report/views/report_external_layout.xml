@@ -131,7 +131,7 @@ td, th {
                                             text-align:center;
                                         ">
 
-                                            # <span t-field="o.name"/>
+                                             # <!--<span t-field="o.name"/>--> <span t-esc="o.ref or ''"/>
                                           <!---  <span t-esc="'IP/SO/' + str(o.date_order.year)[-2:] + '/' + '%03d' % o.id"/>-->
                                           
 

@@ -8,6 +8,55 @@
         <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
         <field name="arch" type="xml">
 
+            <!-- Account Group -->
+            <xpath expr="//field[@name='account_id']"
+                   position="before">
+
+                <field name="account_group_id"/>
+
+                <field name="allowed_account_ids"
+                       invisible="1"/>
+
+            </xpath>
+
+            <!-- Vehicle Number -->
+            <xpath expr="//field[@name='account_group_id']"
+                   position="after">
+
+                <field name="show_vehicle_number"
+                       invisible="1"/>
+
+                <field name="vehicle_number"
+                       invisible="not show_vehicle_number"
+                       required="show_vehicle_number"/>
+
+            </xpath>
+
+            <!-- Filter Accounts -->
+            <xpath expr="//field[@name='account_id']"
+                   position="attributes">
+
+                <attribute name="domain">
+                    [('id', 'in', allowed_account_ids)]
+                </attribute>
+
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
+
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_expense_form_account_group"
+            model="ir.ui.view">
+        <field name="name">hr.expense.form.account.group</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+        <field name="arch" type="xml">
+
             <xpath expr="//field[@name='account_id']"
                    position="before">
 
@@ -30,4 +79,4 @@
         </field>
     </record>
 
-</odoo>
+</odoo> -->
