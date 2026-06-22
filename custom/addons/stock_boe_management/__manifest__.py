@@ -6,6 +6,7 @@
     "data": [
         "views/stock_picking_views.xml",
         'views/account_move_views.xml',
+        'views/account_move_search_views.xml',
     ],
     "installable": True,
     "application": False,

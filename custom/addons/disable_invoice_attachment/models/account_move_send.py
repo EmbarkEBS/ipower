@@ -1,16 +1,10 @@
-from odoo import models, api
+import logging
+_logger = logging.getLogger(__name__)
 
-
-class AccountMoveSendWizard(models.TransientModel):
-    _inherit = "account.move.send.wizard"
-
-    @api.model
-    def _get_default_mail_attachments_widget(self, moves, *args, **kwargs):
-        attachments = super()._get_default_mail_attachments_widget(
-            moves, *args, **kwargs
-        )
-
-        return [
-            att for att in attachments
-            if att.get("dynamic_report")
-        ]
+def _get_default_pdf_report_id(self, move):
+    report = self.env.ref(
+        "custom_invoice_report.invoice_template",
+        raise_if_not_found=False,
+    )
+    _logger.warning("REPORT FOUND = %s", report)
+    return report
