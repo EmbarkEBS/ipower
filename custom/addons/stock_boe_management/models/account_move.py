@@ -7,14 +7,14 @@ class AccountMove(models.Model):
     boe_number = fields.Char(
         string="BOE Number",
         compute="_compute_boe_details",
-        store=False,
+        store=True,
         readonly=True,
     )
 
     boe_date = fields.Date(
         string="BOE Date",
         compute="_compute_boe_details",
-        store=False,
+        store=True,
         readonly=True,
     )
 
