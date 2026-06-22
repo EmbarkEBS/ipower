@@ -1,0 +1,28 @@
+<odoo>
+
+    <record id="sale_vendor_wizard_form" model="ir.ui.view">
+        <field name="name">sale.vendor.wizard.form</field>
+        <field name="model">sale.vendor.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Vendor">
+
+                <group>
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="vendor_id"/>
+                </group>
+
+                <footer>
+                    <button name="action_confirm"
+                            string="Create PO"
+                            type="object"
+                            class="btn-primary"/>
+
+                    <button string="Cancel"
+                            special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+</odoo>
