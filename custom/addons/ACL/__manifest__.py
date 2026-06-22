@@ -6,10 +6,9 @@
     'license': 'LGPL-3',
     'data': [
        # 'security/security.xml',
-       'security/ir.model.access.csv',
- 'wizard/vendor_wizard.xml',
+       # 'security/ir.model.access.csv',
+
         'views/sale_order_views.xml', 
-        
     ],
     'installable': True,
 }
