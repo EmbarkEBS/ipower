@@ -58,7 +58,20 @@ class SaleOrder(models.Model):
         po_lines = []
 
         if not vendor:
-            first_supplier = self.order_line[0].product_id.seller_ids[:1]
+            first_supplier = False
+
+            for line in self.order_line:
+                supplier = line.product_id.seller_ids[:1]
+
+                if supplier:
+                    first_supplier = supplier
+                    break
+
+            if not first_supplier:
+                raise UserError(
+                    "No vendor found on products. Please assign vendor to products."
+                )
+
             vendor = first_supplier.partner_id
 
         for line in self.order_line:
