@@ -10,9 +10,9 @@
 
             <xpath expr="//field[@name='invoice_date']" position="after">
 
-                <field name="boe_number" readonly="1"/>
+                <field name="boe_number" readonly="0"/>
 
-                <field name="boe_date" readonly="1"/>
+                <field name="boe_date" readonly="0"/>
 
             </xpath>
 

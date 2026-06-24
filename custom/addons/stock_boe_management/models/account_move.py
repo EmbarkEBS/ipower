@@ -8,14 +8,14 @@ class AccountMove(models.Model):
         string="BOE Number",
         compute="_compute_boe_details",
         store=True,
-        readonly=True,
+        # readonly=True,
     )
 
     boe_date = fields.Date(
         string="BOE Date",
         compute="_compute_boe_details",
         store=True,
-        readonly=True,
+        # readonly=True,
     )
 
     @api.depends(
