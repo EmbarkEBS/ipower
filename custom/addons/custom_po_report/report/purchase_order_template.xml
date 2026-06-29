@@ -255,12 +255,10 @@ td, th {
                                                     Payment Terms
                                                 </td>
 
-                                                <td style="padding:4px 0;">
-
-                                                    :
-                                                    <span t-field="o.payment_term_id.name"/>
-
-                                                </td>
+                                                <td style="padding:4px 0; white-space:nowrap;">
+    :
+    <span t-field="o.payment_term_id.name"/>
+</td>
                                                 </tr>
                                             </t>
 
