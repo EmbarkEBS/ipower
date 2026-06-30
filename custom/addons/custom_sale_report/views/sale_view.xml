@@ -28,13 +28,13 @@
            domain="[('parent_id', '=', partner_id)]"/>
 
 </xpath>
-<!-- Remove Customer Reference from Other Info tab -->
-<xpath expr="//field[@name='client_order_ref']" position="replace"/>
+<!-- Remove Customer Reference from Other Info tab 
+<xpath expr="//field[@name='client_order_ref']" position="replace"/>-->
 
-<!-- Add Customer Reference after Payment Terms -->
+<!-- Add Customer Reference after Payment Terms 
 <xpath expr="//field[@name='payment_term_id']" position="after">
     <field name="client_order_ref"/>
-</xpath>
+</xpath>-->
     </field>
 </record>
 
