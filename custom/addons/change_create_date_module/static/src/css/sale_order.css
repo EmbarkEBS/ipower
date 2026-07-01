@@ -1,0 +1,4 @@
+.o_td_label label[for^="date_order"] {
+    color: black !important;
+    opacity: 1 !important;
+}

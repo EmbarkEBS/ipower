@@ -7,5 +7,10 @@
 'data': [
         'views/sale_order_views.xml',
     ],
+    'assets': {
+    'web.assets_backend': [
+        'change_create_date_module/static/src/css/sale_order.css',
+    ],
+},
     'installable': True,
 }
