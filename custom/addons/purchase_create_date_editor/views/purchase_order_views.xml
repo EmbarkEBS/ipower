@@ -11,12 +11,12 @@
 
         <field name="arch" type="xml">
 
-            <!-- Hide default Confirmation Date -->
-            <xpath expr="//field[@name='date_approve']" position="attributes">
-                <attribute name="invisible">1</attribute>
+            <!-- Remove original Confirmation Date field -->
+            <xpath expr="//field[@name='date_approve']"
+                   position="replace">
             </xpath>
 
-            <!-- Your existing fields -->
+            <!-- Add editable fields -->
             <xpath expr="//field[@name='date_order']"
                    position="after">
 
