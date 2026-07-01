@@ -25,23 +25,25 @@ class PurchaseOrder(models.Model):
 
     def _inverse_create_date(self):
         for rec in self:
-            if rec.editable_create_date:
-                self.env.cr.execute("""
-                    UPDATE purchase_order
-                    SET create_date = %s
-                    WHERE id = %s
-                """, (
-                    rec.editable_create_date,
-                    rec.id,
-                ))
+         if rec.editable_create_date:
+            self.env.cr.execute("""
+                UPDATE purchase_order
+                SET create_date = %s
+                WHERE id = %s
+            """, (
+                rec.editable_create_date,
+                rec.id,
+            ))
 
     def _inverse_confirmation_date(self):
         for rec in self:
-            self.env.cr.execute("""
-                UPDATE purchase_order
-                SET date_approve = %s
-                WHERE id = %s
-            """, (
-                rec.editable_confirmation_date,
-                rec.id,
-            ))
+         value = rec.editable_confirmation_date or None
+
+        self.env.cr.execute("""
+            UPDATE purchase_order
+            SET date_approve = %s
+            WHERE id = %s
+        """, (
+            value,
+            rec.id,
+        ))
