@@ -12,9 +12,13 @@
         <field name="arch" type="xml">
 
             <!-- Hide default Confirmation Date -->
-            <xpath expr="//field[@name='date_approve']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+            <xpath expr="//label[@for='date_approve']" position="attributes">
+    <attribute name="invisible">1</attribute>
+</xpath>
+
+<xpath expr="//field[@name='date_approve']" position="attributes">
+    <attribute name="invisible">1</attribute>
+</xpath>
 
             <!-- Your existing fields -->
             <xpath expr="//field[@name='date_order']"
