@@ -375,7 +375,7 @@ td, th {
                                     ">
                                         Product Specification
                                     </th>
-   <th style="
+  <t t-if="o.company_id.id != 2"> <th style="
                                         padding:10px;
                                         width:12%;
                                         text-align:center;
@@ -388,7 +388,7 @@ td, th {
                                         text-align:center;
                                     ">
                                         Qty
-                                    </th>
+                                    </th></t>
 
                                     <th style="
                                         padding:10px;
@@ -498,14 +498,14 @@ td, th {
                 </td>
 
                 <!-- HS CODE -->
-                <td style="
+               <t t-if="o.company_id.id != 2"> <td style="
                     padding-top:15px;
                     font-size:15px;
                     text-align:center;
                     vertical-align:top;
                 ">
                     <span t-esc="line.product_id.product_tmpl_id.hs_code or ''"/>
-                </td>
+                </td><t t-if="o.company_id.id != 2">
 
                 <!-- QTY -->
                 <td style="
