@@ -505,7 +505,7 @@ td, th {
                     vertical-align:top;
                 ">
                     <span t-esc="line.product_id.product_tmpl_id.hs_code or ''"/>
-                </td><t t-if="o.company_id.id != 2">
+                </td></t>
 
                 <!-- QTY -->
                 <td style="
