@@ -283,7 +283,7 @@ td, th {
 
                                         </tr>-->
 
-                                       <tr>
+                                      <t t-if="o.invoice_origin">  <tr>
 
                                          <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
    Our PO Number
@@ -293,7 +293,7 @@ td, th {
     <span t-esc="o.invoice_origin or ''"/>
 </td>
 
-                                        </tr>
+                                        </tr></t>
                                        <!--<t t-if="o.ref">   <tr>
 
                                        <td style="padding:5px 0;font-weight:bold; font-size:15px;color:#1a3a5a;">
