@@ -487,7 +487,12 @@ td, th {
                         line-height:1.5;
                         width:100%;
                     ">
-                        <span t-esc="line.product_id.name"/>
+                     <t t-if="line.product_id">
+        <span t-esc="line.product_id.display_name"/>
+    </t>
+    <t t-else="">
+        <span t-esc="line.name"/>
+    </t>
                     </div>
 
                 </td>
