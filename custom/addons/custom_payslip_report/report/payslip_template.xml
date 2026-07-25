@@ -372,13 +372,14 @@
            )"/>
         <span t-esc="lop_days"/></td>
                                 </tr>
-                        <tr t-if="o.x_studio_expenses_reimbursement">
+                      
+                      <!--  <tr t-if="o.x_studio_expenses_reimbursement">
     <td>Expenses Reimbursement</td>
     <td style="padding-left:5px" >:</td>
     <td >
         <span t-esc="o.x_studio_expenses_reimbursement"/>
     </td>
-</tr>
+</tr>-->
                             </table>
 
                         </td>
