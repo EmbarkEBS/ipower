@@ -141,7 +141,7 @@
                                                 <t t-if="o.company_id.id == 2">   <img t-if="o.company_id.logo"
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                 style="
-                                                max-height:40px;max-height:40px;margin-right:10px"/></t>
+                                                max-height:50px;max-height:40px;margin-right:10px"/></t>
 
                         </td>
 
@@ -665,10 +665,14 @@
                         </svg>
 
                    
-                        <span style="
+                      <t t-if="o.company_id.id == 1">    <span style="
                         text-align:left;vertical-align:top;
                         font-size:7px;">PO Box 451269, Shed-2, Plot 1586, Umm Dera, Umm Al
-Quwain</span>
+Quwain</span></t>
+  <t t-if="o.company_id.id == 2">    <span style="
+                        text-align:left;vertical-align:top;
+                        font-size:7px;">PO Box 4084, Shed-1, Plot 1586, Umm Dera, Umm Al
+Quwain</span></t>
                        <!-- <t t-if="o.company_id.street2">
                           <span style="
                         text-align:left;vertical-align:top;
