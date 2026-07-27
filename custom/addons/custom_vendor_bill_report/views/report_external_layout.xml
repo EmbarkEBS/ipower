@@ -68,7 +68,9 @@ td, th {
 
                                             <br/>
 
-                                            <span t-esc="company.street or ''"/>, Dubai
+                                            <span t-esc="company.street or ''"/>
+                                            <t t-if="o.company_id.id == 1"><span>, Dubai</span></t>
+                                            <t t-if="o.company_id.id == 2"><span>, Umm al-Quwain </span></t>
 
                                           
                                            

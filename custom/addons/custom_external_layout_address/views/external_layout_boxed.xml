@@ -8,13 +8,19 @@
         <xpath expr="//div[@name='company_address']"
                position="replace">
 
-            <div name="company_address" class="mb4">
+           <t t-if="o.company_id.id == 1"> <div name="company_address" class="mb4">
                 <strong>iPOWER ELECTRIKA TRADING L.L.C</strong><br/>
                 PO Box 451269, Dubai<br/>
                 United Arab Emirates<br/>
               TRN: 100504732700003
-            </div>
-
+            </div></t>
+  <t t-if="o.company_id.id == 2"> <div name="company_address" class="mb4">
+                <strong>STROMNET INDUSTRIES L.L.C
+</strong><br/>
+                PO BOX 4084, Umm al-Quwain <br/>
+                United Arab Emirates<br/>
+              TRN: 105336253700003
+            </div></t>
         </xpath>
 
     </template>
@@ -34,7 +40,7 @@
                     This document is electronically generated and valid without signature or company stamp.
                 </div>
 
-                <div style="
+              <t t-if="o.company_id.id == 1">  <div style="
                     border-top:1px solid #1f3b73;
                     padding-top:6px;
                     text-align:center;
@@ -51,8 +57,25 @@
                     info@ipowerelectrika.com |
                     www.ipowerelectrika.com
 
-                </div>
+                </div></t>
+   <t t-if="o.company_id.id == 1">  <div style="
+                    border-top:1px solid #1f3b73;
+                    padding-top:6px;
+                    text-align:center;
+                    font-size:11px;
+                    line-height:1.5;
+                ">
 
+                    Shed-1, Plot 1586, Umm Dera, Al Raafah,
+                    Umm Al Quwain - United Arab Emirates
+
+                    <br/>
+
+                    CR No: 1024983 |
+                    info@ipowerelectrika.com |
+                    www.ipowerelectrika.com
+
+                </div></t>
             </div>
 
             <div style="
