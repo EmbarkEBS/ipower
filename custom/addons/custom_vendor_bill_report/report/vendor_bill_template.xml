@@ -375,7 +375,12 @@ td, th {
                                     ">
                                         Product Specification
                                     </th>
-   <th t-if="show_hscode" style="
+   <t t-set="show_hscode"
+   t-value="any(
+      line.product_id
+      and line.product_id.hs_code
+      for line in o.invoice_line_ids
+   )"/><th t-if="show_hscode" style="
                                         padding:10px;
                                         width:12%;
                                         text-align:center;
