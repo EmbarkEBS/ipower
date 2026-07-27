@@ -141,7 +141,7 @@
                                                 <t t-if="o.company_id.id == 2">   <img t-if="o.company_id.logo"
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                 style="
-                                                max-height:50px;max-height:40px;margin-right:10px"/></t>
+                                                max-height:50px;max-height:40px;margin-right:10px,margin-top:10px;"/></t>
 
                         </td>
 
@@ -705,7 +705,7 @@ Quwain</span></t>
                         <span style="padding:0 2px;">|</span>
 
                         <!-- WEBSITE -->
-                        <span style="
+                      <t t-if="o.company_id.website">    <span style="
                             display:inline-block;
                             width:16px;
                             height:16px;
@@ -718,7 +718,7 @@ Quwain</span></t>
                         ">🌐</span>
 
                         <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
-
+</t>
                        <!-- <span style="padding:0 2px;">|</span>--><br/>
 
                         <!-- PHONE -->
