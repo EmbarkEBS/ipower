@@ -141,7 +141,7 @@
                                                 <t t-if="o.company_id.id == 2">   <img t-if="o.company_id.logo"
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                 style="
-                                                max-height:50px;max-height:40px;margin-right:10px,margin-top:10px;"/></t>
+                                                max-height:50px;max-height:40px;margin-right:10px;padding-top:10px;"/></t>
 
                         </td>
 
@@ -702,10 +702,10 @@ Quwain</span></t>
 
                         <span t-field="o.company_id.email"/>
 
-                        <span style="padding:0 2px;">|</span>
+                       <t t-if="o.company_id.website">  <span style="padding:0 2px;">|</span>
 
                         <!-- WEBSITE -->
-                      <t t-if="o.company_id.website">    <span style="
+                         <span style="
                             display:inline-block;
                             width:16px;
                             height:16px;
