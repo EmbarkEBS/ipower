@@ -134,10 +134,14 @@
 
                         <td style="width:25%;vertical-align:top;">
 
-                            <img t-if="o.company_id.logo"
+                           <t t-if="o.company_id.id == 1">   <img t-if="o.company_id.logo"
                                  t-att-src="image_data_uri(o.company_id.logo)"
                                 style="
-                                                max-height:80px;"/>
+                                                max-height:80px;"/></t>  
+                                                <t t-if="o.company_id.id == 2">   <img t-if="o.company_id.logo"
+                                 t-att-src="image_data_uri(o.company_id.logo)"
+                                style="
+                                                max-height:60px;max-height:100px;"/></t>
 
                         </td>
 
@@ -194,7 +198,9 @@
 
                             <div style="
                                 font-size:14px;">
-                                <span t-field="o.company_id.street"/> , Dubai
+                                <span t-field="o.company_id.street"/>  <t t-if="o.company_id.id == 1"><span>, Dubai</span></t>
+                                            <t t-if="o.company_id.id == 2"><span>, Umm al-Quwain </span></t>
+
                             </div>
 
                             <div style="
