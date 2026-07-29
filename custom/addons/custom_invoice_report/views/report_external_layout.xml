@@ -67,7 +67,9 @@ td, th {
 
                                             <br/>
 
-                                            <span t-esc="company.street or ''"/>, Dubai
+                                             <t t-if="o.company_id.id == 1"><span>, Dubai</span></t>
+                                            <t t-if="o.company_id.id == 2"><span>, Umm al-Quwain </span></t>
+
 
                                           
                                            
@@ -180,7 +182,10 @@ td, th {
             text-align:center;
         ">
 
-          <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span>
+        <t t-if="o.company_id.id == 1">
+           <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span></t>
+           <t t-if="o.company_id.id == 2">
+           <span>Shed-1, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span></t>
            <!-- <t t-if="company.street2">
                 <span t-esc="company.street2"/>,
             </t>
