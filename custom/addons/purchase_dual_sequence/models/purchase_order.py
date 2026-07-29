@@ -29,7 +29,6 @@
 #         return super().button_confirm()
 from odoo import api, fields, models
 
-
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
@@ -40,17 +39,19 @@ class PurchaseOrder(models.Model):
 
         for vals in vals_list:
 
-            # Intercompany auto-generated PO
-            if vals.get('auto_generated'):
-                vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'purchase.rfq'
-                ) or 'New'
+            company = self.env['res.company'].browse(
+                vals.get('company_id', self.env.company.id)
+            )
 
-            # Manual RFQ
+            if vals.get('auto_generated'):
+                vals['name'] = self.env['ir.sequence'].with_company(
+                    company
+                ).next_by_code('purchase.rfq') or 'New'
+
             elif vals.get('name', 'New') == 'New':
-                vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'purchase.rfq'
-                ) or 'New'
+                vals['name'] = self.env['ir.sequence'].with_company(
+                    company
+                ).next_by_code('purchase.rfq') or 'New'
 
         return super().create(vals_list)
 
@@ -59,9 +60,9 @@ class PurchaseOrder(models.Model):
         for order in self:
             if order.is_rfq:
 
-                order.name = self.env['ir.sequence'].next_by_code(
-                    'purchase.order.custom'
-                )
+                order.name = self.env['ir.sequence'].with_company(
+                    order.company_id
+                ).next_by_code('purchase.order.custom')
 
                 order.is_rfq = False
 

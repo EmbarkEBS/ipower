@@ -375,7 +375,12 @@ td, th {
                                     ">
                                         Product Specification
                                     </th>
-  <t t-if="o.company_id.id != 2"> <th style="
+   <t t-set="show_hscode"
+   t-value="any(
+      line.product_id
+      and line.product_id.hs_code
+      for line in o.invoice_line_ids
+   )"/><th t-if="show_hscode" style="
                                         padding:10px;
                                         width:12%;
                                         text-align:center;
@@ -388,7 +393,7 @@ td, th {
                                         text-align:center;
                                     ">
                                         Qty
-                                    </th></t>
+                                    </th>
 
                                     <th style="
                                         padding:10px;
@@ -498,14 +503,14 @@ td, th {
                 </td>
 
                 <!-- HS CODE -->
-               <t t-if="o.company_id.id != 2"> <td style="
+                <td  t-if="show_hscode" style="
                     padding-top:15px;
                     font-size:15px;
                     text-align:center;
                     vertical-align:top;
                 ">
                     <span t-esc="line.product_id.product_tmpl_id.hs_code or ''"/>
-                </td></t>
+                </td>
 
                 <!-- QTY -->
                 <td style="
