@@ -293,8 +293,15 @@ from odoo import models, fields, api
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    quotation_number = fields.Char(readonly=True, copy=False)
-    so_number = fields.Char(readonly=True, copy=False)
+    quotation_number = fields.Char(
+        readonly=True,
+        copy=False
+    )
+
+    so_number = fields.Char(
+        readonly=True,
+        copy=False
+    )
 
     display_number = fields.Char(
         compute="_compute_display_number",
@@ -310,9 +317,9 @@ class SaleOrder(models.Model):
                 else rec.quotation_number
             )
 
-    # -------------------------
+    # ----------------------------------
     # CREATE QUOTATION
-    # -------------------------
+    # ----------------------------------
     @api.model_create_multi
     def create(self, vals_list):
 
@@ -320,49 +327,56 @@ class SaleOrder(models.Model):
 
             if vals.get("name", "New") == "New":
 
-                seq = self.env["ir.sequence"].next_by_code(
-                    "sale.quotation.sequence"
+                company = self.env["res.company"].browse(
+                    vals.get("company_id", self.env.company.id)
                 )
 
-                vals["quotation_number"] = seq
-                vals["name"] = seq
+                quotation_seq = (
+                    self.env["ir.sequence"]
+                    .with_company(company)
+                    .next_by_code("sale.quotation.sequence")
+                )
+
+                vals.update({
+                    "quotation_number": quotation_seq,
+                    "name": quotation_seq,
+                })
 
         return super().create(vals_list)
 
-    # -------------------------
+    # ----------------------------------
     # CONFIRM SALE ORDER
-    # -------------------------
+    # ----------------------------------
     def action_confirm(self):
 
-        # Generate SO number BEFORE intercompany PO creation
         for order in self:
 
             if not order.so_number:
 
-                seq = self.env["ir.sequence"].next_by_code(
-                    "sale.order.sequence"
+                so_seq = (
+                    self.env["ir.sequence"]
+                    .with_company(order.company_id)
+                    .next_by_code("sale.order.sequence")
                 )
 
                 order.write({
-                    "so_number": seq,
-                    "name": seq,
+                    "so_number": so_seq,
+                    "name": so_seq,
                 })
 
-        # Now intercompany module will read SO number
         res = super().action_confirm()
 
-        # Update related documents
         for order in self:
 
             for picking in order.picking_ids:
                 picking.origin = order.name
 
-            invoices = self.env['account.move'].search([
-                ('invoice_origin', '=', order.quotation_number)
+            invoices = self.env["account.move"].search([
+                ("invoice_origin", "=", order.quotation_number)
             ])
 
             invoices.write({
-                'invoice_origin': order.name
+                "invoice_origin": order.name
             })
 
         return res
