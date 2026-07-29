@@ -29,6 +29,7 @@
 #         return super().button_confirm()
 from odoo import api, fields, models
 
+
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
@@ -43,26 +44,35 @@ class PurchaseOrder(models.Model):
                 vals.get('company_id', self.env.company.id)
             )
 
+            # Intercompany / Create PO button
             if vals.get('auto_generated'):
-                vals['name'] = self.env['ir.sequence'].with_company(
-                    company
-                ).next_by_code('purchase.rfq') or 'New'
+                vals['name'] = (
+                    self.env['ir.sequence']
+                    .with_company(company)
+                    .next_by_code('purchase.rfq')
+                ) or 'New'
 
+            # Manual RFQ
             elif vals.get('name', 'New') == 'New':
-                vals['name'] = self.env['ir.sequence'].with_company(
-                    company
-                ).next_by_code('purchase.rfq') or 'New'
+                vals['name'] = (
+                    self.env['ir.sequence']
+                    .with_company(company)
+                    .next_by_code('purchase.rfq')
+                ) or 'New'
 
         return super().create(vals_list)
 
     def button_confirm(self):
 
         for order in self:
+
             if order.is_rfq:
 
-                order.name = self.env['ir.sequence'].with_company(
-                    order.company_id
-                ).next_by_code('purchase.order.custom')
+                order.name = (
+                    self.env['ir.sequence']
+                    .with_company(order.company_id)
+                    .next_by_code('purchase.order.custom')
+                )
 
                 order.is_rfq = False
 
