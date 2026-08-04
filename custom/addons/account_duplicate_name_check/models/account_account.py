@@ -5,42 +5,60 @@ from odoo.exceptions import ValidationError
 class AccountAccount(models.Model):
     _inherit = "account.account"
 
-    def _check_duplicate_account_name(self, name):
+    def _validate_duplicate_name(self, name, company_ids):
         if not name:
             return
 
-        normalized_name = " ".join(name.split()).lower()
+        normalized = " ".join(name.split()).lower()
+
+        company_ids = company_ids or [self.env.company.id]
 
         accounts = self.search([
+            ("company_ids", "in", company_ids),
             ("id", "not in", self.ids),
-            ("company_id", "=", self.company_id.id if self.company_id else self.env.company.id),
         ])
 
         for account in accounts:
             existing = " ".join((account.name or "").split()).lower()
-            if existing == normalized_name:
+            if existing == normalized:
                 raise ValidationError(_(
-                    'Chart of Account "%s" already exists.\n'
-                    'Please use a different account name.'
+                    'The Chart of Account "%s" already exists.'
                 ) % account.name)
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            company = self.env["res.company"].browse(
-                vals.get("company_id", self.env.company.id)
-            )
+            company_ids = vals.get("company_ids")
+            if company_ids:
+                # Extract IDs from M2M commands
+                ids = []
+                for command in company_ids:
+                    if command[0] == 6:
+                        ids.extend(command[2])
+                    elif command[0] == 4:
+                        ids.append(command[1])
+            else:
+                ids = [self.env.company.id]
 
-            temp = self.with_company(company).new(vals)
-            temp._check_duplicate_account_name(vals.get("name"))
+            self._validate_duplicate_name(vals.get("name"), ids)
 
         return super().create(vals_list)
 
     def write(self, vals):
-        result = super().write(vals)
+        for rec in self:
+            if "company_ids" in vals:
+                ids = []
+                for command in vals["company_ids"]:
+                    if command[0] == 6:
+                        ids.extend(command[2])
+                    elif command[0] == 4:
+                        ids.append(command[1])
+            else:
+                ids = rec.company_ids.ids
 
-        if "name" in vals:
-            for rec in self:
-                rec._check_duplicate_account_name(rec.name)
+            self._validate_duplicate_name(
+                vals.get("name", rec.name),
+                ids,
+            )
 
-        return result
+        return super().write(vals)
