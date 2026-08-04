@@ -421,7 +421,12 @@ td, th {
 
     <t t-set="sn" t-value="1"/>
 
-    <t t-foreach="o.invoice_line_ids" t-as="line">
+    <t t-set="lines"
+   t-value="o.invoice_line_ids.sorted(key=lambda l: (l.sequence, l.id))"/>
+
+<t t-set="sn" t-value="1"/>
+
+<t t-foreach="lines" t-as="line">
 
         <!-- SECTION -->
         <t t-if="line.display_type == 'line_section'">
