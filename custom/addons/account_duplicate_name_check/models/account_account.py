@@ -1,27 +1,18 @@
-from odoo import api, models, _
-from odoo.exceptions import ValidationError
+import logging
+
+from odoo import api, models
+
+_logger = logging.getLogger(__name__)
 
 
 class AccountAccount(models.Model):
     _inherit = "account.account"
 
-    @api.constrains("name", "company_id")
-    def _check_duplicate_account_name(self):
-        for rec in self:
-            if not rec.name:
-                continue
+    @api.model_create_multi
+    def create(self, vals_list):
+        _logger.warning("######## CUSTOM CREATE EXECUTED ########")
+        return super().create(vals_list)
 
-            normalized_name = " ".join(rec.name.split()).lower()
-
-            duplicate = self.search([
-                ("id", "!=", rec.id),
-                ("company_id", "=", rec.company_id.id),
-            ])
-
-            for account in duplicate:
-                existing = " ".join((account.name or "").split()).lower()
-
-                if existing == normalized_name:
-                    raise ValidationError(_(
-                        'Chart of Account "%s" already exists.'
-                    ) % account.name)
+    def write(self, vals):
+        _logger.warning("######## CUSTOM WRITE EXECUTED ########")
+        return super().write(vals)
