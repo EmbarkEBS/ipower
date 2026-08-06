@@ -25,8 +25,12 @@
                 <field name="employee_name"
                        invisible="not show_employee"/>
 
-                <field name="project_name"
-                       invisible="not show_project"/>
+                <field name="sale_order_id"
+                       invisible="not show_project"
+                       domain="[('state', 'in', ['sale', 'done'])]"/>
+
+                <!-- <field name="project_name"
+                       invisible="not show_project"/> -->
 
             </xpath>
 
