@@ -4,6 +4,7 @@
     "depends": [
         "hr_expense",
         "account",
+        "sale"
     ],
     "data": [
         "views/hr_expense_views.xml",
