@@ -143,8 +143,14 @@ class HrExpense(models.Model):
         string="Employee"
     )
 
-    project_name = fields.Char(
-        string="Project Name"
+    # project_name = fields.Char(
+    #     string="Project Name"
+    # )
+
+    sale_order_id = fields.Many2one(
+          "sale.order",
+          string="Sale Order",
+          domain="[('state', 'in', ['sale', 'done'])]",
     )
 
     show_vehicle_number = fields.Boolean(
@@ -216,4 +222,5 @@ class HrExpense(models.Model):
             self.employee_name = False
 
         if group_name != "project / service order expenses".lower():
-            self.project_name = False
+            # self.project_name = False
+            self.sale_order_id = False
