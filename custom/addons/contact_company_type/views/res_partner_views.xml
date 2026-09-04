@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <odoo>
 
-    <record id="view_partner_form_company_type_one_time" model="ir.ui.view">
-        <field name="name">res.partner.form.company.type.one.time</field>
+    <record id="view_partner_form_one_time" model="ir.ui.view">
+        <field name="name">res.partner.form.one.time</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='company_type']" position="attributes">
-                <attribute name="string">Company Type</attribute>
+            <xpath expr="//field[@name='company_type']" position="after">
+                <field name="one_time"/>
             </xpath>
 
         </field>
