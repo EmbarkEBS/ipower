@@ -9,6 +9,6 @@ class ResPartner(models.Model):
             ('one_time', 'One Time'),
         ],
         ondelete={
-            'one_time': 'set default',
+            'one_time': 'set null',
         },
     )
