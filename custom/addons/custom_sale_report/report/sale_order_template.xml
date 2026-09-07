@@ -332,43 +332,7 @@ td, th {
                                                 </td>
 
                                             </tr></t>
-                                           <t t-if="o.partner_shipping_id
-         and o.partner_invoice_id
-         and o.partner_shipping_id != o.partner_invoice_id">
-
-    <tr>
-        <td style="
-                                                    padding:4px 0; font-size:15px;
-                                                    font-weight:bold;
-                                                    color:#1a3a5a;
-                                                ">Delivery Address</td>
-
-        <td style="padding:4px 0;">
-            <strong>
-                <span t-esc="o.partner_shipping_id.name"/>
-            </strong>
-
-            <t t-if="o.partner_shipping_id.street">
-                <br/>
-                <span t-esc="o.partner_shipping_id.street"/>
-            </t>
-
-            <t t-if="o.partner_shipping_id.street2">
-                <br/>
-                <span t-esc="o.partner_shipping_id.street2"/>
-            </t>
-
-            <br/>
-            <span t-esc="o.partner_shipping_id.city or ''"/>
-
-            <t t-if="o.partner_shipping_id.country_id">
-                <br/>
-                <span t-esc="o.partner_shipping_id.country_id.name"/>
-            </t>
-        </td>
-    </tr>
-
-</t>                        </table>
+                                                         </table>
 
                                     </td>
 
@@ -775,7 +739,55 @@ td, th {
 
                             </div>
  
-                 
+                <!-- ===================================================== -->
+                  <!-- =========================Delivery============================ -->
+ <t t-if="o.partner_shipping_id
+         and o.partner_invoice_id
+         and o.partner_shipping_id != o.partner_invoice_id">
+  <div style="margin-top:60px;padding-left:20px;">
+
+                                <strong style="
+                                    font-size:14px;
+                                    border-bottom:1px solid #e58b39;
+                                    padding-bottom:2px;
+                                ">
+                                   Delivery Address
+                                </strong>
+
+                                <div style="
+                                    margin-top:10px;
+                                      font-size:14px;
+                                    color:#555;
+                                ">
+
+                                    <strong>
+                <span t-esc="o.partner_shipping_id.name"/>
+            </strong>
+
+            <t t-if="o.partner_shipping_id.street">
+                <br/>
+                <span t-esc="o.partner_shipping_id.street"/>
+            </t>
+
+            <t t-if="o.partner_shipping_id.street2">
+                <br/>
+                <span t-esc="o.partner_shipping_id.street2"/>
+            </t>
+
+            <br/>
+            <span t-esc="o.partner_shipping_id.city or ''"/>
+
+            <t t-if="o.partner_shipping_id.country_id">
+                <br/>
+                <span t-esc="o.partner_shipping_id.country_id.name"/>
+            </t>
+
+
+                                </div>
+
+                            </div>
+                            </t>
+ <!-- ===================================================== -->
 
                 </div>
 
