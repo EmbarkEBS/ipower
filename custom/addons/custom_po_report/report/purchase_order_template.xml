@@ -256,11 +256,11 @@ td, th {
 
                                                 <td style="padding:4px 0; white-space:nowrap;">
     :
-    <span t-field="o.date_planned"/>
+    <span t-field="o.date_planned" t-options='{"format": "dd MMMM yyyy"}'/>
 </td>
                                                 </tr>
                                             </t>
-                                        <t t-if="o.payment_term_id.name" t-options='{"format": "dd MMMM yyyy"}'>    <tr>
+                                        <t t-if="o.payment_term_id.name">    <tr>
 
                                                 <td style="
                                                     padding:4px 0;font-size:15px;
