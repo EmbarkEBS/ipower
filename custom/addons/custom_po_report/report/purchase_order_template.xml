@@ -725,7 +725,7 @@ td, th {
 
  <!-- ===================================================== -->
                             <!-- NOTES -->
-                            <!-- ===================================================== -->
+                            
 
                             <div style="margin-top:60px;padding-left:20px;">
 
@@ -754,9 +754,8 @@ td, th {
                                 </div>
 
                             </div>
-  <!-- ===================================================== -->
-                            <!-- Dropship -->
-                            <!-- ===================================================== -->
+ <!-- ===================================================== -->
+ <!-- =========================Dropship============================ -->
 <t t-set="shipping_partner"
    t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
 
@@ -765,26 +764,23 @@ td, th {
 
     <t t-set="shipping_partner"
        t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
-                            <div style="margin-top:60px;padding-left:20px;">
+  <div style="margin-top:60px;padding-left:20px;">
 
                                 <strong style="
                                     font-size:14px;
                                     border-bottom:1px solid #e58b39;
                                     padding-bottom:2px;
                                 ">
-                                  Shipping Address
+                                    Shipping Address
                                 </strong>
 
                                 <div style="
-                                     padding:4px 0;
-            font-size:15px;
-            font-family:Arial,sans-serif;
-            line-height:1.4;
+                                    margin-top:10px;
+                                      font-size:14px;
+                                    color:#555;
                                 ">
 
-                                   <div style="margin-top:-20px;margin-left:6px">
-
-                <strong t-field="shipping_partner.name"/><br/>
+                                     <strong t-field="shipping_partner.name"/><br/>
 
                 <t t-if="shipping_partner.street">
                     <span t-field="shipping_partner.street"/><br/>
@@ -811,12 +807,13 @@ td, th {
                     <span t-field="shipping_partner.country_id.name"/>
                 </t>
 
-            </div>
 
                                 </div>
 
                             </div>
- 
+                            </t>
+ <!-- ===================================================== -->
+
 
                 </div>
  </t>
