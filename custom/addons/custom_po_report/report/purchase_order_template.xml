@@ -244,7 +244,22 @@ td, th {
                                                 </td>
 
                                             </tr>
+<t t-if="o.date_planned">    <tr>
 
+                                                <td style="
+                                                    padding:4px 0;font-size:15px;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                   Expected Arrival
+                                                </td>
+
+                                                <td style="padding:4px 0; white-space:nowrap;">
+    :
+    <span t-field="o.date_planned" t-options='{"format": "dd MMMM yyyy"}'/>
+</td>
+                                                </tr>
+                                            </t>
                                         <t t-if="o.payment_term_id.name">    <tr>
 
                                                 <td style="
@@ -310,67 +325,7 @@ td, th {
         </td>
     </tr>
 </t>
-<t t-set="shipping_partner"
-   t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
 
-<!-- Show only for Dropship -->
-<t t-if="'Dropship' in (o.picking_type_id.name or '')">
-
-    <t t-set="shipping_partner"
-       t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
-
-    <tr>
-        <td style="
-            padding:4px 0;
-            font-size:15px;
-            font-weight:bold;
-            color:#1a3a5a;
-            vertical-align:top;
-        ">
-            Shipping Address
-        </td>
-
-        <td style="
-            padding:4px 0;
-            font-size:15px;
-            font-family:Arial,sans-serif;
-            line-height:1.4;
-        ">
-            :
-            <div style="margin-top:-20px;margin-left:6px">
-
-                <strong t-field="shipping_partner.name"/><br/>
-
-                <t t-if="shipping_partner.street">
-                    <span t-field="shipping_partner.street"/><br/>
-                </t>
-
-                <t t-if="shipping_partner.street2">
-                    <span t-field="shipping_partner.street2"/><br/>
-                </t>
-
-                <t t-if="shipping_partner.city">
-                    <span t-field="shipping_partner.city"/>
-                </t>
-
-                <t t-if="shipping_partner.state_id">
-                    , <span t-field="shipping_partner.state_id.name"/>
-                </t>
-
-                <t t-if="shipping_partner.zip">
-                    - <span t-field="shipping_partner.zip"/>
-                </t>
-
-                <t t-if="shipping_partner.country_id">
-                    <br/>
-                    <span t-field="shipping_partner.country_id.name"/>
-                </t>
-
-            </div>
-        </td>
-    </tr>
-
-</t>
                                         </table>
 
                                     </td>
@@ -770,7 +725,7 @@ td, th {
 
  <!-- ===================================================== -->
                             <!-- NOTES -->
-                            <!-- ===================================================== -->
+                            
 
                             <div style="margin-top:60px;padding-left:20px;">
 
@@ -799,7 +754,65 @@ td, th {
                                 </div>
 
                             </div>
- 
+ <!-- ===================================================== -->
+ <!-- =========================Dropship============================ -->
+<t t-set="shipping_partner"
+   t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
+
+<!-- Show only for Dropship -->
+<t t-if="'Dropship' in (o.picking_type_id.name or '')">
+
+    <t t-set="shipping_partner"
+       t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
+  <div style="margin-top:60px;padding-left:20px;">
+
+                                <strong style="
+                                    font-size:14px;
+                                    border-bottom:1px solid #e58b39;
+                                    padding-bottom:2px;
+                                ">
+                                    Shipping Address
+                                </strong>
+
+                                <div style="
+                                    margin-top:10px;
+                                      font-size:14px;
+                                    color:#555;
+                                ">
+
+                                     <strong t-field="shipping_partner.name"/><br/>
+
+                <t t-if="shipping_partner.street">
+                    <span t-field="shipping_partner.street"/><br/>
+                </t>
+
+                <t t-if="shipping_partner.street2">
+                    <span t-field="shipping_partner.street2"/><br/>
+                </t>
+
+                <t t-if="shipping_partner.city">
+                    <span t-field="shipping_partner.city"/>
+                </t>
+
+                <t t-if="shipping_partner.state_id">
+                    , <span t-field="shipping_partner.state_id.name"/>
+                </t>
+
+                <t t-if="shipping_partner.zip">
+                    - <span t-field="shipping_partner.zip"/>
+                </t>
+
+                <t t-if="shipping_partner.country_id">
+                    <br/>
+                    <span t-field="shipping_partner.country_id.name"/>
+                </t>
+
+
+                                </div>
+
+                            </div>
+                            </t>
+ <!-- ===================================================== -->
 
 
                 </div>

@@ -17,7 +17,7 @@
   <t t-if="o.company_id.id == 2"> <div name="company_address" class="mb4">
                 <strong>STROMNET INDUSTRIES L.L.C
 </strong><br/>
-                PO BOX 4084, Umm al-Quwain <br/>
+                PO BOX 4084, Umm Al-Quwain <br/>
                 United Arab Emirates<br/>
               TRN: 105336253700003
             </div></t>
