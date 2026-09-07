@@ -244,7 +244,22 @@ td, th {
                                                 </td>
 
                                             </tr>
+<t t-if="o.date_planned">    <tr>
 
+                                                <td style="
+                                                    padding:4px 0;font-size:15px;
+                                                    font-weight:bold;
+                                                    color:#1a3a5a;
+                                                ">
+                                                   Expected Arrival
+                                                </td>
+
+                                                <td style="padding:4px 0; white-space:nowrap;">
+    :
+    <span t-field="o.date_planned"/>
+</td>
+                                                </tr>
+                                            </t>
                                         <t t-if="o.payment_term_id.name">    <tr>
 
                                                 <td style="
