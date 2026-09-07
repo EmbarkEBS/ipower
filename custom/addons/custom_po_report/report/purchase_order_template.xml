@@ -754,7 +754,9 @@ td, th {
                                 </div>
 
                             </div>
- 
+  <!-- ===================================================== -->
+                            <!-- Dropship -->
+                            <!-- ===================================================== -->
 <t t-set="shipping_partner"
    t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
 
@@ -763,26 +765,24 @@ td, th {
 
     <t t-set="shipping_partner"
        t-value="o.dest_address_id or o.picking_type_id.warehouse_id.partner_id"/>
-<table>
-    <tr>
-        <td style="
-            padding:4px 0;
-            font-size:15px;
-            font-weight:bold;
-            color:#1a3a5a;
-            vertical-align:top;
-        ">
-            Shipping Address
-        </td>
+                            <div style="margin-top:60px;padding-left:20px;">
 
-        <td style="
-            padding:4px 0;
+                                <strong style="
+                                    font-size:14px;
+                                    border-bottom:1px solid #e58b39;
+                                    padding-bottom:2px;
+                                ">
+                                  Shipping Address
+                                </strong>
+
+                                <div style="
+                                     padding:4px 0;
             font-size:15px;
             font-family:Arial,sans-serif;
             line-height:1.4;
-        ">
-            :
-            <div style="margin-top:-20px;margin-left:6px">
+                                ">
+
+                                   <div style="margin-top:-20px;margin-left:6px">
 
                 <strong t-field="shipping_partner.name"/><br/>
 
@@ -812,10 +812,11 @@ td, th {
                 </t>
 
             </div>
-        </td>
-    </tr>
-</table>
-</t>
+
+                                </div>
+
+                            </div>
+ 
 
                 </div>
  </t>
