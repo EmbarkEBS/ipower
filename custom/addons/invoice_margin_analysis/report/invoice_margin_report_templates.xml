@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <template
+        id="report_invoice_margin"
+    >
+
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs"
+               t-as="doc">
+
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <h2>
+                            Invoice Margin Analysis
+                        </h2>
+
+                        <div class="row mb-3">
+
+                            <div class="col-6">
+
+                                <strong>Invoice:</strong>
+
+                                <span t-field="doc.invoice_number"/>
+
+                                <br/>
+
+                                <strong>Date:</strong>
+
+                                <span t-field="doc.invoice_date"/>
+
+                                <br/>
+
+                                <strong>Customer:</strong>
+
+                                <span t-field="doc.customer_id"/>
+
+                            </div>
+
+                            <div class="col-6">
+
+                                <strong>Sales Order:</strong>
+
+                                <span t-field="doc.sale_order_number"/>
+
+                                <br/>
+
+                                <strong>Company:</strong>
+
+                                <span t-field="doc.company_id"/>
+
+                                <br/>
+
+                                <strong>Currency:</strong>
+
+                                <span t-field="doc.currency_id"/>
+
+                            </div>
+
+                        </div>
+
+
+                        <table class="table table-sm table-bordered">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Product
+                                    </th>
+
+                                    <th class="text-end">
+                                        Qty
+                                    </th>
+
+                                    <th class="text-end">
+                                        Selling Price
+                                    </th>
+
+                                    <th class="text-end">
+                                        Revenue
+                                    </th>
+
+                                    <th class="text-end">
+                                        COGS
+                                    </th>
+
+                                    <th class="text-end">
+                                        Margin
+                                    </th>
+
+                                    <th class="text-end">
+                                        Margin %
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+                                        <span t-field="doc.product_id"/>
+                                    </td>
+
+                                    <td class="text-end">
+                                        <span t-field="doc.quantity"/>
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <span
+                                            t-field="doc.selling_price"
+                                            t-options="{
+                                                'widget': 'monetary',
+                                                'display_currency': doc.currency_id
+                                            }"
+                                        />
+
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <span
+                                            t-field="doc.revenue_amount"
+                                            t-options="{
+                                                'widget': 'monetary',
+                                                'display_currency': doc.currency_id
+                                            }"
+                                        />
+
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <span
+                                            t-field="doc.cogs_amount"
+                                            t-options="{
+                                                'widget': 'monetary',
+                                                'display_currency': doc.currency_id
+                                            }"
+                                        />
+
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <span
+                                            t-field="doc.line_margin_amount"
+                                            t-options="{
+                                                'widget': 'monetary',
+                                                'display_currency': doc.currency_id
+                                            }"
+                                        />
+
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <span
+                                            t-esc="'%.2f' % doc.line_margin_percentage"
+                                        />
+                                        %
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <div class="row mt-4">
+
+                            <div class="col-7">
+                            </div>
+
+                            <div class="col-5">
+
+                                <table class="table table-sm">
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>Total Revenue</strong>
+                                        </td>
+
+                                        <td class="text-end">
+
+                                            <span
+                                                t-field="doc.total_revenue"
+                                                t-options="{
+                                                    'widget': 'monetary',
+                                                    'display_currency': doc.currency_id
+                                                }"
+                                            />
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>Total COGS</strong>
+                                        </td>
+
+                                        <td class="text-end">
+
+                                            <span
+                                                t-field="doc.total_cogs"
+                                                t-options="{
+                                                    'widget': 'monetary',
+                                                    'display_currency': doc.currency_id
+                                                }"
+                                            />
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>Total Margin</strong>
+                                        </td>
+
+                                        <td class="text-end">
+
+                                            <span
+                                                t-field="doc.total_margin_amount"
+                                                t-options="{
+                                                    'widget': 'monetary',
+                                                    'display_currency': doc.currency_id
+                                                }"
+                                            />
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>Total Margin %</strong>
+                                        </td>
+
+                                        <td class="text-end">
+
+                                            <span
+                                                t-esc="'%.2f' % doc.total_margin_percentage"
+                                            />
+                                            %
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </t>
+
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>

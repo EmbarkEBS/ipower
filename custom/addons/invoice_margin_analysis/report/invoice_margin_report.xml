@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record
+        id="action_report_invoice_margin"
+        model="ir.actions.report"
+    >
+
+        <field name="name">
+            Invoice Margin Analysis
+        </field>
+
+        <field name="model">
+            invoice.margin.report
+        </field>
+
+        <field name="report_type">
+            qweb-pdf
+        </field>
+
+        <field name="report_name">
+            invoice_margin_analysis.report_invoice_margin
+        </field>
+
+        <field name="report_file">
+            invoice_margin_analysis.report_invoice_margin
+        </field>
+
+        <field name="binding_model_id"
+               ref="model_invoice_margin_report"/>
+
+        <field name="binding_type">
+            report
+        </field>
+
+    </record>
+
+</odoo>
