@@ -128,6 +128,25 @@ td, th {
                                 <div style="
     display:inline-block;
 ">
+<t t-if="o.company_id.id == 1">
+<div style="text-align:center; margin:5px 0;">
+
+    <svg width="120" height="15"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <line x1="0" y1="5" x2="80" y2="5" stroke="#f39223" stroke-width="2"/>
+
+        <line x1="80" y1="5" x2="90" y2="5" stroke="#f59f3e" stroke-width="2"/>
+        <line x1="90" y1="5" x2="100" y2="5" stroke="#f7ac59" stroke-width="2"/>
+        <line x1="100" y1="5" x2="110" y2="5" stroke="#fbc68f" stroke-width="2"/>
+        <line x1="110" y1="5" x2="120" y2="5" stroke="#fff8f2" stroke-width="2"/>
+
+    </svg>
+
+</div></t>
+
+
+<t t-if="o.company_id.id == 2">
 <div style="text-align:center; margin:5px 0;">
 
     <svg width="120" height="15"
@@ -141,7 +160,7 @@ td, th {
 
     </svg>
 
-</div>
+</div></t>
 
 </div>
                                         <div style="
@@ -187,18 +206,12 @@ td, th {
         ">
             This document is electronically generated and valid without signature or company stamp.
         </div>
-        <t t-if="o.company_id.id == 1">
+      
         <div style="
             border-top:1px solid #1f3b73;
             padding-top:6px;
             text-align:center;
-        "></t>
-<t t-if="o.company_id.id == 2">
-        <div style="
-            border-top:1px solid #0c4da2;
-            padding-top:6px;
-            text-align:center;
-        "></t>
+        ">
 <t t-if="o.company_id.id == 1">
            <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span></t>
            <t t-if="o.company_id.id == 2">

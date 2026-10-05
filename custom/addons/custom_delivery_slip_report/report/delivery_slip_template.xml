@@ -119,11 +119,12 @@ td, th {
                                             <tr>
 
                                                 <!-- ORANGE BORDER -->
+                                            <t t-if="o.company_id.id == 1">
                                               <td style="
     width:8px;
     padding:0;
     vertical-align:top;
-"><t t-if="o.company_id.id == 1">
+">
  <svg width="8"
          height="130"
          xmlns="http://www.w3.org/2000/svg">
@@ -155,8 +156,17 @@ td, th {
               height="130"
               fill="url(#verticalFade)"/>
 
-    </svg></t><t t-if="o.company_id.id == 2">
-   <svg width="8"
+    </svg>
+   
+</td> </t>
+                                           <!-- blue BORDER -->
+                                            <t t-if="o.company_id.id == 2">
+                                              <td style="
+    width:8px;
+    padding:0;
+    vertical-align:top;
+">
+<svg width="8"
      height="130"
      xmlns="http://www.w3.org/2000/svg">
 
@@ -188,8 +198,8 @@ td, th {
           fill="url(#verticalFade)"/>
 
 </svg>
-</t>
-</td>
+   
+</td> </t>
                                                 <td style="width:15px;">
                                                 </td>
 
@@ -666,7 +676,8 @@ td, th {
             font-size:14px;
             border-bottom:1px solid #e58b39;
             padding-bottom:2px;
-        ">
+        ">  Delivery Address
+        </strong>
         </t>
       <t t-if="o.company_id.id == 2">
         <strong style="
@@ -674,9 +685,9 @@ td, th {
             border-bottom:1px solid #0c4da2;
             padding-bottom:2px;
         ">
-        </t>  
+        
             Delivery Address
-        </strong>
+        </strong> </t> 
 
         <div style="
             margin-top:10px;
