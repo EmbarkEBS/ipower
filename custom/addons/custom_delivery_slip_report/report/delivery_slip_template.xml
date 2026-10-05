@@ -119,11 +119,11 @@ td, th {
                                             <tr>
 
                                                 <!-- ORANGE BORDER -->
-                                             <t t-if="o.company_id.id == 1"> <td style="
+                                              <td style="
     width:8px;
     padding:0;
     vertical-align:top;
-">
+"><t t-if="o.company_id.id == 1">
  <svg width="8"
          height="130"
          xmlns="http://www.w3.org/2000/svg">
@@ -155,17 +155,7 @@ td, th {
               height="130"
               fill="url(#verticalFade)"/>
 
-    </svg>
-   
-</td>
-</t>
- <t t-if="o.company_id.id == 2">
- <td style="
-    width:8px;
-    padding:0;
-    vertical-align:top;
-">
-
+    </svg></t><t t-if="o.company_id.id == 2">
    <svg width="8"
      height="130"
      xmlns="http://www.w3.org/2000/svg">
@@ -198,8 +188,8 @@ td, th {
           fill="url(#verticalFade)"/>
 
 </svg>
-
-</td></t>
+</t>
+</td>
                                                 <td style="width:15px;">
                                                 </td>
 
