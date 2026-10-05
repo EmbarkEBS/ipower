@@ -119,11 +119,12 @@ td, th {
                                             <tr>
 
                                                 <!-- ORANGE BORDER -->
+                                            <t t-if="o.company_id.id == 1">
                                               <td style="
     width:8px;
     padding:0;
     vertical-align:top;
-"><t t-if="o.company_id.id == 1">
+">
  <svg width="8"
          height="130"
          xmlns="http://www.w3.org/2000/svg">
@@ -155,41 +156,9 @@ td, th {
               height="130"
               fill="url(#verticalFade)"/>
 
-    </svg></t><t t-if="o.company_id.id == 2">
-   <svg width="8"
-     height="130"
-     xmlns="http://www.w3.org/2000/svg">
-
-    <defs>
-
-        <!-- VERTICAL BLUE FADE -->
-        <linearGradient id="verticalFade"
-                        x1="0%"
-                        y1="0%"
-                        x2="0%"
-                        y2="100%">
-
-            <stop offset="0%"
-                  stop-color="#0c4da2"
-                  stop-opacity="1"/>
-
-            <stop offset="100%"
-                  stop-color="#0c4da2"
-                  stop-opacity="0"/>
-
-        </linearGradient>
-
-    </defs>
-
-    <rect x="0"
-          y="0"
-          width="2"
-          height="130"
-          fill="url(#verticalFade)"/>
-
-</svg>
-</t>
-</td>
+    </svg>
+   
+</td> </t>
                                                 <td style="width:15px;">
                                                 </td>
 
