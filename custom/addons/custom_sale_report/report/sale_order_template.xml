@@ -100,14 +100,13 @@ td, th {
                                                    
                                             <tr>
 
-                                                <!-- ORANGE BORDER -->
+                                               <t t-if="o.company_id.id == 1">
                                               <td style="
     width:8px;
     padding:0;
     vertical-align:top;
 ">
-
-    <svg width="8"
+ <svg width="8"
          height="130"
          xmlns="http://www.w3.org/2000/svg">
 
@@ -139,8 +138,49 @@ td, th {
               fill="url(#verticalFade)"/>
 
     </svg>
+   
+</td> </t>
+                                           <!-- blue BORDER -->
+                                            <t t-if="o.company_id.id == 2">
+                                              <td style="
+    width:8px;
+    padding:0;
+    vertical-align:top;
+">
+<svg width="8"
+     height="130"
+     xmlns="http://www.w3.org/2000/svg">
 
-</td>
+    <defs>
+
+        <!-- VERTICAL BLUE FADE -->
+        <linearGradient id="verticalFade"
+                        x1="0%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%">
+
+            <stop offset="0%"
+                  stop-color="#0c4da2"
+                  stop-opacity="1"/>
+
+            <stop offset="100%"
+                  stop-color="#0c4da2"
+                  stop-opacity="0"/>
+
+        </linearGradient>
+
+    </defs>
+
+    <rect x="0"
+          y="0"
+          width="2"
+          height="130"
+          fill="url(#verticalFade)"/>
+
+</svg>
+   
+</td> </t>
                                                 <td style="width:15px;">
                                                 </td>
 
@@ -713,14 +753,24 @@ td, th {
 
                             <div style="margin-top:60px;padding-left:20px;">
 
-                                <strong style="
+                             <t t-if="o.company_id.id == 1">   <strong style="
                                     font-size:14px;
                                     border-bottom:1px solid #e58b39 !important;
                                     padding-bottom:2px;
                                 ">
                                     Notes
                                 </strong>
-
+</t>
+<t t-if="o.company_id.id == 2">
+                            <strong style="
+                                font-size:14px;
+                                border-bottom:1px solid #0c4da2;
+                                padding-bottom:2px;
+                            ">
+                                Notes
+                            </strong>
+</t>
+    
                                 <div style="
                                     margin-top:10px;
                                       font-size:14px;
@@ -745,15 +795,23 @@ td, th {
          and o.partner_invoice_id
          and o.partner_shipping_id != o.partner_invoice_id">
   <div style="margin-top:60px;padding-left:20px;">
-
+ <t t-if="o.company_id.id == 1">
                                 <strong style="
                                     font-size:14px;
                                     border-bottom:1px solid #e58b39;
                                     padding-bottom:2px;
                                 ">
                                    Delivery Address
-                                </strong>
-
+                                </strong></t>
+ <t t-if="o.company_id.id == 2">
+        <strong style="
+            font-size:14px;
+            border-bottom:1px solid #0c4da2;
+            padding-bottom:2px;
+        ">
+        
+            Delivery Address
+        </strong> </t> 
                                 <div style="
                                     margin-top:10px;
                                       font-size:14px;
