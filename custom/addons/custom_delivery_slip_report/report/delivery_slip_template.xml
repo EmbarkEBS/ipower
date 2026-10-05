@@ -155,7 +155,7 @@ td, th {
               height="130"
               fill="url(#verticalFade)"/>
 
-    </svg></t>
+    </svg>
    
 </td>
 </t>
@@ -166,8 +166,6 @@ td, th {
     vertical-align:top;
 ">
 
-
-    </svg></t><t t-if="o.company_id.id == 2">
    <svg width="8"
      height="130"
      xmlns="http://www.w3.org/2000/svg">
