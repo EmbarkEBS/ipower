@@ -125,38 +125,38 @@ td, th {
     vertical-align:top;
 ">
 
-    <svg width="8"
-         height="130"
-         xmlns="http://www.w3.org/2000/svg">
+   <svg width="8"
+     height="130"
+     xmlns="http://www.w3.org/2000/svg">
 
-        <defs>
+    <defs>
 
-            <!-- VERTICAL ORANGE FADE -->
-            <linearGradient id="verticalFade"
-                            x1="0%"
-                            y1="0%"
-                            x2="0%"
-                            y2="100%">
+        <!-- VERTICAL BLUE FADE -->
+        <linearGradient id="verticalFade"
+                        x1="0%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%">
 
-                <stop offset="0%"
-                      stop-color="#f39223"
-                      stop-opacity="1"/>
+            <stop offset="0%"
+                  stop-color="#0c4da2"
+                  stop-opacity="1"/>
 
-                <stop offset="100%"
-                      stop-color="#f39223"
-                      stop-opacity="0"/>
+            <stop offset="100%"
+                  stop-color="#0c4da2"
+                  stop-opacity="0"/>
 
-            </linearGradient>
+        </linearGradient>
 
-        </defs>
+    </defs>
 
-        <rect x="0"
-              y="0"
-              width="2"
-              height="130"
-              fill="url(#verticalFade)"/>
+    <rect x="0"
+          y="0"
+          width="2"
+          height="130"
+          fill="url(#verticalFade)"/>
 
-    </svg>
+</svg>
 
 </td>
                                                 <td style="width:15px;">
