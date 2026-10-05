@@ -111,6 +111,7 @@ td, th {
                                 <div style="
     display:inline-block;
 ">
+<t t-if="o.company_id.id == 1">
 <div style="text-align:center; margin:5px 0;">
 
     <svg width="120" height="15"
@@ -125,7 +126,24 @@ td, th {
 
     </svg>
 
-</div>
+</div></t>
+
+
+<t t-if="o.company_id.id == 2">
+<div style="text-align:center; margin:5px 0;">
+
+    <svg width="120" height="15"
+         xmlns="http://www.w3.org/2000/svg">
+<line x1="0" y1="5" x2="80" y2="5" stroke="#0c4da2" stroke-width="2"/>
+
+<line x1="80" y1="5" x2="90" y2="5" stroke="#2f69b3" stroke-width="2"/>
+<line x1="90" y1="5" x2="100" y2="5" stroke="#5b88c4" stroke-width="2"/>
+<line x1="100" y1="5" x2="110" y2="5" stroke="#9bb7dd" stroke-width="2"/>
+<line x1="110" y1="5" x2="120" y2="5" stroke="#eef4fc" stroke-width="2"/>
+
+    </svg>
+
+</div></t>
 
 </div>
                                         <div style="
@@ -216,7 +234,8 @@ td, th {
 
     <!-- FULL BLEED BAR -->
    <!-- ABSOLUTE FULL WIDTH BAR -->
-                           <!-- FULL WIDTH FOOTER BORDER -->
+                                           <!-- FULL WIDTH FOOTER BORDER -->
+           <t t-if="o.company_id.id == 1"> 
 <div style="
     width:auto;
     height:25px;
@@ -243,7 +262,35 @@ td, th {
     </svg>
 
 </div>
+</t>
+ <t t-if="o.company_id.id == 2">
+<div style="
+    width:auto;
+    height:25px;
+    overflow:hidden;
+    margin-top:5px;
+    margin-left:-40px;
+    margin-right:-50px;
+">
 
+    <svg width="100%"
+         height="25"
+         viewBox="0 0 1000 25"
+         preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <!-- BLUE 25% -->
+        <polygon points="0,0 260,0 240,25 0,25"
+                 fill="#ffcb08"/>
+
+        <!-- ORANGE 75% -->
+        <polygon points="260,0 1000,0 1000,25 240,25"
+                 fill="#0c4da2"/>
+
+    </svg>
+
+</div>
+ </t>
         </div>
 
     </template>
