@@ -187,18 +187,12 @@ td, th {
         ">
             This document is electronically generated and valid without signature or company stamp.
         </div>
-        <t t-if="o.company_id.id == 1">
+      
         <div style="
             border-top:1px solid #1f3b73;
             padding-top:6px;
             text-align:center;
-        "></t>
-<t t-if="o.company_id.id == 2">
-        <div style="
-            border-top:1px solid #0c4da2;
-            padding-top:6px;
-            text-align:center;
-        "></t>
+        ">
 <t t-if="o.company_id.id == 1">
            <span>Shed-2, Plot 1586, Umm Dera, Al Raafah, Umm Al Quwain - United Arab Emirates</span></t>
            <t t-if="o.company_id.id == 2">
