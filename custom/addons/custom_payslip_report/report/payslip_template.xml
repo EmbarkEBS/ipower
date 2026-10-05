@@ -57,7 +57,13 @@
                         margin-top:10px;
                         margin-bottom:25px;
                     }
-
+ .top-blue{
+                        height:3px;
+                        width:100%;
+                        background:#0c4da2;
+                        margin-top:10px;
+                        margin-bottom:25px;
+                    }
                     .info td{
                         padding:3px 0;
                         font-size:11px;
@@ -150,7 +156,7 @@
     padding:0;
     vertical-align:top;
 ">
-
+<t t-if="o.company_id.id == 1"> 
     <svg width="8"
          height="130"
          xmlns="http://www.w3.org/2000/svg">
@@ -182,8 +188,40 @@
               height="130"
               fill="url(#verticalFade)"/>
 
-    </svg>
+    </svg></t>
+<t t-if="o.company_id.id == 2">
+<svg width="8"
+     height="130"
+     xmlns="http://www.w3.org/2000/svg">
 
+    <defs>
+
+        <!-- VERTICAL BLUE FADE -->
+        <linearGradient id="verticalFade"
+                        x1="0%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%">
+
+            <stop offset="0%"
+                  stop-color="#0c4da2"
+                  stop-opacity="1"/>
+
+            <stop offset="100%"
+                  stop-color="#0c4da2"
+                  stop-opacity="0"/>
+
+        </linearGradient>
+
+    </defs>
+
+    <rect x="0"
+          y="0"
+          width="2"
+          height="130"
+          fill="url(#verticalFade)"/>
+
+</svg> </t>
 </td>
 
                         <td style="width:43%;padding-left:15px;vertical-align:top;">
@@ -256,8 +294,8 @@
                     </tr>
                 </table>
 
-                <div class="top-orange"/>
-
+           <t t-if="o.company_id.id == 1">     <div class="top-orange"/></t>
+<t t-if="o.company_id.id == 2"><div class="top-blue"/></t>
                 <!-- INFO -->
 
                 <table>
@@ -624,14 +662,22 @@
                 Notes
             </div>
 
-            <div style="
+         <t t-if="o.company_id.id == 1">   <div style="
                 width:45px;
                 height:2px;
                 background:#f58220;
                 margin-top:5px;
                 margin-bottom:10px;
             "/>
-
+</t>
+       <t t-if="o.company_id.id == 2">   <div style="
+                width:45px;
+                height:2px;
+                background:#0c4da2;
+                margin-top:5px;
+                margin-bottom:10px;
+            "/>
+</t>
             <div class="footer-note">
                 This is a system-generated document and does not require any signature.
             </div>
