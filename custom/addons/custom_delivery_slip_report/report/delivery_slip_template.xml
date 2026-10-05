@@ -155,7 +155,8 @@ td, th {
               height="130"
               fill="url(#verticalFade)"/>
 
-    </svg></t><t t-if="o.company_id.id == 2">
+    </svg></t>
+    <t t-if="o.company_id.id == 2">
    <svg width="8"
      height="130"
      xmlns="http://www.w3.org/2000/svg">
@@ -666,17 +667,18 @@ td, th {
             font-size:14px;
             border-bottom:1px solid #e58b39;
             padding-bottom:2px;
-        ">
+        ">  Delivery Address
+        </strong>
         </t>
       <t t-if="o.company_id.id == 2">
         <strong style="
             font-size:14px;
             border-bottom:1px solid #0c4da2;
             padding-bottom:2px;
-        ">
-        </t>  
-            Delivery Address
+        ">  Delivery Address
         </strong>
+        </t>  
+          
 
         <div style="
             margin-top:10px;
