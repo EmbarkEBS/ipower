@@ -99,8 +99,7 @@
                                            column_invisible="True"/>
                                     <field name="bill_amount" readonly="1"/>
                                     <field name="account_id"
-                                           domain="[('deprecated', '=', False),
-                                                    ('company_ids', 'in', [parent.company_id])]"
+                                           domain="[('company_ids', 'in', [parent.company_id])]"
                                            options="{'no_create': True}"/>
                                     <field name="description"/>
                                     <field name="line_type"
@@ -131,8 +130,7 @@
                                     <field name="percentage"/>
                                     <field name="allocated_amount" readonly="1"/>
                                     <field name="account_id"
-                                           domain="[('deprecated', '=', False),
-                                                    ('company_ids', 'in', [parent.company_id])]"
+                                           domain="[('company_ids', 'in', [parent.company_id])]"
                                            options="{'no_create': True}"/>
                                     <field name="description"/>
                                     <field name="line_type"
