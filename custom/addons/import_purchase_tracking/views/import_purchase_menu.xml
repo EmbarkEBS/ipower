@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="menu_import_purchase_root" name="Import Purchase" sequence="35"
+              groups="account.group_account_user,purchase.group_purchase_user"/>
+    <menuitem id="menu_import_boe" name="BOE Register"
+              parent="menu_import_purchase_root" action="action_import_boe" sequence="10"
+              groups="account.group_account_user,purchase.group_purchase_user"/>
+    <menuitem id="menu_import_charge_allocation" name="Charge Allocations"
+              parent="menu_import_purchase_root" action="action_import_charge_allocation" sequence="20"
+              groups="account.group_account_user"/>
+</odoo>

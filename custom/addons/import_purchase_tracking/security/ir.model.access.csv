@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_import_boe_account,import.boe account,model_import_boe,account.group_account_user,1,1,1,1
+access_import_boe_po_line_account,import.boe.po.line account,model_import_boe_po_line,account.group_account_user,1,1,1,1
+access_import_charge_allocation_account,import.charge.allocation account,model_import_charge_allocation,account.group_account_user,1,1,1,1

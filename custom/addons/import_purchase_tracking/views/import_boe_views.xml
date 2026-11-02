@@ -1,0 +1,98 @@
+<odoo>
+    <record id="view_import_boe_list" model="ir.ui.view">
+        <field name="name">import.boe.list</field>
+        <field name="model">import.boe</field>
+        <field name="arch" type="xml">
+            <list string="Bill of Entry">
+                <field name="name"/>
+                <field name="boe_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="customs_duty_total" sum="Customs Duty"/>
+                <field name="clearing_total" sum="Clearing"/>
+                <field name="freight_total" sum="Freight"/>
+                <field name="total_import_charges" sum="Total Charges"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_import_boe_form" model="ir.ui.view">
+        <field name="name">import.boe.form</field>
+        <field name="model">import.boe</field>
+        <field name="arch" type="xml">
+            <form string="Bill of Entry">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. BOE-2026-00125"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="boe_date"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Purchase Orders">
+                            <field name="purchase_order_line_ids">
+                                <list editable="bottom">
+                                    <field name="purchase_order_id"/>
+                                    <field name="partner_id" readonly="1"/>
+                                    <field name="date_order" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Charge Allocations">
+                            <field name="allocation_ids" context="{'default_boe_id': id}">
+                                <list editable="bottom">
+                                    <field name="move_line_id"/>
+                                    <field name="move_id" readonly="1"/>
+                                    <field name="bill_supplier_id" readonly="1"/>
+                                    <field name="purchase_order_id"/>
+                                    <field name="po_supplier_id" readonly="1"/>
+                                    <field name="charge_type"/>
+                                    <field name="account_id" readonly="1"/>
+                                    <field name="amount" sum="Allocated Total"/>
+                                    <field name="state" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Vendor Bills">
+                            <field name="vendor_bill_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="invoice_date"/>
+                                    <field name="partner_id"/>
+                                    <field name="amount_total"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group string="Import Charge Summary">
+                        <group>
+                            <field name="boe_duty_total" readonly="1"/>
+                            <field name="customs_duty_total" readonly="1"/>
+                            <field name="clearing_total" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="freight_total" readonly="1"/>
+                            <field name="other_total" readonly="1"/>
+                            <field name="total_import_charges" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_boe" model="ir.actions.act_window">
+        <field name="name">BOE Register</field>
+        <field name="res_model">import.boe</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
