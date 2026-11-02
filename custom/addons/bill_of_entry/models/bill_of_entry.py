@@ -251,8 +251,7 @@ class BillOfEntryLine(models.Model):
         "account.account",
         string="Chart of Accounts",
         check_company=True,
-        domain="[('deprecated', '=', False), "
-               "('company_ids', 'in', [company_id])]",
+        domain="[('company_ids', 'in', [company_id])]",
     )
 
     description = fields.Char(string="Description")
