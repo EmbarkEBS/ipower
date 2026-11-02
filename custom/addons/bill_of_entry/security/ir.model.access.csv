@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bill_of_entry_account_user,bill.of.entry.account.user,model_bill_of_entry,account.group_account_user,1,1,1,0
+access_bill_of_entry_line_account_user,bill.of.entry.line.account.user,model_bill_of_entry_line,account.group_account_user,1,1,1,1

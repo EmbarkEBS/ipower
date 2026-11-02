@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sequence_bill_of_entry" model="ir.sequence">
+        <field name="name">Bill of Entry</field>
+        <field name="code">bill.of.entry</field>
+        <field name="prefix">BOE/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="view_bill_of_entry_list" model="ir.ui.view">
+        <field name="name">bill.of.entry.list</field>
+        <field name="model">bill.of.entry</field>
+        <field name="arch" type="xml">
+            <list string="Bills of Entry">
+                <field name="name"/>
+                <field name="boe_number"/>
+                <field name="boe_date"/>
+                <field name="purchase_order_ids" widget="many2many_tags"/>
+                <field name="vendor_ids" widget="many2many_tags"/>
+                <field name="company_id"
+                       groups="base.group_multi_company"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bill_of_entry_form" model="ir.ui.view">
+        <field name="name">bill.of.entry.form</field>
+        <field name="model">bill.of.entry</field>
+        <field name="arch" type="xml">
+            <form string="Bill of Entry">
+                <header>
+                    <button name="action_confirm"
+                            type="object"
+                            string="Confirm"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_reset_to_draft"
+                            type="object"
+                            string="Reset to Draft"
+                            invisible="state == 'draft'"/>
+
+                    <button name="action_cancel"
+                            type="object"
+                            string="Cancel"
+                            invisible="state == 'cancelled'"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,cancelled"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="boe_number"/>
+                            <field name="boe_date"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="purchase_order_ids"
+                                   widget="many2many_tags"
+                                   domain="[('company_id', '=', company_id)]"
+                                   options="{'no_create': True}"/>
+                            <field name="vendor_ids"
+                                   widget="many2many_tags"
+                                   readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Vendor Bills"
+                              name="vendor_bills">
+                            <field name="vendor_bill_line_ids"
+                                   context="{'default_line_type': 'vendor'}">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="move_id"
+                                           string="Vendor Bill"
+                                           domain="[('move_type', '=', 'in_invoice'),
+                                                    ('state', '=', 'posted'),
+                                                    ('company_id', '=', parent.company_id)]"
+                                           options="{'no_create': True,
+                                                     'no_create_edit': True}"/>
+                                    <field name="vendor_id" readonly="1"/>
+                                    <field name="bill_number" readonly="1"/>
+                                    <field name="bill_date" readonly="1"/>
+                                    <field name="currency_id"
+                                           column_invisible="True"/>
+                                    <field name="bill_amount" readonly="1"/>
+                                    <field name="account_id"
+                                           domain="[('deprecated', '=', False),
+                                                    ('company_ids', 'in', [parent.company_id])]"
+                                           options="{'no_create': True}"/>
+                                    <field name="description"/>
+                                    <field name="line_type"
+                                           column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Additional Bills"
+                              name="additional_bills">
+                            <field name="additional_bill_line_ids"
+                                   context="{'default_line_type': 'additional'}">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="move_id"
+                                           string="Vendor Bill"
+                                           domain="[('move_type', '=', 'in_invoice'),
+                                                    ('state', '=', 'posted'),
+                                                    ('company_id', '=', parent.company_id)]"
+                                           options="{'no_create': True,
+                                                     'no_create_edit': True}"/>
+                                    <field name="vendor_id" readonly="1"/>
+                                    <field name="bill_number" readonly="1"/>
+                                    <field name="bill_date" readonly="1"/>
+                                    <field name="currency_id"
+                                           column_invisible="True"/>
+                                    <field name="bill_amount" readonly="1"/>
+                                    <field name="percentage"/>
+                                    <field name="allocated_amount" readonly="1"/>
+                                    <field name="account_id"
+                                           domain="[('deprecated', '=', False),
+                                                    ('company_ids', 'in', [parent.company_id])]"
+                                           options="{'no_create': True}"/>
+                                    <field name="description"/>
+                                    <field name="line_type"
+                                           column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bill_of_entry" model="ir.actions.act_window">
+        <field name="name">Bills of Entry</field>
+        <field name="res_model">bill.of.entry</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_bill_of_entry_root"
+              name="Bill of Entry"
+              sequence="55"
+              groups="account.group_account_user"/>
+
+    <menuitem id="menu_bill_of_entry"
+              name="Bills of Entry"
+              parent="menu_bill_of_entry_root"
+              action="action_bill_of_entry"
+              sequence="10"
+              groups="account.group_account_user"/>
+
+</odoo>
