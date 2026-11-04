@@ -203,12 +203,14 @@ class BillOfEntryAdditionalLine(models.Model):
         related="invoice_line_id.price_subtotal",
         currency_field="currency_id",
         readonly=True,
+        store=True,
     )
 
     currency_id = fields.Many2one(
         "res.currency",
         related="invoice_line_id.currency_id",
         readonly=True,
+        store=True,
     )
 
     account_id = fields.Many2one(
