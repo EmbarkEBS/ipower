@@ -264,3 +264,51 @@ class BillOfEntryAdditionalLine(models.Model):
                 raise ValidationError(
                     _("Percentage must be between 0 and 100.")
                 )
+
+class BillOfEntryAccountSummary(models.Model):
+    _name = "bill.of.entry.account.summary"
+    _description = "Bill of Entry Account Allocation Summary"
+    _auto = False
+    _order = "account_id"
+
+    bill_of_entry_id = fields.Many2one(
+        "bill.of.entry",
+        string="Bill of Entry",
+        readonly=True,
+    )
+
+    account_id = fields.Many2one(
+        "account.account",
+        string="Account",
+        readonly=True,
+    )
+
+    currency_id = fields.Many2one(
+        "res.currency",
+        string="Currency",
+        readonly=True,
+    )
+
+    allocated_amount = fields.Monetary(
+        string="Total Allocated Amount",
+        currency_field="currency_id",
+        readonly=True,
+    )
+
+    def init(self):
+        self.env.cr.execute("""
+            CREATE OR REPLACE VIEW bill_of_entry_account_summary AS (
+                SELECT
+                    MIN(line.id) AS id,
+                    line.bill_of_entry_id,
+                    line.account_id,
+                    line.currency_id,
+                    SUM(line.allocated_amount) AS allocated_amount
+                FROM bill_of_entry_additional_line line
+                WHERE line.account_id IS NOT NULL
+                GROUP BY
+                    line.bill_of_entry_id,
+                    line.account_id,
+                    line.currency_id
+            )
+        """)
