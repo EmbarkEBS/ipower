@@ -216,6 +216,7 @@ class BillOfEntryAdditionalLine(models.Model):
         string="Account",
         related="invoice_line_id.account_id",
         readonly=True,
+        store=True,
     )
 
     percentage = fields.Float(
