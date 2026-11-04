@@ -104,7 +104,7 @@
                             </field>
                             <separator string="Account-wise Allocated Amount"/>
 
-                            <field name="additional_account_summary_ids" readonly="1">
+                            <!-- <field name="additional_account_summary_ids" readonly="1">
                                 <list create="0" edit="0" delete="0">
                                     <field name="account_id"/>
                                     <field name="allocated_amount"
@@ -112,7 +112,11 @@
                                            sum="Grand Total"/>
                                     <field name="currency_id" column_invisible="True"/>
                                 </list>
-                            </field>
+                            </field> -->
+                            <field name="additional_account_summary_html"
+                                   widget="html"
+                                   readonly="1"
+                                   nolabel="1"/>
                         </page>
 
                         <!-- Notes -->
