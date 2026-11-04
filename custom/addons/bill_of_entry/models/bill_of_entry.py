@@ -73,8 +73,56 @@ class BillOfEntry(models.Model):
         compute="_compute_additional_account_summary_html",
         readonly=True,
     )
+    
+    account_wise_allocated_summary = fields.Char(
+        string="Account-wise Allocated Amount",
+        compute="_compute_account_wise_allocated_summary",
+    )
 
     notes = fields.Text(string="Notes")
+
+    @api.depends(
+        "additional_bill_line_ids.account_id",
+        "additional_bill_line_ids.currency_id",
+        "additional_bill_line_ids.allocated_amount",
+    )
+    def _compute_account_wise_allocated_summary(self):
+        for record in self:
+            totals = {}
+    
+            for line in record.additional_bill_line_ids:
+                if not line.account_id or not line.currency_id:
+                    continue
+    
+                key = (line.account_id.id, line.currency_id.id)
+    
+                if key not in totals:
+                    totals[key] = {
+                        "account": line.account_id.display_name,
+                        "currency": line.currency_id,
+                        "amount": 0.0,
+                    }
+    
+                totals[key]["amount"] += line.allocated_amount
+    
+            summary = []
+    
+            for item in totals.values():
+                currency = item["currency"]
+                amount = currency.round(item["amount"])
+    
+                formatted_amount = f"{amount:,.2f}"
+    
+                if currency.position == "before":
+                    formatted_amount = f"{currency.symbol} {formatted_amount}"
+                else:
+                    formatted_amount = f"{formatted_amount} {currency.symbol}"
+    
+                summary.append(
+                    f"{item['account']}: {formatted_amount}"
+                )
+    
+            record.account_wise_allocated_summary = " | ".join(summary)
 
     @api.depends(
         "additional_bill_line_ids.account_id",
