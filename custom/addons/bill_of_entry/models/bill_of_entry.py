@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from markupsafe import Markup, escape
 
 
 class BillOfEntry(models.Model):
@@ -60,14 +61,87 @@ class BillOfEntry(models.Model):
         "bill_of_entry_id",
         string="Additional Bill Invoice Lines",
     )
-    additional_account_summary_ids = fields.One2many(
-        "bill.of.entry.account.summary",
-        "bill_of_entry_id",
+    # additional_account_summary_ids = fields.One2many(
+    #     "bill.of.entry.account.summary",
+    #     "bill_of_entry_id",
+    #     string="Account Allocation Summary",
+    #     readonly=True,
+    # )
+
+    additional_account_summary_html = fields.Html(
         string="Account Allocation Summary",
+        compute="_compute_additional_account_summary_html",
         readonly=True,
     )
 
     notes = fields.Text(string="Notes")
+
+    @api.depends(
+        "additional_bill_line_ids.account_id",
+        "additional_bill_line_ids.currency_id",
+        "additional_bill_line_ids.allocated_amount",
+    )
+    def _compute_additional_account_summary_html(self):
+        for record in self:
+            totals = {}
+    
+            for line in record.additional_bill_line_ids:
+                if not line.account_id or not line.currency_id:
+                    continue
+    
+                key = (line.account_id.id, line.currency_id.id)
+    
+                if key not in totals:
+                    totals[key] = {
+                        "account": line.account_id.display_name,
+                        "currency": line.currency_id,
+                        "amount": 0.0,
+                    }
+    
+                totals[key]["amount"] += line.allocated_amount
+    
+            rows = []
+    
+            for item in sorted(
+                totals.values(),
+                key=lambda value: value["account"],
+            ):
+                currency = item["currency"]
+                amount = currency.round(item["amount"])
+                formatted_amount = f"{amount:,.2f}"
+    
+                if currency.position == "before":
+                    formatted_amount = f"{currency.symbol} {formatted_amount}"
+                else:
+                    formatted_amount = f"{formatted_amount} {currency.symbol}"
+    
+                rows.append(
+                    Markup(
+                        "<tr><td>{}</td><td class='text-end'>{}</td></tr>"
+                    ).format(
+                        escape(item["account"]),
+                        escape(formatted_amount),
+                    )
+                )
+    
+            if rows:
+                record.additional_account_summary_html = Markup(
+                    """
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Account</th>
+                                <th class="text-end">Total Allocated Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>{}</tbody>
+                    </table>
+                    """
+                ).format(Markup("").join(rows))
+            else:
+                record.additional_account_summary_html = Markup(
+                    "<p>No account allocations available.</p>"
+                )
 
     @api.model_create_multi
     def create(self, vals_list):
