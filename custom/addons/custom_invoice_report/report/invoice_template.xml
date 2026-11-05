@@ -323,7 +323,7 @@ td, th {
                                             </td>
 
                                         </tr>-->
-<t t-if="sale_order">
+
                                        <tr>
 
                                             <td style="
@@ -336,10 +336,10 @@ td, th {
 
                                             <td>
                                                 :
-                                               <span t-field="sale_order.name"/>
+                                                <span t-field="sale_order.so_number"/>
                                             </td>
 
-                                        </tr></t>
+                                        </tr>
 <t t-set="sale_order" t-value="o.invoice_line_ids.sale_line_ids.order_id[:1]"/>
 
 <t t-if="sale_order and sale_order.client_order_ref"><tr>
