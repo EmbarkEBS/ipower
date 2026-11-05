@@ -336,7 +336,7 @@ td, th {
 
                                             <td>
                                                 :
-                                                <span t-field="sale_order.so_number"/>
+                                                <span t-esc="o.invoice_origin or ''"/>
                                             </td>
 
                                         </tr>
