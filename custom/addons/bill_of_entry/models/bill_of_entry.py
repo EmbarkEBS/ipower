@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from markupsafe import Markup, escape
 
 
 class BillOfEntry(models.Model):
@@ -60,8 +61,135 @@ class BillOfEntry(models.Model):
         "bill_of_entry_id",
         string="Additional Bill Invoice Lines",
     )
+    # additional_account_summary_ids = fields.One2many(
+    #     "bill.of.entry.account.summary",
+    #     "bill_of_entry_id",
+    #     string="Account Allocation Summary",
+    #     readonly=True,
+    # )
+
+    additional_account_summary_html = fields.Html(
+        string="Account Allocation Summary",
+        compute="_compute_additional_account_summary_html",
+        readonly=True,
+    )
+    
+    account_wise_allocated_summary = fields.Char(
+        string="Account-wise Allocated Amount",
+        compute="_compute_account_wise_allocated_summary",
+    )
 
     notes = fields.Text(string="Notes")
+
+    @api.depends(
+        "additional_bill_line_ids.account_id",
+        "additional_bill_line_ids.currency_id",
+        "additional_bill_line_ids.allocated_amount",
+    )
+    def _compute_account_wise_allocated_summary(self):
+        for record in self:
+            totals = {}
+    
+            for line in record.additional_bill_line_ids:
+                if not line.account_id or not line.currency_id:
+                    continue
+    
+                key = (line.account_id.id, line.currency_id.id)
+    
+                if key not in totals:
+                    totals[key] = {
+                        "account": line.account_id.display_name,
+                        "currency": line.currency_id,
+                        "amount": 0.0,
+                    }
+    
+                totals[key]["amount"] += line.allocated_amount
+    
+            summary = []
+    
+            for item in totals.values():
+                currency = item["currency"]
+                amount = currency.round(item["amount"])
+    
+                formatted_amount = f"{amount:,.2f}"
+    
+                if currency.position == "before":
+                    formatted_amount = f"{currency.symbol} {formatted_amount}"
+                else:
+                    formatted_amount = f"{formatted_amount} {currency.symbol}"
+    
+                summary.append(
+                    f"{item['account']}: {formatted_amount}"
+                )
+    
+            record.account_wise_allocated_summary = " | ".join(summary)
+
+    @api.depends(
+        "additional_bill_line_ids.account_id",
+        "additional_bill_line_ids.currency_id",
+        "additional_bill_line_ids.allocated_amount",
+    )
+    def _compute_additional_account_summary_html(self):
+        for record in self:
+            totals = {}
+    
+            for line in record.additional_bill_line_ids:
+                if not line.account_id or not line.currency_id:
+                    continue
+    
+                key = (line.account_id.id, line.currency_id.id)
+    
+                if key not in totals:
+                    totals[key] = {
+                        "account": line.account_id.display_name,
+                        "currency": line.currency_id,
+                        "amount": 0.0,
+                    }
+    
+                totals[key]["amount"] += line.allocated_amount
+    
+            rows = []
+    
+            for item in sorted(
+                totals.values(),
+                key=lambda value: value["account"],
+            ):
+                currency = item["currency"]
+                amount = currency.round(item["amount"])
+                formatted_amount = f"{amount:,.2f}"
+    
+                if currency.position == "before":
+                    formatted_amount = f"{currency.symbol} {formatted_amount}"
+                else:
+                    formatted_amount = f"{formatted_amount} {currency.symbol}"
+    
+                rows.append(
+                    Markup(
+                        "<tr><td>{}</td><td class='text-end'>{}</td></tr>"
+                    ).format(
+                        escape(item["account"]),
+                        escape(formatted_amount),
+                    )
+                )
+    
+            if rows:
+                record.additional_account_summary_html = Markup(
+                    """
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Account</th>
+                                <th class="text-end">Total Allocated Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>{}</tbody>
+                    </table>
+                    """
+                ).format(Markup("").join(rows))
+            else:
+                record.additional_account_summary_html = Markup(
+                    "<p>No account allocations available.</p>"
+                )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -197,12 +325,14 @@ class BillOfEntryAdditionalLine(models.Model):
         related="invoice_line_id.price_subtotal",
         currency_field="currency_id",
         readonly=True,
+        store=True,
     )
 
     currency_id = fields.Many2one(
         "res.currency",
         related="invoice_line_id.currency_id",
         readonly=True,
+        store=True,
     )
 
     account_id = fields.Many2one(
@@ -210,6 +340,7 @@ class BillOfEntryAdditionalLine(models.Model):
         string="Account",
         related="invoice_line_id.account_id",
         readonly=True,
+        store=True,
     )
 
     percentage = fields.Float(
@@ -258,3 +389,51 @@ class BillOfEntryAdditionalLine(models.Model):
                 raise ValidationError(
                     _("Percentage must be between 0 and 100.")
                 )
+
+class BillOfEntryAccountSummary(models.Model):
+    _name = "bill.of.entry.account.summary"
+    _description = "Bill of Entry Account Allocation Summary"
+    _auto = False
+    _order = "account_id"
+
+    bill_of_entry_id = fields.Many2one(
+        "bill.of.entry",
+        string="Bill of Entry",
+        readonly=True,
+    )
+
+    account_id = fields.Many2one(
+        "account.account",
+        string="Account",
+        readonly=True,
+    )
+
+    currency_id = fields.Many2one(
+        "res.currency",
+        string="Currency",
+        readonly=True,
+    )
+
+    allocated_amount = fields.Monetary(
+        string="Total Allocated Amount",
+        currency_field="currency_id",
+        readonly=True,
+    )
+
+    def init(self):
+        self.env.cr.execute("""
+            CREATE OR REPLACE VIEW bill_of_entry_account_summary AS (
+                SELECT
+                    MIN(line.id) AS id,
+                    line.bill_of_entry_id,
+                    line.account_id,
+                    line.currency_id,
+                    SUM(line.allocated_amount) AS allocated_amount
+                FROM bill_of_entry_additional_line line
+                WHERE line.account_id IS NOT NULL
+                GROUP BY
+                    line.bill_of_entry_id,
+                    line.account_id,
+                    line.currency_id
+            )
+        """)
