@@ -418,13 +418,13 @@ td, th {
                                     ">
                                         Product Specification
                                     </th>
-   <th style="
+   <!--<th style="
                                         padding:10px;
                                         width:12%;
                                         text-align:center;
                                     ">
                                       HS Code
-                                    </th>
+                                    </th>-->
                                     <th style="
                                         padding:10px;
                                         width:7%;
@@ -535,14 +535,14 @@ td, th {
                     </div>
                 </td>
 
-                <td style="
+              <!--  <td style="
                     padding-top:15px;
                     font-size:15px;
                     text-align:center;
                     vertical-align:top;
                 ">
                     <span t-esc="line.product_id.product_tmpl_id.hs_code"/>
-                </td>
+                </td>-->
 
                 <td style="
                     padding-top:15px;
@@ -594,7 +594,7 @@ td, th {
                 </td>
             </tr>
 </t>
-            <!-- SERIAL NUMBERS -->
+            <!-- SERIAL NUMBERS 
             <tr>
 
                 <td></td>
@@ -619,7 +619,7 @@ td, th {
 
                 </td>
 
-            </tr>
+            </tr>-->
 
             <!-- DESCRIPTION -->
             <tr >
