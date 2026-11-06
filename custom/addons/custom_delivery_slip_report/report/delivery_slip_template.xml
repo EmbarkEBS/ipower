@@ -581,40 +581,38 @@ td, th {
         </td>
     </tr>
 </t>
-    <tr>
-        <td></td>
-       <td colspan="4" style="
-                                        
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">
-
-      <t t-set="serials"
-   t-value="', '.join(line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
-
-<t t-if="serials">
-    <span>Serial No:</span>
-    <small><span t-esc="serials"/></small>
-</t>
-
-</td>
-    </tr>
+   
 
     <tr>
-       <td style="border-bottom:1px solid #d9d9d9;"></td>
-       
-                                        <td colspan="4" style="
-                                            font-size:12px;
-                                            border-bottom:1px solid #d9d9d9 !important;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">
-            <span t-esc="line.product_id.description or ''"/>
-        </td>
-    </tr>
-
+    <td style=""></td>
+    <td colspan="4" style="
+        font-size:12px;
+        color:#666;
+        line-height:1.7;
+        white-space:normal;
+        word-break:break-word;
+    ">
+        <span t-esc="line.product_id.description or ''"/>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td colspan="4" style="margin-bottom:6px; font-size:13px; border-bottom:1px solid #d9d9d9 !important; padding-bottom: 6px;">
+        <t t-set="lots" t-value="line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name')"/>
+        
+        <t t-if="lots">
+            <span style="display: block; margin-bottom: 4px;"><strong>Serial No:</strong></span>
+            <div>
+                <!-- Group serials into chunks of 6 -->
+                <t t-foreach="range(0, len(lots), 6)" t-as="i">
+                    <div style="margin-bottom: 4px;">
+                        <span t-esc="', '.join(lots[i:i+6])"/>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </td>
+</tr>
     <t t-set="sn" t-value="sn + 1"/>
 
 </t>
