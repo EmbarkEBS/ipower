@@ -597,7 +597,7 @@ td, th {
 </tr>
 <tr>
     <td></td>
-    <td colspan="4" style="margin-bottom:6px; font-size:13px; border-bottom:1px solid #d9d9d9 !important; padding-bottom: 6px;">
+    <td colspan="4" style="margin-bottom:6px; font-size:12px; border-bottom:1px solid #d9d9d9 !important; padding-bottom: 6px;">
         <t t-set="lots" t-value="line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name')"/>
         
         <t t-if="lots">
