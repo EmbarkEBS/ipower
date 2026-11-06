@@ -599,12 +599,7 @@ td, th {
     </tr>
  <tr>
         <td></td>
-       <td colspan="4" style="
-                                        
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">
-
+       
       <t t-set="serials"
    t-value="', '.join(line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
 
@@ -614,6 +609,12 @@ td, th {
 </t>
 
 </td>
+<td colspan="4" style="
+                                        
+                                                    margin-bottom:6px;
+                                                    font-size:11px;
+                                        ">
+
     </tr>
     <t t-set="sn" t-value="sn + 1"/>
 
