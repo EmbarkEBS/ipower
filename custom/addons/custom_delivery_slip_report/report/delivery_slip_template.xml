@@ -581,7 +581,23 @@ td, th {
         </td>
     </tr>
 </t>
+   
+
     <tr>
+       <td style="border-bottom:1px solid #d9d9d9;"></td>
+       
+                                        <td colspan="4" style="
+                                            font-size:12px;
+                                            border-bottom:1px solid #d9d9d9 !important;
+                                            color:#666;
+                                            line-height:1.7;
+                                            white-space:normal;
+                                            word-break:break-word;
+                                        ">
+            <span t-esc="line.product_id.description or ''"/>
+        </td>
+    </tr>
+ <tr>
         <td></td>
        <td colspan="4" style="
                                         
@@ -599,22 +615,6 @@ td, th {
 
 </td>
     </tr>
-
-    <tr>
-       <td style="border-bottom:1px solid #d9d9d9;"></td>
-       
-                                        <td colspan="4" style="
-                                            font-size:12px;
-                                            border-bottom:1px solid #d9d9d9 !important;
-                                            color:#666;
-                                            line-height:1.7;
-                                            white-space:normal;
-                                            word-break:break-word;
-                                        ">
-            <span t-esc="line.product_id.description or ''"/>
-        </td>
-    </tr>
-
     <t t-set="sn" t-value="sn + 1"/>
 
 </t>
