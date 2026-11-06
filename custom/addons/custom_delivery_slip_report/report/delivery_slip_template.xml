@@ -597,25 +597,24 @@ td, th {
             <span t-esc="line.product_id.description or ''"/>
         </td>
     </tr>
- <tr>
-        <td></td>
-       
-      <t t-set="serials"
-   t-value="', '.join(line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name'))"/>
-
-<t t-if="serials">
-    <span>Serial No:</span>
-    <small><span t-esc="serials"/></small>
-</t>
-
-</td>
-<td colspan="4" style="
-                                        
-                                                    margin-bottom:6px;
-                                                    font-size:11px;
-                                        ">
-
-    </tr>
+<tr>
+    <td></td>
+    <td colspan="4" style="margin-bottom:6px; font-size:11px;">
+        <t t-set="lots" t-value="line.move_line_ids.filtered(lambda ml: ml.lot_id).mapped('lot_id.name')"/>
+        
+        <t t-if="lots">
+            <span><strong>Serial No:</strong></span>
+            <div>
+                <!-- Group serials into chunks of 5 -->
+                <t t-foreach="range(0, len(lots), 5)" t-as="i">
+                    <div>
+                        <span t-esc="', '.join(lots[i:i+5])"/>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </td>
+</tr>
     <t t-set="sn" t-value="sn + 1"/>
 
 </t>
