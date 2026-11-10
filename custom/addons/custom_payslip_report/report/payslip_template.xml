@@ -130,7 +130,30 @@
                     .footer-note{
                         font-size:8px;
                     }
+.payslip-header-info {
+    width: 100%;
+    table-layout: auto;
+    font-size: 11px;
+}
 
+.payslip-header-info td {
+    padding: 2px 0;
+    vertical-align: top;
+}
+
+.payslip-header-info .info-label {
+    white-space: nowrap;
+    width: 85px;
+}
+
+.payslip-header-info .info-colon {
+    width: 10px;
+    padding-left: 3px;
+}
+
+.payslip-header-info .info-value {
+    white-space: nowrap;
+}
                 </style>
 
                 <!-- HEADER -->
@@ -224,7 +247,7 @@
 </svg> </t>
 </td>
 
-                        <td style="width:43%;padding-left:15px;vertical-align:top;">
+                       <td style="width:38%;padding-left:15px;vertical-align:top;">
 
                             <div style="
                                 color:#1f3a93;
@@ -235,25 +258,25 @@
                             </div>
 
                             <div style="
-                                font-size:14px;">
+                                font-size:13px;">
                                 <span t-field="o.company_id.street"/>  <t t-if="o.company_id.id == 1"><span>, Dubai</span></t>
                                             <t t-if="o.company_id.id == 2"><span>, Umm Al-Quwain </span></t>
 
                             </div>
 
                             <div style="
-                                font-size:14px;">
+                                font-size:13px;">
                                 <span t-esc="o.company_id.country_id.name or ''"/>
                             </div>
 
-                            <div style="margin-top:10px;font-size:16px;">
+                            <div style="margin-top:10px;font-size:13px;">
                                 TRN :
                                 <span t-field="o.company_id.vat"/>
                             </div>
 
                         </td>
 
-                        <td style="width:30%;vertical-align:top;">
+                       <td style="width:36%;vertical-align:top;padding-left:15px;">
 
                             <div style="
                                 color:#0b2d8d;
@@ -269,26 +292,45 @@
 
                             
 
-                            <table style="font-size:11px;">
-                                <tr>
-                                    <td>Payslip No</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td><span t-field="o.name"/></td>
-                                </tr>
+                           <table style="width:100%;font-size:11px;border-collapse:collapse;table-layout:auto;">
 
-                                <tr>
-                                    <td>Payment Date</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td><span t-field="o.date_to"/></td>
-                                </tr>
+    <tr>
+        <td style="width:90px;white-space:nowrap;padding:2px 0;">
+            Payslip No
+        </td>
+        <td style="width:10px;white-space:nowrap;padding:2px 8px 2px 0;">
+            :
+        </td>
+         <td style="white-space:nowrap;padding:2px 0;">
+            <span t-field="o.name"/>
+        </td>
+    </tr>
 
-                                <tr>
-                                    <td>Currency</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td><span t-field="o.currency_id.name"/></td>
-                                </tr>
-                            </table>
+    <tr>
+        <td style="white-space:nowrap;padding:2px 0;">
+            Payment Date
+        </td>
+        <td style="white-space:nowrap;padding:2px 8px 2px 0;">
+            :
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            <span t-field="o.date_to"/>
+        </td>
+    </tr>
 
+    <tr>
+        <td style="white-space:nowrap;padding:2px 0;">
+            Currency
+        </td>
+        <td style="white-space:nowrap;padding:2px 8px 2px 0;">
+            :
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            <span t-field="o.currency_id.name"/>
+        </td>
+    </tr>
+
+</table>
                         </td>
 
                     </tr>
@@ -344,13 +386,12 @@
                                 </tr>
 
                                 <tr>
-                                    <td>IBAN</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td>
-                                        <span t-esc="o.employee_id.bank_account_ids[:1].acc_number if o.employee_id.bank_account_ids else ''"/>
-                                    </td>
-                                </tr>
-
+    <td>IBAN</td>
+    <td style="padding-left:5px">:</td>
+    <td>
+        <span t-esc="o.employee_id.bank_account_ids[:1].iban if o.employee_id.bank_account_ids else ''"/>
+    </td>
+</tr>
                             </table>
 
                         </td>
