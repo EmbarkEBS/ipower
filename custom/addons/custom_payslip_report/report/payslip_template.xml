@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <odoo>
-<template id="custom_payslip_template" inherit_id="l10n_ae_hr_payroll.report_payslip_ae">
-<!-- Replace the main content or document body of the standard report -->
+    <template id="custom_payslip_template" inherit_id="l10n_ae_hr_payroll.report_payslip_ae">
+        <!-- Replace only the page content block -->
         <xpath expr="//div[hasclass('page')]" position="replace">
-    <t t-call="web.html_container">
-<meta charset="UTF-8"/>
+            <div class="page">
 
         <t t-foreach="docs" t-as="o">
             <t t-set="earnings"
@@ -835,13 +833,9 @@ Quwain</span></t>
     </tr>
 </table>
 
-            </div>
-
-        </t>
-
-    </t>
-</xpath>
-</template>
+      </div>
+        </xpath>
+    </template>
 
 
 </odoo>
