@@ -386,13 +386,12 @@
                                 </tr>
 
                                 <tr>
-                                    <td>IBAN</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td>
-                                        <span t-esc="o.employee_id.bank_account_ids[:1].acc_number if o.employee_id.bank_account_ids else ''"/>
-                                    </td>
-                                </tr>
-
+    <td>IBAN</td>
+    <td style="padding-left:5px">:</td>
+    <td>
+        <span t-esc="o.employee_id.bank_account_ids[:1].iban if o.employee_id.bank_account_ids else ''"/>
+    </td>
+</tr>
                             </table>
 
                         </td>
