@@ -743,7 +743,7 @@
                 <tr>
                     <td style="
                         vertical-align:middle;
-                        font-size:10px;
+                        font-size:10px;colspan="2" 
                     ">
 
                         <svg width="20" height="20" viewBox="0 0 24 24">
