@@ -743,7 +743,7 @@
                 <tr>
                     <td style="
                         vertical-align:middle;
-                        font-size:10px;margin-left:-2px;
+                        font-size:10px;
                     ">
 
                         <svg width="20" height="20" viewBox="0 0 24 24">
@@ -784,7 +784,7 @@ Quwain</span></t>
                             border-radius:50%;
                             background:#0b2d8d;
                             color:white;
-                            font-size:10px;padding-top:2px;
+                            font-size:10px;padding:2px;
                         ">✉</span>
 
                         <span t-field="o.company_id.email"/>
