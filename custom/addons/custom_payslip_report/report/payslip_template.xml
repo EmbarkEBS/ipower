@@ -4,7 +4,7 @@
 <template id="custom_payslip_template" inherit_id="l10n_ae_hr_payroll.report_payslip_ae">
 <!-- Replace the main content or document body of the standard report -->
         <xpath expr="//div[hasclass('page')]" position="replace">
- <div class="page">
+
         <t t-foreach="docs" t-as="o">
             <t t-set="earnings"
    t-value="sum(
@@ -837,7 +837,6 @@ Quwain</span></t>
 
         </t>
 
-    </div>
 </xpath>
 </template>
 
