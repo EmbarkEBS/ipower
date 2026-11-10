@@ -130,7 +130,30 @@
                     .footer-note{
                         font-size:8px;
                     }
+.payslip-header-info {
+    width: 100%;
+    table-layout: auto;
+    font-size: 11px;
+}
 
+.payslip-header-info td {
+    padding: 2px 0;
+    vertical-align: top;
+}
+
+.payslip-header-info .info-label {
+    white-space: nowrap;
+    width: 85px;
+}
+
+.payslip-header-info .info-colon {
+    width: 10px;
+    padding-left: 3px;
+}
+
+.payslip-header-info .info-value {
+    white-space: nowrap;
+}
                 </style>
 
                 <!-- HEADER -->
@@ -269,7 +292,7 @@
 
                             
 
-                            <table style="font-size:11px;">
+                            <table class="payslip-header-info">
                                 <tr>
                                     <td>Payslip No</td>
                                     <td style="padding-left:5px">:</td>
