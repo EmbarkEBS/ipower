@@ -258,18 +258,18 @@
                             </div>
 
                             <div style="
-                                font-size:14px;">
+                                font-size:13px;">
                                 <span t-field="o.company_id.street"/>  <t t-if="o.company_id.id == 1"><span>, Dubai</span></t>
                                             <t t-if="o.company_id.id == 2"><span>, Umm Al-Quwain </span></t>
 
                             </div>
 
                             <div style="
-                                font-size:14px;">
+                                font-size:13px;">
                                 <span t-esc="o.company_id.country_id.name or ''"/>
                             </div>
 
-                            <div style="margin-top:10px;font-size:16px;">
+                            <div style="margin-top:10px;font-size:13px;">
                                 TRN :
                                 <span t-field="o.company_id.vat"/>
                             </div>
@@ -300,8 +300,8 @@
         </td>
         <td style="width:10px;white-space:nowrap;padding:2px 0;">
             :
-        </td>
-        <td style="white-space:nowrap;padding:2px 0;">
+        </td>&nbsp;
+         <td style="white-space:nowrap;padding:2px 0;">
             <span t-field="o.name"/>
         </td>
     </tr>
