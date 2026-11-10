@@ -298,9 +298,9 @@
         <td style="width:90px;white-space:nowrap;padding:2px 0;">
             Payslip No
         </td>
-        <td style="width:10px;white-space:nowrap;padding:2px 0;">
+        <td style="width:10px;white-space:nowrap;padding:2px 0;margin-right:2px">
             :
-        </td>&nbsp;
+        </td>
          <td style="white-space:nowrap;padding:2px 0;">
             <span t-field="o.name"/>
         </td>
