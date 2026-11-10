@@ -247,7 +247,7 @@
 </svg> </t>
 </td>
 
-                       <td style="width:37%;padding-left:15px;vertical-align:top;">
+                       <td style="width:38%;padding-left:15px;vertical-align:top;">
 
                             <div style="
                                 color:#1f3a93;
@@ -302,7 +302,7 @@
             :
         </td>
         <td style="white-space:nowrap;padding:2px 0;">
-             <span t-field="o.name"/>
+            <span t-field="o.name"/>
         </td>
     </tr>
 
@@ -314,7 +314,7 @@
             :
         </td>
         <td style="white-space:nowrap;padding:2px 0;">
-             <span t-field="o.date_to"/>
+            <span t-field="o.date_to"/>
         </td>
     </tr>
 
@@ -326,7 +326,7 @@
             :
         </td>
         <td style="white-space:nowrap;padding:2px 0;">
-             <span t-field="o.currency_id.name"/>
+            <span t-field="o.currency_id.name"/>
         </td>
     </tr>
 
