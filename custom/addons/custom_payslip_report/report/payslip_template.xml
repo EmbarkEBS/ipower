@@ -247,7 +247,7 @@
 </svg> </t>
 </td>
 
-                        <td style="width:43%;padding-left:15px;vertical-align:top;">
+                       <td style="width:35%;padding-left:15px;vertical-align:top;">
 
                             <div style="
                                 color:#1f3a93;
@@ -276,7 +276,7 @@
 
                         </td>
 
-                        <td style="width:30%;vertical-align:top;">
+                       <td style="width:38%;vertical-align:top;">
 
                             <div style="
                                 color:#0b2d8d;
@@ -292,26 +292,45 @@
 
                             
 
-                            <table class="payslip-header-info">
-                                <tr>
-                                    <td>Payslip No</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td><span t-field="o.name"/></td>
-                                </tr>
+                           <table style="width:100%;font-size:11px;border-collapse:collapse;table-layout:auto;">
 
-                                <tr>
-                                    <td>Payment Date</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td><span t-field="o.date_to"/></td>
-                                </tr>
+    <tr>
+        <td style="width:90px;white-space:nowrap;padding:2px 0;">
+            Payslip No
+        </td>
+        <td style="width:10px;white-space:nowrap;padding:2px 0;">
+            :
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            <span t-field="o.name"/>
+        </td>
+    </tr>
 
-                                <tr>
-                                    <td>Currency</td>
-                                    <td style="padding-left:5px">:</td>
-                                    <td><span t-field="o.currency_id.name"/></td>
-                                </tr>
-                            </table>
+    <tr>
+        <td style="white-space:nowrap;padding:2px 0;">
+            Payment Date
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            :
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            <span t-field="o.date_to"/>
+        </td>
+    </tr>
 
+    <tr>
+        <td style="white-space:nowrap;padding:2px 0;">
+            Currency
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            :
+        </td>
+        <td style="white-space:nowrap;padding:2px 0;">
+            <span t-field="o.currency_id.name"/>
+        </td>
+    </tr>
+
+</table>
                         </td>
 
                     </tr>
