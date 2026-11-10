@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
-<template id="custom_payslip_template" inherit_id="hr_payroll.report_payslip">
+<template id="custom_payslip_template" inherit_id="l10n_ae_hr_payroll.report_payslip_ae">
 <!-- Replace the main content or document body of the standard report -->
         <xpath expr="//div[hasclass('page')]" position="replace">
     <t t-call="web.html_container">
