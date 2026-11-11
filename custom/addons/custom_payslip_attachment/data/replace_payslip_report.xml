@@ -1,0 +1,18 @@
+<odoo>
+    <!-- Redirect the standard payslip report to the custom template -->
+    <record id="hr_payroll.action_report_payslip"
+            model="ir.actions.report">
+
+        <field name="report_name">
+            custom_payslip_report.custom_payslip_template
+        </field>
+
+        <field name="report_file">
+            custom_payslip_report.custom_payslip_template
+        </field>
+
+        <!-- Generate a fresh PDF instead of reusing an old attachment -->
+        <field name="attachment_use" eval="False"/>
+
+    </record>
+</odoo>
