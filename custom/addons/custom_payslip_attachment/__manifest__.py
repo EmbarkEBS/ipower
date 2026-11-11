@@ -5,7 +5,7 @@
     'summary': 'Use custom payslip report for standard payslip printing',
     'depends': [
         'hr_payroll',
-        'your_custom_payslip_module',
+        'custom_payslip_report',
     ],
     'data': [
         'data/payslip_report.xml',
