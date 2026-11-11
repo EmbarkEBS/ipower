@@ -1,11 +1,11 @@
 
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="custom_payslip_template">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
+
                         <h2>Custom Employee Payslip</h2>
 
                         <p>
@@ -14,7 +14,7 @@
                         </p>
 
                         <p>
-                            <strong>Reference:</strong>
+                            <strong>Payslip Reference:</strong>
                             <span t-field="o.name"/>
                         </p>
 
@@ -46,6 +46,7 @@
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
                 </t>
             </t>
