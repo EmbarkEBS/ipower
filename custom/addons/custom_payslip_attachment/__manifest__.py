@@ -7,6 +7,7 @@
         'hr_payroll',
     ],
     'data': [
+        'reports/custom_payslip_template.xml',
         'data/replace_payslip_report.xml',
     ],
     'installable': True,
