@@ -2,10 +2,9 @@
     'name': 'Custom Payslip Attachment',
     'version': '19.0.1.0.0',
     'category': 'Human Resources/Payroll',
-    'summary': 'Use custom payslip report for standard payslip printing',
+    'summary': 'Automatically attach custom payslip PDF on validation',
     'depends': [
         'hr_payroll',
-        'custom_payslip_report',
     ],
     'data': [
         'data/payslip_report.xml',
