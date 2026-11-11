@@ -7,7 +7,7 @@
         'hr_payroll',
     ],
     'data': [
-        'data/payslip_report.xml',
+        'data/replace_payslip_report.xml',
     ],
     'installable': True,
     'application': False,
