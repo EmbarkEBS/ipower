@@ -740,7 +740,7 @@
     </table>
 </td>
             <!-- EMAIL -->
-            <td style="vertical-align:middle; text-align:center; white-space:nowrap;width:20%;">
+            <td style="vertical-align:middle; text-align:center; white-space:nowrap;width:25%;">
                 <table style="border-collapse:collapse; width:auto; margin:0 auto;">
                     <tr>
                         <td style="vertical-align:middle; padding:0 4px 0 0; width:16px;">
@@ -779,7 +779,7 @@
             </t>-->
 
             <!-- PHONE -->
-            <td style="vertical-align:middle; text-align:right; white-space:nowrap;width:20%;">
+            <td style="vertical-align:middle; text-align:right; white-space:nowrap;width:25%;">
                 <table style="border-collapse:collapse; width:auto; margin-left:auto;">
                     <tr>
                         <td style="vertical-align:middle; padding:0 4px 0 0; width:16px;">
