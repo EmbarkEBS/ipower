@@ -730,7 +730,105 @@
             width:50%; vertical-align:top; font-size:12px; text-align:left;
         ">
 
-          
+            <table style="
+                 width:auto;
+   
+    font-size:8px;
+    border-collapse:collapse;
+    line-height:22px;
+    vertical-align:top;
+            ">
+
+                <!-- ADDRESS -->
+                <tr>
+                    <td style="
+                        vertical-align:middle;
+                        font-size:10px;
+                    ">
+
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#f58220"
+                                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+                        </svg>
+
+                   
+                      <t t-if="o.company_id.id == 1">    <span style="
+                        text-align:left;vertical-align:top;
+                        font-size:7px;">PO Box 451269, Shed-2, Plot 1586, Umm Dera, Umm Al
+Quwain</span></t>
+  <t t-if="o.company_id.id == 2">    <span style="
+                        text-align:left;vertical-align:top;
+                        font-size:7px;">PO Box 4084, Shed-1, Plot 1586, Umm Dera, Umm Al
+Quwain</span></t>
+                       <!-- <t t-if="o.company_id.street2">
+                          <span style="
+                        text-align:left;vertical-align:top;
+                        font-size:8px;" t-field="o.company_id.street2"/>
+                        </t>-->
+
+                    </td>
+                </tr>
+
+                <!-- CONTACTS -->
+                <tr>
+
+                    <td colspan="2" style="text-align:left;font-size:8px;">
+
+                        <!-- EMAIL -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;padding-top:2px;
+                        ">✉ dfdd</span>
+
+                        <span t-field="o.company_id.email"/>
+
+                       <t t-if="o.company_id.website">  <span style="padding:0 2px;">|</span>
+
+                        <!-- WEBSITE -->
+                         <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;padding-top:2px;
+                        ">🌐</span>
+
+                        <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
+</t>
+                       <!-- <span style="padding:0 2px;">|</span>--><br/>
+
+                        <!-- PHONE -->
+                        <span style="
+                            display:inline-block;
+                            width:16px;
+                            height:16px;
+                            line-height:16px;
+                            text-align:center;
+                            border-radius:50%;
+                            background:#0b2d8d;
+                            color:white;
+                            font-size:10px;padding-top:2px;
+                        ">☎</span>
+
+                        <span t-field="o.company_id.phone"/>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
         </td>
 
     </tr>
