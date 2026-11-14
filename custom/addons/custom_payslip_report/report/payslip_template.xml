@@ -720,7 +720,7 @@
             "/>
 </t>
             <div class="footer-note">
-                This is a system-generated document and does not require any signature.
+                This is a system-generated document and does not require any signature.eeeeeeeeeeeee
             </div>
 
         </td>
@@ -785,7 +785,7 @@ Quwain</span></t>
                             background:#0b2d8d;
                             color:white;
                             font-size:10px;padding-top:2px;
-                        ">✉t</span>
+                        ">✉</span>
 
                         <span t-field="o.company_id.email"/>
 
