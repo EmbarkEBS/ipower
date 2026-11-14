@@ -700,7 +700,7 @@
         <td style="width:50%; vertical-align:top;">
 
             <div style="font-size:14px;">
-                Notes
+                Notes1
             </div>
 
          <t t-if="o.company_id.id == 1">   <div style="
