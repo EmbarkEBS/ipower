@@ -856,7 +856,7 @@ Quwain</span>
                             <span style=" display:inline-block; width:16px; height:16px; line-height:16px; text-align:center; border-radius:50%; background:#0b2d8d; color:white; font-size:10px;padding-top:2px;">🌐</span>
                             <span t-esc="(o.company_id.website or '').replace('http://','').replace('https://','')"/>
                         </t>
-                    </div>
+                    </div>t
                     <div class="col-3">
                         <!--<span style="display:inline-block; width:16px; height:16px; line-height:16px; text-align:center; border-radius:50%; background:#0b2d8d; color:white; font-size:10px;padding-top:2px; ">✉</span>-->
                         <span t-field="o.company_id.email"/>
