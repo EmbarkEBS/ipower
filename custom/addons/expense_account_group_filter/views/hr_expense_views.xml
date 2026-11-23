@@ -22,12 +22,12 @@
                 <field name="vehicle_number"
                        invisible="not show_vehicle_number"/>
 
-                <!-- <field name="employee_name"
-                       invisible="not show_employee"/> -->
+                <field name="employee_name"
+                       invisible="not show_employee"/>
 
-                <field name="employee_id"
+                <!-- <field name="employee_id"
                        invisible="not show_employee"
-                       options="{'no_create': True}"/>
+                       options="{'no_create': True}"/> -->
 
                 <field name="sale_order_id"
                        invisible="not show_project"
