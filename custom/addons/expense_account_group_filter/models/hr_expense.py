@@ -139,8 +139,14 @@ class HrExpense(models.Model):
         string="Vehicle Number"
     )
 
-    employee_name = fields.Char(
-        string="Employee"
+    # employee_name = fields.Char(
+    #     string="Employee"
+    # )
+
+    employee_id = fields.Many2one(
+        "hr.employee",
+        string="Employee",
+        ondelete="set null"
     )
 
     # project_name = fields.Char(
@@ -218,8 +224,11 @@ class HrExpense(models.Model):
         if "vehicle" not in group_name:
             self.vehicle_number = False
 
+        # if group_name != "employee & hr expenses".lower():
+        #     self.employee_name = False
+
         if group_name != "employee & hr expenses".lower():
-            self.employee_name = False
+              self.employee_id = False
 
         if group_name != "project / service order expenses".lower():
             # self.project_name = False
