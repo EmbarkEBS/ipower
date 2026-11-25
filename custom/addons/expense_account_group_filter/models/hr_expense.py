@@ -143,6 +143,12 @@ class HrExpense(models.Model):
         string="Employee"
     )
 
+    # employee_id = fields.Many2one(
+    #     "hr.employee",
+    #     string="Employee",
+    #     ondelete="set null"
+    # )
+
     # project_name = fields.Char(
     #     string="Project Name"
     # )
@@ -204,7 +210,7 @@ class HrExpense(models.Model):
             )
 
             rec.show_project = (
-                group_name == "project / service order expenses".lower()
+                group_name == "Sales & Business Development Expenses".lower()
             )
 
     @api.onchange("account_group_id")
@@ -221,6 +227,10 @@ class HrExpense(models.Model):
         if group_name != "employee & hr expenses".lower():
             self.employee_name = False
 
-        if group_name != "project / service order expenses".lower():
+        # if group_name != "employee & hr expenses".lower():
+        #       self.employee_id = False
+
+        # if group_name != "project / service order expenses".lower():
+        if group_name != "Sales & Business Development Expenses".lower():
             # self.project_name = False
             self.sale_order_id = False

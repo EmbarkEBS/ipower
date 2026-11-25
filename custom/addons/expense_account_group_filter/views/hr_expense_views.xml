@@ -25,6 +25,10 @@
                 <field name="employee_name"
                        invisible="not show_employee"/>
 
+                <!-- <field name="employee_id"
+                       invisible="not show_employee"
+                       options="{'no_create': True}"/> -->
+
                 <field name="sale_order_id"
                        invisible="not show_project"
                        domain="[('state', 'in', ['sale', 'done'])]"/>
@@ -47,6 +51,7 @@
     </record>
 
 </odoo>
+
 
 <!-- <?xml version="1.0" encoding="utf-8"?>
 <odoo>
