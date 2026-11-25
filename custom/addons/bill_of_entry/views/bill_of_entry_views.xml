@@ -61,7 +61,7 @@
                         </page>
 
                         <!-- Account Summary -->
-                        <page string="Account Summary">
+                        <!-- <page string="Account Summary">
                             <field name="additional_bill_summary_ids" readonly="1">
                                 <list create="0" edit="0" delete="0">
                                     <field name="account_id"/>
@@ -71,7 +71,7 @@
                                            sum="Total Allocated Amount"/>
                                 </list>
                             </field>
-                        </page>
+                        </page> -->
                         
                         <!-- Invoice Line Details -->
                         <page string="Additional Bill Details">
