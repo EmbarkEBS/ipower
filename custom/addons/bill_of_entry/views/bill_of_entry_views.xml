@@ -12,6 +12,8 @@
                 <field name="boe_date"/>
                 <field name="purchase_order_id"/>
                 <field name="company_id" groups="base.group_multi_company"/>
+                <field name="account_wise_allocated_summary"
+                       string="Account-wise Allocated Amount"/>
             </list>
         </field>
     </record>
