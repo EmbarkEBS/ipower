@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ================================================================ -->
+    <!-- SEARCH VIEW -->
+    <!-- ================================================================ -->
+
+    <record id="view_invoice_margin_report_search" model="ir.ui.view">
+
+        <field name="name">invoice.margin.report.search</field>
+
+        <field name="model">invoice.margin.report</field>
+
+        <field name="arch" type="xml">
+
+            <search>
+
+                <field name="invoice_number"/>
+                <field name="customer_id"/>
+                <field name="sale_order_number"/>
+                <field name="product_id"/>
+                <field name="invoice_date"/>
+
+                <group>
+
+                    <filter
+                        name="group_invoice"
+                        string="Invoice"
+                        context="{'group_by': 'invoice_id'}"
+                    />
+
+                    <filter
+                        name="group_customer"
+                        string="Customer"
+                        context="{'group_by': 'customer_id'}"
+                    />
+
+                    <filter
+                        name="group_product"
+                        string="Product"
+                        context="{'group_by': 'product_id'}"
+                    />
+
+                    <filter
+                        name="group_invoice_date"
+                        string="Invoice Date"
+                        context="{'group_by': 'invoice_date'}"
+                    />
+
+                </group>
+
+            </search>
+
+        </field>
+
+    </record>
+
+
+    <!-- ================================================================ -->
+    <!-- LIST VIEW -->
+    <!-- ================================================================ -->
+
+    <record id="view_invoice_margin_report_tree" model="ir.ui.view">
+
+        <field name="name">invoice.margin.report.tree</field>
+
+        <field name="model">invoice.margin.report</field>
+
+        <field name="arch" type="xml">
+
+            <list
+                string="Invoice Margin Analysis"
+                create="0"
+                edit="0"
+                delete="0"
+            >
+
+                <!-- ==================================================== -->
+                <!-- INVOICE -->
+                <!-- ==================================================== -->
+
+                <field name="invoice_number"/>
+                <field name="invoice_date"/>
+                <field name="customer_id"/>
+                <field name="sale_order_number"/>
+
+                <!-- ==================================================== -->
+                <!-- PRODUCT -->
+                <!-- ==================================================== -->
+
+                <field name="product_id"/>
+                <field name="quantity"/>
+
+                <!-- ==================================================== -->
+                <!-- SELLING / REVENUE -->
+                <!-- ==================================================== -->
+
+                <field name="selling_price"/>
+
+                <field
+                    name="revenue_amount"
+                    string="Revenue"
+                />
+
+                <!-- ==================================================== -->
+                <!-- COGS -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="cogs"
+                    string="COGS"
+                />
+
+                <!-- ==================================================== -->
+                <!-- LINE MARGIN -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="line_margin_amount"
+                    string="Margin"
+                />
+
+                <field
+                    name="line_margin_percentage"
+                    string="Margin %"
+                    digits="[16, 2]"
+                />
+
+                <!-- ==================================================== -->
+                <!-- INVOICE TOTALS -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="total_revenue"
+                    string="Invoice Total Revenue"
+                />
+
+                <field
+                    name="total_cogs"
+                    string="Invoice Total COGS"
+                />
+
+                <field
+                    name="total_margin_amount"
+                    string="Invoice Total Margin"
+                />
+
+                <field
+                    name="total_margin_percentage"
+                    string="Invoice Total Margin %"
+                    digits="[16, 2]"
+                />
+
+                <!-- ==================================================== -->
+                <!-- TECHNICAL -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="currency_id"
+                    column_invisible="1"
+                />
+
+                <field
+                    name="company_id"
+                    column_invisible="1"
+                />
+
+                <field
+                    name="invoice_id"
+                    column_invisible="1"
+                />
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ================================================================ -->
+    <!-- PIVOT VIEW -->
+    <!-- ================================================================ -->
+
+    <record id="view_invoice_margin_report_pivot" model="ir.ui.view">
+
+        <field name="name">invoice.margin.report.pivot</field>
+
+        <field name="model">invoice.margin.report</field>
+
+        <field name="arch" type="xml">
+
+            <pivot
+                string="Invoice Margin Analysis"
+                display_quantity="1"
+            >
+
+                <!-- ==================================================== -->
+                <!-- ROW -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="product_id"
+                    type="row"
+                />
+
+                <!-- ==================================================== -->
+                <!-- DATE -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="invoice_date"
+                    type="col"
+                    interval="month"
+                />
+
+                <!-- ==================================================== -->
+                <!-- SUM REVENUE -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="revenue_amount"
+                    type="measure"
+                    string="Total Revenue"
+                />
+
+                <!-- ==================================================== -->
+                <!-- SUM COGS -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="cogs"
+                    type="measure"
+                    string="Total COGS"
+                />
+
+                <!-- ==================================================== -->
+                <!-- SUM MARGIN -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="line_margin_amount"
+                    type="measure"
+                    string="Total Margin"
+                />
+
+                <!-- ==================================================== -->
+                <!-- AVERAGE MARGIN % -->
+                <!-- ==================================================== -->
+
+                <field
+                    name="line_margin_percentage"
+                    type="measure"
+                    string="Average Margin %"
+                />
+
+            </pivot>
+
+        </field>
+
+    </record>
+
+
+    <!-- ================================================================ -->
+    <!-- ACTION -->
+    <!-- ================================================================ -->
+
+    <record
+        id="action_invoice_margin_report"
+        model="ir.actions.act_window"
+    >
+
+        <field name="name">Invoice Margin Analysis</field>
+
+        <field name="res_model">invoice.margin.report</field>
+
+        <field name="view_mode">list,pivot</field>
+
+        <field
+            name="search_view_id"
+            ref="view_invoice_margin_report_search"
+        />
+
+        <field name="context">{}</field>
+
+    </record>
+
+
+    <!-- ================================================================ -->
+    <!-- MENU -->
+    <!-- ================================================================ -->
+
+    <menuitem
+        id="menu_invoice_margin_report"
+        name="Invoice Margin Analysis"
+        parent="account.menu_finance_reports"
+        action="action_invoice_margin_report"
+        sequence="50"
+        groups="account.group_account_user"
+    />
+
+</odoo>

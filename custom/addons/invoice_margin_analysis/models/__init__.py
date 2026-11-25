@@ -1,0 +1,1 @@
+from . import invoice_margin_report
