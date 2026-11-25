@@ -1,13 +1,32 @@
 {
     "name": "Expense Account Group Filter",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.0",
+    "category": "Accounting/Expenses",
+    "summary": "Account group filtering and conditional expense fields",
     "depends": [
         "hr_expense",
+        "hr",
         "account",
-        "sale"
+        "sale",
     ],
     "data": [
+        "security/ir.model.access.csv",
+        "views/expense_vehicle_views.xml",
         "views/hr_expense_views.xml",
     ],
     "installable": True,
+    "application": False,
 }
+
+# {
+#     "name": "Expense Account Group Filter",
+#     "version": "19.0.1.0.0",
+#     "depends": [
+#         "hr_expense",
+#         "account",
+#     ],
+#     "data": [
+#         "views/hr_expense_views.xml",
+#     ],
+#     "installable": True,
+# }
