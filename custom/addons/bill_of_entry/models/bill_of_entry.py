@@ -61,6 +61,13 @@ class BillOfEntry(models.Model):
         string="Additional Bill Invoice Lines",
     )
 
+    additional_bill_summary_ids = fields.One2many(
+        "bill.of.entry.additional.summary",
+        "bill_of_entry_id",
+        string="Account Summary",
+        readonly=True,
+    )
+
     additional_account_summary_ids = fields.One2many(
         "bill.of.entry.account.summary",
         "bill_of_entry_id",
