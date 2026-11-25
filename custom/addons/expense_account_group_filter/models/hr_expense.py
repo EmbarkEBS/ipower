@@ -230,6 +230,7 @@ class HrExpense(models.Model):
         # if group_name != "employee & hr expenses".lower():
         #       self.employee_id = False
 
-        if group_name != "project / service order expenses".lower():
+        # if group_name != "project / service order expenses".lower():
+        if group_name != "Sales & Business Development Expenses".lower():
             # self.project_name = False
             self.sale_order_id = False
