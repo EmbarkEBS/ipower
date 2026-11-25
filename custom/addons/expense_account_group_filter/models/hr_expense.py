@@ -210,7 +210,7 @@ class HrExpense(models.Model):
             )
 
             rec.show_project = (
-                group_name == "project / service order expenses".lower()
+                group_name == "Sales & Business Development Expenses".lower()
             )
 
     @api.onchange("account_group_id")
