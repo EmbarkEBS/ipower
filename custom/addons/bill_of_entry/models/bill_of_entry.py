@@ -61,6 +61,13 @@ class BillOfEntry(models.Model):
         string="Additional Bill Invoice Lines",
     )
 
+    additional_bill_summary_ids = fields.One2many(
+        "bill.of.entry.additional.summary",
+        "bill_of_entry_id",
+        string="Account Summary",
+        readonly=True,
+    )
+
     notes = fields.Text(string="Notes")
 
     @api.model_create_multi
@@ -197,12 +204,14 @@ class BillOfEntryAdditionalLine(models.Model):
         related="invoice_line_id.price_subtotal",
         currency_field="currency_id",
         readonly=True,
+        store=True,
     )
 
     currency_id = fields.Many2one(
         "res.currency",
         related="invoice_line_id.currency_id",
         readonly=True,
+        store=True,
     )
 
     account_id = fields.Many2one(
@@ -210,6 +219,7 @@ class BillOfEntryAdditionalLine(models.Model):
         string="Account",
         related="invoice_line_id.account_id",
         readonly=True,
+        store=True,
     )
 
     percentage = fields.Float(
@@ -258,3 +268,75 @@ class BillOfEntryAdditionalLine(models.Model):
                 raise ValidationError(
                     _("Percentage must be between 0 and 100.")
                 )
+
+class BillOfEntryAdditionalSummary(models.Model):
+    _name = "bill.of.entry.additional.summary"
+    _description = "Bill of Entry Account Summary"
+    _auto = False
+    _order = "bill_of_entry_id, account_id"
+
+    bill_of_entry_id = fields.Many2one(
+        "bill.of.entry",
+        string="Bill of Entry",
+        readonly=True,
+    )
+
+    account_id = fields.Many2one(
+        "account.account",
+        string="Account",
+        readonly=True,
+    )
+
+    currency_id = fields.Many2one(
+        "res.currency",
+        string="Currency",
+        readonly=True,
+    )
+
+    total_amount = fields.Monetary(
+        string="Combined Invoice Amount",
+        currency_field="currency_id",
+        readonly=True,
+    )
+
+    total_allocated_amount = fields.Monetary(
+        string="Combined Allocated Amount",
+        currency_field="currency_id",
+        readonly=True,
+    )
+
+    detail_line_ids = fields.Many2many(
+        "bill.of.entry.additional.line",
+        string="Invoice Line Details",
+        compute="_compute_detail_line_ids",
+    )
+
+    @api.depends("bill_of_entry_id", "account_id")
+    def _compute_detail_line_ids(self):
+        for record in self:
+            record.detail_line_ids = self.env[
+                "bill.of.entry.additional.line"
+            ].search([
+                ("bill_of_entry_id", "=", record.bill_of_entry_id.id),
+                ("account_id", "=", record.account_id.id),
+                ("currency_id", "=", record.currency_id.id),
+            ])
+
+    def init(self):
+        self.env.cr.execute("""
+            CREATE OR REPLACE VIEW bill_of_entry_additional_summary AS (
+                SELECT
+                    MIN(line.id) AS id,
+                    line.bill_of_entry_id AS bill_of_entry_id,
+                    line.account_id AS account_id,
+                    line.currency_id AS currency_id,
+                    SUM(line.subtotal) AS total_amount,
+                    SUM(line.allocated_amount) AS total_allocated_amount
+                FROM bill_of_entry_additional_line line
+                WHERE line.account_id IS NOT NULL
+                GROUP BY
+                    line.bill_of_entry_id,
+                    line.account_id,
+                    line.currency_id
+            )
+        """)
