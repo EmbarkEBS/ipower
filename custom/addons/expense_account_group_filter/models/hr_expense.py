@@ -355,7 +355,7 @@ class HrExpense(models.Model):
             if group_name != "employee & hr expenses":
                 rec.employee_id = False
 
-            if group_name != "sales & business development expenses":
+            if group_name != "Trading Cost of Revenue":
                 rec.sale_order_id = False
 
     @api.constrains(
@@ -388,7 +388,7 @@ class HrExpense(models.Model):
                 )
 
             if (
-                group_name == "sales & business development expenses"
+                group_name == "Trading Cost of Revenue"
                 and not rec.sale_order_id
             ):
                 raise ValidationError(
