@@ -14,13 +14,13 @@ class HrExpense(models.Model):
 
         return values
 
-    @api.onchange("employee_id")
-    def _onchange_employee_id_paid_by_company(self):
-        """
-        When an employee is selected, automatically set Paid By
-        to Company when the employee configuration allows company payment.
-        """
-        for expense in self:
-            if expense.employee_id:
-                if expense.employee_id.expense_paid_by_company:
-                    expense.payment_mode = "company_account"
+    # @api.onchange("employee_id")
+    # def _onchange_employee_id_paid_by_company(self):
+    #     """
+    #     When an employee is selected, automatically set Paid By
+    #     to Company when the employee configuration allows company payment.
+    #     """
+    #     for expense in self:
+    #         if expense.employee_id:
+    #             if expense.employee_id.expense_paid_by_company:
+    #                 expense.payment_mode = "company_account"
