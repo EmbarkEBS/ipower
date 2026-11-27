@@ -3,41 +3,50 @@
 
     <record id="view_hr_expense_form_account_group"
             model="ir.ui.view">
+
         <field name="name">hr.expense.form.account.group</field>
         <field name="model">hr.expense</field>
-        <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+
+        <field name="inherit_id"
+               ref="hr_expense.hr_expense_view_form"/>
+
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='account_id']"
                    position="before">
 
+                <!-- Account Group -->
                 <field name="account_group_id"/>
 
+                <!-- Helper Fields -->
                 <field name="show_vehicle_number" invisible="1"/>
                 <field name="show_employee" invisible="1"/>
                 <field name="show_project" invisible="1"/>
-
                 <field name="allowed_account_ids" invisible="1"/>
 
-                <field name="vehicle_number"
-                       invisible="not show_vehicle_number"/>
+                <!-- Vehicle Number -->
+                <field name="vehicle_id"
+                       string="Vehicle Number"
+                       invisible="not show_vehicle_number"
+                       required="show_vehicle_number"
+                       options="{'no_create': True}"/>
 
-                <field name="employee_name"
-                       invisible="not show_employee"/>
-
-                <!-- <field name="employee_id"
+                <!-- Employee -->
+                <field name="employee_id"
                        invisible="not show_employee"
-                       options="{'no_create': True}"/> -->
+                       required="show_employee"
+                       options="{'no_create': True}"/>
 
+                <!-- Sale Order -->
                 <field name="sale_order_id"
                        invisible="not show_project"
-                       domain="[('state', 'in', ['sale', 'done'])]"/>
-
-                <!-- <field name="project_name"
-                       invisible="not show_project"/> -->
+                       required="show_project"
+                       domain="[('state', 'in', ['sale', 'done'])]"
+                       options="{'no_create': True}"/>
 
             </xpath>
 
+            <!-- Account Filtering -->
             <xpath expr="//field[@name='account_id']"
                    position="attributes">
 
@@ -51,6 +60,7 @@
     </record>
 
 </odoo>
+
 
 
 <!-- <?xml version="1.0" encoding="utf-8"?>
